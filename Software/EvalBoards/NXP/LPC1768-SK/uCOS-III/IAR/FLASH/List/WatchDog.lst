@@ -1,0 +1,249 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       14/Aug/2017  14:07:06
+# Copyright 1999-2015 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        F:\iar\NC136B-310 统计模块\Application\Library\Driver\WatchDog.C
+#    Command line =  
+#        "F:\iar\NC136B-310 统计模块\Application\Library\Driver\WatchDog.C"
+#        -lCN "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\FLASH\List"
+#        --diag_suppress Pa050 -o "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\FLASH\Obj"
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.3\arm\INC\c\DLib_Config_Normal.h" -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\" -I
+#        "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\uCOS-III\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\BSP\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\BSP\IAR\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\BSP\OS\uCOS-III\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-CSP\MCU\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-CSP\MCU\NXP\LPC17xx\LPC1768\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-CSP\MCU\NXP\LPC17xx\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uCOS-III\Ports\ARM-Cortex-M3\Generic\IAR\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uCOS-III\Ports\ARM-Cortex-M3\CSP\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uCOS-III\Source\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-LIB\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-CPU\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-CPU\ARM-Cortex-M3\IAR\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-MB\Source\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-MB\Cfg\Template\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-MB\Os\uCOS-III\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\OSAL\OS\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\OSAL\Ports\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\APP\User\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\APP\Iap\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\APP\Protocol\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\APP\Tasks\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\APP\AES\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\BSP\OS\OSAL\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\CSB\include\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\BSP\Driver\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\User\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\User\APP\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\User\APP\MX25L1602Drv\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\User\APP\OCM800600T80\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\User\BSP\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\CardOperations\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\DataDeal\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\Driver\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\EquipmentOperations\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\Global\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\MastConTask\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\SlaveConTask\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\SpeedTest\"
+#        -I "F:\iar\NC136B-310 统计模块\Application\Library\csnr_package_deal\"
+#        -On --use_c++_inline -I "C:\Program Files (x86)\IAR Systems\Embedded
+#        Workbench 7.3\arm\CMSIS\Include\"
+#    List file    =  
+#        F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\FLASH\List\WatchDog.lst
+#    Object file  =  
+#        F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\FLASH\Obj\WatchDog.o
+#
+###############################################################################
+
+F:\iar\NC136B-310 统计模块\Application\Library\Driver\WatchDog.C
+      1          //#include  "config.h"
+      2          #include <includes.h>
+      3          
+      4          //#define		EX_DOG		sp706
+      5          #define		WATCHDOG	28		//P028
+      6          
+      7          /****************************************************************************
+      8          * 名称：void  InitWatchDog(void)
+      9          * 功能：初始化看门狗
+     10          * 入口参数：无
+     11          * 出口参数：无
+     12          ****************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     13          void  InitWatchDog(void)
+     14          {
+   \                     InitWatchDog: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     15          	WDT_Init(WDT_CLKSRC_IRC,WDT_MODE_RESET);
+   \   00000002   0x2101             MOVS     R1,#+1
+   \   00000004   0x2000             MOVS     R0,#+0
+   \   00000006   0x.... 0x....      BL       WDT_Init
+     16          	WDT_Start(2000000);
+   \   0000000A   0x....             LDR.N    R0,??DataTable1  ;; 0x1e8480
+   \   0000000C   0x.... 0x....      BL       WDT_Start
+     17          	FeedDog();
+   \   00000010   0x.... 0x....      BL       FeedDog
+     18          
+     19          //	GPIO_PinselConfig(WATCHDOG,0);	
+     20          //
+     21          //	FeedDog();
+     22          
+     23          }
+   \   00000014   0xBD01             POP      {R0,PC}          ;; return
+     24          
+     25          /****************************************************************************
+     26          * 名称：void  FeedDog(void)
+     27          * 功能：看门狗喂狗操作。
+     28          * 入口参数：无
+     29          * 出口参数：无
+     30          ****************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     31          void  FeedDog(void)
+     32          {  
+     33          //    WDT_Feed();
+     34              
+     35          //   if(GPIO_ReadIoVal(WATCHDOG))
+     36          //   {
+     37          //   		GPIO_SetOrClearValue(WATCHDOG,0);
+     38          //   }
+     39          //   else
+     40          //   {
+     41          //   		GPIO_SetOrClearValue(WATCHDOG,1);	
+     42          //   }
+     43          }
+   \                     FeedDog: (+1)
+   \   00000000   0x4770             BX       LR               ;; return
+     44          
+     45          
+     46          
+     47          //__asm void JMP_Boot( uint32_t address ){
+     48          //   LDR SP, [R0]		;Load new stack pointer address
+     49          //   LDR PC, [R0, #4]	;Load new program counter address
+     50          //}
+     51          
+     52          #define	Boot_APP_START_ADDR 0
+     53          /****************************************************************************
+     54          * 名称：void  FeedDog(void)
+     55          * 功能：看门狗喂狗操作。
+     56          * 入口参数：无
+     57          * 出口参数：无
+     58          ****************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     59          void  ResetSys(void)
+     60          {  
+     61          //	while(1);	
+     62          	//启动app
+     63          //void Boot( void )
+     64          //{
+     65          //	 void (*userProgram)();   					           /*函数指针*/
+     66          
+     67          	SCB->VTOR = Boot_APP_START_ADDR & 0x1FFFFF80;	//偏移中断向量
+   \                     ResetSys: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x....             LDR.N    R1,??DataTable1_1  ;; 0xe000ed08
+   \   00000004   0x6008             STR      R0,[R1, #+0]
+     68          
+     69          ////	JMP_Boot(Boot_APP_START_ADDR);
+     70          //	userProgram = (void (*)()) (USER_APP_START_ADDR+1);
+     71          //	(*userProgram)();													/*启动						*/	 
+     72          	
+     73          }
+   \   00000006   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1:
+   \   00000000   0x001E8480         DC32     0x1e8480
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_1:
+   \   00000000   0xE000ED08         DC32     0xe000ed08
+     74          
+     75          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       0   FeedDog
+       8   InitWatchDog
+         8   -> FeedDog
+         8   -> WDT_Init
+         8   -> WDT_Start
+       0   ResetSys
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable1
+       4  ??DataTable1_1
+       2  FeedDog
+      22  InitWatchDog
+       8  ResetSys
+
+ 
+ 40 bytes in section .text
+ 
+ 40 bytes of CODE memory
+
+Errors: none
+Warnings: 3

@@ -1,0 +1,2002 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       10/Aug/2017  10:56:45
+# Copyright 1999-2015 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        F:\iar\NC136B-310
+#        统计模块\Application\Library\CardOperations\DataCard.c
+#    Command line =  
+#        "F:\iar\NC136B-310
+#        统计模块\Application\Library\CardOperations\DataCard.c" -lCN
+#        "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\FLASH\List"
+#        --diag_suppress Pa050 -o "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\FLASH\Obj"
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.3\arm\INC\c\DLib_Config_Normal.h" -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\" -I
+#        "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\uCOS-III\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\BSP\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\BSP\IAR\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\BSP\OS\uCOS-III\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-CSP\MCU\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-CSP\MCU\NXP\LPC17xx\LPC1768\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-CSP\MCU\NXP\LPC17xx\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uCOS-III\Ports\ARM-Cortex-M3\Generic\IAR\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uCOS-III\Ports\ARM-Cortex-M3\CSP\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uCOS-III\Source\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-LIB\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-CPU\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-CPU\ARM-Cortex-M3\IAR\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-MB\Source\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-MB\Cfg\Template\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-MB\Os\uCOS-III\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\OSAL\OS\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\OSAL\Ports\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\APP\User\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\APP\Iap\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\APP\Protocol\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\APP\Tasks\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\APP\AES\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\BSP\OS\OSAL\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\CSB\include\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\BSP\Driver\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\User\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\User\APP\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\User\APP\MX25L1602Drv\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\User\APP\OCM800600T80\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\User\BSP\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\CardOperations\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\DataDeal\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\Driver\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\EquipmentOperations\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\Global\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\MastConTask\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\SlaveConTask\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\SpeedTest\"
+#        -I "F:\iar\NC136B-310 统计模块\Application\Library\csnr_package_deal\"
+#        -On --use_c++_inline -I "C:\Program Files (x86)\IAR Systems\Embedded
+#        Workbench 7.3\arm\CMSIS\Include\"
+#    List file    =  
+#        F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\FLASH\List\DataCard.lst
+#    Object file  =  
+#        F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\FLASH\Obj\DataCard.o
+#
+###############################################################################
+
+F:\iar\NC136B-310 统计模块\Application\Library\CardOperations\DataCard.c
+      1          //#include 	"config.h"
+      2          //#include 	"String.h"
+      3          //#include	"Globe.h"
+      4          //#include	"HardDrive.h"
+      5          //#include	"StoreRec.h"
+      6          //#include	"CpuDrive.h"
+      7          //#include	"FramStore.h"
+      8          //#include	"OperateCard.h"
+      9          //#include	"stdlib.h" 
+     10          
+     11          #include    "includes.h"  
+     12          #include	"Card.h"
+     13          #include	"OperateCard.h"
+     14          //#include	"flash.h"
+     15          
+     16          #define		CARD_BUF_LEN		1024			//IC卡处理缓冲区大小	
+     17          
+     18          
+     19          //----------------------------------------------------------------------
+     20          //函数名称:  	uint32_t  GetWritePageLen(uint32_t Start, uint32_t WriteLen,uint32_t MaxWriteLen)
+     21          //函数功能:  	求写将要完成下页写长度
+     22          //入口参数:   	StartAddr:IC卡起始写地址;FinishLen:已写地址,MaxWriteLen:要写地址
+     23          //出口参数:   	
+     24          //说明:                 
+     25          //-----------------------------------------------------------------------
+
+   \                                 In section .text, align 2, keep-with-next
+     26          uint32_t  GetWritePageLen(uint32_t StartAddr, uint32_t FinishLen,uint32_t MaxWriteLen)
+     27          {
+   \                     GetWritePageLen: (+1)
+   \   00000000   0xE92D 0x43F8      PUSH     {R3-R9,LR}
+   \   00000004   0x0004             MOVS     R4,R0
+   \   00000006   0x000D             MOVS     R5,R1
+   \   00000008   0x0016             MOVS     R6,R2
+     28              uint32_t  	PageSize;
+     29              uint32_t  	PageSegLen;
+     30              uint32_t  	NoWriteLen;
+     31          	
+     32          	PageSize = GetCardPageSize();
+   \   0000000A   0x.... 0x....      BL       GetCardPageSize
+   \   0000000E   0x0007             MOVS     R7,R0
+     33          	
+     34              PageSegLen = PageSize - ((StartAddr + FinishLen) % PageSize);		//从首往尾写
+   \   00000010   0x1928             ADDS     R0,R5,R4
+   \   00000012   0x1A39             SUBS     R1,R7,R0
+   \   00000014   0xFBB0 0xF0F7      UDIV     R0,R0,R7
+   \   00000018   0xFB07 0x1000      MLA      R0,R7,R0,R1
+   \   0000001C   0x4680             MOV      R8,R0
+     35          
+     36              NoWriteLen = MaxWriteLen - FinishLen;
+   \   0000001E   0x1B70             SUBS     R0,R6,R5
+   \   00000020   0x4681             MOV      R9,R0
+     37          
+     38              if( PageSegLen < NoWriteLen)
+   \   00000022   0x45C8             CMP      R8,R9
+   \   00000024   0xD201             BCS.N    ??GetWritePageLen_0
+     39              {
+     40                   return PageSegLen;
+   \   00000026   0x4640             MOV      R0,R8
+   \   00000028   0xE000             B.N      ??GetWritePageLen_1
+     41              }
+     42              else
+     43              {
+     44                  return  NoWriteLen;
+   \                     ??GetWritePageLen_0: (+1)
+   \   0000002A   0x4648             MOV      R0,R9
+   \                     ??GetWritePageLen_1: (+1)
+   \   0000002C   0xE8BD 0x83F2      POP      {R1,R4-R9,PC}    ;; return
+     45              }
+     46          }
+     47          
+     48          //----------------------------------------------------------------------
+     49          //函数名称:  	stcFlshRec    FlshRecToCardRec( stcFlshRec   sFlshRec)
+     50          //函数功能:  	将油尺记录FLASH转化为IC卡记录
+     51          //入口参数:   	FLASH记录
+     52          //出口参数:   	IC卡记录
+     53          //说明:                 
+     54          //-----------------------------------------------------------------------
+
+   \                                 In section .text, align 2, keep-with-next
+     55          stcFlshRec    FlshRecToCardRec( stcFlshRec   sFlshRec)
+     56          {
+   \                     FlshRecToCardRec: (+1)
+   \   00000000   0xB40E             PUSH     {R1-R3}
+   \   00000002   0xB5F0             PUSH     {R4-R7,LR}
+   \   00000004   0xB0A0             SUB      SP,SP,#+128
+   \   00000006   0x0004             MOVS     R4,R0
+     57          	stcFlshRec  sCardRec;		
+     58          	memcpy((uint8_t *)&sCardRec,(uint8_t *)&sFlshRec,sizeof(sCardRec));
+   \   00000008   0x2580             MOVS     R5,#+128
+   \   0000000A   0xAE25             ADD      R6,SP,#+148
+   \   0000000C   0x466F             MOV      R7,SP
+   \   0000000E   0x002A             MOVS     R2,R5
+   \   00000010   0x0031             MOVS     R1,R6
+   \   00000012   0x0038             MOVS     R0,R7
+   \   00000014   0x.... 0x....      BL       __aeabi_memcpy
+     59          	
+     60          	return	sCardRec;
+   \   00000018   0x0020             MOVS     R0,R4
+   \   0000001A   0x4669             MOV      R1,SP
+   \   0000001C   0x2280             MOVS     R2,#+128
+   \   0000001E   0x.... 0x....      BL       __aeabi_memcpy4
+   \   00000022   0xB020             ADD      SP,SP,#+128
+   \   00000024   0xBCF0             POP      {R4-R7}
+   \   00000026   0xF85D 0xFB10      LDR      PC,[SP], #+16    ;; return
+     61          }
+     62          
+     63          //extern	void	SysHoldTast(void);
+     64          
+     65          //----------------------------------------------------------------------
+     66          //函数名称:  	void    ReadCardDisplay(uint8_t	 Sct)
+     67          //函数功能:  	将油尺记录FLASH转化为IC卡记录
+     68          //入口参数:   	FLASH记录
+     69          //出口参数:   	IC卡记录
+     70          //说明:                 
+     71          //-----------------------------------------------------------------------
+
+   \                                 In section .text, align 2, keep-with-next
+     72          void    ReadCardDisplay(uint8_t	 Sct)
+     73          {
+   \                     ReadCardDisplay: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+     74          	uint8_t	i = 0;
+   \   00000004   0x2500             MOVS     R5,#+0
+     75          	
+     76          //	if(GetSysTime() % 100 < 12)
+     77          	{
+     78          		i = 0;
+   \   00000006   0x2000             MOVS     R0,#+0
+   \   00000008   0x0005             MOVS     R5,R0
+     79          		while(i < 10 )
+   \                     ??ReadCardDisplay_0: (+1)
+   \   0000000A   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
+   \   0000000C   0x2D0A             CMP      R5,#+10
+   \   0000000E   0xDA0B             BGE.N    ??ReadCardDisplay_1
+     80          		{
+     81          			DisplaySet(10,2,"%u  %u",Sct,i);
+   \   00000010   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
+   \   00000012   0x9500             STR      R5,[SP, #+0]
+   \   00000014   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000016   0x0023             MOVS     R3,R4
+   \   00000018   0x.... 0x....      LDR.W    R2,??DataTable11
+   \   0000001C   0x2102             MOVS     R1,#+2
+   \   0000001E   0x200A             MOVS     R0,#+10
+   \   00000020   0x.... 0x....      BL       DisplaySet
+     82          			i++;
+   \   00000024   0x1C6D             ADDS     R5,R5,#+1
+   \   00000026   0xE7F0             B.N      ??ReadCardDisplay_0
+     83          		}
+     84          		
+     85          		//OnLed(WRITE_CARD_LED,10,5,5);
+     86          	}													//xitong 
+     87          }
+   \                     ??ReadCardDisplay_1: (+1)
+   \   00000028   0xBD31             POP      {R0,R4,R5,PC}    ;; return
+     88          
+     89          //----------------------------------------------------------------------
+     90          //函数名称:  	uint8_t  StoreCardRec(uint32_t   FlshStartRecNum,uint32_t	FlshRecCnt,uint32_t	CardStartAddr )
+     91          //函数功能:  	存IC卡记录
+     92          //入口参数:   	FlshStartRecNum:起始Flsh记录号,FlshRecCnt:记录个数,StartCardRecAddr:IC卡起始地址
+     93          //出口参数:   	
+     94          //说明:                 
+     95          //-----------------------------------------------------------------------
+
+   \                                 In section .text, align 2, keep-with-next
+     96          uint8_t  StoreCardRec(uint32_t   FlshStartRecNum,uint32_t	FlshRecCnt,uint32_t	CardStartAddr,uint32_t	WriteTimes )
+     97          {
+   \                     StoreCardRec: (+1)
+   \   00000000   0xE92D 0x4FFB      PUSH     {R0,R1,R3-R11,LR}
+   \   00000004   0xF5AD 0x6D91      SUB      SP,SP,#+1160
+   \   00000008   0x0014             MOVS     R4,R2
+     98          	uint8_t			CardBuf[1024];
+     99          	uint32_t			FlshRecNum;											//Flsh记录流水号
+    100          	uint32_t			MaxWriteLen;										//最大要写卡长度
+    101          	uint32_t			FinishLen = 0;										//已写长度
+   \   0000000A   0x2500             MOVS     R5,#+0
+    102          	uint32_t			WritePageLen;	
+    103          	uint32_t			NextRecCardAddr;
+    104          	uint32_t			BufWriteLen = 0;
+   \   0000000C   0x2700             MOVS     R7,#+0
+    105          	
+    106          	stcFlshRec		sFlshRec;
+    107          	
+    108          	FlshRecNum	= FlshStartRecNum;
+   \   0000000E   0xF8DD 0x0488      LDR      R0,[SP, #+1160]
+   \   00000012   0x4680             MOV      R8,R0
+    109          	MaxWriteLen = FlshRecCnt * sizeof(sFlshRec);					
+   \   00000014   0xF8DD 0x048C      LDR      R0,[SP, #+1164]
+   \   00000018   0x2180             MOVS     R1,#+128
+   \   0000001A   0x4348             MULS     R0,R1,R0
+   \   0000001C   0x9000             STR      R0,[SP, #+0]
+    110          				
+    111          	BufWriteLen = 0;
+   \   0000001E   0x2000             MOVS     R0,#+0
+   \   00000020   0x0007             MOVS     R7,R0
+    112          	while( FinishLen < MaxWriteLen)
+   \                     ??StoreCardRec_0: (+1)
+   \   00000022   0x9800             LDR      R0,[SP, #+0]
+   \   00000024   0x4285             CMP      R5,R0
+   \   00000026   0xD232             BCS.N    ??StoreCardRec_1
+    113          	{
+    114          		ReadFlshRec((stcFlshRec *)&sFlshRec,FlshRecNum++);
+   \   00000028   0x4641             MOV      R1,R8
+   \   0000002A   0xA802             ADD      R0,SP,#+8
+   \   0000002C   0x.... 0x....      BL       ReadFlshRec
+   \   00000030   0xF118 0x0801      ADDS     R8,R8,#+1
+    115          
+    116          		WritePageLen = GetWritePageLen(CardStartAddr,FinishLen,MaxWriteLen);
+   \   00000034   0x9A00             LDR      R2,[SP, #+0]
+   \   00000036   0x0029             MOVS     R1,R5
+   \   00000038   0x0020             MOVS     R0,R4
+   \   0000003A   0x.... 0x....      BL       GetWritePageLen
+   \   0000003E   0x0006             MOVS     R6,R0
+    117          			
+    118          		memcpy(&CardBuf[BufWriteLen],(uint8_t *)&sFlshRec,sizeof(sFlshRec));
+   \   00000040   0xF05F 0x0980      MOVS     R9,#+128
+   \   00000044   0xF10D 0x0A08      ADD      R10,SP,#+8
+   \   00000048   0xA822             ADD      R0,SP,#+136
+   \   0000004A   0xEB17 0x0B00      ADDS     R11,R7,R0
+   \   0000004E   0x464A             MOV      R2,R9
+   \   00000050   0x4651             MOV      R1,R10
+   \   00000052   0x4658             MOV      R0,R11
+   \   00000054   0x.... 0x....      BL       __aeabi_memcpy
+    119          		BufWriteLen += sizeof(sFlshRec);
+   \   00000058   0x3780             ADDS     R7,R7,#+128
+    120          
+    121          		if(WritePageLen == BufWriteLen || WritePageLen < BufWriteLen)
+   \   0000005A   0x42BE             CMP      R6,R7
+   \   0000005C   0xD001             BEQ.N    ??StoreCardRec_2
+   \   0000005E   0x42BE             CMP      R6,R7
+   \   00000060   0xD20F             BCS.N    ??StoreCardRec_3
+    122          		{
+    123          			NextRecCardAddr = CardStartAddr + FinishLen;				//IC卡下一地址
+   \                     ??StoreCardRec_2: (+1)
+   \   00000062   0x1928             ADDS     R0,R5,R4
+   \   00000064   0x9001             STR      R0,[SP, #+4]
+    124          			 	
+    125             			WriteCard(NextRecCardAddr,CardBuf,WritePageLen);      		//写卡
+   \   00000066   0x0032             MOVS     R2,R6
+   \   00000068   0xB292             UXTH     R2,R2            ;; ZeroExt  R2,R2,#+16,#+16
+   \   0000006A   0xA922             ADD      R1,SP,#+136
+   \   0000006C   0x9801             LDR      R0,[SP, #+4]
+   \   0000006E   0x.... 0x....      BL       WriteCard
+    126               		
+    127               		FinishLen += WritePageLen;									//将要完成写长度
+   \   00000072   0x1975             ADDS     R5,R6,R5
+    128          
+    129               		ReadCardDisplay(WriteTimes);								//指示正在读卡
+   \   00000074   0xF8DD 0x0490      LDR      R0,[SP, #+1168]
+   \   00000078   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000007A   0x.... 0x....      BL       ReadCardDisplay
+    130          
+    131          			BufWriteLen = 0;
+   \   0000007E   0x2000             MOVS     R0,#+0
+   \   00000080   0x0007             MOVS     R7,R0
+    132          		}
+    133          		if(GetPlugFlg() == NO_PLUG_IN_CARD)								//拨卡退出
+   \                     ??StoreCardRec_3: (+1)
+   \   00000082   0x.... 0x....      BL       GetPlugFlg
+   \   00000086   0x2800             CMP      R0,#+0
+   \   00000088   0xD1CB             BNE.N    ??StoreCardRec_0
+    134          		{
+    135          			return FALSE;
+   \   0000008A   0x2000             MOVS     R0,#+0
+   \   0000008C   0xE000             B.N      ??StoreCardRec_4
+    136          		}
+    137          	}
+    138          
+    139          	return TRUE;
+   \                     ??StoreCardRec_1: (+1)
+   \   0000008E   0x2001             MOVS     R0,#+1
+   \                     ??StoreCardRec_4: (+1)
+   \   00000090   0xF20D 0x4D94      ADDW     SP,SP,#+1172
+   \   00000094   0xE8BD 0x8FF0      POP      {R4-R11,PC}      ;; return
+    140          }
+    141          
+    142          //-------------------------------------------------------------------------------------------------
+    143          //函数名称:             uint32_t	GetReadFlshRecCnt(uint32_t ZoneMaxRecNum)	   
+    144          //函数功能:             取分区应读取的记录数
+    145          //入口参数:             分区最大记录数
+    146          //出口参数:             记录数
+    147          //--------------------------------------------------------------------------------------------------
+
+   \                                 In section .text, align 2, keep-with-next
+    148          uint32_t	GetReadFlshRecCnt(uint32_t NoReadRecNum,uint32_t ZoneMaxRecNum)
+    149          {	
+   \                     GetReadFlshRecCnt: (+1)
+   \   00000000   0x0002             MOVS     R2,R0
+    150          	uint32_t	FlshMaxRec;
+    151          	
+    152          	FlshMaxRec = (FLSH_MAX_SIZE)/(sizeof(stcFlshRec));
+   \   00000002   0xF45F 0x3080      MOVS     R0,#+65536
+   \   00000006   0x0003             MOVS     R3,R0
+    153          	
+    154          	////printfcom0("\r\n FlshMaxRec %d",FlshMaxRec);
+    155          	if(NoReadRecNum >= ZoneMaxRecNum)
+   \   00000008   0x428A             CMP      R2,R1
+   \   0000000A   0xD305             BCC.N    ??GetReadFlshRecCnt_0
+    156          	{
+    157          		if(ZoneMaxRecNum > FlshMaxRec)
+   \   0000000C   0x428B             CMP      R3,R1
+   \   0000000E   0xD201             BCS.N    ??GetReadFlshRecCnt_1
+    158          		{
+    159          			return	FlshMaxRec;
+   \   00000010   0x0018             MOVS     R0,R3
+   \   00000012   0xE006             B.N      ??GetReadFlshRecCnt_2
+    160          		}
+    161          		
+    162          		return	ZoneMaxRecNum;
+   \                     ??GetReadFlshRecCnt_1: (+1)
+   \   00000014   0x0008             MOVS     R0,R1
+   \   00000016   0xE004             B.N      ??GetReadFlshRecCnt_2
+    163          	}
+    164          	else
+    165          	{
+    166          		if(NoReadRecNum > FlshMaxRec)
+   \                     ??GetReadFlshRecCnt_0: (+1)
+   \   00000018   0x4293             CMP      R3,R2
+   \   0000001A   0xD201             BCS.N    ??GetReadFlshRecCnt_3
+    167          		{
+    168          			return	FlshMaxRec;
+   \   0000001C   0x0018             MOVS     R0,R3
+   \   0000001E   0xE000             B.N      ??GetReadFlshRecCnt_2
+    169          		}
+    170          			
+    171          		return	NoReadRecNum;
+   \                     ??GetReadFlshRecCnt_3: (+1)
+   \   00000020   0x0010             MOVS     R0,R2
+   \                     ??GetReadFlshRecCnt_2: (+1)
+   \   00000022   0x4770             BX       LR               ;; return
+    172          	}
+    173          }
+    174          
+    175          //-------------------------------------------------------------------------------------------------
+    176          //函数名称:             void	void	IndicateWriteCardFinsh(void)	   
+    177          //函数功能:             普通卡处理
+    178          //入口参数:             无
+    179          //出口参数:             无
+    180          //--------------------------------------------------------------------------------------------------
+
+   \                                 In section .text, align 2, keep-with-next
+    181          void	IndicateWriteCardFinsh(void)
+    182          {
+   \                     IndicateWriteCardFinsh: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    183          	DelayX10ms(10);	
+   \   00000002   0x200A             MOVS     R0,#+10
+   \   00000004   0x.... 0x....      BL       DelayX10ms
+    184          	ClaerDisplaySetWithoutStore();
+   \   00000008   0x.... 0x....      BL       ClaerDisplaySetWithoutStore
+    185          //	OnLed(WRITE_CARD_LED,0xffffff,5,0);										
+    186          	DisplaySet(60,100,"good");
+   \   0000000C   0x.... 0x....      LDR.W    R2,??DataTable11_1
+   \   00000010   0x2164             MOVS     R1,#+100
+   \   00000012   0x203C             MOVS     R0,#+60
+   \   00000014   0x.... 0x....      BL       DisplaySet
+    187          	DisplaySet(60,100,"    ");	
+   \   00000018   0x.... 0x....      LDR.W    R2,??DataTable11_2
+   \   0000001C   0x2164             MOVS     R1,#+100
+   \   0000001E   0x203C             MOVS     R0,#+60
+   \   00000020   0x.... 0x....      BL       DisplaySet
+    188          	//printfcom0("\r\n Good!!");
+    189          }
+   \   00000024   0xBD01             POP      {R0,PC}          ;; return
+    190          
+    191          //-------------------------------------------------------------------------------------------------
+    192          //函数名称:             void	void	IndicateWriteCardFlgErr(void)	   
+    193          //函数功能:             普通卡处理
+    194          //入口参数:             无
+    195          //出口参数:             无
+    196          //--------------------------------------------------------------------------------------------------
+
+   \                                 In section .text, align 2, keep-with-next
+    197          void	IndicateWriteCardFlgErr(void)
+    198          {
+   \                     IndicateWriteCardFlgErr: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    199          	DelayX10ms(10);	
+   \   00000002   0x200A             MOVS     R0,#+10
+   \   00000004   0x.... 0x....      BL       DelayX10ms
+    200          	OnLed(WRITE_CARD_LED,0xffffff,5,0);										
+   \   00000008   0x2300             MOVS     R3,#+0
+   \   0000000A   0x2205             MOVS     R2,#+5
+   \   0000000C   0xF07F 0x417F      MVNS     R1,#-16777216
+   \   00000010   0x2004             MOVS     R0,#+4
+   \   00000012   0x.... 0x....      BL       OnLed
+    201          	DisplaySet(60,100,"E_IC");
+   \   00000016   0x....             LDR.N    R2,??DataTable11_3
+   \   00000018   0x2164             MOVS     R1,#+100
+   \   0000001A   0x203C             MOVS     R0,#+60
+   \   0000001C   0x.... 0x....      BL       DisplaySet
+    202          	DisplaySet(60,100,"    ");	
+   \   00000020   0x....             LDR.N    R2,??DataTable11_2
+   \   00000022   0x2164             MOVS     R1,#+100
+   \   00000024   0x203C             MOVS     R0,#+60
+   \   00000026   0x.... 0x....      BL       DisplaySet
+    203          }
+   \   0000002A   0xBD01             POP      {R0,PC}          ;; return
+    204          
+    205          //-------------------------------------------------------------------------------------------------
+    206          //函数名称:             void	void	IndicateWriteCardFlgErr(void)	   
+    207          //函数功能:             普通卡处理
+    208          //入口参数:             无
+    209          //出口参数:             无
+    210          //--------------------------------------------------------------------------------------------------
+
+   \                                 In section .text, align 2, keep-with-next
+    211          void	IndicateUSBFlgErr(void)
+    212          {
+   \                     IndicateUSBFlgErr: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    213          	DelayX10ms(10);	
+   \   00000002   0x200A             MOVS     R0,#+10
+   \   00000004   0x.... 0x....      BL       DelayX10ms
+    214          	OnLed(WRITE_CARD_LED,0xffffff,5,0);										
+   \   00000008   0x2300             MOVS     R3,#+0
+   \   0000000A   0x2205             MOVS     R2,#+5
+   \   0000000C   0xF07F 0x417F      MVNS     R1,#-16777216
+   \   00000010   0x2004             MOVS     R0,#+4
+   \   00000012   0x.... 0x....      BL       OnLed
+    215          	DisplaySet(60,100,"E_US");
+   \   00000016   0x....             LDR.N    R2,??DataTable11_4
+   \   00000018   0x2164             MOVS     R1,#+100
+   \   0000001A   0x203C             MOVS     R0,#+60
+   \   0000001C   0x.... 0x....      BL       DisplaySet
+    216          	DisplaySet(60,100,"    ");	
+   \   00000020   0x....             LDR.N    R2,??DataTable11_2
+   \   00000022   0x2164             MOVS     R1,#+100
+   \   00000024   0x203C             MOVS     R0,#+60
+   \   00000026   0x.... 0x....      BL       DisplaySet
+    217          }
+   \   0000002A   0xBD01             POP      {R0,PC}          ;; return
+    218          
+    219          //-------------------------------------------------------------------------------------------------
+    220          //函数名称:             void	IndicateRecordFinsh(void)	   
+    221          //函数功能:             普通卡处理
+    222          //入口参数:             无
+    223          //出口参数:             无
+    224          //--------------------------------------------------------------------------------------------------
+
+   \                                 In section .text, align 2, keep-with-next
+    225          void	IndicateRecordFinsh(void)
+    226          {
+   \                     IndicateRecordFinsh: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    227          	DelayX10ms(10);	
+   \   00000002   0x200A             MOVS     R0,#+10
+   \   00000004   0x.... 0x....      BL       DelayX10ms
+    228          	ClaerDisplaySetWithoutStore();
+   \   00000008   0x.... 0x....      BL       ClaerDisplaySetWithoutStore
+    229          	OnLed(WRITE_CARD_LED,0xffffff,5,0);										
+   \   0000000C   0x2300             MOVS     R3,#+0
+   \   0000000E   0x2205             MOVS     R2,#+5
+   \   00000010   0xF07F 0x417F      MVNS     R1,#-16777216
+   \   00000014   0x2004             MOVS     R0,#+4
+   \   00000016   0x.... 0x....      BL       OnLed
+    230          	DisplaySet(60,100,"ALL");
+   \   0000001A   0x....             ADR.N    R2,??DataTable10  ;; "ALL"
+   \   0000001C   0x2164             MOVS     R1,#+100
+   \   0000001E   0x203C             MOVS     R0,#+60
+   \   00000020   0x.... 0x....      BL       DisplaySet
+    231          	DisplaySet(60,100,"    ");	
+   \   00000024   0x....             LDR.N    R2,??DataTable11_2
+   \   00000026   0x2164             MOVS     R1,#+100
+   \   00000028   0x203C             MOVS     R0,#+60
+   \   0000002A   0x.... 0x....      BL       DisplaySet
+    232          }
+   \   0000002E   0xBD01             POP      {R0,PC}          ;; return
+    233          
+    234          //-------------------------------------------------------------------------------------------------
+    235          //函数名称:             void	void	IndicateWriteCardFinsh(void)	   
+    236          //函数功能:             普通卡处理
+    237          //入口参数:             无
+    238          //出口参数:             无
+    239          //--------------------------------------------------------------------------------------------------
+
+   \                                 In section .text, align 2, keep-with-next
+    240          void	IndicateCardFull(void)
+    241          {
+   \                     IndicateCardFull: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    242          	ClaerDisplaySetWithoutStore();
+   \   00000002   0x.... 0x....      BL       ClaerDisplaySetWithoutStore
+    243          	DisplaySet(60,100,"FULL");
+   \   00000006   0x....             LDR.N    R2,??DataTable11_5
+   \   00000008   0x2164             MOVS     R1,#+100
+   \   0000000A   0x203C             MOVS     R0,#+60
+   \   0000000C   0x.... 0x....      BL       DisplaySet
+    244          	DisplaySet(60,100,"    ");
+   \   00000010   0x....             LDR.N    R2,??DataTable11_2
+   \   00000012   0x2164             MOVS     R1,#+100
+   \   00000014   0x203C             MOVS     R0,#+60
+   \   00000016   0x.... 0x....      BL       DisplaySet
+    245          	OnLed(CARD_FULL_LED,0xffffff,5,5);
+   \   0000001A   0x2305             MOVS     R3,#+5
+   \   0000001C   0x2205             MOVS     R2,#+5
+   \   0000001E   0xF07F 0x417F      MVNS     R1,#-16777216
+   \   00000022   0x2005             MOVS     R0,#+5
+   \   00000024   0x.... 0x....      BL       OnLed
+    246          }
+   \   00000028   0xBD01             POP      {R0,PC}          ;; return
+    247          
+    248          //-------------------------------------------------------------------------------------------------
+    249          //函数名称:             void	void	IndicateWriteCardFinsh(void)	   
+    250          //函数功能:             普通卡处理
+    251          //入口参数:             无
+    252          //出口参数:             无
+    253          //--------------------------------------------------------------------------------------------------
+
+   \                                 In section .text, align 2, keep-with-next
+    254          void	IndicateWriteNoFinsh(void)
+    255          {
+   \                     IndicateWriteNoFinsh: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    256          	ClaerDisplaySetWithoutStore();
+   \   00000002   0x.... 0x....      BL       ClaerDisplaySetWithoutStore
+    257          	DisplaySet(60,0xffff,"NUNF");
+   \   00000006   0x....             LDR.N    R2,??DataTable11_6
+   \   00000008   0xF64F 0x71FF      MOVW     R1,#+65535
+   \   0000000C   0x203C             MOVS     R0,#+60
+   \   0000000E   0x.... 0x....      BL       DisplaySet
+    258          	DisplaySet(60,0xffff,"    ");
+   \   00000012   0x....             LDR.N    R2,??DataTable11_2
+   \   00000014   0xF64F 0x71FF      MOVW     R1,#+65535
+   \   00000018   0x203C             MOVS     R0,#+60
+   \   0000001A   0x.... 0x....      BL       DisplaySet
+    259          }
+   \   0000001E   0xBD01             POP      {R0,PC}          ;; return
+    260          
+
+   \                                 In section .data, align 1
+    261          uint8_t	l_UnFihCardEvtFlg = NO_ERROR;
+   \                     l_UnFihCardEvtFlg:
+   \   00000000   0x01               DC8 1
+    262          //uint8_t	l_WriteFlgErrCardEvtFlg = NO_ERROR;
+    263          
+    264          void	DataDensityCard(stcCardFlg *	sCardFlg);
+    265          ////-------------------------------------------------------------------------------------------------
+    266          ////函数名称:             void	OperationNormCard(void);	   
+    267          ////函数功能:             普通卡处理
+    268          ////入口参数:             无
+    269          ////出口参数:             无
+    270          ////--------------------------------------------------------------------------------------------------
+    271          //void	DataCard(void)
+    272          //{
+    273          //	uint32_t	FlshRecCnt;	
+    274          //	uint32_t	FlshStartRecNum;
+    275          //	uint32_t	CardEndAddr;
+    276          //	uint32_t	CardStartAddr;
+    277          //	uint32_t	CardMaxRecNum;
+    278          //	uint32_t	NoReadRecNum;
+    279          //	uint16	CrcCheck;
+    280          //	static	stcDeviceInfo 	sDeviceInfo;
+    281          //	static	stcFixInfo		sFixInfo;						
+    282          //	
+    283          //	//PrintfDebug("\r\nDataCard");
+    284          //	
+    285          ////	DataDensityCard(sCardFlg);  					//数据密度卡
+    286          //	
+    287          //	g_LshRedFlshRecNum = ReadLstRedFlshRecNum();
+    288          //	
+    289          //	if(sCardFlg->WriteCardTimes >= 100)	
+    290          //	{	
+    291          //		sCardFlg->WriteCardTimes = 0;
+    292          //	}
+    293          //		
+    294          //	if(sCardFlg->WriteCardTimes == 0)
+    295          //	{
+    296          //		CardStartAddr = CARD_DATA_ADDR;
+    297          //	}
+    298          //	else
+    299          //	{
+    300          //		CardStartAddr 	= sCardFlg->sCardIndex[sCardFlg->WriteCardTimes - 1].EndAddr;
+    301          //		
+    302          //		if(CardStartAddr < CARD_DATA_ADDR)
+    303          //		{
+    304          //			CardStartAddr = CARD_DATA_ADDR;
+    305          //		}
+    306          //	}
+    307          //	
+    308          //	if(g_CurFlshRecNum > g_LshRedFlshRecNum)
+    309          //	{
+    310          //		NoReadRecNum	= (g_CurFlshRecNum - g_LshRedFlshRecNum);		//Flsh的未读记录长度
+    311          //	}
+    312          //	else
+    313          //	{
+    314          //		NoReadRecNum = 0;
+    315          //	}
+    316          //	
+    317          //	CardMaxRecNum	= GetToEndLen(CardStartAddr) / sizeof(stcFlshRec);	//取IC卡未写空间长度
+    318          //		
+    319          //	FlshRecCnt 		= GetReadFlshRecCnt(NoReadRecNum,CardMaxRecNum);	//要写数据长度
+    320          //	
+    321          //	FlshStartRecNum = g_CurFlshRecNum  - FlshRecCnt ;
+    322          //
+    323          //	////printfcom0("\r\nNoReadRecNum %d,CardMaxRecNum %d,FlshRecCnt %d,FlshStartRecNum %d sCardFlg->WriteCardTimes %d,GetToEndLen(CardStartAddr) %d",
+    324          //	//NoReadRecNum,CardMaxRecNum,FlshRecCnt,FlshStartRecNum,sCardFlg->WriteCardTimes,GetToEndLen(CardStartAddr));
+    325          //	//printfcom0("\r\n FlshStartRecNum %d NoReadRecNum %d",FlshStartRecNum,NoReadRecNum);
+    326          //
+    327          //	if((sCardFlg->WriteCardTimes < 100)  && ( CardMaxRecNum >20))			//卡写满
+    328          //	{
+    329          //		l_UnFihCardEvtFlg = NO_ERROR;
+    330          //
+    331          //		if( NoReadRecNum > 1 )												//未读记录条数须大于1才能读取数据	
+    332          //		{
+    333          //			if( StoreCardRec(FlshStartRecNum,FlshRecCnt,CardStartAddr,sCardFlg->WriteCardTimes))		//返回1 写卡完成
+    334          //			{
+    335          //				uint8_t	i;
+    336          //				uint8_t	Tmp;
+    337          //				uint16	DataTmp;
+    338          //				uint8_t	Buf[5] = {'0','0','0','0','0'};
+    339          //			
+    340          //				ReadHostInfo((stcDeviceInfo * )&sDeviceInfo);
+    341          //				
+    342          //				ReadFixInfo((stcFixInfo * )&sFixInfo);
+    343          //				
+    344          //				memcpy(sCardFlg->sCardIndex[sCardFlg->WriteCardTimes].ProNum
+    345          //							,sDeviceInfo.ProduceDate,sizeof(sDeviceInfo.ProduceDate));
+    346          //		
+    347          //				DataTmp = sDeviceInfo.DeviceNum;
+    348          //				for(i = 0; i < 5;i++)
+    349          //				{
+    350          //					Tmp = DataTmp%10;
+    351          //					DataTmp /= 10;
+    352          //					if(DataTmp != 0)
+    353          //					{
+    354          //						Buf[5-1-i] = Tmp + '0';
+    355          //					}
+    356          //				}
+    357          //				
+    358          //				memcpy(&sCardFlg->sCardIndex[sCardFlg->WriteCardTimes].ProNum[sizeof(sDeviceInfo.ProduceDate)],Buf,5);
+    359          //				sCardFlg->sCardIndex[sCardFlg->WriteCardTimes].LocoType[0]	= sFixInfo.LocoTyp;
+    360          //				sCardFlg->sCardIndex[sCardFlg->WriteCardTimes].LocoType[1]	= sFixInfo.E_LocoTyp;	
+    361          //				memcpy(sCardFlg->sCardIndex[sCardFlg->WriteCardTimes].LocoNum,sFixInfo.LocoNum,sizeof(sFixInfo.LocoNum));		
+    362          //				sCardFlg->sCardIndex[sCardFlg->WriteCardTimes].StartAddr	= CardStartAddr;
+    363          //				CardEndAddr	= CardStartAddr + ( FlshRecCnt * sizeof(stcFlshRec));
+    364          //				sCardFlg->sCardIndex[sCardFlg->WriteCardTimes].EndAddr 		= CardEndAddr;
+    365          //				//sCardFlg->sCardIndex[sCardFlg->WriteCardTimes].RecLen		= CardEndAddr - CardStartAddr;
+    366          //				sCardFlg->sCardIndex[sCardFlg->WriteCardTimes].RecLen		=  FlshRecCnt * sizeof(stcFlshRec);
+    367          //				sCardFlg->sCardIndex[sCardFlg->WriteCardTimes].RecNum		= FlshRecCnt;
+    368          //				
+    369          //				sCardFlg->WriteCardTimes++;									
+    370          //
+    371          //				CrcCheck = GetCrc16Check((uint8_t *)sCardFlg,sizeof(stcCardFlg) -2);
+    372          //
+    373          //				sCardFlg->CrcCheck = CrcCheck;									
+    374          //
+    375          //				WriteCardFlg(sCardFlg);									//修改IC卡标志页
+    376          //							
+    377          // 				if(CheckWriteCardFlgCrc(CrcCheck) == NO_ERROR)
+    378          // 				{
+    379          //					StoreLstRedFlshRecNum(g_CurFlshRecNum);				//存最新的已读记录流水号
+    380          //				
+    381          //					g_LshRedFlshRecNum = g_CurFlshRecNum;				//
+    382          // 				
+    383          //					IndicateWriteCardFinsh();							//
+    384          //					
+    385          //					DelayX10ms(10);	
+    386          //				}
+    387          //				else
+    388          //				{
+    389          //					l_WriteFlgErrCardEvtFlg = ERROR;
+    390          //					
+    391          //					sCardFlg->sCardID.Reserve1 = 65;					//重写标志页的标志
+    392          //					
+    393          //					CrcCheck = GetCrc16Check((uint8_t *)sCardFlg,sizeof(stcCardFlg) -2); //重写校验
+    394          //
+    395          //					sCardFlg->CrcCheck = CrcCheck;					
+    396          //					
+    397          //					WriteCardFlg(sCardFlg);									//重新修改IC卡标志页,不在判断
+    398          //	 				
+    399          //	 				if(CheckWriteCardFlgCrc(CrcCheck) == NO_ERROR)			//重新刷新
+    400          //	 				{
+    401          //						StoreLstRedFlshRecNum(g_CurFlshRecNum);				//存最新的已读记录流水号
+    402          //					
+    403          //						g_LshRedFlshRecNum = g_CurFlshRecNum;				//
+    404          //	 				
+    405          //						IndicateWriteCardFinsh();							//
+    406          //					}
+    407          //					else
+    408          //					{
+    409          //						IndicateWriteCardFlgErr();							//
+    410          //					}
+    411          //				}
+    412          //			}
+    413          //			else														//写卡错误操作
+    414          //			{
+    415          //				l_UnFihCardEvtFlg = ERROR;
+    416          //				
+    417          //				DelayX10ms(10);	
+    418          //				
+    419          //				IndicateWriteNoFinsh();									//写卡未完成指示
+    420          //				
+    421          //				DelayX10ms(500);										//未写完
+    422          //			}
+    423          //		}
+    424          //		else
+    425          //		{
+    426          //			IndicateWriteCardFinsh();									//
+    427          //		}
+    428          //	}
+    429          //	else
+    430          //	{
+    431          //		IndicateCardFull();
+    432          //	}
+    433          //} 
+    434          
+
+   \                                 In section .text, align 2, keep-with-next
+    435          void	DataCard(uint8_t copyflg)
+    436          {
+   \                     DataCard: (+1)
+   \   00000000   0xE92D 0x4FF1      PUSH     {R0,R4-R11,LR}
+   \   00000004   0xB0A4             SUB      SP,SP,#+144
+    437          	uint32_t	FlshRecCnt;	
+    438          	uint32_t	FlshStartRecNum;
+    439          	uint32_t	CardEndAddr;
+    440          	uint32_t	CardStartAddr;
+    441          	uint32_t	CardMaxRecNum;
+    442          	uint32_t	NoReadRecNum;
+    443          //	uint16	CrcCheck;
+    444          	stcDeviceInfo 	sDeviceInfo;
+    445          	stcFixInfo		sFixInfo;						
+    446          	uint16	WriteCardTimes;
+    447          	stcCardIndex	sCardIndex;
+    448          	uint32_t	CardAddrTmp;
+    449          
+    450          
+    451          	DelayX10ms(10);
+   \   00000006   0x200A             MOVS     R0,#+10
+   \   00000008   0x.... 0x....      BL       DelayX10ms
+    452          
+    453          	g_LshRedFlshRecNum = ReadLstRedFlshRecNum();
+   \   0000000C   0x.... 0x....      BL       ReadLstRedFlshRecNum
+   \   00000010   0x....             LDR.N    R1,??DataTable11_7
+   \   00000012   0x6008             STR      R0,[R1, #+0]
+    454          	if(copyflg == 1) //copy
+   \   00000014   0xF89D 0x0090      LDRB     R0,[SP, #+144]
+   \   00000018   0x2801             CMP      R0,#+1
+   \   0000001A   0xD102             BNE.N    ??DataCard_0
+    455          	{
+    456          		g_LshRedFlshRecNum = 1;	
+   \   0000001C   0x2001             MOVS     R0,#+1
+   \   0000001E   0x....             LDR.N    R1,??DataTable11_7
+   \   00000020   0x6008             STR      R0,[R1, #+0]
+    457          	}
+    458          	
+    459          	CardAddrTmp = CARD_FLG_ADDR+sizeof(stcCardID)+sizeof(stcCardType)+sizeof(stcCardPara)+sizeof(stcCardIndex)*100;
+   \                     ??DataCard_0: (+1)
+   \   00000022   0xF640 0x505C      MOVW     R0,#+3420
+   \   00000026   0x0007             MOVS     R7,R0
+    460          	ReadCard(CardAddrTmp,(uint8_t *)&WriteCardTimes,sizeof(WriteCardTimes));	
+   \   00000028   0x2202             MOVS     R2,#+2
+   \   0000002A   0xA902             ADD      R1,SP,#+8
+   \   0000002C   0x0038             MOVS     R0,R7
+   \   0000002E   0x.... 0x....      BL       ReadCard
+    461          
+    462          	if(WriteCardTimes >= 100)	
+   \   00000032   0xF8BD 0x0008      LDRH     R0,[SP, #+8]
+   \   00000036   0x2864             CMP      R0,#+100
+   \   00000038   0xDB02             BLT.N    ??DataCard_1
+    463          	{	
+    464          		WriteCardTimes = 0;
+   \   0000003A   0x2000             MOVS     R0,#+0
+   \   0000003C   0xF8AD 0x0008      STRH     R0,[SP, #+8]
+    465          	}
+    466          			
+    467          	if(WriteCardTimes == 0)
+   \                     ??DataCard_1: (+1)
+   \   00000040   0xF8BD 0x0008      LDRH     R0,[SP, #+8]
+   \   00000044   0x2800             CMP      R0,#+0
+   \   00000046   0xD103             BNE.N    ??DataCard_2
+    468          	{
+    469          		CardStartAddr = CARD_DATA_ADDR;
+   \   00000048   0xF44F 0x50A0      MOV      R0,#+5120
+   \   0000004C   0x0006             MOVS     R6,R0
+   \   0000004E   0xE011             B.N      ??DataCard_3
+    470          	}
+    471          	else
+    472          	{
+    473          		CardAddrTmp = CARD_FLG_ADDR+sizeof(stcCardID)+sizeof(stcCardType)
+    474          				+sizeof(stcCardPara)+sizeof(stcCardIndex)*(WriteCardTimes-1);
+   \                     ??DataCard_2: (+1)
+   \   00000050   0xF8BD 0x0008      LDRH     R0,[SP, #+8]
+   \   00000054   0x0140             LSLS     R0,R0,#+5
+   \   00000056   0x30BC             ADDS     R0,R0,#+188
+   \   00000058   0x0007             MOVS     R7,R0
+    475          		ReadCard(CardAddrTmp,(uint8_t *)&sCardIndex,sizeof(stcCardIndex));
+   \   0000005A   0x2220             MOVS     R2,#+32
+   \   0000005C   0xA90A             ADD      R1,SP,#+40
+   \   0000005E   0x0038             MOVS     R0,R7
+   \   00000060   0x.... 0x....      BL       ReadCard
+    476          
+    477          		CardStartAddr 	= sCardIndex.EndAddr;
+   \   00000064   0x9810             LDR      R0,[SP, #+64]
+   \   00000066   0x0006             MOVS     R6,R0
+    478          		
+    479          		if(CardStartAddr < CARD_DATA_ADDR)
+   \   00000068   0xF5B6 0x5FA0      CMP      R6,#+5120
+   \   0000006C   0xD202             BCS.N    ??DataCard_3
+    480          		{
+    481          			CardStartAddr = CARD_DATA_ADDR;
+   \   0000006E   0xF44F 0x50A0      MOV      R0,#+5120
+   \   00000072   0x0006             MOVS     R6,R0
+    482          		}
+    483          	}
+    484          
+    485          	CardAddrTmp = CARD_FLG_ADDR+sizeof(stcCardID)+sizeof(stcCardType)
+    486          				+sizeof(stcCardPara)+sizeof(stcCardIndex)*WriteCardTimes;
+   \                     ??DataCard_3: (+1)
+   \   00000074   0xF8BD 0x0008      LDRH     R0,[SP, #+8]
+   \   00000078   0x0140             LSLS     R0,R0,#+5
+   \   0000007A   0x30DC             ADDS     R0,R0,#+220
+   \   0000007C   0x0007             MOVS     R7,R0
+    487          	ReadCard(CardAddrTmp,(uint8_t *)&sCardIndex,sizeof(stcCardIndex));
+   \   0000007E   0x2220             MOVS     R2,#+32
+   \   00000080   0xA90A             ADD      R1,SP,#+40
+   \   00000082   0x0038             MOVS     R0,R7
+   \   00000084   0x.... 0x....      BL       ReadCard
+    488          		
+    489          	if(g_CurFlshRecNum > g_LshRedFlshRecNum)
+   \   00000088   0x....             LDR.N    R0,??DataTable11_7
+   \   0000008A   0x6800             LDR      R0,[R0, #+0]
+   \   0000008C   0x....             LDR.N    R1,??DataTable11_8
+   \   0000008E   0x6809             LDR      R1,[R1, #+0]
+   \   00000090   0x4288             CMP      R0,R1
+   \   00000092   0xD206             BCS.N    ??DataCard_4
+    490          	{
+    491          		NoReadRecNum	= (g_CurFlshRecNum - g_LshRedFlshRecNum);		//Flsh的未读记录长度
+   \   00000094   0x....             LDR.N    R0,??DataTable11_8
+   \   00000096   0x6800             LDR      R0,[R0, #+0]
+   \   00000098   0x....             LDR.N    R1,??DataTable11_7
+   \   0000009A   0x6809             LDR      R1,[R1, #+0]
+   \   0000009C   0x1A40             SUBS     R0,R0,R1
+   \   0000009E   0x9003             STR      R0,[SP, #+12]
+   \   000000A0   0xE001             B.N      ??DataCard_5
+    492          	}
+    493          	else
+    494          	{
+    495          		NoReadRecNum = 0;
+   \                     ??DataCard_4: (+1)
+   \   000000A2   0x2000             MOVS     R0,#+0
+   \   000000A4   0x9003             STR      R0,[SP, #+12]
+    496          	}
+    497          	
+    498          	CardMaxRecNum	= GetToEndLen(CardStartAddr) / sizeof(stcFlshRec);	//取IC卡未写空间长度
+   \                     ??DataCard_5: (+1)
+   \   000000A6   0x0030             MOVS     R0,R6
+   \   000000A8   0x.... 0x....      BL       GetToEndLen
+   \   000000AC   0x09C0             LSRS     R0,R0,#+7
+   \   000000AE   0x9005             STR      R0,[SP, #+20]
+    499          		
+    500          	FlshRecCnt 		= GetReadFlshRecCnt(NoReadRecNum,CardMaxRecNum);	//要写数据长度
+   \   000000B0   0x9905             LDR      R1,[SP, #+20]
+   \   000000B2   0x9803             LDR      R0,[SP, #+12]
+   \   000000B4   0x.... 0x....      BL       GetReadFlshRecCnt
+   \   000000B8   0x0005             MOVS     R5,R0
+    501          	
+    502          	FlshStartRecNum = g_CurFlshRecNum  - FlshRecCnt ;
+   \   000000BA   0x....             LDR.N    R0,??DataTable11_8
+   \   000000BC   0x6800             LDR      R0,[R0, #+0]
+   \   000000BE   0x1B40             SUBS     R0,R0,R5
+   \   000000C0   0x9004             STR      R0,[SP, #+16]
+    503          
+    504          	printfcom0("\r\n %d,%d,%d,%d,%d",g_CurFlshRecNum,g_LshRedFlshRecNum,NoReadRecNum,FlshRecCnt,FlshStartRecNum);
+   \   000000C2   0x9804             LDR      R0,[SP, #+16]
+   \   000000C4   0x9001             STR      R0,[SP, #+4]
+   \   000000C6   0x9500             STR      R5,[SP, #+0]
+   \   000000C8   0x9B03             LDR      R3,[SP, #+12]
+   \   000000CA   0x....             LDR.N    R0,??DataTable11_7
+   \   000000CC   0x6802             LDR      R2,[R0, #+0]
+   \   000000CE   0x....             LDR.N    R0,??DataTable11_8
+   \   000000D0   0x6801             LDR      R1,[R0, #+0]
+   \   000000D2   0x....             LDR.N    R0,??DataTable11_9
+   \   000000D4   0x.... 0x....      BL       printfcom0
+    505          	if((WriteCardTimes < 100)  && ( CardMaxRecNum >20))			//卡写满
+   \   000000D8   0xF8BD 0x0008      LDRH     R0,[SP, #+8]
+   \   000000DC   0x2864             CMP      R0,#+100
+   \   000000DE   0xF280 0x80B9      BGE.W    ??DataCard_6
+   \   000000E2   0x9805             LDR      R0,[SP, #+20]
+   \   000000E4   0x2815             CMP      R0,#+21
+   \   000000E6   0xF0C0 0x80B5      BCC.W    ??DataCard_6
+    506          	{
+    507          		l_UnFihCardEvtFlg = NO_ERROR;
+   \   000000EA   0x2001             MOVS     R0,#+1
+   \   000000EC   0x....             LDR.N    R1,??DataTable11_10
+   \   000000EE   0x7008             STRB     R0,[R1, #+0]
+    508          
+    509          		if( NoReadRecNum > 1 )												//未读记录条数须大于1才能读取数据	
+   \   000000F0   0x9803             LDR      R0,[SP, #+12]
+   \   000000F2   0x2802             CMP      R0,#+2
+   \   000000F4   0xF0C0 0x80AB      BCC.W    ??DataCard_7
+    510          		{
+    511          			if( StoreCardRec(FlshStartRecNum,FlshRecCnt,CardStartAddr,WriteCardTimes))		//返回1 写卡完成
+   \   000000F8   0xF8BD 0x3008      LDRH     R3,[SP, #+8]
+   \   000000FC   0x0032             MOVS     R2,R6
+   \   000000FE   0x0029             MOVS     R1,R5
+   \   00000100   0x9804             LDR      R0,[SP, #+16]
+   \   00000102   0x.... 0x....      BL       StoreCardRec
+   \   00000106   0x2800             CMP      R0,#+0
+   \   00000108   0xF000 0x8094      BEQ.W    ??DataCard_8
+    512          			{
+    513          				uint8_t	i;
+    514          				uint8_t	Tmp;
+    515          				uint16	DataTmp;
+    516          				uint8_t	Buf[5] = {'0','0','0','0','0'};
+   \   0000010C   0xA808             ADD      R0,SP,#+32
+   \   0000010E   0x....             LDR.N    R1,??DataTable11_11
+   \   00000110   0xC90C             LDM      R1!,{R2,R3}
+   \   00000112   0xC00C             STM      R0!,{R2,R3}
+   \   00000114   0x3908             SUBS     R1,R1,#+8
+   \   00000116   0x3808             SUBS     R0,R0,#+8
+    517          			
+    518          				ReadHostInfo((stcDeviceInfo * )&sDeviceInfo);
+   \   00000118   0xA819             ADD      R0,SP,#+100
+   \   0000011A   0x.... 0x....      BL       ReadHostInfo
+    519          				
+    520          				ReadFixInfo((stcFixInfo * )&sFixInfo);
+   \   0000011E   0xA812             ADD      R0,SP,#+72
+   \   00000120   0x.... 0x....      BL       ReadFixInfo
+    521          				
+    522          				memcpy(sCardIndex.ProNum
+    523          							,sDeviceInfo.ProduceDate,sizeof(sDeviceInfo.ProduceDate));
+   \   00000124   0xF05F 0x0904      MOVS     R9,#+4
+   \   00000128   0xF10D 0x0A70      ADD      R10,SP,#+112
+   \   0000012C   0xF10D 0x0B2C      ADD      R11,SP,#+44
+   \   00000130   0x464A             MOV      R2,R9
+   \   00000132   0x4651             MOV      R1,R10
+   \   00000134   0x4658             MOV      R0,R11
+   \   00000136   0x.... 0x....      BL       __aeabi_memcpy
+    524          		
+    525          				DataTmp = sDeviceInfo.DeviceNum;
+   \   0000013A   0x981B             LDR      R0,[SP, #+108]
+   \   0000013C   0x0004             MOVS     R4,R0
+    526          				for(i = 0; i < 5;i++)
+   \   0000013E   0x2000             MOVS     R0,#+0
+   \   00000140   0x4680             MOV      R8,R0
+   \                     ??DataCard_9: (+1)
+   \   00000142   0xFA5F 0xF888      UXTB     R8,R8            ;; ZeroExt  R8,R8,#+24,#+24
+   \   00000146   0xF1B8 0x0F05      CMP      R8,#+5
+   \   0000014A   0xDA1A             BGE.N    ??DataCard_10
+    527          				{
+    528          					Tmp = DataTmp%10;
+   \   0000014C   0xB2A4             UXTH     R4,R4            ;; ZeroExt  R4,R4,#+16,#+16
+   \   0000014E   0x200A             MOVS     R0,#+10
+   \   00000150   0xFB94 0xF1F0      SDIV     R1,R4,R0
+   \   00000154   0xFB00 0x4011      MLS      R0,R0,R1,R4
+   \   00000158   0xF88D 0x0000      STRB     R0,[SP, #+0]
+    529          					DataTmp /= 10;
+   \   0000015C   0xB2A4             UXTH     R4,R4            ;; ZeroExt  R4,R4,#+16,#+16
+   \   0000015E   0x200A             MOVS     R0,#+10
+   \   00000160   0xFB94 0xF4F0      SDIV     R4,R4,R0
+    530          					if(DataTmp != 0)
+   \   00000164   0xB2A4             UXTH     R4,R4            ;; ZeroExt  R4,R4,#+16,#+16
+   \   00000166   0x2C00             CMP      R4,#+0
+   \   00000168   0xD008             BEQ.N    ??DataCard_11
+    531          					{
+    532          						Buf[5-1-i] = Tmp + '0';
+   \   0000016A   0xF89D 0x0000      LDRB     R0,[SP, #+0]
+   \   0000016E   0x3030             ADDS     R0,R0,#+48
+   \   00000170   0xA908             ADD      R1,SP,#+32
+   \   00000172   0xFA5F 0xF888      UXTB     R8,R8            ;; ZeroExt  R8,R8,#+24,#+24
+   \   00000176   0xEBB1 0x0108      SUBS     R1,R1,R8
+   \   0000017A   0x7108             STRB     R0,[R1, #+4]
+    533          					}
+    534          				}
+   \                     ??DataCard_11: (+1)
+   \   0000017C   0xF118 0x0801      ADDS     R8,R8,#+1
+   \   00000180   0xE7DF             B.N      ??DataCard_9
+    535          				
+    536          				memcpy(&sCardIndex.ProNum[sizeof(sDeviceInfo.ProduceDate)],Buf,5);
+   \                     ??DataCard_10: (+1)
+   \   00000182   0x2005             MOVS     R0,#+5
+   \   00000184   0x9007             STR      R0,[SP, #+28]
+   \   00000186   0xA808             ADD      R0,SP,#+32
+   \   00000188   0x9001             STR      R0,[SP, #+4]
+   \   0000018A   0xF10D 0x0930      ADD      R9,SP,#+48
+   \   0000018E   0x9A07             LDR      R2,[SP, #+28]
+   \   00000190   0x9901             LDR      R1,[SP, #+4]
+   \   00000192   0x4648             MOV      R0,R9
+   \   00000194   0x.... 0x....      BL       __aeabi_memcpy
+    537          				sCardIndex.LocoType[0]	= sFixInfo.LocoTyp;
+   \   00000198   0xF89D 0x0048      LDRB     R0,[SP, #+72]
+   \   0000019C   0xF88D 0x0028      STRB     R0,[SP, #+40]
+    538          				sCardIndex.LocoType[1]	= sFixInfo.E_LocoTyp;	
+   \   000001A0   0xF89D 0x0049      LDRB     R0,[SP, #+73]
+   \   000001A4   0xF88D 0x0029      STRB     R0,[SP, #+41]
+    539          				memcpy(sCardIndex.LocoNum,sFixInfo.LocoNum,sizeof(sFixInfo.LocoNum));		
+   \   000001A8   0xF05F 0x0902      MOVS     R9,#+2
+   \   000001AC   0xF10D 0x0A4A      ADD      R10,SP,#+74
+   \   000001B0   0xF10D 0x0B2A      ADD      R11,SP,#+42
+   \   000001B4   0x464A             MOV      R2,R9
+   \   000001B6   0x4651             MOV      R1,R10
+   \   000001B8   0x4658             MOV      R0,R11
+   \   000001BA   0x.... 0x....      BL       __aeabi_memcpy
+    540          				sCardIndex.StartAddr	= CardStartAddr;
+   \   000001BE   0x960F             STR      R6,[SP, #+60]
+    541          				CardEndAddr	= CardStartAddr + ( FlshRecCnt * sizeof(stcFlshRec));
+   \   000001C0   0x2080             MOVS     R0,#+128
+   \   000001C2   0xFB00 0x6005      MLA      R0,R0,R5,R6
+   \   000001C6   0x9006             STR      R0,[SP, #+24]
+    542          				sCardIndex.EndAddr 		= CardEndAddr;
+   \   000001C8   0x9806             LDR      R0,[SP, #+24]
+   \   000001CA   0x9010             STR      R0,[SP, #+64]
+    543          				//sCardFlg->sCardIndex[sCardFlg->WriteCardTimes].RecLen		= CardEndAddr - CardStartAddr;
+    544          				sCardIndex.RecLen		=  FlshRecCnt * sizeof(stcFlshRec);
+   \   000001CC   0x2080             MOVS     R0,#+128
+   \   000001CE   0xFB00 0xF005      MUL      R0,R0,R5
+   \   000001D2   0xF8AD 0x0044      STRH     R0,[SP, #+68]
+    545          				sCardIndex.RecNum		= FlshRecCnt;
+   \   000001D6   0x0028             MOVS     R0,R5
+   \   000001D8   0xF8AD 0x0046      STRH     R0,[SP, #+70]
+    546          				
+    547          				WriteCardTimes++;									
+   \   000001DC   0xF8BD 0x0008      LDRH     R0,[SP, #+8]
+   \   000001E0   0x1C40             ADDS     R0,R0,#+1
+   \   000001E2   0xF8AD 0x0008      STRH     R0,[SP, #+8]
+    548          
+    549          				CardAddrTmp = CARD_FLG_ADDR+sizeof(stcCardID)+sizeof(stcCardType)
+    550          							+sizeof(stcCardPara)+sizeof(stcCardIndex)*100; 
+   \   000001E6   0xF640 0x505C      MOVW     R0,#+3420
+   \   000001EA   0x0007             MOVS     R7,R0
+    551          				WriteCard(CardAddrTmp,(uint8_t *)&WriteCardTimes,sizeof(WriteCardTimes));	
+   \   000001EC   0x2202             MOVS     R2,#+2
+   \   000001EE   0xA902             ADD      R1,SP,#+8
+   \   000001F0   0x0038             MOVS     R0,R7
+   \   000001F2   0x.... 0x....      BL       WriteCard
+    552          
+    553          				CardAddrTmp = CARD_FLG_ADDR+sizeof(stcCardID)+sizeof(stcCardType)
+    554          							+sizeof(stcCardPara)+sizeof(stcCardIndex)*(WriteCardTimes-1); 
+   \   000001F6   0xF8BD 0x0008      LDRH     R0,[SP, #+8]
+   \   000001FA   0x0140             LSLS     R0,R0,#+5
+   \   000001FC   0x30BC             ADDS     R0,R0,#+188
+   \   000001FE   0x0007             MOVS     R7,R0
+    555          				WriteCard(CardAddrTmp,(uint8_t *)&sCardIndex,sizeof(stcCardIndex));
+   \   00000200   0x2220             MOVS     R2,#+32
+   \   00000202   0xA90A             ADD      R1,SP,#+40
+   \   00000204   0x0038             MOVS     R0,R7
+   \   00000206   0x.... 0x....      BL       WriteCard
+    556          
+    557          				if(copyflg == 0)
+   \   0000020A   0xF89D 0x0090      LDRB     R0,[SP, #+144]
+   \   0000020E   0x2800             CMP      R0,#+0
+   \   00000210   0xD107             BNE.N    ??DataCard_12
+    558          				{
+    559          					StoreLstRedFlshRecNum(g_CurFlshRecNum);				//存最新的已读记录流水号
+   \   00000212   0x....             LDR.N    R0,??DataTable11_8
+   \   00000214   0x6800             LDR      R0,[R0, #+0]
+   \   00000216   0x.... 0x....      BL       StoreLstRedFlshRecNum
+    560          				
+    561          					g_LshRedFlshRecNum = g_CurFlshRecNum;				//
+   \   0000021A   0x....             LDR.N    R0,??DataTable11_8
+   \   0000021C   0x6800             LDR      R0,[R0, #+0]
+   \   0000021E   0x....             LDR.N    R1,??DataTable11_7
+   \   00000220   0x6008             STR      R0,[R1, #+0]
+    562          				}
+    563          				DelayX10ms(10);
+   \                     ??DataCard_12: (+1)
+   \   00000222   0x200A             MOVS     R0,#+10
+   \   00000224   0x.... 0x....      BL       DelayX10ms
+    564          				IndicateWriteCardFinsh();							//
+   \   00000228   0x.... 0x....      BL       IndicateWriteCardFinsh
+    565          				
+    566          				DelayX10ms(10);	
+   \   0000022C   0x200A             MOVS     R0,#+10
+   \   0000022E   0x.... 0x....      BL       DelayX10ms
+   \   00000232   0xE011             B.N      ??DataCard_13
+    567          			}
+    568          			else														//写卡错误操作
+    569          			{
+    570          				l_UnFihCardEvtFlg = ERROR;
+   \                     ??DataCard_8: (+1)
+   \   00000234   0x2000             MOVS     R0,#+0
+   \   00000236   0x....             LDR.N    R1,??DataTable11_10
+   \   00000238   0x7008             STRB     R0,[R1, #+0]
+    571          				
+    572          				DelayX10ms(10);	
+   \   0000023A   0x200A             MOVS     R0,#+10
+   \   0000023C   0x.... 0x....      BL       DelayX10ms
+    573          				
+    574          				IndicateWriteNoFinsh();									//写卡未完成指示
+   \   00000240   0x.... 0x....      BL       IndicateWriteNoFinsh
+    575          				
+    576          				DelayX10ms(500);										//未写完
+   \   00000244   0xF44F 0x70FA      MOV      R0,#+500
+   \   00000248   0x.... 0x....      BL       DelayX10ms
+   \   0000024C   0xE004             B.N      ??DataCard_13
+    577          			}
+    578          		}
+    579          		else
+    580          		{
+    581          			IndicateWriteCardFinsh();									//
+   \                     ??DataCard_7: (+1)
+   \   0000024E   0x.... 0x....      BL       IndicateWriteCardFinsh
+   \   00000252   0xE001             B.N      ??DataCard_13
+    582          		}
+    583          	}
+    584          	else
+    585          	{
+    586          		IndicateCardFull();
+   \                     ??DataCard_6: (+1)
+   \   00000254   0x.... 0x....      BL       IndicateCardFull
+    587          	}
+    588          
+    589          	printfcom0("\r\n %d,%d,%d,%d",FlshRecCnt,g_LshRedFlshRecNum,NoReadRecNum,FlshStartRecNum);
+   \                     ??DataCard_13: (+1)
+   \   00000258   0x9804             LDR      R0,[SP, #+16]
+   \   0000025A   0x9000             STR      R0,[SP, #+0]
+   \   0000025C   0x9B03             LDR      R3,[SP, #+12]
+   \   0000025E   0x....             LDR.N    R0,??DataTable11_7
+   \   00000260   0x6802             LDR      R2,[R0, #+0]
+   \   00000262   0x0029             MOVS     R1,R5
+   \   00000264   0x....             LDR.N    R0,??DataTable11_12
+   \   00000266   0x.... 0x....      BL       printfcom0
+    590          
+    591          } 
+   \   0000026A   0xB025             ADD      SP,SP,#+148
+   \   0000026C   0xE8BD 0x8FF0      POP      {R4-R11,PC}      ;; return
+    592          
+    593          extern  stcCardFlg	l_sCardFlg;
+    594          extern	uint16	l_CardType;
+    595          
+    596          //-------------------------------------------------------------------------------------------------
+    597          //函数名称:             void	DataCardPartRead(void)
+    598          //函数功能:             普通卡处理
+    599          //入口参数:             无
+    600          //出口参数:             无
+    601          //--------------------------------------------------------------------------------------------------
+
+   \                                 In section .text, align 2, keep-with-next
+    602          void	DataCardPartRead(void)
+    603          {
+    604          /*
+    605          	static	stcDeviceInfo 	sDeviceInfo;
+    606          	static	stcFixInfo		sFixInfo;		
+    607          	uint32_t	FlshRecCnt;	
+    608          	uint32_t	FlshStartRecNum;
+    609          	uint32_t	CardEndAddr;
+    610          	uint32_t	CardStartAddr;
+    611          	uint32_t	CardMaxRecNum;
+    612          	uint32_t	NoReadRecNum;
+    613          	uint16	CrcCheck;
+    614          	uint32_t	FinshRecCnt = 0;
+    615          	uint32_t	CardTime = 0;
+    616          
+    617          	PrintfDebug("\r\nDataCard");
+    618          	
+    619          	ClaerDisplaySet();												//清显示缓冲区
+    620          	OffAllLed();													//关所有发光二极管
+    621          	OnLed(RUN_LED,30000,5,5);										//清显示缓冲区		
+    622          	//CloseTax2();
+    623          		
+    624          	PrintfDebug("\r\n OperationCard");
+    625          	
+    626          	DisplaySet(100,1,"PRCD");
+    627          
+    628          	while(1)
+    629          	{
+    630          		if(PlugICCard() == TRUE)										//有卡插入，再进行相关操作
+    631          		{	
+    632          			ClaerDisplaySet();												//清显示缓冲区
+    633          				
+    634          			ReadCardFlg((stcCardFlg *)&l_sCardFlg);
+    635          			
+    636          			if( l_CardType == DATA_CARD )
+    637          			{
+    638          				CardTime++;
+    639          				
+    640          				if(l_sCardFlg.WriteCardTimes >= 100)	
+    641          				{	
+    642          					l_sCardFlg.WriteCardTimes = 0;
+    643          				}
+    644          					
+    645          				if(l_sCardFlg.WriteCardTimes == 0)						//地址对齐
+    646          				{
+    647          					CardStartAddr = CARD_DATA_ADDR;
+    648          				}
+    649          				else
+    650          				{
+    651          					CardStartAddr 	= l_sCardFlg.sCardIndex[l_sCardFlg.WriteCardTimes - 1].EndAddr;
+    652          					
+    653          					if(CardStartAddr < CARD_DATA_ADDR)
+    654          					{
+    655          						CardStartAddr = CARD_DATA_ADDR;
+    656          					}
+    657          					
+    658          					if((CardStartAddr - CARD_DATA_ADDR) %  sizeof(stcFlshRec))	//地址对齐
+    659          					{
+    660          						CardStartAddr = CardStartAddr - (CardStartAddr - CARD_DATA_ADDR) %  sizeof(stcFlshRec);
+    661          					}
+    662          				}
+    663          				
+    664          				g_LshRedFlshRecNum = 0;												//
+    665          				
+    666          				if((g_CurFlshRecNum - g_LshRedFlshRecNum) /(FLSH_MAX_SIZE/(sizeof(stcFlshRec))))
+    667          				{
+    668          					NoReadRecNum = FLSH_MAX_SIZE/(sizeof(stcFlshRec));
+    669          				}
+    670          				else
+    671          				{
+    672          					NoReadRecNum	= (g_CurFlshRecNum - g_LshRedFlshRecNum);			//Flsh的未读记录长度
+    673          				}
+    674          				
+    675          				if(NoReadRecNum <=  FinshRecCnt + 100)									//数据记录全读完
+    676          				{
+    677          					IndicateRecordFinsh();
+    678          					
+    679          					while(PlugICCard() == TRUE)
+    680          					{
+    681          						NOP();
+    682          					}
+    683          					
+    684          					break;
+    685          				}
+    686          				
+    687          				CardMaxRecNum	= GetToEndLen(CardStartAddr) / sizeof(stcFlshRec);		//取IC卡未写空间长度
+    688          					
+    689          				FlshRecCnt 		= GetReadFlshRecCnt(NoReadRecNum,CardMaxRecNum);		//要写数据长度
+    690          				
+    691          				FlshStartRecNum = g_CurFlshRecNum  - FlshRecCnt -  FinshRecCnt;    		//开始本次写时起始流水号
+    692          				
+    693          				FinshRecCnt += FlshRecCnt;												//已完成的流水号个数
+    694          
+    695          				//printfcom0("\r\nNoReadRecNum %d,CardMaxRecNum %d,FlshRecCnt %d,FlshStartRecNum %d l_sCardFlg.WriteCardTimes %d,GetToEndLen(CardStartAddr) %d",
+    696          				NoReadRecNum,CardMaxRecNum,FlshRecCnt,FlshStartRecNum,l_sCardFlg.WriteCardTimes,GetToEndLen(CardStartAddr));
+    697          				
+    698          				if((l_sCardFlg.WriteCardTimes < 100)  && ( CardMaxRecNum > 20))			//卡写满
+    699          				{
+    700          					l_UnFihCardEvtFlg = NO_ERROR;
+    701          
+    702          					if( NoReadRecNum > 1 )											//未读记录条数须大于1才能读取数据	
+    703          					{
+    704          						if( StoreCardRec(FlshStartRecNum,FlshRecCnt,CardStartAddr,l_sCardFlg.WriteCardTimes))		//返回1 写卡完成
+    705          						{
+    706          							uint8_t	i;
+    707          							uint8_t	Tmp;
+    708          							uint16	DataTmp;
+    709          							uint8_t	Buf[5] = {'0','0','0','0','0'};
+    710          						
+    711          							ReadHostInfo((stcDeviceInfo * )&sDeviceInfo);
+    712          							
+    713          							ReadFixInfo((stcFixInfo * )&sFixInfo);
+    714          							
+    715          							memcpy(l_sCardFlg.sCardIndex[l_sCardFlg.WriteCardTimes].ProNum
+    716          										,sDeviceInfo.ProduceDate,sizeof(sDeviceInfo.ProduceDate));
+    717          					
+    718          							DataTmp = sDeviceInfo.DeviceNum;
+    719          							for(i = 0; i < 5;i++)
+    720          							{
+    721          								Tmp = DataTmp%10;
+    722          								DataTmp /= 10;
+    723          								if(DataTmp != 0)
+    724          								{
+    725          									Buf[5-1-i] = Tmp + '0';
+    726          								}
+    727          							}
+    728          							
+    729          							memcpy(&l_sCardFlg.sCardIndex[l_sCardFlg.WriteCardTimes].ProNum[sizeof(sDeviceInfo.ProduceDate)],Buf,5);
+    730          							l_sCardFlg.sCardIndex[l_sCardFlg.WriteCardTimes].LocoType[0]	= sFixInfo.LocoTyp;
+    731          							l_sCardFlg.sCardIndex[l_sCardFlg.WriteCardTimes].LocoType[1]	= sFixInfo.E_LocoTyp;	
+    732          							memcpy(l_sCardFlg.sCardIndex[l_sCardFlg.WriteCardTimes].LocoNum,sFixInfo.LocoNum,sizeof(sFixInfo.LocoNum));		
+    733          							l_sCardFlg.sCardIndex[l_sCardFlg.WriteCardTimes].StartAddr= CardStartAddr;
+    734          							CardEndAddr	= CardStartAddr + ( FlshRecCnt * sizeof(stcFlshRec));
+    735          							l_sCardFlg.sCardIndex[l_sCardFlg.WriteCardTimes].EndAddr 	= CardEndAddr;
+    736          							//l_sCardFlg.sCardIndex[l_sCardFlg.WriteCardTimes].RecLen	= CardEndAddr - CardStartAddr;
+    737          							l_sCardFlg.sCardIndex[l_sCardFlg.WriteCardTimes].RecLen	=  FlshRecCnt * sizeof(stcFlshRec);
+    738          							l_sCardFlg.sCardIndex[l_sCardFlg.WriteCardTimes].RecNum	= FlshRecCnt;
+    739          							
+    740          							l_sCardFlg.WriteCardTimes++;									
+    741          
+    742          							CrcCheck = GetCrc16Check((uint8_t *)&l_sCardFlg,sizeof(stcCardFlg) -2);
+    743          
+    744          							l_sCardFlg.CrcCheck = CrcCheck;									
+    745          
+    746          							WriteCardFlg((stcCardFlg *)&l_sCardFlg);					//修改IC卡标志页
+    747          										
+    748          							//StoreLstRedFlshRecNum(g_CurFlshRecNum);					//存最新的已读记录流水号
+    749          							
+    750          							//g_LshRedFlshRecNum = g_CurFlshRecNum;
+    751          							
+    752          							IndicateWriteCardFinsh();									//
+    753          
+    754          						}
+    755          						else															//写卡错误操作
+    756          						{
+    757          							l_UnFihCardEvtFlg = ERROR;
+    758          							
+    759          							DelayX10ms(10);	
+    760          							
+    761          							IndicateWriteNoFinsh();										//写卡未完成指示
+    762          							
+    763          							DelayX10ms(500);											//未写完
+    764          						}
+    765          					}
+    766          					else
+    767          					{
+    768          						IndicateWriteCardFinsh();								//
+    769          
+    770          					}
+    771          
+    772          				}
+    773          				else
+    774          				{
+    775          					IndicateCardFull();
+    776          				}
+    777          				
+    778          				while(PlugICCard() == TRUE)
+    779          				{
+    780          					NOP();
+    781          				}				
+    782          				
+    783          				DelayX10ms(500);												//拨卡后，延时5S
+    784          				ClaerDisplaySet();												//清显示缓冲区
+    785          				DisplaySet(100,5,"%u",CardTime);
+    786          			}
+    787          			else
+    788          			{
+    789          				DisplaySet(100,10,"UNDF");
+    790          				DisplaySet(100,10,"     ");
+    791          				while( PlugICCard() != TRUE)
+    792          				{
+    793          					NOP();
+    794          				}
+    795          				
+    796          				ClaerDisplaySet();												//清显示缓冲区
+    797          			}
+    798          		}
+    799          		else
+    800          		{
+    801          			DisplaySet(100,1,"PRCD");
+    802          
+    803          			while( PlugICCard() != TRUE)
+    804          			{
+    805          				NOP();
+    806          			}
+    807          		}
+    808          	}
+    809          */
+    810          } 
+   \                     DataCardPartRead: (+1)
+   \   00000000   0x4770             BX       LR               ;; return
+    811          
+    812          
+    813          //-------------------------------------------------------------------------------------------------
+    814          //函数名称:             void	GetUnFihCardEvtFlg(void)
+    815          //函数功能:             取未完成数据转储标识
+    816          //入口参数:             无
+    817          //出口参数:             无
+    818          //--------------------------------------------------------------------------------------------------
+
+   \                                 In section .text, align 2, keep-with-next
+    819          uint8_t	GetUnFihCardEvtFlg(void)
+    820          {
+    821          	return	l_UnFihCardEvtFlg;
+   \                     GetUnFihCardEvtFlg: (+1)
+   \   00000000   0x....             LDR.N    R0,??DataTable11_10
+   \   00000002   0x7800             LDRB     R0,[R0, #+0]
+   \   00000004   0x4770             BX       LR               ;; return
+    822          }
+    823          
+    824          //-------------------------------------------------------------------------------------------------
+    825          //函数名称:             void	GetUnFihCardEvtFlg(void)
+    826          //函数功能:             取未完成数据转储标识
+    827          //入口参数:             无
+    828          //出口参数:             无
+    829          //--------------------------------------------------------------------------------------------------
+    830          //uint8_t	GetWriteFlgErrCardEvtFlg(void)
+    831          //{
+    832          //	return	l_WriteFlgErrCardEvtFlg;
+    833          //}
+    834          
+    835          //-------------------------------------------------------------------------------------------------
+    836          //函数名称:             void	GetUnFihCardEvtFlg(void)
+    837          //函数功能:             取未完成数据转储标识
+    838          //入口参数:             无
+    839          //出口参数:             无
+    840          //--------------------------------------------------------------------------------------------------
+
+   \                                 In section .text, align 2, keep-with-next
+    841          void	ResetUnFihCardEvtFlg(void)
+    842          {
+    843          	l_UnFihCardEvtFlg = NO_ERROR;
+   \                     ResetUnFihCardEvtFlg: (+1)
+   \   00000000   0x2001             MOVS     R0,#+1
+   \   00000002   0x....             LDR.N    R1,??DataTable11_10
+   \   00000004   0x7008             STRB     R0,[R1, #+0]
+    844          }
+   \   00000006   0x4770             BX       LR               ;; return
+    845          
+    846          //----------------------------------------------------------------------
+    847          //函数名称:  	void    ReadCopyCardDisplay(uint8_t	 Sct)
+    848          //函数功能:  	将油尺记录FLASH转化为IC卡记录
+    849          //入口参数:   	FLASH记录
+    850          //出口参数:   	IC卡记录
+    851          //说明:                 
+    852          //-----------------------------------------------------------------------
+
+   \                                 In section .text, align 2, keep-with-next
+    853          void    ReadCopyCardDisplay(uint8_t	 Sct)
+    854          {
+   \                     ReadCopyCardDisplay: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    855          	uint8_t	i = 0;
+   \   00000004   0x2500             MOVS     R5,#+0
+    856          	
+    857          	while(i < 10 )
+   \                     ??ReadCopyCardDisplay_0: (+1)
+   \   00000006   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
+   \   00000008   0x2D0A             CMP      R5,#+10
+   \   0000000A   0xDA09             BGE.N    ??ReadCopyCardDisplay_1
+    858          	{
+    859          		DisplaySet(3,10000,"       %u",i);
+   \   0000000C   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
+   \   0000000E   0x002B             MOVS     R3,R5
+   \   00000010   0x....             LDR.N    R2,??DataTable11_13
+   \   00000012   0xF242 0x7110      MOVW     R1,#+10000
+   \   00000016   0x2003             MOVS     R0,#+3
+   \   00000018   0x.... 0x....      BL       DisplaySet
+    860          		i++;
+   \   0000001C   0x1C6D             ADDS     R5,R5,#+1
+   \   0000001E   0xE7F2             B.N      ??ReadCopyCardDisplay_0
+    861          	}
+    862          }
+   \                     ??ReadCopyCardDisplay_1: (+1)
+   \   00000020   0xBD31             POP      {R0,R4,R5,PC}    ;; return
+    863          
+    864          extern	uint32_t		l_CardPageSize;	
+    865          extern	uint32_t		l_CardPageNum;
+    866          //-------------------------------------------------------------------------------------------------
+    867          //函数名称:             uint32_t	GetCardMaxRecNum(void)
+    868          //函数功能:             取一张IC卡最大能存最大的数据记录数
+    869          //入口参数:             整个卡结构体
+    870          //出口参数:             是否成功
+    871          //--------------------------------------------------------------------------------------------------
+
+   \                                 In section .text, align 2, keep-with-next
+    872          uint32_t	GetCardMaxRecNum(void)
+    873          {
+    874          	uint32_t	RecNum;
+    875          	
+    876          	RecNum = (l_CardPageNum*l_CardPageSize - CARD_DATA_ADDR)/ sizeof(stcFlshRec);
+   \                     GetCardMaxRecNum: (+1)
+   \   00000000   0x....             LDR.N    R1,??DataTable11_14
+   \   00000002   0x6809             LDR      R1,[R1, #+0]
+   \   00000004   0x....             LDR.N    R2,??DataTable11_15
+   \   00000006   0x6812             LDR      R2,[R2, #+0]
+   \   00000008   0x4351             MULS     R1,R2,R1
+   \   0000000A   0xF5B1 0x51A0      SUBS     R1,R1,#+5120
+   \   0000000E   0x09C9             LSRS     R1,R1,#+7
+   \   00000010   0x0008             MOVS     R0,R1
+    877          	
+    878          	return	RecNum;
+   \   00000012   0x4770             BX       LR               ;; return
+    879          }
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10:
+   \   00000000   0x41 0x4C          DC8      "ALL"
+   \              0x4C 0x00    
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11:
+   \   00000000   0x........         DC32     ?_0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_1:
+   \   00000000   0x........         DC32     ?_1
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_2:
+   \   00000000   0x........         DC32     ?_2
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_3:
+   \   00000000   0x........         DC32     ?_3
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_4:
+   \   00000000   0x........         DC32     ?_4
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_5:
+   \   00000000   0x........         DC32     ?_6
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_6:
+   \   00000000   0x........         DC32     ?_7
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_7:
+   \   00000000   0x........         DC32     g_LshRedFlshRecNum
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_8:
+   \   00000000   0x........         DC32     g_CurFlshRecNum
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_9:
+   \   00000000   0x........         DC32     ?_8
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_10:
+   \   00000000   0x........         DC32     l_UnFihCardEvtFlg
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_11:
+   \   00000000   0x........         DC32     ?_9
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_12:
+   \   00000000   0x........         DC32     ?_10
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_13:
+   \   00000000   0x........         DC32     ?_11
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_14:
+   \   00000000   0x........         DC32     l_CardPageNum
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_15:
+   \   00000000   0x........         DC32     l_CardPageSize
+
+   \                                 In section .rodata, align 4
+   \                     ?_0:
+   \   00000000   0x25 0x75          DC8 "%u  %u"
+   \              0x20 0x20    
+   \              0x25 0x75    
+   \              0x00         
+   \   00000007   0x00               DC8 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_1:
+   \   00000000   0x67 0x6F          DC8 "good"
+   \              0x6F 0x64    
+   \              0x00         
+   \   00000005   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_2:
+   \   00000000   0x20 0x20          DC8 "    "
+   \              0x20 0x20    
+   \              0x00         
+   \   00000005   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_3:
+   \   00000000   0x45 0x5F          DC8 "E_IC"
+   \              0x49 0x43    
+   \              0x00         
+   \   00000005   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_4:
+   \   00000000   0x45 0x5F          DC8 "E_US"
+   \              0x55 0x53    
+   \              0x00         
+   \   00000005   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \   00000000   0x41 0x4C          DC8 "ALL"
+   \              0x4C 0x00    
+
+   \                                 In section .rodata, align 4
+   \                     ?_6:
+   \   00000000   0x46 0x55          DC8 "FULL"
+   \              0x4C 0x4C    
+   \              0x00         
+   \   00000005   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_7:
+   \   00000000   0x4E 0x55          DC8 "NUNF"
+   \              0x4E 0x46    
+   \              0x00         
+   \   00000005   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_8:
+   \   00000000   0x0D 0x0A          DC8 "\015\012 %d,%d,%d,%d,%d"
+   \              0x20 0x25    
+   \              0x64 0x2C    
+   \              0x25 0x64    
+   \              0x2C 0x25    
+   \              0x64 0x2C    
+   \              0x25 0x64    
+   \              0x2C 0x25    
+   \              0x64 0x00    
+   \   00000012   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_9:
+   \   00000000   0x30 0x30          DC8 48, 48, 48, 48, 48, 0, 0, 0
+   \              0x30 0x30    
+   \              0x30 0x00    
+   \              0x00 0x00    
+
+   \                                 In section .rodata, align 4
+   \                     ?_10:
+   \   00000000   0x0D 0x0A          DC8 "\015\012 %d,%d,%d,%d"
+   \              0x20 0x25    
+   \              0x64 0x2C    
+   \              0x25 0x64    
+   \              0x2C 0x25    
+   \              0x64 0x2C    
+   \              0x25 0x64    
+   \              0x00         
+   \   0000000F   0x00               DC8 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_11:
+   \   00000000   0x20 0x20          DC8 "       %u"
+   \              0x20 0x20    
+   \              0x20 0x20    
+   \              0x20 0x25    
+   \              0x75 0x00    
+   \   0000000A   0x00 0x00          DC8 0, 0
+    880          
+    881          //-------------------------------------------------------------------------------------------------
+    882          //函数名称:             uint8_t	DataCopyCard(stcCardFlg	* sCardFlg)
+    883          //函数功能:             置数据卡
+    884          //入口参数:             整个卡结构体
+    885          //出口参数:             是否成功
+    886          //--------------------------------------------------------------------------------------------------
+    887          //uint8_t	DataCopyCard(void)
+    888          //{
+    889          ////	uint32_t	FlshRecCnt;	
+    890          ////	uint32_t	FlshStartRecNum;
+    891          ////	uint32_t	CardStartAddr;
+    892          ////	uint32_t	CardEndAddr;
+    893          ////	uint32_t	CardMaxRecNum;
+    894          ////	uint32_t	NoReadRecNum;
+    895          ////	uint16	CrcCheck;	
+    896          ////	uint32_t	Time;
+    897          ////	stcDeviceInfo 	sDeviceInfo;
+    898          ////	stcFixInfo		sFixInfo;	
+    899          ////	uint16	WriteCardTimes;
+    900          ////	stcCardIndex	sCardIndex[100];
+    901          ////
+    902          ////	
+    903          ////	ReadCard(CARD_FLG_ADDR+sizeof(stcCardID)+sizeof(stcCardType)+sizeof(stcCardPara)+sizeof(stcCardIndex)*100,
+    904          ////			(uint8_t *)&WriteCardTimes,sizeof(stcCardType));	
+    905          ////	ReadCard(CARD_FLG_ADDR+sizeof(stcCardID)+sizeof(stcCardType)+sizeof(stcCardPara),
+    906          ////			(uint8_t *)&sCardIndex[0],sizeof(stcCardIndex)*100);			
+    907          ////	
+    908          ////	if(g_CurFlshRecNum > 1 && g_CurFlshRecNum > g_LshRedFlshRecNum)
+    909          ////	{
+    910          ////		NoReadRecNum	= (g_CurFlshRecNum - g_LshRedFlshRecNum);			//Flsh的未读记录长度
+    911          ////	}
+    912          ////	else
+    913          ////	{
+    914          ////		NoReadRecNum = 0;
+    915          ////	}
+    916          ////	
+    917          ////	CardMaxRecNum	= GetToEndLen(CardStartAddr) / sizeof(stcFlshRec);			//取IC卡未写空间长度
+    918          ////		
+    919          ////	FlshRecCnt 		= GetCardMaxRecNum() - 1;	//要写数据长度
+    920          ////	
+    921          ////	if(g_CurFlshRecNum > FlshRecCnt)
+    922          ////	{
+    923          ////		FlshStartRecNum = g_CurFlshRecNum - FlshRecCnt;
+    924          ////	}
+    925          ////	else
+    926          ////	{
+    927          ////		FlshRecCnt = g_CurFlshRecNum;
+    928          ////
+    929          ////		FlshStartRecNum = 0;
+    930          ////	}
+    931          ////	
+    932          ////	CardStartAddr = CARD_DATA_ADDR;
+    933          ////	
+    934          ////	if( StoreCardRec(FlshStartRecNum,FlshRecCnt,CardStartAddr,WriteCardTimes))		//返回1 写卡完成
+    935          ////	{
+    936          ////		uint8_t	i;
+    937          ////		uint8_t	Tmp;
+    938          ////		uint16	DataTmp;
+    939          ////		uint8_t	Buf[5] = {'0','0','0','0','0'};
+    940          ////	
+    941          ////		ReadHostInfo((stcDeviceInfo * )&sDeviceInfo);
+    942          ////		
+    943          ////		ReadFixInfo((stcFixInfo * )&sFixInfo);
+    944          ////		
+    945          ////		memcpy(sCardIndex[WriteCardTimes].ProNum
+    946          ////					,sDeviceInfo.ProduceDate,sizeof(sDeviceInfo.ProduceDate));
+    947          ////
+    948          ////		DataTmp = sDeviceInfo.DeviceNum;
+    949          ////		for(i = 0; i < 5;i++)
+    950          ////		{
+    951          ////			Tmp = DataTmp%10;
+    952          ////			DataTmp /= 10;
+    953          ////			if(DataTmp != 0)
+    954          ////			{
+    955          ////				Buf[5-1-i] = Tmp + '0';
+    956          ////			}
+    957          ////		}
+    958          ////		
+    959          ////		memcpy(&sCardIndex[WriteCardTimes].ProNum[sizeof(sDeviceInfo.ProduceDate)],Buf,5);
+    960          ////		sCardIndex[WriteCardTimes].LocoType[0]	= sFixInfo.LocoTyp;
+    961          ////		sCardIndex[WriteCardTimes].LocoType[1]	= sFixInfo.E_LocoTyp;	
+    962          ////		memcpy(sCardIndex[WriteCardTimes].LocoNum,sFixInfo.LocoNum,sizeof(sFixInfo.LocoNum));		
+    963          ////		sCardIndex[WriteCardTimes].StartAddr= CardStartAddr;
+    964          ////		CardEndAddr	= CardStartAddr + ( FlshRecCnt * sizeof(stcFlshRec));
+    965          ////		sCardIndex[WriteCardTimes].EndAddr 	= CardEndAddr;
+    966          ////		//sCardIndex[WriteCardTimes].RecLen	= CardEndAddr - CardStartAddr;
+    967          ////		sCardIndex[WriteCardTimes].RecLen	=  FlshRecCnt * sizeof(stcFlshRec);
+    968          ////		sCardIndex[WriteCardTimes].RecNum	= FlshRecCnt;
+    969          ////		
+    970          ////		WriteCardTimes++;									
+    971          ////
+    972          //////		CrcCheck = GetCrc16Check((uint8_t *)sCardFlg,sizeof(stcCardFlg) -2);
+    973          //////
+    974          //////		CrcCheck = CrcCheck;									
+    975          ////
+    976          //////		WriteCardFlg(sCardFlg);									//修改IC卡标志页
+    977          ////					
+    978          ////		//StoreLstRedFlshRecNum(g_CurFlshRecNum );				//存最新的已读记录流水号
+    979          ////		
+    980          ////		//g_LshRedFlshRecNum = g_CurFlshRecNum;
+    981          ////		
+    982          ////		IndicateWriteCardFinsh();								//	
+    983          ////	}
+    984          ////	else															//写卡错误操作
+    985          ////	{
+    986          ////		DelayX10ms(10);	
+    987          ////		
+    988          ////		IndicateWriteNoFinsh();										//写卡未完成指示
+    989          ////		
+    990          ////		DelayX10ms(500);											//未写完
+    991          ////	}
+    992          ////
+    993          ////	Time = GetSysTime();	
+    994          ////	
+    995          ////	while(PlugICCard())
+    996          ////	{
+    997          ////		NOP();
+    998          ////		//SysHoldTast();
+    999          ////		
+   1000          ////		if(GetSysTime() - Time > 20*100)
+   1001          ////		{
+   1002          ////			break;
+   1003          ////		}
+   1004          ////	}
+   1005          ////	
+   1006          ////	return 1;
+   1007          //}
+   1008          //		
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+     184   DataCard
+       184   -> DelayX10ms
+       184   -> GetReadFlshRecCnt
+       184   -> GetToEndLen
+       184   -> IndicateCardFull
+       184   -> IndicateWriteCardFinsh
+       184   -> IndicateWriteNoFinsh
+       184   -> ReadCard
+       184   -> ReadFixInfo
+       184   -> ReadHostInfo
+       184   -> ReadLstRedFlshRecNum
+       184   -> StoreCardRec
+       184   -> StoreLstRedFlshRecNum
+       184   -> WriteCard
+       184   -> __aeabi_memcpy
+       184   -> printfcom0
+       0   DataCardPartRead
+     160   FlshRecToCardRec
+       160   -> __aeabi_memcpy
+       160   -> __aeabi_memcpy4
+       0   GetCardMaxRecNum
+       0   GetReadFlshRecCnt
+       0   GetUnFihCardEvtFlg
+      32   GetWritePageLen
+        32   -> GetCardPageSize
+       8   IndicateCardFull
+         8   -> ClaerDisplaySetWithoutStore
+         8   -> DisplaySet
+         8   -> OnLed
+       8   IndicateRecordFinsh
+         8   -> ClaerDisplaySetWithoutStore
+         8   -> DelayX10ms
+         8   -> DisplaySet
+         8   -> OnLed
+       8   IndicateUSBFlgErr
+         8   -> DelayX10ms
+         8   -> DisplaySet
+         8   -> OnLed
+       8   IndicateWriteCardFinsh
+         8   -> ClaerDisplaySetWithoutStore
+         8   -> DelayX10ms
+         8   -> DisplaySet
+       8   IndicateWriteCardFlgErr
+         8   -> DelayX10ms
+         8   -> DisplaySet
+         8   -> OnLed
+       8   IndicateWriteNoFinsh
+         8   -> ClaerDisplaySetWithoutStore
+         8   -> DisplaySet
+      16   ReadCardDisplay
+        16   -> DisplaySet
+      16   ReadCopyCardDisplay
+        16   -> DisplaySet
+       0   ResetUnFihCardEvtFlg
+    1208   StoreCardRec
+      1208   -> GetPlugFlg
+      1208   -> GetWritePageLen
+      1208   -> ReadCardDisplay
+      1208   -> ReadFlshRec
+      1208   -> WriteCard
+      1208   -> __aeabi_memcpy
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable10
+       4  ??DataTable11
+       4  ??DataTable11_1
+       4  ??DataTable11_10
+       4  ??DataTable11_11
+       4  ??DataTable11_12
+       4  ??DataTable11_13
+       4  ??DataTable11_14
+       4  ??DataTable11_15
+       4  ??DataTable11_2
+       4  ??DataTable11_3
+       4  ??DataTable11_4
+       4  ??DataTable11_5
+       4  ??DataTable11_6
+       4  ??DataTable11_7
+       4  ??DataTable11_8
+       4  ??DataTable11_9
+       8  ?_0
+       8  ?_1
+      16  ?_10
+      12  ?_11
+       8  ?_2
+       8  ?_3
+       8  ?_4
+       4  ?_5
+       8  ?_6
+       8  ?_7
+      20  ?_8
+       8  ?_9
+     624  DataCard
+       2  DataCardPartRead
+      42  FlshRecToCardRec
+      20  GetCardMaxRecNum
+      36  GetReadFlshRecCnt
+       6  GetUnFihCardEvtFlg
+      48  GetWritePageLen
+      42  IndicateCardFull
+      48  IndicateRecordFinsh
+      44  IndicateUSBFlgErr
+      38  IndicateWriteCardFinsh
+      44  IndicateWriteCardFlgErr
+      32  IndicateWriteNoFinsh
+      42  ReadCardDisplay
+      34  ReadCopyCardDisplay
+       8  ResetUnFihCardEvtFlg
+     152  StoreCardRec
+       1  l_UnFihCardEvtFlg
+
+ 
+     1 byte  in section .data
+   116 bytes in section .rodata
+ 1 330 bytes in section .text
+ 
+ 1 330 bytes of CODE  memory
+   116 bytes of CONST memory
+     1 byte  of DATA  memory
+
+Errors: none
+Warnings: 2

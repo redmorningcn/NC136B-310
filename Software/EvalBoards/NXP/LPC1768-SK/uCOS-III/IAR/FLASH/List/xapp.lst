@@ -1,0 +1,736 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       10/Aug/2017  10:56:51
+# Copyright 1999-2015 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  F:\iar\NC136B-310 统计模块\Software\APP\User\xapp.c
+#    Command line =  
+#        "F:\iar\NC136B-310 统计模块\Software\APP\User\xapp.c" -lCN
+#        "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\FLASH\List"
+#        --diag_suppress Pa050 -o "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\FLASH\Obj"
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.3\arm\INC\c\DLib_Config_Normal.h" -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\" -I
+#        "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\uCOS-III\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\BSP\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\BSP\IAR\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\BSP\OS\uCOS-III\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-CSP\MCU\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-CSP\MCU\NXP\LPC17xx\LPC1768\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-CSP\MCU\NXP\LPC17xx\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uCOS-III\Ports\ARM-Cortex-M3\Generic\IAR\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uCOS-III\Ports\ARM-Cortex-M3\CSP\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uCOS-III\Source\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-LIB\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-CPU\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-CPU\ARM-Cortex-M3\IAR\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-MB\Source\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-MB\Cfg\Template\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\uC-MB\Os\uCOS-III\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\OSAL\OS\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\OSAL\Ports\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\APP\User\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\APP\Iap\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\APP\Protocol\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\APP\Tasks\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\APP\AES\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\BSP\OS\OSAL\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\CSB\include\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\BSP\Driver\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\User\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\User\APP\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\User\APP\MX25L1602Drv\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\User\APP\OCM800600T80\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\User\BSP\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\CardOperations\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\DataDeal\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\Driver\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\EquipmentOperations\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\Global\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\MastConTask\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\SlaveConTask\"
+#        -I "F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\SpeedTest\"
+#        -I "F:\iar\NC136B-310 统计模块\Application\Library\csnr_package_deal\"
+#        -On --use_c++_inline -I "C:\Program Files (x86)\IAR Systems\Embedded
+#        Workbench 7.3\arm\CMSIS\Include\"
+#    List file    =  
+#        F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\FLASH\List\xapp.lst
+#    Object file  =  
+#        F:\iar\NC136B-310
+#        统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\FLASH\Obj\xapp.o
+#
+###############################################################################
+
+F:\iar\NC136B-310 统计模块\Software\APP\User\xapp.c
+      1          ///*******************************************************************************
+      2          // *   Filename:      app.c
+      3          // *   Revised:       $Date: 2013-06-30$
+      4          // *   Revision:      $
+      5          // *	 Writer:		Wuming Shen.
+      6          // *
+      7          // *   Description:
+      8          // *   Notes:
+      9          // *					QQ:276193028
+     10          // *     				E-mail:shenchangwei945@163.com
+     11          // *
+     12          // *   All copyrights reserved to Wuming Shen.
+     13          // *
+     14          // *******************************************************************************/
+     15          //
+     16          ///*******************************************************************************
+     17          // * INCLUDES
+     18          // */
+     19          //#define  SNL_APP_SOURCE
+     20          //#include <app.h>
+     21          #include <includes.h>
+     22          //#include <iap.h>
+     23          //
+     24          //#ifdef VSC_INCLUDE_SOURCE_FILE_NAMES
+     25          //const  CPU_CHAR  *app__c = "$Id: $";
+     26          //#endif
+     27          //
+     28          ///*******************************************************************************
+     29          // * CONSTANTS
+     30          // */
+     31          ///****************************************************
+     32          //* 描述： 喂狗主任务的执行周期（单位:MS）
+     33          //*/
+     34          //#define CYCLE_TIME_TICKS            (OS_CFG_TICK_RATE_HZ)
+     35          //
+     36          ////#define DEBUG_SIM                   DEF_ENABLED    // 软件仿真开关
+     37          ///*******************************************************************************
+     38          // * MACROS
+     39          // */
+     40          //
+     41          ///*******************************************************************************
+     42          // * TYPEDEFS
+     43          // */
+     44          //
+     45          ///*******************************************************************************
+     46          // * LOCAL VARIABLES
+     47          // */
+     48          ///***************************************************
+     49          //* 描述： uC/OS-III 任务控制块（TCB）
+     50          //*
+     51          //*       类型        TCB名称
+     52          //*/
+     53          //static  OS_TCB      AppTaskStartTCB;
+     54          //
+     55          ///***************************************************
+     56          //* 描述： uC/OS 任务控制块（STACKS）
+     57          //*
+     58          //*       类型        堆栈名称                堆栈大小
+     59          //*/
+     60          //static  CPU_STK     AppTaskStartStk         [ APP_TASK_START_STK_SIZE ];
+     61          //
+     62          ///***********************************************
+     63          //* 描述： 创建标志组
+     64          //*/
+     65          //OS_FLAG_GRP         WdtFlagGRP;                     //看门狗标志组
+     66          //OS_FLAGS            WdtFlags;
+     67          //
+     68          ///***************************************************
+     69          //* 描述： 软定时器声明
+     70          //*/
+     71          //OS_TMR              OSTmr0;                         // 定时器1
+     72          ///****************************************************
+     73          //* 描述： 超过WdtTimeoutSec的时间还没有喂狗，系统复位。
+     74          //*        单位为 秒（S）
+     75          //*/
+     76          //#define             WdtTimeoutSec           60
+     77          //
+     78          ///*******************************************************************************
+     79          // * GLOBAL VARIABLES
+     80          // */
+     81          //
+     82          ///*******************************************************************************
+     83          // * LOCAL FUNCTIONS
+     84          // *
+     85          // * 返回类型         函数名称                入口参数
+     86          // */
+     87          //static  void        AppTaskCreate           (void);
+     88          //static  void        AppObjCreate            (void);
+     89          ///***********************************************
+     90          //* 描述： 函数申明
+     91          //*/
+     92          //static  void        App_Init                (void);
+     93          //static  void        AppTaskStart            (void *p_arg);
+     94          ///***********************************************
+     95          //* 描述： 软定时器回调函数
+     96          //*/
+     97          //void                OSTmr0_callback         (OS_TMR *ptmr,void *p_arg);
+     98          //
+     99          ///*******************************************************************************
+    100          // * GLOBAL FUNCTIONS
+    101          // */
+    102          //
+    103          ///*******************************************************************************
+    104          // * EXTERN VARIABLES
+    105          // */
+    106          //
+    107          ///*******************************************************************************
+    108          // * EXTERN FUNCTIONS
+    109          // */
+    110          //extern  void        APP_TempEventProcess    (void);
+    111          //extern  void        App_InitStartHook       (void);
+    112          //extern  void        App_InitEndHook         (void);
+    113          //extern  void        AppTaskStart            (void *p_arg);
+    114          //extern  void        App_Main                (void);
+    115          //
+    116          ///*******************************************************************************
+    117          // * @fn      &:main
+    118          // * @brief   &:First function called after startup.
+    119          // * @return  &:don't care
+    120          // ******************************************************************************/
+    121          //int main (void)
+    122          //{
+    123          //    OS_ERR  err;
+    124          //
+    125          //    /***********************************************
+    126          //    * 描述： 第一个调用函数，可以不返回
+    127          //    */
+    128          //    App_Main();
+    129          //#if DEBUG_SIM != DEF_ENABLED
+    130          ////#if !defined (LIBRARY)
+    131          //    /***********************************************
+    132          //    * 描述： 仅限64K芯片可用，其他容量芯片不让使用
+    133          //    */
+    134          //    INT16U FlashSize    = *(INT16U*)(0x1FFFF7E0);  // 闪存容量寄存器   
+    135          //    if ( FlashSize != STM32_FLASH_SIZE )           // STM32F103RC  256K，在option中定义
+    136          //        while(1);
+    137          ////#endif
+    138          //#endif
+    139          //    /***********************************************
+    140          //    * 描述： Init uC/OS-III.
+    141          //    */
+    142          //    OSInit(&err);
+    143          //
+    144          //    /***********************************************
+    145          //    * 描述： 创建起始任务
+    146          //    */
+    147          //    OSTaskCreate((OS_TCB     *)&AppTaskStartTCB,                // 任务控制块（当前文件中定义）
+    148          //                 (CPU_CHAR   *)"App Task Start",                // 任务名称
+    149          //                 (OS_TASK_PTR ) AppTaskStart,                   // 任务函数指针（当前文件中定义）
+    150          //                 (void       *) 0,                              // 任务函数参数
+    151          //                 (OS_PRIO     ) APP_TASK_START_PRIO,            // 任务优先级，不同任务优先级可以相同，0 < 优先级 < OS_CFG_PRIO_MAX - 2（app_cfg.h中定义）
+    152          //                 (CPU_STK    *)&AppTaskStartStk[0],             // 任务栈顶
+    153          //                 (CPU_STK_SIZE) APP_TASK_START_STK_SIZE / 10,   // 任务栈溢出报警值
+    154          //                 (CPU_STK_SIZE) APP_TASK_START_STK_SIZE,        // 任务栈大小（CPU数据宽度 * 8 * size = 4 * 8 * size(字节)）（app_cfg.h中定义）
+    155          //                 (OS_MSG_QTY  ) 0u,                             // 可以发送给任务的最大消息队列数量
+    156          //                 (OS_TICK     ) 0u,                             // 相同优先级任务的轮循时间（ms），0为默认
+    157          //                 (void       *) 0,                              // 是一个指向它被用作一个TCB扩展用户提供的存储器位置
+    158          //                 (OS_OPT      )(OS_OPT_TASK_STK_CHK |           // 允许堆栈检查该任务
+    159          //                                OS_OPT_TASK_STK_CLR),           // 创建任务时堆栈清零
+    160          //                 (OS_ERR     *)&err);                           // 指向错误代码的指针，用于创建结果处理
+    161          //
+    162          //    /***********************************************
+    163          //    * 描述： 启动 uC/OS-III
+    164          //    */
+    165          //    OSStart(&err);
+    166          //}
+    167          //
+    168          ///*
+    169          //********************************************************************************
+    170          //*                                          STARTUP TASK
+    171          //*
+    172          //* Description : This is an example of a startup task.  As mentioned in the book's 
+    173          //*               text, you MUST initialize the ticker only once multitasking has started.
+    174          //*
+    175          //* Arguments   : p_arg   is the argument passed to 'AppTaskStart()' by 'OSTaskCreate()'.
+    176          //*
+    177          //* Returns     : none
+    178          //*
+    179          //* Notes       : 1) The first line of code is used to prevent a compiler warning 
+    180          //*               because 'p_arg' is not used.  The compiler should not generate 
+    181          //*               any code for this statement.
+    182          //********************************************************************************
+    183          //*/
+    184          //static  void  AppTaskStart (void *p_arg)
+    185          //{
+    186          //    CPU_INT32U  cpu_clk_freq;
+    187          //    CPU_INT32U  cnts;
+    188          //    OS_ERR      err;
+    189          //    INT32U      ticks;
+    190          //    INT32S      dly;
+    191          //    INT16U  	TimeOutCnt     = 0;                 //看门狗超时计数器
+    192          //    uint8_t     ReadRTCTimeCnt = 0;
+    193          //   (void)p_arg;
+    194          //
+    195          //    /***********************************************
+    196          //    * 描述： 设置STM32的系统时钟，I/O口设置，定时器等
+    197          //    */
+    198          //#if DEBUG_SIM != DEF_ENABLED
+    199          //    BSP_Init();                                                 /* Initialize BSP functions                             */
+    200          //#endif
+    201          //    CPU_Init();
+    202          //    
+    203          //    /***********************************************
+    204          //    * 描述： 初始化滴答定时器，即初始化系统节拍时钟。
+    205          //    */
+    206          //    cpu_clk_freq = BSP_CPU_ClkFreq();                           /* Determine SysTick reference freq.                    */
+    207          //    cnts = cpu_clk_freq / (CPU_INT32U)OSCfg_TickRate_Hz;        /* Determine nbr SysTick increments                     */
+    208          //    OS_CPU_SysTickInit(cnts);                                   /* Init uC/OS periodic time src (SysTick).              */
+    209          //    
+    210          //    /***********************************************
+    211          //    * 描述： 设置UCOS钩子函数
+    212          //    */
+    213          //    App_OS_SetAllHooks();
+    214          //    
+    215          //    /***********************************************
+    216          //    * 描述： 初始化内存管理模块
+    217          //    */
+    218          //#if (LIB_MEM_CFG_ALLOC_EN == DEF_ENABLED)
+    219          //    Mem_Init();                                                 /* Initialize Memory Management Module                  */
+    220          //#endif
+    221          //    
+    222          //    /***********************************************
+    223          //    * 描述： 看门狗初始化
+    224          //    */
+    225          //#if DEBUG_SIM != DEF_ENABLED
+    226          //#if defined     (RELEASE)
+    227          //    BSP_WDT_Init(BSP_WDT_MODE_ALL);
+    228          //#else
+    229          //    BSP_WDT_Init(BSP_WDT_MODE_NONE);
+    230          //#endif  
+    231          //#endif
+    232          //    
+    233          //    /***********************************************
+    234          //    * 描述： 先关闭所有的LED后，闪烁3次指示灯
+    235          //    */
+    236          //    BSP_LED_Flash( 1, 5, 100, 50);
+    237          //    
+    238          //    WdtReset();
+    239          //    /***********************************************
+    240          //    * 描述： E2PROM初始化
+    241          //    */
+    242          //#if DEBUG_SIM != DEF_ENABLED
+    243          //    //App_Init();
+    244          //#endif
+    245          //    
+    246          //    App_TaskCommCreate();
+    247          //    /***********************************************
+    248          //    * 描述： 喂狗
+    249          //    */
+    250          //    WdtReset();
+    251          //    
+    252          //    /***********************************************
+    253          //    * 描述： 估算在没有运行任务时CPU的能力
+    254          //    */
+    255          //#if OS_CFG_STAT_TASK_EN > 0u
+    256          //    OSStatTaskCPUUsageInit(&err);                               /* Compute CPU capacity with no task running            */
+    257          //#endif
+    258          //
+    259          //    /***********************************************
+    260          //    * 描述：用于测量禁止中断的时间
+    261          //    */
+    262          //    CPU_IntDisMeasMaxCurReset();
+    263          //
+    264          //#if (APP_CFG_SERIAL_EN == DEF_ENABLED)
+    265          //    BSP_Ser_Init(115200);                                       /* Enable Serial Interface                              */
+    266          //#endif
+    267          //    
+    268          //    /***********************************************
+    269          //    * 描述： 创建对象（事件）,标志组
+    270          //    */
+    271          //    AppObjCreate();                                             /* Create Application Objects                           */
+    272          //
+    273          //    /***********************************************
+    274          //    * 描述： 创建创建任务
+    275          //    */
+    276          //    AppTaskCreate();                                            /* Create Application Tasks                             */
+    277          //
+    278          //    Ctrl.Com.SlaveAddr     = 0xA3;
+    279          //    /***************************************************************************
+    280          //    * 描述：每一个任务在创建时分配了一个喂狗标志位
+    281          //    *	    每个任务在执行过和中，在未超出看门狗超时时间内
+    282          //    *	    将相应的标志位置位，该任务将每秒钟查询一次
+    283          //    *	    已经注册到喂狗标志位组的标志位，如果当前标志
+    284          //    *	    位与注册的标志位相等，则表示每个任务当前都处于
+    285          //    *	    活动状态，此时将超时计数器清零，重新开始超时计数
+    286          //    *	    如果喂狗标志位没有全部置位，则将超时计数器+1，当
+    287          //    *	    计数值超出设定的计数值时，系统进行重启。
+    288          //    */
+    289          //    while (DEF_TRUE) {
+    290          //        /***********************************************
+    291          //        * 描述： 得到系统当前时间
+    292          //        */
+    293          //        ticks = OSTimeGet(&err);
+    294          //        ReadRTCTimeCnt  ++;
+    295          //
+    296          //        /***********************************************
+    297          //        * 描述： 喂狗
+    298          //        */
+    299          //        WdtReset();
+    300          //               
+    301          //        /***********************************************************************
+    302          //        * 描述： 独立看门狗标志组检查， 判断是否所有任务已喂狗
+    303          //        */
+    304          //        OSFlagPend(( OS_FLAG_GRP *)&WdtFlagGRP,
+    305          //                   ( OS_FLAGS     ) WdtFlags,
+    306          //                   ( OS_TICK      ) 50,
+    307          //                   ( OS_OPT       ) OS_OPT_PEND_FLAG_SET_ALL,   //全部置一
+    308          //                   ( CPU_TS      *) NULL,
+    309          //                   ( OS_ERR      *)&err);
+    310          //        
+    311          //        if(err == OS_ERR_NONE) {                                //所有任务已喂狗
+    312          //            TimeOutCnt = 0;                                     //超时计数器清零
+    313          //            BSP_LED_Flash( 1, 1, 40, 40);
+    314          //            OS_FlagPost ((OS_FLAG_GRP *)&WdtFlagGRP,            //清零所有标志
+    315          //                         (OS_FLAGS     ) WdtFlags,
+    316          //                         (OS_OPT       ) OS_OPT_POST_FLAG_CLR,
+    317          //                         (CPU_TS       ) 0,
+    318          //                         (OS_ERR      *) &err);
+    319          //        } else {                                                //不是所有任务都喂狗
+    320          //            TimeOutCnt++;                                       //超时计数器加1
+    321          //            if(TimeOutCnt > WdtTimeoutSec) {                    //喂狗超时
+    322          //                /***********************************************
+    323          //                * 描述： 如果程序处在升级模式
+    324          //                */
+    325          //                if ( ( Iap.Status != IAP_STS_DEF ) && ( Iap.Status != IAP_STS_SUCCEED ) ) {
+    326          //                } else {
+    327          //                    SystemReset();							    //系统重启
+    328          //                    while(1){
+    329          //                        /*******************************************************
+    330          //                        * 描述： 长时间等不到某任务的看门狗标志位注册，说明有任务死了，
+    331          //                        *        指示灯快速闪烁，进入死循环等待系统复位
+    332          //                        */
+    333          //                        BSP_LED_Toggle(1);
+    334          //                        Delay_Nms(100);
+    335          //                    };
+    336          //                }
+    337          //            } else {
+    338          //                BSP_LED_Flash( 1, 1, 500, 500); 
+    339          //            }
+    340          //        }
+    341          //        /***********************************************
+    342          //        * 描述： 去除任务运行的时间，等到一个控制周期里剩余需要延时的时间
+    343          //        */
+    344          //        dly   = CYCLE_TIME_TICKS - ( OSTimeGet(&err) - ticks );
+    345          //        if ( dly  <= 0 ) {
+    346          //            dly   = 0;
+    347          //        }
+    348          //        OSTimeDly(dly, OS_OPT_TIME_DLY, &err);
+    349          //    }
+    350          //}
+    351          ///*******************************************************************************
+    352          // * 名    称： App_Init
+    353          // * 功    能： 用户应用初始化
+    354          // * 入口参数： 无
+    355          // * 出口参数： 无
+    356          // * 作　 　者： 无名沈.
+    357          // * 创建日期： 2015-03-19
+    358          // * 修    改：
+    359          // * 修改日期：
+    360          // *******************************************************************************/
+    361          //static void App_Init(void)
+    362          //{
+    363          //    /********************************************************************
+    364          //    * 描述： 初始化EEPROM
+    365          //    */
+    366          //    App_PraInit();
+    367          //    WdtReset();
+    368          //    Ctrl.Para.dat.Password  = 0; 
+    369          //    /********************************************************************
+    370          //    * 描述： 在发布RELEASE版本时，给FLASH加上读保护
+    371          //    */
+    372          //#ifndef DEBUG
+    373          //    /***********************************************
+    374          //    * 描述：Flash写保护和读保护，增加保护后，
+    375          //    *       需使用JFLASH擦出芯片才可以进行下次下载与仿真。
+    376          //    */
+    377          //    if( FLASH_GetReadOutProtectionStatus() != SET ){
+    378          //        FLASH_Unlock();
+    379          //        FLASH_ReadOutProtection(ENABLE);
+    380          //        FLASH_Lock();
+    381          //    }
+    382          //    /***********************************************
+    383          //    * 描述：Flash写保护和读保护，增加保护后，
+    384          //    *       需使用JFLASH擦出芯片才可以进行下次下载与仿真。
+    385          //    */
+    386          //#endif
+    387          //}
+    388          //
+    389          ///*
+    390          //********************************************************************************
+    391          //*                                      CREATE APPLICATION EVENTS
+    392          //*
+    393          //* Description:  This function creates the application kernel objects.
+    394          //*
+    395          //* Arguments  :  none
+    396          //*
+    397          //* Returns    :  none
+    398          //********************************************************************************
+    399          //*/
+    400          //
+    401          //static  void  AppObjCreate (void)
+    402          //{
+    403          //    OS_ERR    err;
+    404          //
+    405          //    /***********************************************
+    406          //    * 描述：创建看门狗标志组
+    407          //    */
+    408          //    OSFlagCreate(( OS_FLAG_GRP  *)&WdtFlagGRP,
+    409          //                 ( CPU_CHAR     *)"Wdt Flag",
+    410          //                 ( OS_FLAGS      )0,
+    411          //                 ( OS_ERR       *)&err);
+    412          //
+    413          //    /***********************************************
+    414          //    * 描述：创建一个软定时器 OS_OPT_TMR_ONE_SHOT, OS_OPT_TMR_PERIODIC
+    415          //    */
+    416          //    //OSTmrCreate ((OS_TMR               *)&OSTmr0,
+    417          //    //             (CPU_CHAR             *)"tmr0",
+    418          //    //             (OS_TICK               )60 * OS_CFG_TMR_TASK_RATE_HZ,
+    419          //    //             (OS_TICK               )60 * OS_CFG_TMR_TASK_RATE_HZ,
+    420          //    //             (OS_OPT                )OS_OPT_TMR_ONE_SHOT,
+    421          //    //             (OS_TMR_CALLBACK_PTR   )OSTmr0_callback,
+    422          //    //             (void                 *)NULL,
+    423          //    //             (OS_ERR               *)&err);
+    424          //}
+    425          //
+    426          //
+    427          ///*******************************************************************************
+    428          // * 名    称： OSTmr0_callback
+    429          // * 功    能： 软定时器0的回调函数
+    430          // * 入口参数： 无
+    431          // * 出口参数： 无
+    432          // * 作　  者： 无名沈
+    433          // * 创建日期： 2015-03-28
+    434          // * 修    改：
+    435          // * 修改日期：
+    436          // * 备    注： 定时器回调函数不能使用延时函数
+    437          // *******************************************************************************/
+    438          //void OSTmr0_callback(OS_TMR *ptmr,void *p_arg)
+    439          //{
+    440          //    /***********************************************
+    441          //    * 描述：注意：回调函数中执行的时间不宜过长
+    442          //    */
+    443          //
+    444          //}
+    445          //
+    446          ///*
+    447          //********************************************************************************
+    448          //*                                      CREATE APPLICATION TASKS
+    449          //*
+    450          //* Description:  This function creates the application tasks.
+    451          //*
+    452          //* Arguments  :  none
+    453          //*
+    454          //* Returns    :  none
+    455          //********************************************************************************
+    456          //*/
+    457          //static  void  AppTaskCreate (void)
+    458          //{
+    459          //    /***********************************************
+    460          //    * 描述： 在此处创建任务
+    461          //    */
+    462          //    OS_TaskCreateHook();
+    463          //    
+    464          //    /***********************************************
+    465          //    * 描述： 在此处创建OSAL任务
+    466          //    */
+    467          //#if ( OSAL_EN == DEF_ENABLED )
+    468          //    App_TaskOsalCreate();
+    469          //    /***********************************************
+    470          //    * 描述： 在此处创UCOS建任务
+    471          //    */
+    472          //#else
+    473          //    App_TaskSensorCreate();
+    474          //    //App_TaskControlCreate();
+    475          //#endif
+    476          //}
+    477          //
+    478          
+    479          
+
+   \                                 In section .bss, align 4
+    480          MODBUS_CH   *g_pch; 
+   \                     g_pch:
+   \   00000000                      DS8 4
+
+   \                                 In section .text, align 4, keep-with-next
+    481          void App_ModbusInit(void)
+    482          {
+   \                     App_ModbusInit: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0xB086             SUB      SP,SP,#+24
+    483              MODBUS_CH   *pch;
+    484              /***********************************************
+    485              * 描述： uCModBus初始化，RTU时钟频率为1000HZ
+    486              *        使用了定时器2（TIM2）
+    487              */
+    488              MB_Init(1000);              //如果有操作系统，创建了接收任务
+   \   00000004   0xF44F 0x707A      MOV      R0,#+1000
+   \   00000008   0x.... 0x....      BL       MB_Init
+    489              /***********************************************
+    490              * 描述： 若ModBus配置为从机（见mb_cfg.c）
+    491              */
+    492          #if MODBUS_CFG_SLAVE_EN == DEF_TRUE
+    493              pch         = MB_CfgCh( ModbusNode,             // ... Modbus Node # for this slave channel
+    494                                      MODBUS_SLAVE,           // ... This is a SLAVE
+    495                                      500,                      // ... 0 when a slave
+    496                                      MODBUS_MODE_RTU,        // ... Modbus Mode (_ASCII or _RTU)
+    497                                      3,                      // ... Specify UART #2
+    498                                      57600,                   // ... Baud Rate
+    499                                      UART_DATABIT_8,     // ... Number of data bits 7 or 8
+    500                                      UART_PARITY_NONE,        // ... Parity: _NONE, _ODD or _EVEN
+    501                                      UART_STOPBIT_1,       // ... Number of stop bits 1 or 2
+    502                                      MODBUS_WR_EN);          // ... Enable (_EN) or disable (_DIS) writes
+   \   0000000C   0x2001             MOVS     R0,#+1
+   \   0000000E   0x9005             STR      R0,[SP, #+20]
+   \   00000010   0x2000             MOVS     R0,#+0
+   \   00000012   0x9004             STR      R0,[SP, #+16]
+   \   00000014   0x2000             MOVS     R0,#+0
+   \   00000016   0x9003             STR      R0,[SP, #+12]
+   \   00000018   0x2003             MOVS     R0,#+3
+   \   0000001A   0x9002             STR      R0,[SP, #+8]
+   \   0000001C   0xF44F 0x4061      MOV      R0,#+57600
+   \   00000020   0x9001             STR      R0,[SP, #+4]
+   \   00000022   0x2003             MOVS     R0,#+3
+   \   00000024   0x9000             STR      R0,[SP, #+0]
+   \   00000026   0x2300             MOVS     R3,#+0
+   \   00000028   0xF44F 0x72FA      MOV      R2,#+500
+   \   0000002C   0x2100             MOVS     R1,#+0
+   \   0000002E   0x2001             MOVS     R0,#+1
+   \   00000030   0x.... 0x....      BL       MB_CfgCh
+   \   00000034   0x0004             MOVS     R4,R0
+    503          #endif
+    504          
+    505              /***********************************************
+    506              * 描述： 若ModBus配置为主机（见mb_cfg.c）
+    507              */
+    508          #if MODBUS_CFG_MASTER_EN == DEF_TRUE
+    509              pch         = MB_CfgCh( 1,                      // ... Modbus Node # for this channel
+    510                                      MODBUS_MASTER,          // ... This is a MASTER
+    511                                      500,                    // ... One second timeout waiting for slave response
+    512                                      MODBUS_MODE_RTU,        // ... Modbus Mode (_ASCII or _RTU)
+    513                                      3,                      // ... Specify UART #3
+    514                                      57600,                   // ... Baud Rate
+    515                                      UART_DATABIT_8,         // ... Number of data bits 7 or 8
+    516                                      UART_PARITY_NONE,       // ... Parity: _NONE, _ODD or _EVEN
+    517                                      UART_STOPBIT_1,         // ... Number of stop bits 1 or 2
+    518                                      MODBUS_WR_EN);          // ... Enable (_EN) or disable (_DIS) writes
+   \   00000036   0x2001             MOVS     R0,#+1
+   \   00000038   0x9005             STR      R0,[SP, #+20]
+   \   0000003A   0x2000             MOVS     R0,#+0
+   \   0000003C   0x9004             STR      R0,[SP, #+16]
+   \   0000003E   0x2000             MOVS     R0,#+0
+   \   00000040   0x9003             STR      R0,[SP, #+12]
+   \   00000042   0x2003             MOVS     R0,#+3
+   \   00000044   0x9002             STR      R0,[SP, #+8]
+   \   00000046   0xF44F 0x4061      MOV      R0,#+57600
+   \   0000004A   0x9001             STR      R0,[SP, #+4]
+   \   0000004C   0x2003             MOVS     R0,#+3
+   \   0000004E   0x9000             STR      R0,[SP, #+0]
+   \   00000050   0x2300             MOVS     R3,#+0
+   \   00000052   0xF44F 0x72FA      MOV      R2,#+500
+   \   00000056   0x2101             MOVS     R1,#+1
+   \   00000058   0x2001             MOVS     R0,#+1
+   \   0000005A   0x.... 0x....      BL       MB_CfgCh
+   \   0000005E   0x0004             MOVS     R4,R0
+    519          #endif
+    520              pch->AesEn          = DEF_DISABLED;             // ... AES加密禁止
+   \   00000060   0xF894 0x0452      LDRB     R0,[R4, #+1106]
+   \   00000064   0xF010 0x00FE      ANDS     R0,R0,#0xFE
+   \   00000068   0xF884 0x0452      STRB     R0,[R4, #+1106]
+    521              pch->NonModbusEn    = DEF_ENABLED;              // ... 支持非MODBUS通信
+   \   0000006C   0xF894 0x0452      LDRB     R0,[R4, #+1106]
+   \   00000070   0xF050 0x0002      ORRS     R0,R0,#0x2
+   \   00000074   0xF884 0x0452      STRB     R0,[R4, #+1106]
+    522              pch->IapModbusEn    = DEF_ENABLED;              // ... 支持IAP MODBUS通信
+   \   00000078   0xF894 0x0452      LDRB     R0,[R4, #+1106]
+   \   0000007C   0xF050 0x0004      ORRS     R0,R0,#0x4
+   \   00000080   0xF884 0x0452      STRB     R0,[R4, #+1106]
+    523              pch->RxFrameHead    = 0x1028;                   // ... 添加匹配帧头
+   \   00000084   0xF241 0x0028      MOVW     R0,#+4136
+   \   00000088   0xF8A4 0x034A      STRH     R0,[R4, #+842]
+    524              pch->RxFrameTail    = 0x102c;                   // ... 添加匹配帧尾
+   \   0000008C   0xF241 0x002C      MOVW     R0,#+4140
+   \   00000090   0xF8A4 0x034C      STRH     R0,[R4, #+844]
+    525              
+    526              g_pch               = pch;                      //测试
+   \   00000094   0x4801             LDR.N    R0,??App_ModbusInit_0
+   \   00000096   0x6004             STR      R4,[R0, #+0]
+    527          }
+   \   00000098   0xB006             ADD      SP,SP,#+24
+   \   0000009A   0xBD10             POP      {R4,PC}          ;; return
+   \                     ??App_ModbusInit_0:
+   \   0000009C   0x........         DC32     g_pch
+    528          
+    529          ///*******************************************************************************
+    530          // * 				end of file
+    531          // *******************************************************************************/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+      32   App_ModbusInit
+        32   -> MB_CfgCh
+        32   -> MB_Init
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+     160  App_ModbusInit
+       4  g_pch
+
+ 
+   4 bytes in section .bss
+ 160 bytes in section .text
+ 
+ 160 bytes of CODE memory
+   4 bytes of DATA memory
+
+Errors: none
+Warnings: none
