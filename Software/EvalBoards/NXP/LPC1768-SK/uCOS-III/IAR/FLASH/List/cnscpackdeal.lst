@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       15/Aug/2017  16:25:11
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       16/Aug/2017  11:37:49
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -331,8 +331,8 @@ F:\iar\NC136B-310统计模块\Application\Library\SlaveConTask\cnscpackdeal.c
      70              unsigned char			SumCheck8;
      71              unsigned char			Tmp;
      72              unsigned short		RecCRC16,Check16;
-     73          		unsigned char			DataLen;
-     74          		unsigned int			herdtimes = 0;
+     73              unsigned char			DataLen;
+     74              unsigned int			herdtimes = 0;
    \   0000000C   0xF05F 0x0B00      MOVS     R11,#+0
      75          		
      76          
@@ -342,7 +342,7 @@ F:\iar\NC136B-310统计模块\Application\Library\SlaveConTask\cnscpackdeal.c
    \   00000014   0xDA01             BGE.N    ??DataUnpack_CSNR_0
      78          		return 0;		
    \   00000016   0x2000             MOVS     R0,#+0
-   \   00000018   0xE0D4             B.N      ??DataUnpack_CSNR_1
+   \   00000018   0xE0D9             B.N      ??DataUnpack_CSNR_1
      79          	
      80          	for(j = 0;j < RecLen - herdtimes;j++ )														//去重复通讯首字节
    \                     ??DataUnpack_CSNR_0: (+1)
@@ -412,7 +412,7 @@ F:\iar\NC136B-310统计模块\Application\Library\SlaveConTask\cnscpackdeal.c
    \   00000088   0xEBB6 0x000B      SUBS     R0,R6,R11
    \   0000008C   0x380A             SUBS     R0,R0,#+10
    \   0000008E   0x4287             CMP      R7,R0
-   \   00000090   0xF080 0x8097      BCS.W    ??DataUnpack_CSNR_8
+   \   00000090   0xF080 0x809C      BCS.W    ??DataUnpack_CSNR_8
     100              {
     101          		if(		((RecBuf[i+0]) == FRAM_HERD0) 
     102          			&& 	((RecBuf[i+1]) == FRAM_HERD1)		
@@ -420,23 +420,24 @@ F:\iar\NC136B-310统计模块\Application\Library\SlaveConTask\cnscpackdeal.c
    \   00000094   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
    \   00000096   0x5D78             LDRB     R0,[R7, R5]
    \   00000098   0x2810             CMP      R0,#+16
-   \   0000009A   0xF040 0x8090      BNE.W    ??DataUnpack_CSNR_9
+   \   0000009A   0xF040 0x8095      BNE.W    ??DataUnpack_CSNR_9
    \   0000009E   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
    \   000000A0   0x1978             ADDS     R0,R7,R5
    \   000000A2   0x7840             LDRB     R0,[R0, #+1]
    \   000000A4   0x2828             CMP      R0,#+40
-   \   000000A6   0xF040 0x808A      BNE.W    ??DataUnpack_CSNR_9
+   \   000000A6   0xF040 0x808F      BNE.W    ??DataUnpack_CSNR_9
     104          		{
     105          			DataLen = RecBuf[i+6];
    \   000000AA   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
    \   000000AC   0x1978             ADDS     R0,R7,R5
    \   000000AE   0x7980             LDRB     R0,[R0, #+6]
    \   000000B0   0x4682             MOV      R10,R0
-    106          			if(		
-    107          					(i+10+DataLen)  > RecLen							||
-    108          			 		(RecBuf[i+10+DataLen] 	!= FRAM_END0)	||
-    109          			 	 	(RecBuf[i+11+DataLen] 	!= FRAM_END1)
-    110          			 )
+    106           
+    107          			if(		
+    108          					(i+10+DataLen)  > RecLen				||
+    109          			 		(RecBuf[i+10+DataLen] 	!= FRAM_END0)	||
+    110          			 	 	(RecBuf[i+11+DataLen] 	!= FRAM_END1)
+    111          			 )
    \   000000B2   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
    \   000000B4   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
    \   000000B6   0xFA5F 0xFA8A      UXTB     R10,R10          ;; ZeroExt  R10,R10,#+24,#+24
@@ -458,154 +459,162 @@ F:\iar\NC136B-310统计模块\Application\Library\SlaveConTask\cnscpackdeal.c
    \   000000E2   0x7AC0             LDRB     R0,[R0, #+11]
    \   000000E4   0x282C             CMP      R0,#+44
    \   000000E6   0xD000             BEQ.N    ??DataUnpack_CSNR_11
-    111          			 {	
-    112          			 //i = i + 10 + DataLen;											//地址不对或帧尾错误，跳过此帧
-    113          			 	continue;
+    112          			 {	
+    113          			 //i = i + 10 + DataLen;											//地址不对或帧尾错误，跳过此帧
+    114          			 	continue;
    \                     ??DataUnpack_CSNR_10: (+1)
-   \   000000E8   0xE069             B.N      ??DataUnpack_CSNR_9
-    114          			 }
-    115          			SumCheck8 = GetCheckSumNR((unsigned char *)&RecBuf[i+2],5);		   				//索引区校验
+   \   000000E8   0xE06E             B.N      ??DataUnpack_CSNR_9
+    115          			 }
+    116                      
+    117                      if(DataLen > 256 - 12)                                              //数据长度异常，继续查找                                                         
    \                     ??DataUnpack_CSNR_11: (+1)
-   \   000000EA   0x2105             MOVS     R1,#+5
-   \   000000EC   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
-   \   000000EE   0x1978             ADDS     R0,R7,R5
-   \   000000F0   0x1C80             ADDS     R0,R0,#+2
-   \   000000F2   0x.... 0x....      BL       GetCheckSumNR
-   \   000000F6   0xF88D 0x0001      STRB     R0,[SP, #+1]
-    116          			
-    117          			if(	SumCheck8 != 	RecBuf[i+7] )
-   \   000000FA   0xF89D 0x0001      LDRB     R0,[SP, #+1]
-   \   000000FE   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
-   \   00000100   0x1979             ADDS     R1,R7,R5
-   \   00000102   0x79C9             LDRB     R1,[R1, #+7]
-   \   00000104   0x4288             CMP      R0,R1
-   \   00000106   0xD15A             BNE.N    ??DataUnpack_CSNR_9
-    118          			{	
-    119          				continue;
-    120          			}
-    121          			 
-    122          			DataLen = RecBuf[i+6];
+   \   000000EA   0xFA5F 0xFA8A      UXTB     R10,R10          ;; ZeroExt  R10,R10,#+24,#+24
+   \   000000EE   0xF1BA 0x0FF5      CMP      R10,#+245
+   \   000000F2   0xDA69             BGE.N    ??DataUnpack_CSNR_9
+    118                          continue;
+    119                      
+    120          			SumCheck8 = GetCheckSumNR((unsigned char *)&RecBuf[i+2],5);		   				//索引区校验
    \                     ??DataUnpack_CSNR_12: (+1)
+   \   000000F4   0x2105             MOVS     R1,#+5
+   \   000000F6   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
+   \   000000F8   0x1978             ADDS     R0,R7,R5
+   \   000000FA   0x1C80             ADDS     R0,R0,#+2
+   \   000000FC   0x.... 0x....      BL       GetCheckSumNR
+   \   00000100   0xF88D 0x0001      STRB     R0,[SP, #+1]
+    121          			
+    122          			if(	SumCheck8 != 	RecBuf[i+7] )
+   \   00000104   0xF89D 0x0001      LDRB     R0,[SP, #+1]
    \   00000108   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
-   \   0000010A   0x1978             ADDS     R0,R7,R5
-   \   0000010C   0x7980             LDRB     R0,[R0, #+6]
-   \   0000010E   0x4682             MOV      R10,R0
-    123          						
-    124          			RecCRC16 = ((unsigned short)RecBuf[i+8+DataLen]) *256 + RecBuf[i+9+DataLen];	//校验	
-   \   00000110   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
-   \   00000112   0xFA5F 0xFA8A      UXTB     R10,R10          ;; ZeroExt  R10,R10,#+24,#+24
-   \   00000116   0xEB1A 0x0007      ADDS     R0,R10,R7
-   \   0000011A   0x1940             ADDS     R0,R0,R5
-   \   0000011C   0x7A00             LDRB     R0,[R0, #+8]
-   \   0000011E   0xF44F 0x7180      MOV      R1,#+256
-   \   00000122   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
-   \   00000124   0xFA5F 0xFA8A      UXTB     R10,R10          ;; ZeroExt  R10,R10,#+24,#+24
-   \   00000128   0xEB1A 0x0207      ADDS     R2,R10,R7
-   \   0000012C   0x1952             ADDS     R2,R2,R5
-   \   0000012E   0x7A52             LDRB     R2,[R2, #+9]
-   \   00000130   0xFB01 0x2000      MLA      R0,R1,R0,R2
-   \   00000134   0xF8AD 0x0008      STRH     R0,[SP, #+8]
-    125          
-    126          			switch(RecBuf[i+5]>>4)													//校验和算法判断
-   \   00000138   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
-   \   0000013A   0x1978             ADDS     R0,R7,R5
-   \   0000013C   0x7940             LDRB     R0,[R0, #+5]
-   \   0000013E   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-   \   00000140   0x0900             LSRS     R0,R0,#+4
-   \   00000142   0x2801             CMP      R0,#+1
-   \   00000144   0xD004             BEQ.N    ??DataUnpack_CSNR_13
-   \   00000146   0xD310             BCC.N    ??DataUnpack_CSNR_14
-   \   00000148   0x2803             CMP      R0,#+3
-   \   0000014A   0xD00E             BEQ.N    ??DataUnpack_CSNR_15
-   \   0000014C   0xD20D             BCS.N    ??DataUnpack_CSNR_14
-    127          			{
-    128          					case	RS485_CHK_SUM:
-    129          									//Check16 = GetCheckSum16(&RecBuf[i+2],6+DataLen);
-    130          									////PrintfCOM0(("\r\n 16位校验和！");
-    131          									break;
-   \                     ??DataUnpack_CSNR_16: (+1)
-   \   0000014E   0xE00C             B.N      ??DataUnpack_CSNR_14
-    132          					case	RS485_CHK_CRC:
-    133          									Check16 = GetCrc16Check(&RecBuf[i+2],6+DataLen);
+   \   0000010A   0x1979             ADDS     R1,R7,R5
+   \   0000010C   0x79C9             LDRB     R1,[R1, #+7]
+   \   0000010E   0x4288             CMP      R0,R1
+   \   00000110   0xD15A             BNE.N    ??DataUnpack_CSNR_9
+    123          			{	
+    124          				continue;
+    125          			}
+    126          			 
+    127          			DataLen = RecBuf[i+6];
    \                     ??DataUnpack_CSNR_13: (+1)
-   \   00000150   0xFA5F 0xFA8A      UXTB     R10,R10          ;; ZeroExt  R10,R10,#+24,#+24
-   \   00000154   0xF11A 0x0106      ADDS     R1,R10,#+6
-   \   00000158   0xB289             UXTH     R1,R1            ;; ZeroExt  R1,R1,#+16,#+16
-   \   0000015A   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
-   \   0000015C   0x1978             ADDS     R0,R7,R5
-   \   0000015E   0x1C80             ADDS     R0,R0,#+2
-   \   00000160   0x.... 0x....      BL       GetCrc16Check
-   \   00000164   0xF8AD 0x0002      STRH     R0,[SP, #+2]
-    134          									////PrintfCOM0(("\r\n CRC校验！");
-    135          									break;
-   \   00000168   0xE7FF             B.N      ??DataUnpack_CSNR_14
-    136          					case	RS485_CHK_RESUM:
-    137          									break;
-    138          			}
-    139          			
-    140          			if(			RecCRC16  ==	Check16 	 )
-   \                     ??DataUnpack_CSNR_15: (+1)
+   \   00000112   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
+   \   00000114   0x1978             ADDS     R0,R7,R5
+   \   00000116   0x7980             LDRB     R0,[R0, #+6]
+   \   00000118   0x4682             MOV      R10,R0
+    128          						
+    129          			RecCRC16 = ((unsigned short)RecBuf[i+8+DataLen]) *256 + RecBuf[i+9+DataLen];	//校验	
+   \   0000011A   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
+   \   0000011C   0xFA5F 0xFA8A      UXTB     R10,R10          ;; ZeroExt  R10,R10,#+24,#+24
+   \   00000120   0xEB1A 0x0007      ADDS     R0,R10,R7
+   \   00000124   0x1940             ADDS     R0,R0,R5
+   \   00000126   0x7A00             LDRB     R0,[R0, #+8]
+   \   00000128   0xF44F 0x7180      MOV      R1,#+256
+   \   0000012C   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
+   \   0000012E   0xFA5F 0xFA8A      UXTB     R10,R10          ;; ZeroExt  R10,R10,#+24,#+24
+   \   00000132   0xEB1A 0x0207      ADDS     R2,R10,R7
+   \   00000136   0x1952             ADDS     R2,R2,R5
+   \   00000138   0x7A52             LDRB     R2,[R2, #+9]
+   \   0000013A   0xFB01 0x2000      MLA      R0,R1,R0,R2
+   \   0000013E   0xF8AD 0x0008      STRH     R0,[SP, #+8]
+    130          
+    131          			switch(RecBuf[i+5]>>4)													//校验和算法判断
+   \   00000142   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
+   \   00000144   0x1978             ADDS     R0,R7,R5
+   \   00000146   0x7940             LDRB     R0,[R0, #+5]
+   \   00000148   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000014A   0x0900             LSRS     R0,R0,#+4
+   \   0000014C   0x2801             CMP      R0,#+1
+   \   0000014E   0xD004             BEQ.N    ??DataUnpack_CSNR_14
+   \   00000150   0xD310             BCC.N    ??DataUnpack_CSNR_15
+   \   00000152   0x2803             CMP      R0,#+3
+   \   00000154   0xD00E             BEQ.N    ??DataUnpack_CSNR_16
+   \   00000156   0xD20D             BCS.N    ??DataUnpack_CSNR_15
+    132          			{
+    133          					case	RS485_CHK_SUM:
+    134          									//Check16 = GetCheckSum16(&RecBuf[i+2],6+DataLen);
+    135          									////PrintfCOM0(("\r\n 16位校验和！");
+    136          									break;
+   \                     ??DataUnpack_CSNR_17: (+1)
+   \   00000158   0xE00C             B.N      ??DataUnpack_CSNR_15
+    137          					case	RS485_CHK_CRC:
+    138          									Check16 = GetCrc16Check(&RecBuf[i+2],6+DataLen);
    \                     ??DataUnpack_CSNR_14: (+1)
-   \   0000016A   0xF8BD 0x0008      LDRH     R0,[SP, #+8]
-   \   0000016E   0xF8BD 0x1002      LDRH     R1,[SP, #+2]
-   \   00000172   0x4288             CMP      R0,R1
-   \   00000174   0xD123             BNE.N    ??DataUnpack_CSNR_9
-    141          			{
-    142          				sprotocolpara->sourceaddr 	= RecBuf[i+2];	
-   \   00000176   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
-   \   00000178   0x1978             ADDS     R0,R7,R5
-   \   0000017A   0x7880             LDRB     R0,[R0, #+2]
-   \   0000017C   0x7020             STRB     R0,[R4, #+0]
-    143          				sprotocolpara->destaddr 		= RecBuf[i+3];	
-   \   0000017E   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
-   \   00000180   0x1978             ADDS     R0,R7,R5
-   \   00000182   0x78C0             LDRB     R0,[R0, #+3]
-   \   00000184   0x7060             STRB     R0,[R4, #+1]
-    144          				sprotocolpara->framnum   		= RecBuf[i+4];
-   \   00000186   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
-   \   00000188   0x1978             ADDS     R0,R7,R5
-   \   0000018A   0x7900             LDRB     R0,[R0, #+4]
-   \   0000018C   0x70A0             STRB     R0,[R4, #+2]
-    145          				sprotocolpara->framcode  		= RecBuf[i+5]&0x0f;
-   \   0000018E   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
-   \   00000190   0x1978             ADDS     R0,R7,R5
-   \   00000192   0x7940             LDRB     R0,[R0, #+5]
-   \   00000194   0xF010 0x000F      ANDS     R0,R0,#0xF
-   \   00000198   0x70E0             STRB     R0,[R4, #+3]
-    146          				sprotocolpara->datalen     	= DataLen; 
-   \   0000019A   0xF884 0xA008      STRB     R10,[R4, #+8]
-    147          				
-    148          				memcpy(sprotocolpara->databuf,&RecBuf[i+8],DataLen);				//数据拷贝
-   \   0000019E   0xFA5F 0xFA8A      UXTB     R10,R10          ;; ZeroExt  R10,R10,#+24,#+24
-   \   000001A2   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
-   \   000001A4   0x1978             ADDS     R0,R7,R5
-   \   000001A6   0x3008             ADDS     R0,R0,#+8
-   \   000001A8   0x9003             STR      R0,[SP, #+12]
-   \   000001AA   0x6860             LDR      R0,[R4, #+4]
-   \   000001AC   0x9001             STR      R0,[SP, #+4]
-   \   000001AE   0x4652             MOV      R2,R10
-   \   000001B0   0x9903             LDR      R1,[SP, #+12]
-   \   000001B2   0x9801             LDR      R0,[SP, #+4]
-   \   000001B4   0x.... 0x....      BL       __aeabi_memcpy
-   \   000001B8   0x9801             LDR      R0,[SP, #+4]
-    149          				 
-    150          				return	1;
-   \   000001BA   0x2001             MOVS     R0,#+1
-   \   000001BC   0xE002             B.N      ??DataUnpack_CSNR_1
-    151          			}
-    152          		}
-    153          	}
+   \   0000015A   0xFA5F 0xFA8A      UXTB     R10,R10          ;; ZeroExt  R10,R10,#+24,#+24
+   \   0000015E   0xF11A 0x0106      ADDS     R1,R10,#+6
+   \   00000162   0xB289             UXTH     R1,R1            ;; ZeroExt  R1,R1,#+16,#+16
+   \   00000164   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
+   \   00000166   0x1978             ADDS     R0,R7,R5
+   \   00000168   0x1C80             ADDS     R0,R0,#+2
+   \   0000016A   0x.... 0x....      BL       GetCrc16Check
+   \   0000016E   0xF8AD 0x0002      STRH     R0,[SP, #+2]
+    139          									////PrintfCOM0(("\r\n CRC校验！");
+    140          									break;
+   \   00000172   0xE7FF             B.N      ??DataUnpack_CSNR_15
+    141          					case	RS485_CHK_RESUM:
+    142          									break;
+    143          			}
+    144          			
+    145          			if(			RecCRC16  ==	Check16 	 )
+   \                     ??DataUnpack_CSNR_16: (+1)
+   \                     ??DataUnpack_CSNR_15: (+1)
+   \   00000174   0xF8BD 0x0008      LDRH     R0,[SP, #+8]
+   \   00000178   0xF8BD 0x1002      LDRH     R1,[SP, #+2]
+   \   0000017C   0x4288             CMP      R0,R1
+   \   0000017E   0xD123             BNE.N    ??DataUnpack_CSNR_9
+    146          			{
+    147          				sprotocolpara->sourceaddr 	= RecBuf[i+2];	
+   \   00000180   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
+   \   00000182   0x1978             ADDS     R0,R7,R5
+   \   00000184   0x7880             LDRB     R0,[R0, #+2]
+   \   00000186   0x7020             STRB     R0,[R4, #+0]
+    148          				sprotocolpara->destaddr 	= RecBuf[i+3];	
+   \   00000188   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
+   \   0000018A   0x1978             ADDS     R0,R7,R5
+   \   0000018C   0x78C0             LDRB     R0,[R0, #+3]
+   \   0000018E   0x7060             STRB     R0,[R4, #+1]
+    149          				sprotocolpara->framnum   	= RecBuf[i+4];
+   \   00000190   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
+   \   00000192   0x1978             ADDS     R0,R7,R5
+   \   00000194   0x7900             LDRB     R0,[R0, #+4]
+   \   00000196   0x70A0             STRB     R0,[R4, #+2]
+    150          				sprotocolpara->framcode  	= RecBuf[i+5]&0x0f;
+   \   00000198   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
+   \   0000019A   0x1978             ADDS     R0,R7,R5
+   \   0000019C   0x7940             LDRB     R0,[R0, #+5]
+   \   0000019E   0xF010 0x000F      ANDS     R0,R0,#0xF
+   \   000001A2   0x70E0             STRB     R0,[R4, #+3]
+    151          				sprotocolpara->datalen     	= DataLen; 
+   \   000001A4   0xF884 0xA008      STRB     R10,[R4, #+8]
+    152          				
+    153          				memcpy(sprotocolpara->databuf,&RecBuf[i+8],DataLen);				//数据拷贝
+   \   000001A8   0xFA5F 0xFA8A      UXTB     R10,R10          ;; ZeroExt  R10,R10,#+24,#+24
+   \   000001AC   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
+   \   000001AE   0x1978             ADDS     R0,R7,R5
+   \   000001B0   0x3008             ADDS     R0,R0,#+8
+   \   000001B2   0x9003             STR      R0,[SP, #+12]
+   \   000001B4   0x6860             LDR      R0,[R4, #+4]
+   \   000001B6   0x9001             STR      R0,[SP, #+4]
+   \   000001B8   0x4652             MOV      R2,R10
+   \   000001BA   0x9903             LDR      R1,[SP, #+12]
+   \   000001BC   0x9801             LDR      R0,[SP, #+4]
+   \   000001BE   0x.... 0x....      BL       __aeabi_memcpy
+   \   000001C2   0x9801             LDR      R0,[SP, #+4]
+    154          				 
+    155          				return	1;
+   \   000001C4   0x2001             MOVS     R0,#+1
+   \   000001C6   0xE002             B.N      ??DataUnpack_CSNR_1
+    156          			}
+    157          		}
+    158          	}
    \                     ??DataUnpack_CSNR_9: (+1)
-   \   000001BE   0x1C7F             ADDS     R7,R7,#+1
-   \   000001C0   0xE760             B.N      ??DataUnpack_CSNR_7
-    154            
-    155              return	0;
+   \   000001C8   0x1C7F             ADDS     R7,R7,#+1
+   \   000001CA   0xE75B             B.N      ??DataUnpack_CSNR_7
+    159            
+    160              return	0;
    \                     ??DataUnpack_CSNR_8: (+1)
-   \   000001C2   0x2000             MOVS     R0,#+0
+   \   000001CC   0x2000             MOVS     R0,#+0
    \                     ??DataUnpack_CSNR_1: (+1)
-   \   000001C4   0xB005             ADD      SP,SP,#+20
-   \   000001C6   0xE8BD 0x8FF0      POP      {R4-R11,PC}      ;; return
-    156          }
+   \   000001CE   0xB005             ADD      SP,SP,#+20
+   \   000001D0   0xE8BD 0x8FF0      POP      {R4-R11,PC}      ;; return
+    161          }
 
    \                                 In section .rodata, align 4
    \   00000000   0x00 0x00          DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -764,13 +773,13 @@ F:\iar\NC136B-310统计模块\Application\Library\SlaveConTask\cnscpackdeal.c
    -----  --------------
      256  ?_0
      386  DataPackage_CSNR
-     458  DataUnpack_CSNR
+     468  DataUnpack_CSNR
 
  
  256 bytes in section .rodata
- 844 bytes in section .text
+ 854 bytes in section .text
  
- 844 bytes of CODE  memory
+ 854 bytes of CODE  memory
  256 bytes of CONST memory
 
 Errors: none

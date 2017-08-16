@@ -114,7 +114,7 @@ unsigned char   DataUnpack_CSNR(stcCsnrProtocolPara *sprotocolpara,unsigned char
 			 	continue;
 			 }
             
-            if(DataLen > 256 - 12)                                                                    
+            if(DataLen > 256 - 12)                                              //数据长度异常，继续查找                                                         
                 continue;
             
 			SumCheck8 = GetCheckSumNR((unsigned char *)&RecBuf[i+2],5);		   				//索引区校验
