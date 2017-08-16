@@ -114,6 +114,7 @@ unsigned char   DataUnpack_CSNR(stcCsnrProtocolPara *sprotocolpara,unsigned char
 			 	continue;
 			 }
             
+            
             if(DataLen > 256 - 12)                                              //数据长度异常，继续查找                                                         
                 continue;
             

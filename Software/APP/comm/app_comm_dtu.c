@@ -121,7 +121,8 @@ extern  stcSysCtrl  sCtrl;
 void    app_comm_dtu(void)
 {
     //判断对应地址连接是否接收到数据
-    uint8 i = 0;
+    uint8   i = 0;
+    uint8   status = 0;
     while(i < COMM_DEV_DTU_CONN_NUM){
         if(sCtrl.Dtu.ConnCtrl[i].RecvEndFlg == 1)                   //如果地址i接收到数据，对数据进行处理
         {
@@ -151,7 +152,7 @@ void    app_comm_dtu(void)
                     break;
                     
                 case IAP_FRAME_CODE:     //V2.0 IAP程序下载
-                        IAP_PragramDeal(sCtrl.Dtu.Rd.Buf , sCtrl.Dtu.RxCtrl.Len ); //调用程序下载函数   
+                        status = IAP_PragramDeal(sCtrl.Dtu.Rd.Buf , sCtrl.Dtu.RxCtrl.Len ); //调用程序下载函数   
                         
                         //应答数据
                         CSNC_SendData(sCtrl.Dtu.pch,                        //DTU 的PCH：串口号，收发控制等底层信息

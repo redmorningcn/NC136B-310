@@ -190,9 +190,11 @@ void Boot( void );
  * 名    称： IAP_PragramDeal
  * 功    能： 对传入数据处理
  * 入口参数： 数据区，数据长度
- * 出口参数： 指令成功，返回1；否则，返回0，如果错误，返回负值
-                -1，发送帧序号不连续
-                -2，指令不识别
+ * 出口参数： 指令成功，返回0；（发在指令后一位返回）
+        否则，返回错误值
+                1，发送帧序号不连续
+                2，指令不识别
+                3，程序大小不符
  * 作　　者： redmorningcn.
  * 创建日期： 2017-08-08
  * 修    改：
@@ -212,7 +214,7 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
     
     memcpy((char *)&iapcode,databuf,sizeof(iapcode));       //取升级命令字
     
-    switch(iapcode)
+    switch(iapcode & 0xff)                                 //地8位指令区
     {
         case 0x01:                                          //开始升级指令（考虑断续传）
                                                             //端点续传，更改地址。（如需考虑，根据序号计算地址）
@@ -225,30 +227,39 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
             memcpy((char *)&iapnum,&databuf[sizeof(iapcode)],sizeof(iapnum));   //取帧序号
             
             if( iapnum )                                    //序号大于0，需判断前后帧序号连续性。(数据连续性判断)
-                if(iapnum != lastiapnum+1)
-                    return -1; 
-            
-            lastiapnum = iapnum;                            //序号赋值
-             
-            memcpy(&gsIAPCtrl.buf[(iapnum % SEC_DIV_TIMENS)*IAP_DATA_LEN],
-                   &databuf[2+2],
-                   datalen - 4);                                //拷贝数据到升级缓冲区
-            
-            bufsize += datalen - 4;
-            //准备数据
-            if(  (iapnum % SEC_DIV_TIMENS ) == (SEC_DIV_TIMENS - 1) 
-               || (datalen -4) != IAP_DATA_LEN )                 //如果数据凑满1024字节，或者升级结束。进行写flash操作。
             {
-                if((datalen - 4) != IAP_DATA_LEN)                 //如果升级结束，将1024字节剩余空间写0xff
+                if(     iapnum == lastiapnum+1 
+                    ||  iapnum == lastiapnum)                   //相同帧号，也可以
                 {
-                    for(int i = bufsize;i < IAP_WRITE_1024;i++ )
-                    gsIAPCtrl.buf[i] = 0xff;	
+                    lastiapnum = iapnum;                            //序号赋值
+
+                    memcpy(&gsIAPCtrl.buf[(iapnum % SEC_DIV_TIMENS)*IAP_DATA_LEN],
+                    &databuf[2+2],
+                    datalen - 4);                                //拷贝数据到升级缓冲区
+
+                    bufsize += datalen - 4;
+                    //准备数据
+                    if(     (iapnum % SEC_DIV_TIMENS ) == (SEC_DIV_TIMENS - 1) 
+                        || (datalen -4) != IAP_DATA_LEN )                 //如果数据凑满1024字节，或者升级结束。进行写flash操作。
+                    {
+                        if((datalen - 4) != IAP_DATA_LEN)                 //如果升级结束，将1024字节剩余空间写0xff
+                        {
+                            for(int i = bufsize;i < IAP_WRITE_1024;i++ )
+                            gsIAPCtrl.buf[i] = 0xff;	
+                        }
+
+                        IAP_WriteFlash(&gsIAPCtrl);                 //写数据(地址，gsIAPCtrl.addr依次写入)
+
+                        bufsize = 0;
+                    }
                 }
-                
-                IAP_WriteFlash(&gsIAPCtrl);                 //写数据(地址，gsIAPCtrl.addr依次写入)
-                
-                bufsize = 0;
+                else
+                {
+                    databuf[1] = 1;
+                    return 1; 
+                }
             }
+
             
             break;
             
@@ -265,7 +276,10 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
             if(     gsIAPPara.softsize > (gsIAPCtrl.addr - USER_APP_START_ADDR)     //程序大小不符，软件退出。
                ||   (gsIAPCtrl.addr - USER_APP_START_ADDR - IAP_WRITE_1024) > gsIAPPara.softsize
                )
-                return -3;
+            {
+                databuf[1] = 3;                         //返回状态
+                return 3;
+            }
             
             //如果程序大小相符，认为下载正确。修改下载成功标示
             gsIAPPara.code = 0x01;
@@ -279,11 +293,13 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
 
             break;  
         default:    //其他指令，直接返回
-            return -2;
+            databuf[1] = 2;
+            return 2;
             ;
     }
     
-    return 1;
+    databuf[1] = 0;
+    return 0;
 }
 
 

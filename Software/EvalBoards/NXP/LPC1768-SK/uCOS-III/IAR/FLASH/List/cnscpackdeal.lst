@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       16/Aug/2017  11:37:49
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       16/Aug/2017  12:00:26
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -466,14 +466,15 @@ F:\iar\NC136B-310统计模块\Application\Library\SlaveConTask\cnscpackdeal.c
    \   000000E8   0xE06E             B.N      ??DataUnpack_CSNR_9
     115          			 }
     116                      
-    117                      if(DataLen > 256 - 12)                                              //数据长度异常，继续查找                                                         
+    117                      
+    118                      if(DataLen > 256 - 12)                                              //数据长度异常，继续查找                                                         
    \                     ??DataUnpack_CSNR_11: (+1)
    \   000000EA   0xFA5F 0xFA8A      UXTB     R10,R10          ;; ZeroExt  R10,R10,#+24,#+24
    \   000000EE   0xF1BA 0x0FF5      CMP      R10,#+245
    \   000000F2   0xDA69             BGE.N    ??DataUnpack_CSNR_9
-    118                          continue;
-    119                      
-    120          			SumCheck8 = GetCheckSumNR((unsigned char *)&RecBuf[i+2],5);		   				//索引区校验
+    119                          continue;
+    120                      
+    121          			SumCheck8 = GetCheckSumNR((unsigned char *)&RecBuf[i+2],5);		   				//索引区校验
    \                     ??DataUnpack_CSNR_12: (+1)
    \   000000F4   0x2105             MOVS     R1,#+5
    \   000000F6   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
@@ -481,26 +482,26 @@ F:\iar\NC136B-310统计模块\Application\Library\SlaveConTask\cnscpackdeal.c
    \   000000FA   0x1C80             ADDS     R0,R0,#+2
    \   000000FC   0x.... 0x....      BL       GetCheckSumNR
    \   00000100   0xF88D 0x0001      STRB     R0,[SP, #+1]
-    121          			
-    122          			if(	SumCheck8 != 	RecBuf[i+7] )
+    122          			
+    123          			if(	SumCheck8 != 	RecBuf[i+7] )
    \   00000104   0xF89D 0x0001      LDRB     R0,[SP, #+1]
    \   00000108   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
    \   0000010A   0x1979             ADDS     R1,R7,R5
    \   0000010C   0x79C9             LDRB     R1,[R1, #+7]
    \   0000010E   0x4288             CMP      R0,R1
    \   00000110   0xD15A             BNE.N    ??DataUnpack_CSNR_9
-    123          			{	
-    124          				continue;
-    125          			}
-    126          			 
-    127          			DataLen = RecBuf[i+6];
+    124          			{	
+    125          				continue;
+    126          			}
+    127          			 
+    128          			DataLen = RecBuf[i+6];
    \                     ??DataUnpack_CSNR_13: (+1)
    \   00000112   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
    \   00000114   0x1978             ADDS     R0,R7,R5
    \   00000116   0x7980             LDRB     R0,[R0, #+6]
    \   00000118   0x4682             MOV      R10,R0
-    128          						
-    129          			RecCRC16 = ((unsigned short)RecBuf[i+8+DataLen]) *256 + RecBuf[i+9+DataLen];	//校验	
+    129          						
+    130          			RecCRC16 = ((unsigned short)RecBuf[i+8+DataLen]) *256 + RecBuf[i+9+DataLen];	//校验	
    \   0000011A   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
    \   0000011C   0xFA5F 0xFA8A      UXTB     R10,R10          ;; ZeroExt  R10,R10,#+24,#+24
    \   00000120   0xEB1A 0x0007      ADDS     R0,R10,R7
@@ -514,8 +515,8 @@ F:\iar\NC136B-310统计模块\Application\Library\SlaveConTask\cnscpackdeal.c
    \   00000138   0x7A52             LDRB     R2,[R2, #+9]
    \   0000013A   0xFB01 0x2000      MLA      R0,R1,R0,R2
    \   0000013E   0xF8AD 0x0008      STRH     R0,[SP, #+8]
-    130          
-    131          			switch(RecBuf[i+5]>>4)													//校验和算法判断
+    131          
+    132          			switch(RecBuf[i+5]>>4)													//校验和算法判断
    \   00000142   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
    \   00000144   0x1978             ADDS     R0,R7,R5
    \   00000146   0x7940             LDRB     R0,[R0, #+5]
@@ -527,15 +528,15 @@ F:\iar\NC136B-310统计模块\Application\Library\SlaveConTask\cnscpackdeal.c
    \   00000152   0x2803             CMP      R0,#+3
    \   00000154   0xD00E             BEQ.N    ??DataUnpack_CSNR_16
    \   00000156   0xD20D             BCS.N    ??DataUnpack_CSNR_15
-    132          			{
-    133          					case	RS485_CHK_SUM:
-    134          									//Check16 = GetCheckSum16(&RecBuf[i+2],6+DataLen);
-    135          									////PrintfCOM0(("\r\n 16位校验和！");
-    136          									break;
+    133          			{
+    134          					case	RS485_CHK_SUM:
+    135          									//Check16 = GetCheckSum16(&RecBuf[i+2],6+DataLen);
+    136          									////PrintfCOM0(("\r\n 16位校验和！");
+    137          									break;
    \                     ??DataUnpack_CSNR_17: (+1)
    \   00000158   0xE00C             B.N      ??DataUnpack_CSNR_15
-    137          					case	RS485_CHK_CRC:
-    138          									Check16 = GetCrc16Check(&RecBuf[i+2],6+DataLen);
+    138          					case	RS485_CHK_CRC:
+    139          									Check16 = GetCrc16Check(&RecBuf[i+2],6+DataLen);
    \                     ??DataUnpack_CSNR_14: (+1)
    \   0000015A   0xFA5F 0xFA8A      UXTB     R10,R10          ;; ZeroExt  R10,R10,#+24,#+24
    \   0000015E   0xF11A 0x0106      ADDS     R1,R10,#+6
@@ -545,46 +546,46 @@ F:\iar\NC136B-310统计模块\Application\Library\SlaveConTask\cnscpackdeal.c
    \   00000168   0x1C80             ADDS     R0,R0,#+2
    \   0000016A   0x.... 0x....      BL       GetCrc16Check
    \   0000016E   0xF8AD 0x0002      STRH     R0,[SP, #+2]
-    139          									////PrintfCOM0(("\r\n CRC校验！");
-    140          									break;
+    140          									////PrintfCOM0(("\r\n CRC校验！");
+    141          									break;
    \   00000172   0xE7FF             B.N      ??DataUnpack_CSNR_15
-    141          					case	RS485_CHK_RESUM:
-    142          									break;
-    143          			}
-    144          			
-    145          			if(			RecCRC16  ==	Check16 	 )
+    142          					case	RS485_CHK_RESUM:
+    143          									break;
+    144          			}
+    145          			
+    146          			if(			RecCRC16  ==	Check16 	 )
    \                     ??DataUnpack_CSNR_16: (+1)
    \                     ??DataUnpack_CSNR_15: (+1)
    \   00000174   0xF8BD 0x0008      LDRH     R0,[SP, #+8]
    \   00000178   0xF8BD 0x1002      LDRH     R1,[SP, #+2]
    \   0000017C   0x4288             CMP      R0,R1
    \   0000017E   0xD123             BNE.N    ??DataUnpack_CSNR_9
-    146          			{
-    147          				sprotocolpara->sourceaddr 	= RecBuf[i+2];	
+    147          			{
+    148          				sprotocolpara->sourceaddr 	= RecBuf[i+2];	
    \   00000180   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
    \   00000182   0x1978             ADDS     R0,R7,R5
    \   00000184   0x7880             LDRB     R0,[R0, #+2]
    \   00000186   0x7020             STRB     R0,[R4, #+0]
-    148          				sprotocolpara->destaddr 	= RecBuf[i+3];	
+    149          				sprotocolpara->destaddr 	= RecBuf[i+3];	
    \   00000188   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
    \   0000018A   0x1978             ADDS     R0,R7,R5
    \   0000018C   0x78C0             LDRB     R0,[R0, #+3]
    \   0000018E   0x7060             STRB     R0,[R4, #+1]
-    149          				sprotocolpara->framnum   	= RecBuf[i+4];
+    150          				sprotocolpara->framnum   	= RecBuf[i+4];
    \   00000190   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
    \   00000192   0x1978             ADDS     R0,R7,R5
    \   00000194   0x7900             LDRB     R0,[R0, #+4]
    \   00000196   0x70A0             STRB     R0,[R4, #+2]
-    150          				sprotocolpara->framcode  	= RecBuf[i+5]&0x0f;
+    151          				sprotocolpara->framcode  	= RecBuf[i+5]&0x0f;
    \   00000198   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
    \   0000019A   0x1978             ADDS     R0,R7,R5
    \   0000019C   0x7940             LDRB     R0,[R0, #+5]
    \   0000019E   0xF010 0x000F      ANDS     R0,R0,#0xF
    \   000001A2   0x70E0             STRB     R0,[R4, #+3]
-    151          				sprotocolpara->datalen     	= DataLen; 
+    152          				sprotocolpara->datalen     	= DataLen; 
    \   000001A4   0xF884 0xA008      STRB     R10,[R4, #+8]
-    152          				
-    153          				memcpy(sprotocolpara->databuf,&RecBuf[i+8],DataLen);				//数据拷贝
+    153          				
+    154          				memcpy(sprotocolpara->databuf,&RecBuf[i+8],DataLen);				//数据拷贝
    \   000001A8   0xFA5F 0xFA8A      UXTB     R10,R10          ;; ZeroExt  R10,R10,#+24,#+24
    \   000001AC   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
    \   000001AE   0x1978             ADDS     R0,R7,R5
@@ -597,24 +598,24 @@ F:\iar\NC136B-310统计模块\Application\Library\SlaveConTask\cnscpackdeal.c
    \   000001BC   0x9801             LDR      R0,[SP, #+4]
    \   000001BE   0x.... 0x....      BL       __aeabi_memcpy
    \   000001C2   0x9801             LDR      R0,[SP, #+4]
-    154          				 
-    155          				return	1;
+    155          				 
+    156          				return	1;
    \   000001C4   0x2001             MOVS     R0,#+1
    \   000001C6   0xE002             B.N      ??DataUnpack_CSNR_1
-    156          			}
-    157          		}
-    158          	}
+    157          			}
+    158          		}
+    159          	}
    \                     ??DataUnpack_CSNR_9: (+1)
    \   000001C8   0x1C7F             ADDS     R7,R7,#+1
    \   000001CA   0xE75B             B.N      ??DataUnpack_CSNR_7
-    159            
-    160              return	0;
+    160            
+    161              return	0;
    \                     ??DataUnpack_CSNR_8: (+1)
    \   000001CC   0x2000             MOVS     R0,#+0
    \                     ??DataUnpack_CSNR_1: (+1)
    \   000001CE   0xB005             ADD      SP,SP,#+20
    \   000001D0   0xE8BD 0x8FF0      POP      {R4-R11,PC}      ;; return
-    161          }
+    162          }
 
    \                                 In section .rodata, align 4
    \   00000000   0x00 0x00          DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0

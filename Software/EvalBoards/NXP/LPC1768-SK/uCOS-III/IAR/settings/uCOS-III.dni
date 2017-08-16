@@ -14,7 +14,7 @@ TraceBufferSize=0x00010000
 TraceStallIfFIFOFull=0x00000000
 TracePortSize=0x00000004
 [DebugChecksum]
-Checksum=-577007182
+Checksum=-1352545880
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -144,10 +144,11 @@ Bp2=_ 0 "EMUL_CODE" "{F:\iar\NC136B-310统计模块}.266.18" 0 0 1 "" 0 "" 0
 Bp3=_ 0 "EMUL_CODE" "{F:\iar\NC136B-310统计模块}.77.5" 0 0 1 "" 0 "" 0
 Bp4=_ 0 "EMUL_CODE" "{F:\iar\NC136B-310统计模块}.314.5" 0 0 1 "" 0 "" 0
 Bp5=_ 0 "EMUL_CODE" "0x0000CE06" 0 0 1 "" 0 "" 0
-Bp6=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\iap\IAP_program_mcu.C}.263.13" 0 0 1 "" 0 "" 0
-Bp7=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\iap\IAP_program_mcu.C}.260.18" 0 0 1 "" 0 "" 0
-Bp8=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\iap\IAP_program_mcu.C}.271.13" 0 0 1 "" 0 "" 0
-Count=9
+Bp6=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\iap\IAP_program_mcu.C}.274.13" 0 0 1 "" 0 "" 0
+Bp7=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\iap\IAP_program_mcu.C}.272.13" 0 0 1 "" 0 "" 0
+Bp8=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\iap\IAP_program_mcu.C}.285.13" 0 0 1 "" 0 "" 0
+Bp9=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\iap\IAP_program_mcu.C}.258.21" 0 0 1 "" 0 "" 0
+Count=10
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
