@@ -215,7 +215,7 @@ void    app_comm_dtu(void)
         while(i < COMM_DEV_DTU_CONN_NUM){
             if(sCtrl.Dtu.ConnCtrl[i].SlaveAddr == SLAVE_ADDR_DTU){
                                                                 //对DTU地址发送数据        
- //20170812暂时               comm_record_send_one((StrDevDtu *)&sCtrl.Dtu,i);  
+                comm_record_send_one((StrDevDtu *)&sCtrl.Dtu,i);  
                 break;
             }
             i++;

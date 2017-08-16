@@ -232,16 +232,16 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
              
             memcpy(&gsIAPCtrl.buf[(iapnum % SEC_DIV_TIMENS)*IAP_DATA_LEN],
                    &databuf[2+2],
-                   IAP_DATA_LEN);                                //拷贝数据到升级缓冲区
+                   datalen - 4);                                //拷贝数据到升级缓冲区
             
-            bufsize += IAP_DATA_LEN;
+            bufsize += datalen - 4;
             //准备数据
             if(  (iapnum % SEC_DIV_TIMENS ) == (SEC_DIV_TIMENS - 1) 
                || (datalen -4) != IAP_DATA_LEN )                 //如果数据凑满1024字节，或者升级结束。进行写flash操作。
             {
                 if((datalen - 4) != IAP_DATA_LEN)                 //如果升级结束，将1024字节剩余空间写0xff
                 {
-                    for(int i = (iapnum % SEC_DIV_TIMENS ) * IAP_DATA_LEN;i < IAP_WRITE_1024;i++ )
+                    for(int i = bufsize;i < IAP_WRITE_1024;i++ )
                     gsIAPCtrl.buf[i] = 0xff;	
                 }
                 
@@ -254,7 +254,6 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
             
          //结束升级指令   //做升级后程序完整性判断。程序大小？ //写程序完成标示
         case 0x03:                                          
-                                                            
                                                             
             if( bufsize )                                   //最后的数据未写入，补充写入
             {

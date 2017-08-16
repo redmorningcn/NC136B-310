@@ -70,8 +70,8 @@ unsigned char   DataUnpack_CSNR(stcCsnrProtocolPara *sprotocolpara,unsigned char
     unsigned char			SumCheck8;
     unsigned char			Tmp;
     unsigned short		RecCRC16,Check16;
-		unsigned char			DataLen;
-		unsigned int			herdtimes = 0;
+    unsigned char			DataLen;
+    unsigned int			herdtimes = 0;
 		
 
   if(RecLen < 10)
@@ -103,8 +103,9 @@ unsigned char   DataUnpack_CSNR(stcCsnrProtocolPara *sprotocolpara,unsigned char
 		  )																		//报头
 		{
 			DataLen = RecBuf[i+6];
+ 
 			if(		
-					(i+10+DataLen)  > RecLen							||
+					(i+10+DataLen)  > RecLen				||
 			 		(RecBuf[i+10+DataLen] 	!= FRAM_END0)	||
 			 	 	(RecBuf[i+11+DataLen] 	!= FRAM_END1)
 			 )
@@ -112,6 +113,10 @@ unsigned char   DataUnpack_CSNR(stcCsnrProtocolPara *sprotocolpara,unsigned char
 			 //i = i + 10 + DataLen;											//地址不对或帧尾错误，跳过此帧
 			 	continue;
 			 }
+            
+            if(DataLen > 256 - 12)                                                                    
+                continue;
+            
 			SumCheck8 = GetCheckSumNR((unsigned char *)&RecBuf[i+2],5);		   				//索引区校验
 			
 			if(	SumCheck8 != 	RecBuf[i+7] )
@@ -140,9 +145,9 @@ unsigned char   DataUnpack_CSNR(stcCsnrProtocolPara *sprotocolpara,unsigned char
 			if(			RecCRC16  ==	Check16 	 )
 			{
 				sprotocolpara->sourceaddr 	= RecBuf[i+2];	
-				sprotocolpara->destaddr 		= RecBuf[i+3];	
-				sprotocolpara->framnum   		= RecBuf[i+4];
-				sprotocolpara->framcode  		= RecBuf[i+5]&0x0f;
+				sprotocolpara->destaddr 	= RecBuf[i+3];	
+				sprotocolpara->framnum   	= RecBuf[i+4];
+				sprotocolpara->framcode  	= RecBuf[i+5]&0x0f;
 				sprotocolpara->datalen     	= DataLen; 
 				
 				memcpy(sprotocolpara->databuf,&RecBuf[i+8],DataLen);				//数据拷贝

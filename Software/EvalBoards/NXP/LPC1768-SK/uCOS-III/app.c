@@ -88,11 +88,11 @@ int  main (void)
     
     App_Main();
 
-    
     CPU_Init();
      
+    //NVIC_SetVTOR(0x10000);  //20170815²¹³ä
+
     BSP_Init();                                                 /* Initialize BSP functions                             */
-    
 
     Mem_Init();
 
@@ -114,6 +114,7 @@ int  main (void)
 #if (OS_TASK_NAME_EN > 0u)
     OSTaskNameSet(APP_CFG_TASK_START_PRIO, "Start", &err);
 #endif
+
 
     OSStart(&err);                                              /* Start multitasking (i.e. give control to uC/OS-III). */
 

@@ -355,7 +355,7 @@
           <state>$PROJ_DIR$\..\..\..\..\..\..\Application\Library\MastConTask</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Application\Library\SlaveConTask</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Application\Library\SpeedTest</state>
-          <state>F:\iar\NC136B-310 &#x7eDF;&#x8BA1;&#x6A21;&#x5757;\Application\Library\csnr_package_deal</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Application\Library\csnr_package_deal</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>

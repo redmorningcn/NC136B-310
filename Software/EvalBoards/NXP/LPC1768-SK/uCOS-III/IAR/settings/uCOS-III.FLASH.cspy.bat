@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\common\bin\cspybat" -f "F:\iar\NC136B-310 统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\settings\uCOS-III.FLASH.general.xcl" --backend -f "F:\iar\NC136B-310 统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\settings\uCOS-III.FLASH.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\common\bin\cspybat" -f "F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\settings\uCOS-III.FLASH.general.xcl" --backend -f "F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\settings\uCOS-III.FLASH.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\common\bin\cspybat" -f "F:\iar\NC136B-310 统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\settings\uCOS-III.FLASH.general.xcl" "--debug_file=%~1" --backend -f "F:\iar\NC136B-310 统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\settings\uCOS-III.FLASH.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\common\bin\cspybat" -f "F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\settings\uCOS-III.FLASH.general.xcl" "--debug_file=%~1" --backend -f "F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\settings\uCOS-III.FLASH.driver.xcl" 
 
 @echo off 
 :end
