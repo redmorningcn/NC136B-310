@@ -154,7 +154,7 @@ void    IAP_WriteFlash(stcIAPCtrl *sIAPCtrl)
     uint32_t flash_prog_area_sec_start;
     uint32_t flash_prog_area_sec_end;
     
-    zyIrqDisable();										//关中断
+    zyIrqDisable();										    //关中断
 
     //如果从程序下载地址开始，则先插除所有IAP地址数据。
     if(sIAPCtrl->addr == USER_APP_START_ADDR)
@@ -178,7 +178,8 @@ void    IAP_WriteFlash(stcIAPCtrl *sIAPCtrl)
                                 sIAPCtrl->buf,
                                 IAP_WRITE_1024);    //比较数据
     
-    sIAPCtrl->addr += IAP_WRITE_1024;              //数据地址累加  
+   sIAPCtrl->addr += IAP_WRITE_1024;              //数据地址累加  
+//      sIAPCtrl->addr += IAP_WRITE_1024;              //数据地址累加  
         
     zyIrqEnable();                                  //写flash完成时，开全局中断
 }
@@ -221,44 +222,45 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
             gsIAPCtrl.addr = USER_APP_START_ADDR;           //开始发送时，初始化地址。
             
             memcpy(&gsIAPPara,&databuf[sizeof(iapcode)],2+2+4+4+2); //cpoy硬件版本，软件版本，程序大小，当前地址，当前帧号
-            
+            lastiapnum = 0;
             break;
         case 0x02:                                          //传输数据包
             memcpy((char *)&iapnum,&databuf[sizeof(iapcode)],sizeof(iapnum));   //取帧序号
             
-            if( iapnum )                                    //序号大于0，需判断前后帧序号连续性。(数据连续性判断)
+            if(     iapnum == lastiapnum+1 
+                ||  iapnum == lastiapnum)                   //相同帧号，也可以
             {
-                if(     iapnum == lastiapnum+1 
-                    ||  iapnum == lastiapnum)                   //相同帧号，也可以
+                memcpy(&gsIAPCtrl.buf[(iapnum % SEC_DIV_TIMENS)*IAP_DATA_LEN],
+                &databuf[2+2],
+                datalen - 4);                                //拷贝数据到升级缓冲区
+
+                bufsize += datalen - 4;
+                //准备数据
+                if(     (iapnum % SEC_DIV_TIMENS ) == (SEC_DIV_TIMENS - 1) 
+                    || (datalen -4) != IAP_DATA_LEN )                 //如果数据凑满1024字节，或者升级结束。进行写flash操作。
                 {
-                    lastiapnum = iapnum;                            //序号赋值
-
-                    memcpy(&gsIAPCtrl.buf[(iapnum % SEC_DIV_TIMENS)*IAP_DATA_LEN],
-                    &databuf[2+2],
-                    datalen - 4);                                //拷贝数据到升级缓冲区
-
-                    bufsize += datalen - 4;
-                    //准备数据
-                    if(     (iapnum % SEC_DIV_TIMENS ) == (SEC_DIV_TIMENS - 1) 
-                        || (datalen -4) != IAP_DATA_LEN )                 //如果数据凑满1024字节，或者升级结束。进行写flash操作。
+                    if((datalen - 4) != IAP_DATA_LEN)                 //如果升级结束，将1024字节剩余空间写0xff
                     {
-                        if((datalen - 4) != IAP_DATA_LEN)                 //如果升级结束，将1024字节剩余空间写0xff
-                        {
-                            for(int i = bufsize;i < IAP_WRITE_1024;i++ )
-                            gsIAPCtrl.buf[i] = 0xff;	
-                        }
-
-                        IAP_WriteFlash(&gsIAPCtrl);                 //写数据(地址，gsIAPCtrl.addr依次写入)
-
-                        bufsize = 0;
+                        for(int i = bufsize;i < IAP_WRITE_1024;i++ )
+                        gsIAPCtrl.buf[i] = 0xff;	
                     }
+
+                    if(iapnum != lastiapnum && iapnum )         //除开始，重复接收，字节退出
+                    {
+                         IAP_WriteFlash(&gsIAPCtrl);            //写数据(地址，gsIAPCtrl.addr依次写入)
+                    }
+                    
+                    bufsize = 0;
                 }
-                else
-                {
-                    databuf[1] = 1;
-                    return 1; 
-                }
+                
+                lastiapnum = iapnum;                            //序号赋值
             }
+            else
+            {
+                databuf[1] = 1;
+                return 1; 
+            }
+        
 
             
             break;
