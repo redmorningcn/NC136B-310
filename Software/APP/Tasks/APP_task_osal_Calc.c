@@ -346,6 +346,9 @@ int16    GetDipPrs30SecVal(int16   PrsAvg)
 
 	if(Times < 30)
 	{
+        if(PrsAvg == 0)                                                //·ÇÁã²Å¼ÆËã
+            return 0;
+                
 		Sum30 += PrsAvg;	
 		if(Times < 5)
 		{
@@ -357,7 +360,7 @@ int16    GetDipPrs30SecVal(int16   PrsAvg)
 			Sum5  = Sum5 + PrsAvg - AvgTmp;			
 		}
 
-		Times++;
+		
 		return	PrsAvg;
 	}
 	else
@@ -366,7 +369,9 @@ int16    GetDipPrs30SecVal(int16   PrsAvg)
 		Sum30  = Sum30 + PrsAvg - AvgTmp;		
 
 		AvgTmp = Sum5 / 5; 
-		Sum5  = Sum5 + PrsAvg - AvgTmp;		
+		Sum5  = Sum5 + PrsAvg - AvgTmp;	
+        
+        Times++;
 	}
 
 	PrsAvg30 	= Sum30 / 30;
@@ -389,7 +394,6 @@ int16    GetDipPrs30SecVal(int16   PrsAvg)
 		MinutePrsAvg = PrsAvg30;
 	}
 	
-	Times++;
 	return	MinutePrsAvg;
 }
 

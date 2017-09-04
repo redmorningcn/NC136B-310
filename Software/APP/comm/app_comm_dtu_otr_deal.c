@@ -95,6 +95,7 @@ const  CPU_CHAR  *app_comm_dtu_otr__c = "$Id: $";
 uint8   comm_record_send_one(StrDevDtu * sDtu,uint8 addrnum);
 void    comm_record_send(StrDevDtu * sDtu,uint8 addrnum);
 void    comm_para_flow(StrDevDtu * sDtu,uint8 addrnum);
+void    Restart(void);
 
 
 
@@ -123,7 +124,6 @@ uint8   comm_tinyrec_send(StrDevOtr * sOtr,uint8    addrnum);
 
 extern  stcSysCtrl  sCtrl;
 
-
 /*******************************************************************************
 * 名    称： comm_para_flow
 * 功    能： 参数流。根据具体参数进行操作
@@ -146,7 +146,7 @@ void    comm_para_flow(StrDevDtu * sDtu,uint8 addrnum)
     
     BSP_DispClrAll();                               //清原显示值，立即显示设定值                 
     
-    switch (sDtu->RxCtrl.Code)  
+    switch (sDtu->RxCtrl.DataCode)  
     {
         //设置密度
     case    DENSITY_CARD: 
@@ -246,6 +246,7 @@ void    comm_para_flow(StrDevDtu * sDtu,uint8 addrnum)
         
         //装置复位
     case    RST_SYS: 
+        Restart();                      //重启系统
         break;
         
         //设置斜率

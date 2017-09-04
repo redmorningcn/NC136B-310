@@ -1,4 +1,6 @@
 #include  "includes.h"
+#include  "IAP_program_mcu.h"
+#include  "app_ctrl.h"
 
 //#define	CVI	0
 
@@ -14,6 +16,11 @@
 #define	IAP_PARA_START_ADDR     0x00070000	
 #define	IAP_PARA_PRO_SIZE		0x0000FFFF	
 
+
+#define IAP_START_CODE              1
+#define IAP_DATA_CODE               2
+#define IAP_END_CODE                3
+
 #define zyIrqDisable()  __disable_irq()
 #define zyIrqEnable()   __enable_irq()
 
@@ -21,22 +28,6 @@
 /*******************************************************************************
  * TYPEDEFS
  */
-typedef  struct   _stcIAPCtrl_
-{
-    char    buf[1024];      //数据区
-    int     addr;           //数据地址
-}stcIAPCtrl;
-
-typedef  struct   _stcIAPPara_
-{
-    uint16  hardver;        //硬件版本
-    uint16  softver;        //软件版本
-    uint32  softsize;       //软件大小
-    uint32  addr;           //当前地址
-    uint32  framenum;       //帧序号
-    uint16  code;           //指令码 01，标示有正确的可用
-    uint16  crc16;
-}stcIAPPara;
 
 /*******************************************************************************
  * LOCAL VARIABLES
@@ -146,7 +137,7 @@ void    IAP_ReadParaFlash(stcIAPPara *sIAPPara)
  * 修    改：
  * 修改日期：
  *******************************************************************************/
-void    IAP_WriteFlash(stcIAPCtrl *sIAPCtrl)
+void    IAP_WriteFlash(stcIAPCtrl * sIAPCtrl)
 {
     IAP_STATUS_CODE status;
     uint32_t result[4];
@@ -178,7 +169,7 @@ void    IAP_WriteFlash(stcIAPCtrl *sIAPCtrl)
                                 sIAPCtrl->buf,
                                 IAP_WRITE_1024);    //比较数据
     
-   sIAPCtrl->addr += IAP_WRITE_1024;              //数据地址累加  
+//   sIAPCtrl->addr += IAP_WRITE_1024;              //数据地址累加  
 //      sIAPCtrl->addr += IAP_WRITE_1024;              //数据地址累加  
         
     zyIrqEnable();                                  //写flash完成时，开全局中断
@@ -209,48 +200,79 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
     static  uint16  lastiapnum = 0;                         //上一帧序号
     static  uint8   times = 0;
     static  uint16  bufsize = 0;
-    
-    if(datalen < 2 || datalen > 256)                        //数据异常，退出
+    stcIAPPara  sIAPParatmp;
+
+    if(datalen < 2 || datalen > 256)                                    //数据异常，退出
         return  0;
     
-    memcpy((char *)&iapcode,databuf,sizeof(iapcode));       //取升级命令字
+    memcpy((char *)&iapcode,databuf,sizeof(iapcode));               //取升级命令字
     
-    switch(iapcode & 0xff)                                 //地8位指令区
+    switch(iapcode & 0xff)                                          //地8位指令区
     {
-        case 0x01:                                          //开始升级指令（考虑断续传）
-                                                            //端点续传，更改地址。（如需考虑，根据序号计算地址）
-            gsIAPCtrl.addr = USER_APP_START_ADDR;           //开始发送时，初始化地址。
+        case IAP_START_CODE:                                        //开始升级指令（考虑断续传）
+                                                                    //端点续传，更改地址。（如需考虑，根据序号计算地址）
             
             memcpy(&gsIAPPara,&databuf[sizeof(iapcode)],2+2+4+4+2); //cpoy硬件版本，软件版本，程序大小，当前地址，当前帧号
+            
             lastiapnum = 0;
+            ////////////////断点续传，读出已存信息
+            IAP_ReadParaFlash(&sIAPParatmp);
+            
+            gsIAPPara.softver = sCtrl.SoftWareID;                   //返回版本信息
+            
+            if(
+                        sIAPParatmp.softsize == gsIAPPara.softsize     //软件大小
+                   &&   gsIAPPara.framenum                          //开始包序号不为0   
+               ) 
+            {                                                       //数据未接收完成，发送当前序号
+                gsIAPPara.framenum  = sIAPParatmp.framenum;         //返回当前序号
+                lastiapnum          = sIAPParatmp.framenum;         //下载序号。断点续传 
+                gsIAPCtrl.addr      = sIAPParatmp.addr;
+            }else
+            {
+                gsIAPPara.framenum  = 0;                            //信息不正确，
+                lastiapnum = 0;
+                gsIAPCtrl.addr = USER_APP_START_ADDR;               //开始发送时，初始化地址。
+            }
+            
+            memcpy(&databuf[sizeof(iapcode)],&gsIAPPara,2+2+4+4+2); //cpoy硬件版本，软件版本，程序大小，当前地址，当前帧号
+
             break;
-        case 0x02:                                          //传输数据包
+        case IAP_DATA_CODE:                                         //传输数据包
             memcpy((char *)&iapnum,&databuf[sizeof(iapcode)],sizeof(iapnum));   //取帧序号
             
             if(     iapnum == lastiapnum+1 
-                ||  iapnum == lastiapnum)                   //相同帧号，也可以
+                ||  iapnum == lastiapnum )                  //相同帧号（重发数据）
             {
                 memcpy(&gsIAPCtrl.buf[(iapnum % SEC_DIV_TIMENS)*IAP_DATA_LEN],
                 &databuf[2+2],
                 datalen - 4);                                //拷贝数据到升级缓冲区
 
                 bufsize += datalen - 4;
-                //准备数据
+                                                            //准备数据
                 if(     (iapnum % SEC_DIV_TIMENS ) == (SEC_DIV_TIMENS - 1) 
-                    || (datalen -4) != IAP_DATA_LEN )                 //如果数据凑满1024字节，或者升级结束。进行写flash操作。
+                    || (datalen -4) != IAP_DATA_LEN )       //如果数据凑满1024字节，或者升级结束。进行写flash操作。
                 {
-                    if((datalen - 4) != IAP_DATA_LEN)                 //如果升级结束，将1024字节剩余空间写0xff
+                    if((datalen - 4) != IAP_DATA_LEN)       //如果升级结束，将1024字节剩余空间写0xff
                     {
                         for(int i = bufsize;i < IAP_WRITE_1024;i++ )
                         gsIAPCtrl.buf[i] = 0xff;	
                     }
 
-                    if(iapnum != lastiapnum && iapnum )         //除开始，重复接收，字节退出
+                    if(iapnum != lastiapnum && iapnum )     //除开始，重复接收，字节退出
                     {
-                         IAP_WriteFlash(&gsIAPCtrl);            //写数据(地址，gsIAPCtrl.addr依次写入)
-                    }
+                        IAP_WriteFlash(&gsIAPCtrl);        //写数据(地址，gsIAPCtrl.addr依次写入)
+                        gsIAPCtrl.addr += IAP_WRITE_1024;  //数据地址累加  
+                         
+                        gsIAPPara.addr =  gsIAPCtrl.addr;  //已写地址
+                         
+                        bufsize = 0;
                     
-                    bufsize = 0;
+                        gsIAPPara.code      = 0x00;         //未完成，存序号
+                        gsIAPPara.framenum  = iapnum;       //当前序号
+                        gsIAPPara.crc16 = GetCrc16Check((uint8 *)&gsIAPPara,sizeof(gsIAPPara)-2);
+                        IAP_WriteParaFlash(&gsIAPPara);
+                    }
                 }
                 
                 lastiapnum = iapnum;                            //序号赋值
@@ -261,16 +283,17 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
                 return 1; 
             }
         
-
-            
             break;
             
          //结束升级指令   //做升级后程序完整性判断。程序大小？ //写程序完成标示
-        case 0x03:                                          
+        case IAP_END_CODE:                                          
                                                             
             if( bufsize )                                   //最后的数据未写入，补充写入
             {
-                 IAP_WriteFlash(&gsIAPCtrl);                 //写数据(地址，gsIAPCtrl.addr依次写入)
+                 IAP_WriteFlash(&gsIAPCtrl);                //写数据(地址，gsIAPCtrl.addr依次写入)
+                 gsIAPCtrl.addr += IAP_WRITE_1024;          //数据地址累加  
+
+                 gsIAPPara.addr =  gsIAPCtrl.addr;          //已写地址
             }
                 
             memcpy(&gsIAPPara,&databuf[sizeof(iapcode)],2+2+4+4+2); //cpoy硬件版本，软件版本，程序大小，当前地址，当前帧号
@@ -288,7 +311,7 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
             gsIAPPara.crc16 = GetCrc16Check((uint8 *)&gsIAPPara,sizeof(gsIAPPara)-2);
             IAP_WriteParaFlash(&gsIAPPara);
             
-            //Boot();                                         //程序跳转
+            Boot();                                         //程序跳转
             break;
         case 0x04:                                          //终止升级指令
             gsIAPCtrl.addr = USER_APP_START_ADDR;           //初始化地址。
@@ -297,7 +320,6 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
         default:    //其他指令，直接返回
             databuf[1] = 2;
             return 2;
-            ;
     }
     
     databuf[1] = 0;
@@ -343,3 +365,32 @@ void Boot( void )
     CPU_CRITICAL_EXIT();
 
 }
+
+void    Restart(void)
+{
+    u32     JumpAddress = 0;
+    u8      cpu_sr;
+    //SCB->VTOR = USER_APP_START_ADDR & 0x1FFFFF80;	
+
+	//JMP_Boot(USER_APP_START_ADDR);
+    
+//   __ASM void JMP_Boot( uint32_t address ){
+//   LDR SP, [R0]		;Load new stack pointer address
+//   LDR PC, [R0, #4]	;Load new program counter address
+//   }
+
+    CPU_CRITICAL_ENTER();
+
+    JumpAddress   =*(volatile u32*) (0 + 4); // 地址+4为PC地址
+    pApp          = (pFunction)JumpAddress;                     // 函数指针指向APP
+    __set_MSP       (*(volatile u32*) 0);    // 初始化主堆栈指针（MSP）
+    __set_PSP       (*(volatile u32*) 0);    // 初始化进程堆栈指针（PSP）
+    __set_CONTROL   (0);                                        // 清零CONTROL
+    
+    pApp();                                                     //跳转运行
+    
+    //(*pApp)();
+    
+    CPU_CRITICAL_EXIT();
+}
+

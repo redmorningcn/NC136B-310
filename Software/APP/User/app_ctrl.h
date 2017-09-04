@@ -231,6 +231,7 @@ typedef struct {
 #endif
 } StrParaRange;
 
+
 //
 //
 //typedef struct _stcFlshRec   	//定义油尺记录数据结构
@@ -436,7 +437,9 @@ typedef struct {
     INT08U          SourceAddr;     //源地址       master   =0x80	   
     INT08U          FramNum;        //帧序号
     INT08U			Len;			//接收有效数据长度
-    INT32U			Code;			//接收控制字
+    INT08U          FrameCode;       
+    INT08U          Tmp[3];
+    INT32U			DataCode;			//接收控制字
 } StrDevMtrRecvCtrl;
 
 //连接控制字
@@ -495,6 +498,18 @@ typedef struct {
 /***************************************************
 * 描述： 统计模块--无线发送模块，长沙南睿轨道交通车辆装置异步串行通信通用通信协议
 */
+
+typedef struct  _stcIAPStart_
+{
+    uint8   DataCode;       //数据指令
+    uint8   Status;         //状态
+    uint16  HardVer;        //硬件版本
+    uint16  SoftVer;        //软件版本
+    uint32  SoftSize;       //软件大小
+    uint32  Addr;           //当前地址
+    uint16  CurNum;         //当前序号
+}stcIapStart;
+
 // 发送数据结构		无线-->统计		
 __packed
 typedef union {
@@ -504,16 +519,19 @@ typedef union {
 	stcLocoId   sLocoId;		    //FIX_CARD      设置机车信息	    4     type,num;
 	uint32      Slope;			    //CALC_PARA	    设置计算的斜率	    4	(slope/10000);     后续补充其他
     uint8       ModelNum;           //              模型编号            1       
+    stcIapStart IapStart;           //IAP开始     
 	uint8		Buf[160];		    //	
 } UniDtuCommRecvData;
 
 //接收控制字
 typedef struct {     
-    INT08U          DestAddr;       //接收地址      slave  =
+    INT08U          DestAddr;       //接收地址      slave  =0xA1\A2	   
     INT08U          SourceAddr;     //源地址       master   =0x80	   
     INT08U          FramNum;        //帧序号
     INT08U			Len;			//接收有效数据长度
-    INT32U			Code;			//接收控制字
+    INT08U          FrameCode;       
+    INT08U          Tmp[3];
+    INT32U			DataCode;			//接收控制字
 } StrDevDtuRecvCtrl;
 
 //连接控制字，
@@ -596,11 +614,13 @@ typedef union {
 
 //接收控制字
 typedef struct {     
-    INT08U          DestAddr;       //接收地址      slave  = 
+    INT08U          DestAddr;       //接收地址      slave  =0xA1\A2	   
     INT08U          SourceAddr;     //源地址       master   =0x80	   
     INT08U          FramNum;        //帧序号
     INT08U			Len;			//接收有效数据长度
-    INT32U			Code;			//接收控制字
+    INT08U          FrameCode;       
+    INT08U          Tmp[3];
+    INT32U			DataCode;			//接收控制字
 } StrDevOtrRecvCtrl;
 
 //连接控制字，

@@ -48,7 +48,6 @@ void  App_OS_SetAllHooks (void)
 #if OS_CFG_APP_HOOKS_EN > 0u
     CPU_SR_ALLOC();
 
-
     CPU_CRITICAL_ENTER();
     OS_AppTaskCreateHookPtr = App_OS_TaskCreateHook;
     OS_AppTaskDelHookPtr    = App_OS_TaskDelHook;
@@ -58,6 +57,7 @@ void  App_OS_SetAllHooks (void)
     OS_AppStatTaskHookPtr   = App_OS_StatTaskHook;
     OS_AppTaskSwHookPtr     = App_OS_TaskSwHook;
     OS_AppTimeTickHookPtr   = App_OS_TimeTickHook;
+    
     CPU_CRITICAL_EXIT();
 #endif
 }
@@ -79,7 +79,6 @@ void  App_OS_ClrAllHooks (void)
 {
 #if OS_CFG_APP_HOOKS_EN > 0u
     CPU_SR_ALLOC();
-
 
     CPU_CRITICAL_ENTER();
     OS_AppTaskCreateHookPtr = (OS_APP_HOOK_TCB)0;

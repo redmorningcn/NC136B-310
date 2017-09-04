@@ -184,7 +184,7 @@ void    app_init_sctrl(void)
      
      //NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x10000);
      
-     NVIC_SetVTOR(0x10000);
+     //NVIC_SetVTOR(0x10000);
      
      app_init_sctrl();                  //初始化全局变量
      

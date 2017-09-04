@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       15/Aug/2017  16:25:08
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       21/Aug/2017  11:49:41
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -99,6 +99,8 @@
 #        F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\SpeedTest\
 #        -I
 #        F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\csnr_package_deal\
+#        -I
+#        F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\iap\
 #        -On --use_c++_inline -I "C:\Program Files (x86)\IAR Systems\Embedded
 #        Workbench 7.3\arm\CMSIS\Include\"
 #    List file    =  
@@ -231,7 +233,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_mtr.c
    \   0000000C   0x488D             LDR.N    R0,??app_comm_mtr_2
    \   0000000E   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
    \   00000010   0xEB10 0x00C4      ADDS     R0,R0,R4, LSL #+3
-   \   00000014   0xF890 0x0395      LDRB     R0,[R0, #+917]
+   \   00000014   0xF890 0x0399      LDRB     R0,[R0, #+921]
    \   00000018   0x2801             CMP      R0,#+1
    \   0000001A   0xD174             BNE.N    ??app_comm_mtr_3
     111                  {
@@ -325,13 +327,13 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_mtr.c
    \   000000EA   0x4956             LDR.N    R1,??app_comm_mtr_2
    \   000000EC   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
    \   000000EE   0xEB11 0x01C4      ADDS     R1,R1,R4, LSL #+3
-   \   000000F2   0xF881 0x0395      STRB     R0,[R1, #+917]
+   \   000000F2   0xF881 0x0399      STRB     R0,[R1, #+921]
     136                      sCtrl.Mtr.ConnCtrl[i].TimeOut    = 0; 
    \   000000F6   0x2000             MOVS     R0,#+0
    \   000000F8   0x4952             LDR.N    R1,??app_comm_mtr_2
    \   000000FA   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
    \   000000FC   0xEB11 0x01C4      ADDS     R1,R1,R4, LSL #+3
-   \   00000100   0xF881 0x0396      STRB     R0,[R1, #+918]
+   \   00000100   0xF881 0x039A      STRB     R0,[R1, #+922]
     137                      
     138                      return  ;
    \   00000104   0xE09C             B.N      ??app_comm_mtr_6
@@ -361,18 +363,18 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_mtr.c
    \   00000112   0x484C             LDR.N    R0,??app_comm_mtr_2
    \   00000114   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
    \   00000116   0xEB10 0x00C5      ADDS     R0,R0,R5, LSL #+3
-   \   0000011A   0xF890 0x0396      LDRB     R0,[R0, #+918]
+   \   0000011A   0xF890 0x039A      LDRB     R0,[R0, #+922]
    \   0000011E   0x1C40             ADDS     R0,R0,#+1
    \   00000120   0x4948             LDR.N    R1,??app_comm_mtr_2
    \   00000122   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
    \   00000124   0xEB11 0x01C5      ADDS     R1,R1,R5, LSL #+3
-   \   00000128   0xF881 0x0396      STRB     R0,[R1, #+918]
+   \   00000128   0xF881 0x039A      STRB     R0,[R1, #+922]
     153                      //超时数大于10次，5S，报通讯错误。
     154                      if(sCtrl.Mtr.ConnCtrl[i].TimeOut > 10 * COMM_DEV_MTR_CONN_NUM){
    \   0000012C   0x4845             LDR.N    R0,??app_comm_mtr_2
    \   0000012E   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
    \   00000130   0xEB10 0x00C5      ADDS     R0,R0,R5, LSL #+3
-   \   00000134   0xF890 0x0396      LDRB     R0,[R0, #+918]
+   \   00000134   0xF890 0x039A      LDRB     R0,[R0, #+922]
    \   00000138   0x2815             CMP      R0,#+21
    \   0000013A   0xDB26             BLT.N    ??app_comm_mtr_9
     155                          
@@ -381,20 +383,20 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_mtr.c
    \   0000013E   0x4941             LDR.N    R1,??app_comm_mtr_2
    \   00000140   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
    \   00000142   0xEB11 0x01C5      ADDS     R1,R1,R5, LSL #+3
-   \   00000146   0xF881 0x0396      STRB     R0,[R1, #+918]
+   \   00000146   0xF881 0x039A      STRB     R0,[R1, #+922]
     157                          sCtrl.Mtr.ConnCtrl[i].ErrFlg = 1;       
    \   0000014A   0x2001             MOVS     R0,#+1
    \   0000014C   0x493D             LDR.N    R1,??app_comm_mtr_2
    \   0000014E   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
    \   00000150   0xEB11 0x01C5      ADDS     R1,R1,R5, LSL #+3
-   \   00000154   0xF881 0x0397      STRB     R0,[R1, #+919]
+   \   00000154   0xF881 0x039B      STRB     R0,[R1, #+923]
     158                          
     159                          //数据清零
     160                          if(sCtrl.Mtr.ConnCtrl[i].SlaveAddr == SLAVE_ADDR_DIP1)  
    \   00000158   0x483A             LDR.N    R0,??app_comm_mtr_2
    \   0000015A   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
    \   0000015C   0xEB10 0x00C5      ADDS     R0,R0,R5, LSL #+3
-   \   00000160   0xF890 0x0398      LDRB     R0,[R0, #+920]
+   \   00000160   0xF890 0x039C      LDRB     R0,[R0, #+924]
    \   00000164   0x28A1             CMP      R0,#+161
    \   00000166   0xD103             BNE.N    ??app_comm_mtr_10
     161                              sCtrl.sRec.Myhig1 = 0;
@@ -407,7 +409,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_mtr.c
    \   00000170   0x4834             LDR.N    R0,??app_comm_mtr_2
    \   00000172   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
    \   00000174   0xEB10 0x00C5      ADDS     R0,R0,R5, LSL #+3
-   \   00000178   0xF890 0x0398      LDRB     R0,[R0, #+920]
+   \   00000178   0xF890 0x039C      LDRB     R0,[R0, #+924]
    \   0000017C   0x28A2             CMP      R0,#+162
    \   0000017E   0xD10B             BNE.N    ??app_comm_mtr_11
     164                              sCtrl.sRec.Myhig2 = 0;                
@@ -423,7 +425,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_mtr.c
    \   0000018C   0x492D             LDR.N    R1,??app_comm_mtr_2
    \   0000018E   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
    \   00000190   0xEB11 0x01C5      ADDS     R1,R1,R5, LSL #+3
-   \   00000194   0xF881 0x0397      STRB     R0,[R1, #+919]
+   \   00000194   0xF881 0x039B      STRB     R0,[R1, #+923]
     168                      }
     169                      
     170                      i++;
@@ -514,7 +516,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_mtr.c
    \   0000020E   0xFB91 0xF6F2      SDIV     R6,R1,R2
    \   00000212   0xFB06 0x1612      MLS      R6,R6,R2,R1
    \   00000216   0xEB10 0x00C6      ADDS     R0,R0,R6, LSL #+3
-   \   0000021A   0xF890 0x2398      LDRB     R2,[R0, #+920]
+   \   0000021A   0xF890 0x239C      LDRB     R2,[R0, #+924]
    \   0000021E   0x4809             LDR.N    R0,??app_comm_mtr_2
    \   00000220   0x4909             LDR.N    R1,??app_comm_mtr_2+0x4
    \   00000222   0x7809             LDRB     R1,[R1, #+0]
@@ -522,9 +524,9 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_mtr.c
    \   00000226   0xFB91 0xF7F6      SDIV     R7,R1,R6
    \   0000022A   0xFB07 0x1716      MLS      R7,R7,R6,R1
    \   0000022E   0xEB10 0x00C7      ADDS     R0,R0,R7, LSL #+3
-   \   00000232   0xF890 0x1399      LDRB     R1,[R0, #+921]
+   \   00000232   0xF890 0x139D      LDRB     R1,[R0, #+925]
    \   00000236   0x4803             LDR.N    R0,??app_comm_mtr_2
-   \   00000238   0xF8D0 0x03A4      LDR      R0,[R0, #+932]
+   \   00000238   0xF8D0 0x03A8      LDR      R0,[R0, #+936]
    \   0000023C   0x.... 0x....      BL       CSNC_SendData
     202                  return;
    \                     ??app_comm_mtr_6: (+1)

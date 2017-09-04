@@ -186,7 +186,6 @@ static  void  AppTaskComm (void *p_arg)
                     ( CPU_TS       ) 0,
                     ( OS_ERR      *) &err);
         
-        
         /***********************************************
         * 描述： 等待COMM的标识组
         */
@@ -200,7 +199,6 @@ static  void  AppTaskComm (void *p_arg)
         
         OS_ERR      terr;
         ticks   = OSTimeGet(&terr);                        // 获取当前OSTick
-        
         
         /***********************************************
         * 描述： 没有错误,有事件发生
@@ -217,12 +215,16 @@ static  void  AppTaskComm (void *p_arg)
                    app_comm_mtr();                             
                    
                    if(flags & COMM_EVT_FLAG_MTR_RX) {      
-                       flagClr |= COMM_EVT_FLAG_MTR_RX;        //接收到数据，清接收数据标示
+                       flagClr |= COMM_EVT_FLAG_MTR_RX;         //接收到数据，清接收数据标示
+
                    }else{
-                       flagClr |= COMM_EVT_FLAG_MTR_TIMEOUT;   //接收到数据，清接收数据标示
+                       flagClr |= COMM_EVT_FLAG_MTR_TIMEOUT;   //超时，清接收数据标示
                    }
+                                  
+                   osal_start_timerRl(  OS_TASK_ID_TMR,     //计数器重新开始
+                                        OS_EVT_TMR_MTR,
+                                        OS_TICKS_PER_SEC);
                }
-            
             
             /***********************************************
             * 和无线发送模块事件发生，调用DTU通讯处理函数
@@ -235,9 +237,14 @@ static  void  AppTaskComm (void *p_arg)
                          
                          if(flags &      COMM_EVT_FLAG_DTU_RX) {      
                              flagClr |=  COMM_EVT_FLAG_DTU_RX;        //接收到数据，清接收数据标示
+
                          }else{
                              flagClr |=  COMM_EVT_FLAG_DTU_TIMEOUT;   //接收到数据，清接收数据标示
                          }
+
+                         osal_start_timerRl(  OS_TASK_ID_TMR,     //计数器重新开始
+                                              OS_EVT_TMR_DTU,
+                                              OS_TICKS_PER_SEC*15);                             
                          
                      }
             
@@ -255,7 +262,11 @@ static  void  AppTaskComm (void *p_arg)
                         }else{
                             flagClr |=  COMM_EVT_FLAG_OTR_TIMEOUT;   //接收到数据，清接收数据标示
                         }
-                        
+                                                    
+                         osal_start_timerRl(  OS_TASK_ID_TMR,     //计数器重新开始
+                                              OS_EVT_TMR_OTR,
+                                              OS_TICKS_PER_SEC*2);                             
+
                     }
             
             /***********************************************
@@ -273,7 +284,6 @@ static  void  AppTaskComm (void *p_arg)
                        ( OS_OPT        )OS_OPT_POST_FLAG_CLR,
                        ( OS_ERR       *)&err);
         }
-        
     }
 }
 
@@ -534,7 +544,7 @@ INT08U APP_CommRxDataDealCB(MODBUS_CH  *pch)
             sCtrl.Mtr.RxCtrl.SourceAddr = sCsncPara.sourceaddr;   	//源地址
             sCtrl.Mtr.RxCtrl.DestAddr   = sCsncPara.destaddr;    	//目标地址
             sCtrl.Mtr.RxCtrl.FramNum    = sCsncPara.framnum;    	//接收到的帧号
-            sCtrl.Mtr.RxCtrl.Code       = sCsncPara.framcode & (0x0f);//指令码 ，测量装置未定义 
+            sCtrl.Mtr.RxCtrl.FrameCode  = (uint8)sCsncPara.framcode & (0x0f);//指令码 ，测量装置未定义 
             sCtrl.Mtr.RxCtrl.Len        = sCsncPara.datalen;       	//数据区长度    
             
             //取数据记录，将数据记录保存到接收区
@@ -588,7 +598,7 @@ INT08U APP_CommRxDataDealCB(MODBUS_CH  *pch)
             sCtrl.Dtu.RxCtrl.SourceAddr = sCsncPara.sourceaddr;   	//源地址
             sCtrl.Dtu.RxCtrl.DestAddr   = sCsncPara.destaddr;    	//目标地址
             sCtrl.Dtu.RxCtrl.FramNum    = sCsncPara.framnum;    	//接收到的帧号
-            sCtrl.Dtu.RxCtrl.Code       = sCsncPara.framcode & (0x0f);//指令码 ，测量装置未定义 
+            sCtrl.Dtu.RxCtrl.FrameCode  = (uint8)sCsncPara.framcode & (0x0f);//指令码 ，测量装置未定义 
             sCtrl.Dtu.RxCtrl.Len        = sCsncPara.datalen;       	//数据区长度               
 
 			/***********************************************
@@ -596,7 +606,7 @@ INT08U APP_CommRxDataDealCB(MODBUS_CH  *pch)
             *                           ，4字节后才是真正的数据。                        
             */                   
             //if(Len >=4)     
-            if(sCsncPara.datalen >=4 && sCtrl.Dtu.RxCtrl.Code == 0) 
+            if(sCsncPara.datalen >=4 && sCtrl.Dtu.RxCtrl.FrameCode == 0) 
             {
                 //sCtrl.Dtu.RxCtrl.Len        = Len - 4;                  //数据区长度
                 sCtrl.Dtu.RxCtrl.Len        = sCsncPara.datalen - 4;                  //数据区长度
@@ -604,7 +614,7 @@ INT08U APP_CommRxDataDealCB(MODBUS_CH  *pch)
                 //OS_CRITICAL_ENTER();
                 //memcpy( (INT08U *)&sCtrl.Dtu.RxCtrl.Code, (INT08U *)&pch->RxFrameData[DataPos], 4);        //功能码
                 //memcpy( (INT08U *)&sCtrl.Dtu.Rd.Buf[0],   (INT08U *)&pch->RxFrameData[DataPos+4], Len-4 );   //数据区
-                memcpy( (INT08U *)&sCtrl.Dtu.RxCtrl.Code, buf, 4);        //功能码
+                memcpy( (INT08U *)&sCtrl.Dtu.RxCtrl.DataCode, buf, 4);        //功能码
                 memcpy( (INT08U *)&sCtrl.Dtu.Rd.Buf[0],   (INT08U *)&buf[4], sCsncPara.datalen-4 );   //数据区
 
                 //OS_CRITICAL_EXIT();                    
@@ -656,7 +666,7 @@ INT08U APP_CommRxDataDealCB(MODBUS_CH  *pch)
             sCtrl.Otr.RxCtrl.SourceAddr = sCsncPara.sourceaddr;   	//源地址
             sCtrl.Otr.RxCtrl.DestAddr   = sCsncPara.destaddr;    	//目标地址
             sCtrl.Otr.RxCtrl.FramNum    = sCsncPara.framnum;    	//接收到的帧号
-            sCtrl.Otr.RxCtrl.Code       = sCsncPara.framcode & (0x0f);//指令码 ，测量装置未定义 
+            sCtrl.Otr.RxCtrl.FrameCode  = (uint8)sCsncPara.framcode & (0x0f);//指令码 ，测量装置未定义 
             sCtrl.Otr.RxCtrl.Len        = sCsncPara.datalen;       	//数据区长度               
 
             /***********************************************
@@ -664,7 +674,7 @@ INT08U APP_CommRxDataDealCB(MODBUS_CH  *pch)
             *                           ，4字节后才是真正的数据。                        
             */                   
             //if(Len >=4)  //V1.0协议操作
-            if(sCsncPara.datalen >=4 && sCtrl.Otr.RxCtrl.Code == 0) 
+            if(sCsncPara.datalen >=4 && sCtrl.Otr.RxCtrl.FrameCode == 0) 
             {
                 //sCtrl.Otr.RxCtrl.Len        = Len - 4;                  //数据区长度
                 sCtrl.Otr.RxCtrl.Len        = sCtrl.Otr.RxCtrl.Len  - 4;                  //数据区长度 - 4;                  //数据区长度
@@ -673,7 +683,7 @@ INT08U APP_CommRxDataDealCB(MODBUS_CH  *pch)
                 //memcpy( (INT08U *)&sCtrl.Otr.RxCtrl.Code, (INT08U *)&pch->RxFrameData[DataPos], 4);        //功能码
                 //memcpy( (INT08U *)&sCtrl.Otr.Rd.Buf[0],   (INT08U *)&pch->RxFrameData[DataPos+4], Len-4 );   //数据区
 
-                memcpy( (INT08U *)&sCtrl.Otr.RxCtrl.Code, buf, 4);        //功能码
+                memcpy( (INT08U *)&sCtrl.Otr.RxCtrl.DataCode, buf, 4);        //功能码
                 memcpy( (INT08U *)&sCtrl.Otr.Rd.Buf[0],   (INT08U *)&buf[4], sCsncPara.datalen-4 );   //数据区                //OS_CRITICAL_EXIT();                    
             }
             else        //V2.0协议操作    //将数据拷贝数据区，在根据协议解析 

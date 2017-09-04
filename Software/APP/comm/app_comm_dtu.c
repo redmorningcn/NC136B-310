@@ -27,6 +27,7 @@
 #include <app_ctrl.h>
 #include <app.h>
 #include <os_cfg_app.h>
+#include  "IAP_program_mcu.h"
 
 
 #ifdef VSC_INCLUDE_SOURCE_FILE_NAMES
@@ -43,6 +44,9 @@ const  CPU_CHAR  *app_comm_dtu__c = "$Id: $";
  * MACROS
  */
 #define CYCLE_TIME_TICKS            (OS_TICKS_PER_SEC * 1)
+#define IAP_START_CODE              1
+#define IAP_DATA_CODE               2
+#define IAP_END_CODE                3
 
 /*******************************************************************************
  * TYPEDEFS
@@ -123,6 +127,8 @@ void    app_comm_dtu(void)
     //判断对应地址连接是否接收到数据
     uint8   i = 0;
     uint8   status = 0;
+    uint8   echolen = 0;
+
     while(i < COMM_DEV_DTU_CONN_NUM){
         if(sCtrl.Dtu.ConnCtrl[i].RecvEndFlg == 1)                   //如果地址i接收到数据，对数据进行处理
         {
@@ -131,10 +137,9 @@ void    app_comm_dtu(void)
             *        根据接收到的地址CA，进行无线  数据传输；
             *        接收到地址C2，进行  设置模式。
             */
-            
-            switch(sCtrl.Dtu.RxCtrl.Code)
+            switch(sCtrl.Dtu.RxCtrl.FrameCode)
             {
-                case 0: //V1.0
+                case 0:     //V1.0
             
                     if(sCtrl.Dtu.RxCtrl.SourceAddr == SLAVE_ADDR_DTU)       //地址等于CA，无线数据传输。
                     {
@@ -151,19 +156,25 @@ void    app_comm_dtu(void)
                 case 2:     //V2.0
                     break;
                     
-                case IAP_FRAME_CODE:     //V2.0 IAP程序下载
+                case IAP_FRAME_CODE:        //V2.0 IAP程序下载
                         status = IAP_PragramDeal(sCtrl.Dtu.Rd.Buf , sCtrl.Dtu.RxCtrl.Len ); //调用程序下载函数   
                         
-                        //应答数据
-                        CSNC_SendData(sCtrl.Dtu.pch,                        //DTU 的PCH：串口号，收发控制等底层信息
-                                      sCtrl.Dtu.RxCtrl.DestAddr,            //源地址，
-                                      sCtrl.Dtu.RxCtrl.SourceAddr,          //目标地址
-                                      sCtrl.Dtu.RxCtrl.FramNum,             //帧序号 ，，在接收中累加
-                                      sCtrl.Dtu.RxCtrl.Code,                //命令字
-                                      sCtrl.Dtu.Rd.Buf,                     //数据区
-                                      4                                     //发送长度
-                                          );
+                        echolen = 4;
+                        //应答数据          //如果是IAP传包帧，则传数据长度4，如果是开始、结束。返回长度为
+                        if(     sCtrl.Dtu.Rd.Buf[0] == IAP_START_CODE 
+                            ||  sCtrl.Dtu.Rd.Buf[0] == IAP_END_CODE )
+                        {
+                            echolen = sCtrl.Dtu.RxCtrl.Len;   
+                        }
                         
+                        CSNC_SendData(  sCtrl.Dtu.pch,                        //DTU 的PCH：串口号，收发控制等底层信息
+                                        sCtrl.Dtu.RxCtrl.DestAddr,            //源地址，
+                                        sCtrl.Dtu.RxCtrl.SourceAddr,          //目标地址
+                                        sCtrl.Dtu.RxCtrl.FramNum,             //帧序号 ，，在接收中累加
+                                        sCtrl.Dtu.RxCtrl.FrameCode,           //命令字
+                                        sCtrl.Dtu.Rd.Buf,                     //数据区
+                                        echolen                               //发送长度
+                                    );
                     break;
                     
                 default:;  //V2.0
@@ -216,7 +227,7 @@ void    app_comm_dtu(void)
         while(i < COMM_DEV_DTU_CONN_NUM){
             if(sCtrl.Dtu.ConnCtrl[i].SlaveAddr == SLAVE_ADDR_DTU){
                                                                 //对DTU地址发送数据        
-                comm_record_send_one((StrDevDtu *)&sCtrl.Dtu,i);  
+              //  comm_record_send_one((StrDevDtu *)&sCtrl.Dtu,i);  
                 break;
             }
             i++;

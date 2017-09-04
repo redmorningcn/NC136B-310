@@ -356,6 +356,7 @@
           <state>$PROJ_DIR$\..\..\..\..\..\..\Application\Library\SlaveConTask</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Application\Library\SpeedTest</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Application\Library\csnr_package_deal</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Application\Library\iap</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>

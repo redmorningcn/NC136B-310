@@ -202,13 +202,18 @@ void TaskInitTmr(void)
     /*************************************************
     * 描述：启动事件查询
     */
-    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_SEC, OS_TICKS_PER_SEC);
-//    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_MIN ,  OS_TICKS_PER_SEC * 10);
-//    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_DEAL , OS_TICKS_PER_SEC * 60);
-   
+    //2017一段时间后，无通讯。
+    
+    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_SEC, OS_TICKS_PER_SEC);   
     osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_MTR, OS_TICKS_PER_SEC*1 );  //统计模块和测量装置通讯定时器  500ms
     osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_DTU, OS_TICKS_PER_SEC*2 );  //统计装置和无线发送模块定时器  500ms
-    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_OTR, OS_TICKS_PER_SEC*10 );  //统计模块和IC卡模块通讯定时器  500ms  
+    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_OTR, OS_TICKS_PER_SEC*10 ); //统计模块和IC卡模块通讯定时器  500ms  
+    
+ //   osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_SEC,OS_TICKS_PER_SEC);   
+ //   osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_MTR,OS_TICKS_PER_SEC*1 ); 
+ //   osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_DTU,OS_TICKS_PER_SEC*2 ); 
+ //   osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_OTR,OS_TICKS_PER_SEC*10 );
+
 }
 
 /*******************************************************************************

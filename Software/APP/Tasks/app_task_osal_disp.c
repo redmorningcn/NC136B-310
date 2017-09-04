@@ -69,7 +69,6 @@ static  OS_TCB   AppTaskDispTCB;
 /*******************************************************************************
  * GLOBAL VARIABLES
  */
-
 /*******************************************************************************
  * LOCAL FUNCTIONS
  */
@@ -187,8 +186,8 @@ osalEvt  TaskDispEvtProcess(INT8U task_id, osalEvt task_event)
             */
             case 2: 
                 dis_mode++;
-                sCtrl.SoftWareID = 5678;
-                uprintf("SV_%4d",sCtrl.SoftWareID);
+                sCtrl.SoftWareID = 0x0105;
+                uprintf("SV_%02X.%02X",(uint8)(sCtrl.SoftWareID>>8),(uint8)sCtrl.SoftWareID);
                 
                 break;
             /*******************************************************************

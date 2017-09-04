@@ -14,7 +14,7 @@ TraceBufferSize=0x00010000
 TraceStallIfFIFOFull=0x00000000
 TracePortSize=0x00000004
 [DebugChecksum]
-Checksum=703030117
+Checksum=-462518875
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -69,12 +69,13 @@ Fmt14=stcFlshRec-MyMinute	3	0
 Fmt15=stcFlshRec-MyMonth	3	0
 Fmt16=stcFlshRec-MySecond	3	0
 Fmt17=stcFlshRec-MyYear	3	0
-Fmt18=stcTime-Date	3	0
-Fmt19=stcTime-Hour	3	0
-Fmt20=stcTime-Min	3	0
-Fmt21=stcTime-Month	3	0
-Fmt22=stcTime-Sec	3	0
-Fmt23=stcTime-Year	3	0
+Fmt18=stcIAPCtrl-addr	4	0
+Fmt19=stcTime-Date	3	0
+Fmt20=stcTime-Hour	3	0
+Fmt21=stcTime-Min	3	0
+Fmt22=stcTime-Month	3	0
+Fmt23=stcTime-Sec	3	0
+Fmt24=stcTime-Year	3	0
 [array_types]
 Fmt0=CPU_INT08U[256]	4	0
 Fmt1=char[1024]	4	0
@@ -144,9 +145,7 @@ Bp2=_ 0 "EMUL_CODE" "{F:\iar\NC136B-310统计模块}.266.18" 0 0 1 "" 0 "" 0
 Bp3=_ 0 "EMUL_CODE" "{F:\iar\NC136B-310统计模块}.77.5" 0 0 1 "" 0 "" 0
 Bp4=_ 0 "EMUL_CODE" "{F:\iar\NC136B-310统计模块}.314.5" 0 0 1 "" 0 "" 0
 Bp5=_ 0 "EMUL_CODE" "0x0000CE06" 0 0 1 "" 0 "" 0
-Bp6=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\iap\IAP_program_mcu.C}.296.13" 0 0 1 "" 0 "" 0
-Bp7=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\iap\IAP_program_mcu.C}.283.17" 0 0 1 "" 0 "" 0
-Count=8
+Count=6
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
