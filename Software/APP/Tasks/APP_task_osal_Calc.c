@@ -116,7 +116,7 @@ extern	stcSysCtrl       sCtrl;       	//	全局结构控制体
 
 stcModel 		  	l_sModel;
 stcModelSemple	  	l_sModelSemple;
-
+stcCalcModel        l_sCalcModel;
 
 /*******************************************************************************
  * 名    称：          GetOilBoxModel()
@@ -131,6 +131,22 @@ stcModelSemple	  	l_sModelSemple;
  *******************************************************************************/
 uint8   GetOilBoxModel(void)
 {
+    //先取预设油箱模型，不成功，再按油箱模型编号，进行计算。（建议现场使用20170905）
+    FRAM_ReadCalcModel(&l_sCalcModel);      //取模型
+    
+    if(l_sCalcModel.valid == 1)             //模型有效
+    {
+        uint16  crc16 = GetCrc16Check((uint8 *)&l_sCalcModel,sizeof(l_sCalcModel)-2);
+        
+        if(crc16 == l_sCalcModel.CrcCheck) //，且校验通过
+        {
+            memcpy((uint8 *)&sCtrl.sCalcModel,(uint8 *)&l_sCalcModel,sizeof(l_sCalcModel));
+            
+            return 1;                       
+        }
+    }
+    
+//////////////////////////////////////////////////////////////////    
     switch (sCtrl.SOilPara.ModelNum)                                //根据模型编号，确定油箱模型，其中自设模型
     {
         case HXN5_MODLE:

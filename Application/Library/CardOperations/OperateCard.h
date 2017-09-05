@@ -28,6 +28,9 @@
 #define		RST_SYS				0x100000		//系统复位
 #define		CALC_PARA           0x200000		//油量计算系数
 
+#define		RUN_MODEL_PARA      0x400000		//运算模型卡
+
+
 #define		CARD_DATA_ADDR	    5120			//IC卡 数据起始地址
 #define		CARD_FLG_ADDR		0				//IC卡 标识起始地址
 

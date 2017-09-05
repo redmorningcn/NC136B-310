@@ -557,7 +557,7 @@ typedef struct {
     /***************************************************
     * 描述： 串口控制组
     */
-	StrDevDtuRecvCtrl    	RxCtrl;				//接收控制，包含当前接收到的控制信息
+	StrDevDtuRecvCtrl    	RxCtrl;				            //接收控制，包含当前接收到的控制信息
 	StrDevDtuConnCtrl		ConnCtrl[COMM_DEV_DTU_CONN_NUM];//连接控制，对每个地址作为单独的数据连接。
 	
     MODBUS_CH            	*pch;                   		// MODBUS句柄
@@ -727,7 +727,7 @@ typedef struct _stcCalcModel_
 	uint16		PotNum;							// 2 		模型有效点数 
 	uint16		StartOil;                       // 2    	模型初始油量   	
 	uint8		ModelNum;						// 1		模型编号
-	uint8		Res0;							// 1        备用
+	uint8		valid;							// 1        使用
 	uint16		CrcCheck;						// 2 		CrcCheck;
 }stcCalcModel;
 
@@ -751,13 +751,13 @@ typedef struct _StrSysCtrlPara {
     /***************************************************
     * 描述： 系统参数：起始地址 = 000   通讯密码，软件版本，记录号，产品信息
     */    
-    INT16U      Password;               // 	2  	用于MODEBUS通讯确认密钥，默认为6237，防止非法改数据
-    INT16U		SoftWareID;				//	2  	软件版本
+    INT16U      Password;                   // 	2  	用于MODEBUS通讯确认密钥，默认为6237，防止非法改数据
+    INT16U		SoftWareID;				    //	2  	软件版本
     //
     /***************************************************
     * 描述：记录号管理地址：起始地址 = 004
     */
-    StrRecNumMgr   sRecNumMgr;			//	16	记录号管理: 当前记录号，卡已读记录号，无线已读记录号
+    StrRecNumMgr   sRecNumMgr;			    //	16	记录号管理: 当前记录号，卡已读记录号，无线已读记录号
        //
     /***************************************************
     * 描述：产品信息：起始地址 = 020
@@ -768,19 +768,19 @@ typedef struct _StrSysCtrlPara {
     /***************************************************
     * 描述：数据记录：起始地址 = 032
     */
-	stcFlshRec	sRec;					//  128  数据记录      包含所有采集数据及运算结果。
+	stcFlshRec	sRec;					    //  128  数据记录      包含所有采集数据及运算结果。
 
     //
     /***************************************************
     * 描述：油量计算参数：起始地址 = 160
     */
-	StrOilPara	SOilPara	;				// 12  高度、密度，斜率，模型编号；
+	StrOilPara	SOilPara;				    // 12  高度、密度，斜率，模型编号；
 
     //
     /***************************************************
     * 描述：系统运行参数：起始地址 = 172
     */
-	stcRunPara	sRunPara;				// 8		//数据存储周期，数据清零，参数清零
+	stcRunPara	sRunPara;				    // 8		//数据存储周期，数据清零，参数清零
 
     //
     /***************************************************
@@ -810,7 +810,7 @@ typedef struct _StrSysCtrlPara {
 	StrDevOtr	Otr;						//  和邋IC卡模块进行通讯控制字，接收收、发缓冲，	接收控制，发送控制
 
     //定义全局的Os操作变量?   
-    	StrCtrlOS    	Os;                                	 // OS系统结构体变量    
+    StrCtrlOS    	Os;                                	 // OS系统结构体变量    
     	
 //    //显示结构体	
 //    	StrDisp           Disp;                            	//显示结构体变量 	

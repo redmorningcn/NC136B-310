@@ -50,7 +50,7 @@ extern "C" {
 //参数存储地址
 #define		FRAM_RECNUM_MGR_ADDR		4			//数据记录管理存储地址
 #define		FRAM_PRODUCT_INFO_ADDR		20			//产品ID地址
-#define		FRAM_REC_ADDR					32			//当前数据记录存储地址
+#define		FRAM_REC_ADDR				32			//当前数据记录存储地址
 #define		FRAM_OIL_PARA_ADDR			160			//油量计算参数
 #define		FRAM_RUN_PARA_ADDR			172			//系统运行参数
 #define		FRAM_CALC_MODEL_ADDR		180			//计算油箱模型

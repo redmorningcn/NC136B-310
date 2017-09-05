@@ -27,6 +27,7 @@
 #include <app_ctrl.h>
 #include <app.h>
 #include <os_cfg_app.h>
+#include <OperateCard.h>
 
 
 #ifdef VSC_INCLUDE_SOURCE_FILE_NAMES
@@ -124,6 +125,7 @@ uint8   comm_tinyrec_send(StrDevOtr * sOtr,uint8    addrnum);
 
 extern  stcSysCtrl  sCtrl;
 
+extern  stcCalcModel    l_sCalcModel;       //临时采用的油箱模型
 /*******************************************************************************
 * 名    称： comm_para_flow
 * 功    能： 参数流。根据具体参数进行操作
@@ -143,6 +145,7 @@ void    comm_para_flow(StrDevDtu * sDtu,uint8 addrnum)
     uint32      modelrecvnum =0;
     uint32      tmp32;
     static     uint32      modelstoreaddr = 0;
+    uint16      crc16;
     
     BSP_DispClrAll();                               //清原显示值，立即显示设定值                 
     
@@ -353,6 +356,34 @@ void    comm_para_flow(StrDevDtu * sDtu,uint8 addrnum)
             }
             
         }
+        break;
+        
+    case    RUN_MODEL_PARA:
+
+        memcpy((uint8 *)&tmp32, &sDtu->Rd.Buf[0],sizeof(tmp32));      //取帧序号
+        if(tmp32 < (1 + sizeof(l_sCalcModel)/128 ))                 //序号有效
+        {
+            memcpy((uint8 *)(   &l_sCalcModel + 128*tmp32),
+                                (uint8 *)&sDtu->Rd.Buf[4],
+                                sDtu->RxCtrl.Len-4);
+            
+            if(tmp32 == sizeof(l_sCalcModel)/128)               //接收完成
+            {
+                crc16 = GetCrc16Check((uint8 *)&l_sCalcModel,sizeof(l_sCalcModel)-2);   //计算校验
+                if(crc16 == l_sCalcModel.CrcCheck)              //模型校验通过，赋值给计算使用
+                {
+                    l_sCalcModel.valid = 1;                     //置模型有效位
+                    
+                    l_sCalcModel.CrcCheck = GetCrc16Check((uint8 *)&l_sCalcModel,sizeof(l_sCalcModel)-2); 
+                    
+                    memcpy((uint8 *)&sCtrl.sCalcModel,(uint8 *)&l_sCalcModel,sizeof(l_sCalcModel)); //赋值给正在使用的模型。
+                    
+                    FRAM_StoreCalcModel(&sCtrl.sCalcModel);
+                }
+            }
+        }
+        
+        break;
     }
 }
 

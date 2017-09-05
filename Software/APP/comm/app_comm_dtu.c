@@ -52,7 +52,10 @@ const  CPU_CHAR  *app_comm_dtu__c = "$Id: $";
  * TYPEDEFS
  */
 //IAP 下载帧控制字
-#define     IAP_FRAME_CODE      10      
+#define     IAP_FRAME_CODE      10 
+//SET 设置控制字
+#define     SET_FRAME_CODE      2      
+
 
 /*******************************************************************************
  * LOCAL VARIABLES
@@ -153,7 +156,8 @@ void    app_comm_dtu(void)
                     break;
                 case 1:     //V2.0
                     break;
-                case 2:     //V2.0
+                case SET_FRAME_CODE:        //V2.0 IAP参数设置
+                    
                     break;
                     
                 case IAP_FRAME_CODE:        //V2.0 IAP程序下载
@@ -227,7 +231,7 @@ void    app_comm_dtu(void)
         while(i < COMM_DEV_DTU_CONN_NUM){
             if(sCtrl.Dtu.ConnCtrl[i].SlaveAddr == SLAVE_ADDR_DTU){
                                                                 //对DTU地址发送数据        
-              //  comm_record_send_one((StrDevDtu *)&sCtrl.Dtu,i);  
+                comm_record_send_one((StrDevDtu *)&sCtrl.Dtu,i);  
                 break;
             }
             i++;
@@ -236,7 +240,7 @@ void    app_comm_dtu(void)
         //重新给定时器给初值。osal_start_timerRl可以自动赋值，
         osal_start_timerRl( OS_TASK_ID_TMR, 
                             OS_EVT_TMR_DTU, 
-                            OS_TICKS_PER_SEC*10 );  //统计装置和无线发送模块定时器  10s
+                            OS_TICKS_PER_SEC*10 );              //统计装置和无线发送模块定时器  10s
 
     }
 }

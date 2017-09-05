@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       04/Sep/2017  13:12:42
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       05/Sep/2017  11:22:08
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -384,8 +384,8 @@ F:\iar\NC136B-310Í³¼ÆÄ£¿é\Software\APP\Tasks\app_task_osal_disp.c
    \   000000B0   0x1C40             ADDS     R0,R0,#+1
    \   000000B2   0x....             LDR.N    R1,??DataTable3_1
    \   000000B4   0x7008             STRB     R0,[R1, #+0]
-    189                          sCtrl.SoftWareID = 0x0105;
-   \   000000B6   0xF240 0x1005      MOVW     R0,#+261
+    189                          sCtrl.SoftWareID = 0x0104;
+   \   000000B6   0xF44F 0x7082      MOV      R0,#+260
    \   000000BA   0x....             LDR.N    R1,??DataTable3_3
    \   000000BC   0x8048             STRH     R0,[R1, #+2]
     190                          uprintf("SV_%02X.%02X",(uint8)(sCtrl.SoftWareID>>8),(uint8)sCtrl.SoftWareID);
