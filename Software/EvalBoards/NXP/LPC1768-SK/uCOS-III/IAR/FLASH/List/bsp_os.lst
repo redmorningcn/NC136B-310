@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       21/Aug/2017  10:05:19
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       06/Sep/2017  16:07:10
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -373,121 +373,120 @@ F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\BSP\OS\uCOS-III\bsp
     208          * Note(s)     : none.
     209          *********************************************************************************************************
     210          */
-    211          
 
    \                                 In section .text, align 2, keep-with-next
-    212          CPU_BOOLEAN  BSP_OS_SemPost (BSP_OS_SEM *p_sem)
-    213          {
+    211          CPU_BOOLEAN  BSP_OS_SemPost (BSP_OS_SEM *p_sem)
+    212          {
    \                     BSP_OS_SemPost: (+1)
    \   00000000   0xB510             PUSH     {R4,LR}
    \   00000002   0xB082             SUB      SP,SP,#+8
    \   00000004   0x0004             MOVS     R4,R0
-    214              OS_ERR  err;
+    213              OS_ERR  err;
+    214          
     215          
-    216          
-    217              OSSemPost((OS_SEM *)p_sem,
-    218                        (OS_OPT  )OS_OPT_POST_1,
-    219                        (OS_ERR *)&err);
+    216              OSSemPost((OS_SEM *)p_sem,
+    217                        (OS_OPT  )OS_OPT_POST_1,
+    218                        (OS_ERR *)&err);
    \   00000006   0x466A             MOV      R2,SP
    \   00000008   0x2100             MOVS     R1,#+0
    \   0000000A   0x0020             MOVS     R0,R4
    \   0000000C   0x.... 0x....      BL       OSSemPost
-    220          
-    221              if (err != OS_ERR_NONE) {
+    219          
+    220              if (err != OS_ERR_NONE) {
    \   00000010   0xF8BD 0x0000      LDRH     R0,[SP, #+0]
    \   00000014   0x2800             CMP      R0,#+0
    \   00000016   0xD001             BEQ.N    ??BSP_OS_SemPost_0
-    222                  return (DEF_FAIL);
+    221                  return (DEF_FAIL);
    \   00000018   0x2000             MOVS     R0,#+0
    \   0000001A   0xE000             B.N      ??BSP_OS_SemPost_1
-    223              }
-    224          
-    225              return (DEF_OK);
+    222              }
+    223          
+    224              return (DEF_OK);
    \                     ??BSP_OS_SemPost_0: (+1)
    \   0000001C   0x2001             MOVS     R0,#+1
    \                     ??BSP_OS_SemPost_1: (+1)
    \   0000001E   0xBD16             POP      {R1,R2,R4,PC}    ;; return
-    226          }
+    225          }
+    226          
     227          
-    228          
-    229          /*
+    228          /*
+    229          *********************************************************************************************************
     230          *********************************************************************************************************
-    231          *********************************************************************************************************
-    232          **                                     uC/OS-III TIMER FUNCTIONS
+    231          **                                     uC/OS-III TIMER FUNCTIONS
+    232          *********************************************************************************************************
     233          *********************************************************************************************************
-    234          *********************************************************************************************************
-    235          */
-    236          
-    237          /*
-    238          *********************************************************************************************************
-    239          *                                    BSP_TimeDlyMs()
-    240          *
-    241          * Description : This function delay the exceution for specifi amount of miliseconds
-    242          *
-    243          * Argument(s) : dly_ms       Delay in miliseconds
-    244          *
-    245          * Return(s)   : none.
-    246          *
-    247          * Caller(s)   : Application
-    248          *
-    249          * Note(s)     : none.
-    250          *
-    251          *********************************************************************************************************
-    252          */
-    253          
+    234          */
+    235          
+    236          /*
+    237          *********************************************************************************************************
+    238          *                                    BSP_TimeDlyMs()
+    239          *
+    240          * Description : This function delay the exceution for specifi amount of miliseconds
+    241          *
+    242          * Argument(s) : dly_ms       Delay in miliseconds
+    243          *
+    244          * Return(s)   : none.
+    245          *
+    246          * Caller(s)   : Application
+    247          *
+    248          * Note(s)     : none.
+    249          *
+    250          *********************************************************************************************************
+    251          */
+    252          
 
    \                                 In section .text, align 2, keep-with-next
-    254          void   BSP_OS_TimeDlyMs (CPU_INT32U  dly_ms)
-    255          {
+    253          void   BSP_OS_TimeDlyMs (CPU_INT32U  dly_ms)
+    254          {
    \                     BSP_OS_TimeDlyMs: (+1)
    \   00000000   0xB570             PUSH     {R4-R6,LR}
    \   00000002   0xB084             SUB      SP,SP,#+16
    \   00000004   0x0004             MOVS     R4,R0
-    256              CPU_INT16U  ms;
-    257              CPU_INT16U  sec;
-    258              OS_ERR      err;
+    255              CPU_INT16U  ms;
+    256              CPU_INT16U  sec;
+    257              OS_ERR      err;
+    258          
     259          
-    260          
-    261              if (dly_ms > 10000u) {                                       /* Limit delays to 10 seconds.                        */
+    260              if (dly_ms > 10000u) {                                       /* Limit delays to 10 seconds.                        */
    \   00000006   0xF242 0x7011      MOVW     R0,#+10001
    \   0000000A   0x4284             CMP      R4,R0
    \   0000000C   0xD302             BCC.N    ??BSP_OS_TimeDlyMs_0
-    262                  dly_ms = 10000u;
+    261                  dly_ms = 10000u;
    \   0000000E   0xF242 0x7010      MOVW     R0,#+10000
    \   00000012   0x0004             MOVS     R4,R0
-    263              }
-    264          
-    265              if (dly_ms >= 1000u) {
+    262              }
+    263          
+    264              if (dly_ms >= 1000u) {
    \                     ??BSP_OS_TimeDlyMs_0: (+1)
    \   00000014   0xF5B4 0x7F7A      CMP      R4,#+1000
    \   00000018   0xD30C             BCC.N    ??BSP_OS_TimeDlyMs_1
-    266                  ms  = dly_ms % 1000u;
+    265                  ms  = dly_ms % 1000u;
    \   0000001A   0xF44F 0x707A      MOV      R0,#+1000
    \   0000001E   0xFBB4 0xF1F0      UDIV     R1,R4,R0
    \   00000022   0xFB00 0x4011      MLS      R0,R0,R1,R4
    \   00000026   0x0005             MOVS     R5,R0
-    267                  sec = dly_ms / 1000u;
+    266                  sec = dly_ms / 1000u;
    \   00000028   0xF44F 0x707A      MOV      R0,#+1000
    \   0000002C   0xFBB4 0xF0F0      UDIV     R0,R4,R0
    \   00000030   0x0006             MOVS     R6,R0
    \   00000032   0xE003             B.N      ??BSP_OS_TimeDlyMs_2
-    268              } else {
-    269                  ms  = dly_ms;
+    267              } else {
+    268                  ms  = dly_ms;
    \                     ??BSP_OS_TimeDlyMs_1: (+1)
    \   00000034   0x0020             MOVS     R0,R4
    \   00000036   0x0005             MOVS     R5,R0
-    270                  sec = 0u;
+    269                  sec = 0u;
    \   00000038   0x2000             MOVS     R0,#+0
    \   0000003A   0x0006             MOVS     R6,R0
-    271              }
+    270              }
+    271          
     272          
-    273          
-    274              OSTimeDlyHMSM((CPU_INT16U) 0u,
-    275                            (CPU_INT16U) 0u,
-    276                            (CPU_INT16U) sec,
-    277                            (CPU_INT32U) ms,
-    278                            (OS_OPT    ) OS_OPT_TIME_HMSM_STRICT,
-    279                            (OS_ERR   *)&err);
+    273              OSTimeDlyHMSM((CPU_INT16U) 0u,
+    274                            (CPU_INT16U) 0u,
+    275                            (CPU_INT16U) sec,
+    276                            (CPU_INT32U) ms,
+    277                            (OS_OPT    ) OS_OPT_TIME_HMSM_STRICT,
+    278                            (OS_ERR   *)&err);
    \                     ??BSP_OS_TimeDlyMs_2: (+1)
    \   0000003C   0xA802             ADD      R0,SP,#+8
    \   0000003E   0x9001             STR      R0,[SP, #+4]
@@ -500,13 +499,13 @@ F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\BSP\OS\uCOS-III\bsp
    \   0000004C   0x2100             MOVS     R1,#+0
    \   0000004E   0x2000             MOVS     R0,#+0
    \   00000050   0x.... 0x....      BL       OSTimeDlyHMSM
-    280          }
+    279          }
    \   00000054   0xBD7F             POP      {R0-R6,PC}       ;; return
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable0:
    \   00000000   0x........         DC32     OSCfg_TickRate_Hz
-    281          
+    280          
 
    Maximum stack usage in bytes:
 

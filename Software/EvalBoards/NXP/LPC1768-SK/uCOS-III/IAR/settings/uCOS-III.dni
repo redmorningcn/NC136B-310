@@ -14,7 +14,7 @@ TraceBufferSize=0x00010000
 TraceStallIfFIFOFull=0x00000000
 TracePortSize=0x00000004
 [DebugChecksum]
-Checksum=1841132093
+Checksum=1747535698
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -153,10 +153,6 @@ ShowTiming=1
 Frequency=10000
 Probe0=I0
 ProbeSetup0=2 1 1 2 0 0
-[Log file]
-LoggingEnabled=_ 0
-LogFile=_ ""
-Category=_ 0
 [Disassemble mode]
 mode=0
 [Breakpoints2]
@@ -166,7 +162,12 @@ Bp2=_ 0 "EMUL_CODE" "{F:\iar\NC136B-310统计模块}.266.18" 0 0 1 "" 0 "" 0
 Bp3=_ 0 "EMUL_CODE" "{F:\iar\NC136B-310统计模块}.77.5" 0 0 1 "" 0 "" 0
 Bp4=_ 0 "EMUL_CODE" "{F:\iar\NC136B-310统计模块}.314.5" 0 0 1 "" 0 "" 0
 Bp5=_ 0 "EMUL_CODE" "0x0000CE06" 0 0 1 "" 0 "" 0
-Count=6
+Bp6=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\iap\IAP_program_mcu.C}.307.17" 0 0 1 "" 0 "" 0
+Count=7
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
 [Aliases]
 A0=_ "F:\embedsoft\Micrium_LPC1768-SK_uCOS-III 17\Software\APP\Tasks\app_task_osal.c" ""
 A1=_ "F:\embedsoft\Micrium_LPC1768-SK_uCOS-III 17\Software\APP\Tasks\app_task_osal_disp.c" ""

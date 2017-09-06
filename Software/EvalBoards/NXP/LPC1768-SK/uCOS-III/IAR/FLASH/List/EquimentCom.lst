@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       05/Sep/2017  11:22:09
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       06/Sep/2017  10:50:16
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -655,7 +655,7 @@ F:\iar\NC136B-310统计模块\Application\Library\EquipmentOperations\EquimentCom.c
    \   00000208   0xF05F 0x0802      MOVS     R8,#+2
    \   0000020C   0x1938             ADDS     R0,R7,R4
    \   0000020E   0x9000             STR      R0,[SP, #+0]
-   \   00000210   0xF10D 0x0908      ADD      R9,SP,#+8
+   \   00000210   0xF10D 0x090A      ADD      R9,SP,#+10
    \   00000214   0x4642             MOV      R2,R8
    \   00000216   0x9900             LDR      R1,[SP, #+0]
    \   00000218   0x4648             MOV      R0,R9
@@ -666,7 +666,7 @@ F:\iar\NC136B-310统计模块\Application\Library\EquipmentOperations\EquimentCom.c
     221          							  memcpy((unsigned char *)&loconum,&buf[datalen],sizeof(loconum));
    \   00000220   0xF05F 0x0902      MOVS     R9,#+2
    \   00000224   0xEB17 0x0A04      ADDS     R10,R7,R4
-   \   00000228   0xF10D 0x0B0A      ADD      R11,SP,#+10
+   \   00000228   0xF10D 0x0B08      ADD      R11,SP,#+8
    \   0000022C   0x464A             MOV      R2,R9
    \   0000022E   0x4651             MOV      R1,R10
    \   00000230   0x4658             MOV      R0,R11
@@ -675,8 +675,8 @@ F:\iar\NC136B-310统计模块\Application\Library\EquipmentOperations\EquimentCom.c
     223          //							  printfcom0("\r\n 机车类型：%d，机车编号：%d",locotype,loconum);
     224          							  
     225          							  SetFix(locotype,loconum);
-   \   00000236   0xF8BD 0x100A      LDRH     R1,[SP, #+10]
-   \   0000023A   0xF8BD 0x0008      LDRH     R0,[SP, #+8]
+   \   00000236   0xF8BD 0x1008      LDRH     R1,[SP, #+8]
+   \   0000023A   0xF8BD 0x000A      LDRH     R0,[SP, #+10]
    \   0000023E   0x.... 0x....      BL       SetFix
     226          				     		  break; 
    \   00000242   0xE051             B.N      ??CarddataOperate_19

@@ -208,7 +208,6 @@ CPU_BOOLEAN  BSP_OS_SemWait (BSP_OS_SEM  *p_sem,
 * Note(s)     : none.
 *********************************************************************************************************
 */
-
 CPU_BOOLEAN  BSP_OS_SemPost (BSP_OS_SEM *p_sem)
 {
     OS_ERR  err;

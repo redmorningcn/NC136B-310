@@ -220,10 +220,6 @@ static  void  AppTaskComm (void *p_arg)
                    }else{
                        flagClr |= COMM_EVT_FLAG_MTR_TIMEOUT;   //超时，清接收数据标示
                    }
-                                  
-                   osal_start_timerRl(  OS_TASK_ID_TMR,     //计数器重新开始
-                                        OS_EVT_TMR_MTR,
-                                        OS_TICKS_PER_SEC);
                }
             
             /***********************************************
@@ -241,18 +237,13 @@ static  void  AppTaskComm (void *p_arg)
                          }else{
                              flagClr |=  COMM_EVT_FLAG_DTU_TIMEOUT;   //接收到数据，清接收数据标示
                          }
-
-                         osal_start_timerRl(  OS_TASK_ID_TMR,     //计数器重新开始
-                                              OS_EVT_TMR_DTU,
-                                              OS_TICKS_PER_SEC*15);                             
-                         
                      }
             
             /***********************************************
             * 和IC模块事件发生，调用OTR通讯处理函数
             */           
-            else if(     flags & COMM_EVT_FLAG_OTR_RX 
-                    ||        flags & COMM_EVT_FLAG_OTR_TIMEOUT ) {
+            else if(    flags & COMM_EVT_FLAG_OTR_RX 
+                    ||  flags & COMM_EVT_FLAG_OTR_TIMEOUT ) {
                         
                         //调用DTU通讯处理函数
                         app_comm_otr();                             
@@ -262,11 +253,6 @@ static  void  AppTaskComm (void *p_arg)
                         }else{
                             flagClr |=  COMM_EVT_FLAG_OTR_TIMEOUT;   //接收到数据，清接收数据标示
                         }
-                                                    
-                         osal_start_timerRl(  OS_TASK_ID_TMR,     //计数器重新开始
-                                              OS_EVT_TMR_OTR,
-                                              OS_TICKS_PER_SEC*2);                             
-
                     }
             
             /***********************************************

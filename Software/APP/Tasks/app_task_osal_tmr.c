@@ -124,6 +124,11 @@ osalEvt  TaskTmrEvtProcess(INT8U task_id, osalEvt task_event)
                     ( OS_OPT       ) OS_OPT_POST_FLAG_SET,
                     ( CPU_TS       ) 0,
                     ( OS_ERR      *) &err);        
+
+
+       osal_start_timerEx(  OS_TASK_ID_TMR,     //计数器重新开始
+                    OS_EVT_TMR_MTR,
+                    OS_TICKS_PER_SEC);        
         
         return ( task_event ^ OS_EVT_TMR_MTR );
     }
@@ -137,7 +142,11 @@ osalEvt  TaskTmrEvtProcess(INT8U task_id, osalEvt task_event)
                     ( OS_FLAGS     ) COMM_EVT_FLAG_DTU_TIMEOUT,
                     ( OS_OPT       ) OS_OPT_POST_FLAG_SET,
                     ( CPU_TS       ) 0,
-                    ( OS_ERR      *) &err);        
+                    ( OS_ERR      *) &err);  
+    
+         osal_start_timerEx(  OS_TASK_ID_TMR,     //计数器重新开始
+                              OS_EVT_TMR_DTU,
+                              OS_TICKS_PER_SEC*15); 
         
         return ( task_event ^ OS_EVT_TMR_DTU );
     }
@@ -152,7 +161,12 @@ osalEvt  TaskTmrEvtProcess(INT8U task_id, osalEvt task_event)
                     ( OS_OPT       ) OS_OPT_POST_FLAG_SET,
                     ( CPU_TS       ) 0,
                     ( OS_ERR      *) &err);        
-        
+
+     osal_start_timerEx(  OS_TASK_ID_TMR,     //计数器重新开始
+                  OS_EVT_TMR_OTR,
+                  OS_TICKS_PER_SEC*2);                             
+
+         
         return ( task_event ^ OS_EVT_TMR_OTR );
     }
 
@@ -173,6 +187,10 @@ osalEvt  TaskTmrEvtProcess(INT8U task_id, osalEvt task_event)
             
             if( sCtrl.Otr.ConnectTimeOut > 1)
                 sCtrl.Otr.ConnectFlag = 0;
+
+       osal_start_timerEx(  OS_TASK_ID_TMR,     //计数器重新开始
+                    OS_EVT_TMR_SEC,
+                    OS_TICKS_PER_SEC);        
             
         return ( task_event ^ OS_EVT_TMR_SEC );
     }
@@ -204,15 +222,15 @@ void TaskInitTmr(void)
     */
     //2017一段时间后，无通讯。
     
-    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_SEC, OS_TICKS_PER_SEC);   
-    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_MTR, OS_TICKS_PER_SEC*1 );  //统计模块和测量装置通讯定时器  500ms
-    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_DTU, OS_TICKS_PER_SEC*2 );  //统计装置和无线发送模块定时器  500ms
-    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_OTR, OS_TICKS_PER_SEC*10 ); //统计模块和IC卡模块通讯定时器  500ms  
+//    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_SEC, OS_TICKS_PER_SEC);   
+//    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_MTR, OS_TICKS_PER_SEC*1 );  //统计模块和测量装置通讯定时器  500ms
+//    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_DTU, OS_TICKS_PER_SEC*2 );  //统计装置和无线发送模块定时器  500ms
+//    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_OTR, OS_TICKS_PER_SEC*10 ); //统计模块和IC卡模块通讯定时器  500ms  
     
- //   osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_SEC,OS_TICKS_PER_SEC);   
- //   osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_MTR,OS_TICKS_PER_SEC*1 ); 
- //   osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_DTU,OS_TICKS_PER_SEC*2 ); 
- //   osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_OTR,OS_TICKS_PER_SEC*10 );
+    osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_SEC,OS_TICKS_PER_SEC);   
+    osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_MTR,OS_TICKS_PER_SEC*1 ); 
+    osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_DTU,OS_TICKS_PER_SEC*2 ); 
+    osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_OTR,OS_TICKS_PER_SEC*10 );
 
 }
 

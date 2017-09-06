@@ -205,7 +205,8 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
     if(datalen < 2 || datalen > 256)                                    //数据异常，退出
         return  0;
     
-    memcpy((char *)&iapcode,databuf,sizeof(iapcode));               //取升级命令字
+    memcpy((char *)&iapcode,databuf,sizeof(iapcode));              //取升级命令字
+    databuf[1] = 0;                                                 //返回状态标示，默认正常
     
     switch(iapcode & 0xff)                                          //地8位指令区
     {
@@ -245,10 +246,10 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
                 ||  iapnum == lastiapnum )                  //相同帧号（重发数据）
             {
                 memcpy(&gsIAPCtrl.buf[(iapnum % SEC_DIV_TIMENS)*IAP_DATA_LEN],
-                &databuf[2+2],
+                &databuf[2 + 2],                            //数据区是从第4字节开始
                 datalen - 4);                                //拷贝数据到升级缓冲区
 
-                bufsize += datalen - 4;
+                bufsize += datalen - 4;                     //4字节代码，数据区前标示
                                                             //准备数据
                 if(     (iapnum % SEC_DIV_TIMENS ) == (SEC_DIV_TIMENS - 1) 
                     || (datalen -4) != IAP_DATA_LEN )       //如果数据凑满1024字节，或者升级结束。进行写flash操作。
@@ -259,7 +260,7 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
                         gsIAPCtrl.buf[i] = 0xff;	
                     }
 
-                    if(iapnum != lastiapnum && iapnum )     //除开始，重复接收，字节退出
+                    if(iapnum != lastiapnum && iapnum )     //重复接收退出
                     {
                         IAP_WriteFlash(&gsIAPCtrl);        //写数据(地址，gsIAPCtrl.addr依次写入)
                         gsIAPCtrl.addr += IAP_WRITE_1024;  //数据地址累加  
@@ -294,6 +295,7 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
                  gsIAPCtrl.addr += IAP_WRITE_1024;          //数据地址累加  
 
                  gsIAPPara.addr =  gsIAPCtrl.addr;          //已写地址
+                 bufsize = 0;
             }
                 
             memcpy(&gsIAPPara,&databuf[sizeof(iapcode)],2+2+4+4+2); //cpoy硬件版本，软件版本，程序大小，当前地址，当前帧号
@@ -302,22 +304,22 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
                ||   (gsIAPCtrl.addr - USER_APP_START_ADDR - IAP_WRITE_1024) > gsIAPPara.softsize
                )
             {
-                databuf[1] = 3;                         //返回状态
+                databuf[1] = 3;                             //返回状态
                 return 3;
             }
             
             //如果程序大小相符，认为下载正确。修改下载成功标示
             gsIAPPara.code = 0x01;
+            gsIAPPara.framenum  = 0;                        //恢复开始状态
             gsIAPPara.crc16 = GetCrc16Check((uint8 *)&gsIAPPara,sizeof(gsIAPPara)-2);
             IAP_WriteParaFlash(&gsIAPPara);
             
-            Boot();                                         //程序跳转
             break;
         case 0x04:                                          //终止升级指令
             gsIAPCtrl.addr = USER_APP_START_ADDR;           //初始化地址。
 
             break;  
-        default:    //其他指令，直接返回
+        default:                                            //其他指令，直接返回
             databuf[1] = 2;
             return 2;
     }
@@ -327,7 +329,7 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
 }
 
 
-typedef  void (*pFunction)(void);			    //定义一个函数类型的参数.
+typedef  void (*pFunction)(void);			                //定义一个函数类型的参数.
 
 /*******************************************************************************
  * LOCAL VARIABLES
