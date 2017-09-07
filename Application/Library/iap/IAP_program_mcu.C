@@ -383,10 +383,10 @@ void    Restart(void)
 
     CPU_CRITICAL_ENTER();
 
-    JumpAddress   =*(volatile u32*) (0 + 4); // 地址+4为PC地址
-    pApp          = (pFunction)JumpAddress;                     // 函数指针指向APP
-    __set_MSP       (*(volatile u32*) 0);    // 初始化主堆栈指针（MSP）
-    __set_PSP       (*(volatile u32*) 0);    // 初始化进程堆栈指针（PSP）
+    JumpAddress   =*(volatile u32*) (0 + 4);    // 地址+4为PC地址
+    pApp          = (pFunction)JumpAddress;      // 函数指针指向APP
+    __set_MSP       (*(volatile u32*) 0);       // 初始化主堆栈指针（MSP）
+    __set_PSP       (*(volatile u32*) 0);       // 初始化进程堆栈指针（PSP）
     __set_CONTROL   (0);                                        // 清零CONTROL
     
     pApp();                                                     //跳转运行

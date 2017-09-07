@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       06/Sep/2017  10:50:14
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       07/Sep/2017  16:58:46
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -492,218 +492,215 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\APP_task_osal_store.c
    \   000001A8   0x....             LDR.N    R1,??DataTable1
    \   000001AA   0xF881 0x003C      STRB     R0,[R1, #+60]
     204               
-    205              
-    206          
-    207          // 	计算记录校验和
-    208          	sCtrl.sRec.CrcCheck = GetCrc16Check((uint8 *)&sCtrl.sRec,sizeof(sCtrl.sRec) - 2);
+    205          // 	计算记录校验和
+    206          	sCtrl.sRec.CrcCheck = GetCrc16Check((uint8 *)&sCtrl.sRec,sizeof(sCtrl.sRec) - 2);
    \   000001AE   0x217E             MOVS     R1,#+126
    \   000001B0   0x....             LDR.N    R0,??DataTable1_1
    \   000001B2   0x.... 0x....      BL       GetCrc16Check
    \   000001B6   0x....             LDR.N    R1,??DataTable1
    \   000001B8   0xF8A1 0x009E      STRH     R0,[R1, #+158]
-    209          
-    210          // 	计算数据记录地址
-    211              FlshAddr = GetRecNumAddr( sCtrl.sRec.StoreCnt);		//
+    207          
+    208          // 	计算数据记录地址
+    209              FlshAddr = GetRecNumAddr( sCtrl.sRec.StoreCnt);		//
    \   000001BC   0x....             LDR.N    R0,??DataTable1
    \   000001BE   0x6A00             LDR      R0,[R0, #+32]
    \   000001C0   0x.... 0x....      BL       GetRecNumAddr
    \   000001C4   0x0004             MOVS     R4,R0
-    212          
-    213          //	数据存储到flash
-    214          	if(!WriteFlsh(FlshAddr, (uint16 *)&sCtrl.sRec, sizeof(sCtrl.sRec)))
+    210          
+    211          //	数据存储到flash
+    212          	if(!WriteFlsh(FlshAddr, (uint16 *)&sCtrl.sRec, sizeof(sCtrl.sRec)))
    \   000001C6   0x2280             MOVS     R2,#+128
    \   000001C8   0x....             LDR.N    R1,??DataTable1_1
    \   000001CA   0x0020             MOVS     R0,R4
    \   000001CC   0x.... 0x....      BL       WriteFlsh
-    215          	{}
-    216          
-    217          
-    218          // 	保存数据记录号
-    219              sCtrl.sRecNumMgr.Current++;
+    213          	{}
+    214          
+    215          // 	保存数据记录号
+    216              sCtrl.sRecNumMgr.Current++;
    \   000001D0   0x....             LDR.N    R0,??DataTable1
    \   000001D2   0x6840             LDR      R0,[R0, #+4]
    \   000001D4   0x1C40             ADDS     R0,R0,#+1
    \   000001D6   0x....             LDR.N    R1,??DataTable1
    \   000001D8   0x6048             STR      R0,[R1, #+4]
-    220          	FRAM_StoreRecNumMgr((StrRecNumMgr  *)&sCtrl.sRecNumMgr);    //数据记录号加1，并保存
+    217          	FRAM_StoreRecNumMgr((StrRecNumMgr  *)&sCtrl.sRecNumMgr);    //数据记录号加1，并保存
    \   000001DA   0x....             LDR.N    R0,??DataTable1_2
    \   000001DC   0x.... 0x....      BL       FRAM_StoreRecNumMgr
-    221          }
+    218          }
    \   000001E0   0xBD13             POP      {R0,R1,R4,PC}    ;; return
-    222          
-    223          /*******************************************************************************
-    224           * 名    称： 		ReadFlshRec
-    225           * 功    能： 		根据记录号，取数据记录
-    226           * 入口参数： 	    无
-    227           * 出口参数： 	    无
-    228           * 作　 　者： 	    redmornigcn
-    229           * 创建日期： 	    2017-05-15
-    230           * 修    改：
-    231           * 修改日期：
-    232           *******************************************************************************/
+    219          
+    220          /*******************************************************************************
+    221           * 名    称： 		ReadFlshRec
+    222           * 功    能： 		根据记录号，取数据记录
+    223           * 入口参数： 	    无
+    224           * 出口参数： 	    无
+    225           * 作　 　者： 	    redmornigcn
+    226           * 创建日期： 	    2017-05-15
+    227           * 修    改：
+    228           * 修改日期：
+    229           *******************************************************************************/
 
    \                                 In section .text, align 2, keep-with-next
-    233          uint8	ReadFlshRec(stcFlshRec * sFlshRec,uint32	FlshRecNum)
-    234          {
+    230          uint8	ReadFlshRec(stcFlshRec * sFlshRec,uint32	FlshRecNum)
+    231          {
    \                     ReadFlshRec: (+1)
    \   00000000   0xB570             PUSH     {R4-R6,LR}
    \   00000002   0x0004             MOVS     R4,R0
    \   00000004   0x000D             MOVS     R5,R1
-    235          	uint32		FlshAddr;
-    236          	
-    237          	FlshAddr = GetRecNumAddr( FlshRecNum );						
+    232          	uint32		FlshAddr;
+    233          	
+    234          	FlshAddr = GetRecNumAddr( FlshRecNum );						
    \   00000006   0x0028             MOVS     R0,R5
    \   00000008   0x.... 0x....      BL       GetRecNumAddr
    \   0000000C   0x0006             MOVS     R6,R0
-    238          	
-    239          	if(ReadFlsh(FlshAddr,(uint16 *)sFlshRec,sizeof(stcFlshRec)))
+    235          	
+    236          	if(ReadFlsh(FlshAddr,(uint16 *)sFlshRec,sizeof(stcFlshRec)))
    \   0000000E   0x2280             MOVS     R2,#+128
    \   00000010   0x0021             MOVS     R1,R4
    \   00000012   0x0030             MOVS     R0,R6
    \   00000014   0x.... 0x....      BL       ReadFlsh
    \   00000018   0x2800             CMP      R0,#+0
    \   0000001A   0xD001             BEQ.N    ??ReadFlshRec_0
-    240          	{
-    241          		return 1;
+    237          	{
+    238          		return 1;
    \   0000001C   0x2001             MOVS     R0,#+1
    \   0000001E   0xE000             B.N      ??ReadFlshRec_1
-    242          	}
-    243          	
-    244          	return	0;
+    239          	}
+    240          	
+    241          	return	0;
    \                     ??ReadFlshRec_0: (+1)
    \   00000020   0x2000             MOVS     R0,#+0
    \                     ??ReadFlshRec_1: (+1)
    \   00000022   0xBD70             POP      {R4-R6,PC}       ;; return
-    245          }
-    246          
-    247          /*******************************************************************************
-    248           * 名    称：  TaskInitStore
-    249           * 功    能：  任务初始化
-    250           * 入口参数： 	无
-    251           * 出口参数： 	无
-    252           * 作　 　者： 	redmornigcn
-    253           * 创建日期： 	2017-05-15
-    254           * 修    改：
-    255           * 修改日期：
-    256           *******************************************************************************/
+    242          }
+    243          
+    244          /*******************************************************************************
+    245           * 名    称：  TaskInitStore
+    246           * 功    能：  任务初始化
+    247           * 入口参数： 	无
+    248           * 出口参数： 	无
+    249           * 作　 　者： 	redmornigcn
+    250           * 创建日期： 	2017-05-15
+    251           * 修    改：
+    252           * 修改日期：
+    253           *******************************************************************************/
 
    \                                 In section .text, align 2, keep-with-next
-    257          void    BSP_StoreInit(void)
-    258          {
+    254          void    BSP_StoreInit(void)
+    255          {
    \                     BSP_StoreInit: (+1)
    \   00000000   0xB580             PUSH     {R7,LR}
-    259          	InitFlashIO();      //初始化flash
+    256          	InitFlashIO();      //初始化flash
    \   00000002   0x.... 0x....      BL       InitFlashIO
-    260          
-    261              GPIO_Fram_Init();   //初始化fram
+    257          
+    258              GPIO_Fram_Init();   //初始化fram
    \   00000006   0x.... 0x....      BL       GPIO_Fram_Init
-    262              
-    263              InitDS3231();       //初始化时钟
+    259              
+    260              InitDS3231();       //初始化时钟
    \   0000000A   0x.... 0x....      BL       InitDS3231
-    264                  
-    265             //读sCtrl 
-    266              FRAM_ReadRecNumMgr((StrRecNumMgr  *)&sCtrl.sRecNumMgr);         //读记录号
+    261                  
+    262             //读sCtrl 
+    263              FRAM_ReadRecNumMgr((StrRecNumMgr  *)&sCtrl.sRecNumMgr);         //读记录号
    \   0000000E   0x....             LDR.N    R0,??DataTable1_2
    \   00000010   0x.... 0x....      BL       FRAM_ReadRecNumMgr
-    267              FRAM_ReadProductInfo((StrProductInfo  *)&sCtrl.sProductInfo);   //读产品编号
+    264              FRAM_ReadProductInfo((StrProductInfo  *)&sCtrl.sProductInfo);   //读产品编号
    \   00000014   0x....             LDR.N    R0,??DataTable1_3
    \   00000016   0x.... 0x....      BL       FRAM_ReadProductInfo
-    268              FRAM_ReadCurRecord((stcFlshRec  *)&sCtrl.sRec);                 //读当前记录
+    265              FRAM_ReadCurRecord((stcFlshRec  *)&sCtrl.sRec);                 //读当前记录
    \   0000001A   0x....             LDR.N    R0,??DataTable1_1
    \   0000001C   0x.... 0x....      BL       FRAM_ReadCurRecord
-    269              FRAM_ReadOilPara((StrOilPara  *)&sCtrl.SOilPara);               //读计算参数
+    266              FRAM_ReadOilPara((StrOilPara  *)&sCtrl.SOilPara);               //读计算参数
    \   00000020   0x....             LDR.N    R0,??DataTable1_4
    \   00000022   0x.... 0x....      BL       FRAM_ReadOilPara
-    270              FRAM_ReadRunPara((stcRunPara  *)&sCtrl.sRunPara);               //读运行参数
+    267              FRAM_ReadRunPara((stcRunPara  *)&sCtrl.sRunPara);               //读运行参数
    \   00000026   0x....             LDR.N    R0,??DataTable1_5
    \   00000028   0x.... 0x....      BL       FRAM_ReadRunPara
-    271              FRAM_ReadCalcModel((stcCalcModel  *)&sCtrl.sCalcModel);         //读计算模型
+    268              FRAM_ReadCalcModel((stcCalcModel  *)&sCtrl.sCalcModel);         //读计算模型
    \   0000002C   0x....             LDR.N    R0,??DataTable1_6
    \   0000002E   0x.... 0x....      BL       FRAM_ReadCalcModel
-    272          
-    273          }
+    269          
+    270          }
    \   00000032   0xBD01             POP      {R0,PC}          ;; return
-    274          
-    275          /*******************************************************************************
-    276           * 名    称：  TaskInitStore
-    277           * 功    能：  任务初始化
-    278           * 入口参数： 	无
-    279           * 出口参数： 	无
-    280           * 作　 　者： 	redmornigcn
-    281           * 创建日期： 	2017-05-15
-    282           * 修    改：
-    283           * 修改日期：
-    284           *******************************************************************************/
+    271          
+    272          /*******************************************************************************
+    273           * 名    称：  TaskInitStore
+    274           * 功    能：  任务初始化
+    275           * 入口参数： 	无
+    276           * 出口参数： 	无
+    277           * 作　 　者： 	redmornigcn
+    278           * 创建日期： 	2017-05-15
+    279           * 修    改：
+    280           * 修改日期：
+    281           *******************************************************************************/
 
    \                                 In section .text, align 2, keep-with-next
-    285          void TaskInitStore(void)
-    286          {    
+    282          void TaskInitStore(void)
+    283          {    
    \                     TaskInitStore: (+1)
    \   00000000   0xB580             PUSH     {R7,LR}
-    287          //    /***********************************************
-    288          //    * 描述： 初始化本任务用到的相关硬件
-    289          //    */
-    290              BSP_StoreInit();			//初始化Flash底层相关函数
+    284          //    /***********************************************
+    285          //    * 描述： 初始化本任务用到的相关硬件
+    286          //    */
+    287              BSP_StoreInit();			//初始化Flash底层相关函数
    \   00000002   0x.... 0x....      BL       BSP_StoreInit
-    291          
-    292              //初始化定时器
-    293              osal_start_timerEx( OS_TASK_ID_STORE,
-    294                                OS_EVT_STORE_TICKS,
-    295                                1000);
+    288          
+    289              //初始化定时器
+    290              osal_start_timerEx( OS_TASK_ID_STORE,
+    291                                OS_EVT_STORE_TICKS,
+    292                                1000);
    \   00000006   0xF44F 0x727A      MOV      R2,#+1000
    \   0000000A   0x2101             MOVS     R1,#+1
    \   0000000C   0x2004             MOVS     R0,#+4
    \   0000000E   0x.... 0x....      BL       osal_start_timerEx
-    296          }
+    293          }
    \   00000012   0xBD01             POP      {R0,PC}          ;; return
-    297          
-    298          extern  MODBUS_CH   *g_pch; 
-    299          /*******************************************************************************
-    300           * 名    称： 		AppTaskStore
-    301           * 功    能： 		控制任务
-    302           * 入口参数： 	p_arg - 由任务创建函数传入
-    303           * 出口参数： 	无
-    304           * 作　 　者： 	redmorningcn.
-    305           * 创建日期： 	2017-05-15
-    306           * 修    改：
-    307           * 修改日期：
-    308           *******************************************************************************/
+    294          
+    295          extern  MODBUS_CH   *g_pch; 
+    296          /*******************************************************************************
+    297           * 名    称： 		AppTaskStore
+    298           * 功    能： 		控制任务
+    299           * 入口参数： 	p_arg - 由任务创建函数传入
+    300           * 出口参数： 	无
+    301           * 作　 　者： 	redmorningcn.
+    302           * 创建日期： 	2017-05-15
+    303           * 修    改：
+    304           * 修改日期：
+    305           *******************************************************************************/
 
    \                                 In section .text, align 2, keep-with-next
-    309          osalEvt  TaskStoreEvtProcess(INT8U task_id, osalEvt task_event)
-    310          {
+    306          osalEvt  TaskStoreEvtProcess(INT8U task_id, osalEvt task_event)
+    307          {
    \                     TaskStoreEvtProcess: (+1)
    \   00000000   0xB570             PUSH     {R4-R6,LR}
    \   00000002   0x0004             MOVS     R4,R0
    \   00000004   0x000D             MOVS     R5,R1
-    311              OS_ERR      err;
-    312              INT32U      ticks;
-    313              INT32S      dly;
-    314              CPU_SR_ALLOC();
+    308              OS_ERR      err;
+    309              INT32U      ticks;
+    310              INT32S      dly;
+    311              CPU_SR_ALLOC();
    \   00000006   0x2600             MOVS     R6,#+0
-    315          
-    316              if( task_event & OS_EVT_STORE_TICKS ) {
+    312          
+    313              if( task_event & OS_EVT_STORE_TICKS ) {
    \   00000008   0x07E8             LSLS     R0,R5,#+31
    \   0000000A   0xD50A             BPL.N    ??TaskStoreEvtProcess_0
-    317          
-    318          
-    319                      StoreData();            //保存数据记录
+    314          
+    315          
+    316                      StoreData();            //保存数据记录
    \   0000000C   0x.... 0x....      BL       StoreData
-    320                      
-    321                      osal_start_timerEx( OS_TASK_ID_STORE,
-    322                                          OS_EVT_STORE_TICKS,
-    323                                          1000*60);
+    317                      
+    318                      osal_start_timerEx( OS_TASK_ID_STORE,
+    319                                          OS_EVT_STORE_TICKS,
+    320                                          1000*60);
    \   00000010   0xF64E 0x2260      MOVW     R2,#+60000
    \   00000014   0x2101             MOVS     R1,#+1
    \   00000016   0x2004             MOVS     R0,#+4
    \   00000018   0x.... 0x....      BL       osal_start_timerEx
-    324                                          //1000);
-    325                      
-    326                      return ( task_event ^ OS_EVT_STORE_TICKS );
+    321                                          //1000);
+    322                      
+    323                      return ( task_event ^ OS_EVT_STORE_TICKS );
    \   0000001C   0xF095 0x0001      EORS     R0,R5,#0x1
    \   00000020   0xE7FF             B.N      ??TaskStoreEvtProcess_1
-    327                  }
-    328          }
+    324                  }
+    325          }
    \                     ??TaskStoreEvtProcess_0: (+1)
    \                     ??TaskStoreEvtProcess_1: (+1)
    \   00000022   0xBD70             POP      {R4-R6,PC}       ;; return
@@ -735,13 +732,13 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\APP_task_osal_store.c
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable1_6:
    \   00000000   0x........         DC32     sCtrl+0xB4
-    329          
-    330          
-    331          
-    332          /*******************************************************************************
-    333           * 				                    end of file                                *
-    334           *******************************************************************************/
-    335          #endif
+    326          
+    327          
+    328          
+    329          /*******************************************************************************
+    330           * 				                    end of file                                *
+    331           *******************************************************************************/
+    332          #endif
 
    Maximum stack usage in bytes:
 

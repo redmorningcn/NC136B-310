@@ -402,21 +402,21 @@ typedef union {
 // 应答数据结构：油尺-->主机
 __packed
 typedef struct {
-    INT16U                  Hight;                              	// 液位高度	    2	xxx.x毫米（10倍）
-    INT16U                  Density;                            	// 高度计算密度	2	0.xxxx克/立方厘米（10000倍）
+    INT16U      Hight;                              	// 液位高度	    2	xxx.x毫米（10倍）
+    INT16U      Density;                            	// 高度计算密度	2	0.xxxx克/立方厘米（10000倍）
 //    union __usend_status {
 //    StrSenErr               Udat;
 //    INT08U                  Dat;
 //    } Sts;
-    INT08U                  RefLiqTemp;            		// 液体参考温度	1	0.25~63.50度（分别用1-254表示）或者-49.5~77.0度（分别用1-254表示，100表示0度）0：过低；255：过高
-    INT16U                  AdcValue[2];                        // Adc值
-    INT16U                  HightDiff;                          	// 高度差	    2	0~1000x0.1mm(两传感器高度差)
-    INT16U                  Volume;                             	// 体积  	    2	0~10000L(油量)
-    INT16U                  Weight;                             	// 重量	        2	0~10000kg(重量)
-    INT16S                  Pressure[2];                        // 压强	        2	0~10000pa
-    INT16S                  CalcDensity;                        // 测量密度     x10000
-    INT16S                  Gravity;                            	// 计算加速度   x10000
-    INT16S                  CalcGravity;                        // 测量加速度   x10000
+    INT08U      RefLiqTemp;            		// 液体参考温度	1	0.25~63.50度（分别用1-254表示）或者-49.5~77.0度（分别用1-254表示，100表示0度）0：过低；255：过高
+    INT16U      AdcValue[2];                        // Adc值
+    INT16U      HightDiff;                          	// 高度差	    2	0~1000x0.1mm(两传感器高度差)
+    INT16U      Volume;                             	// 体积  	    2	0~10000L(油量)
+    INT16U      Weight;                             	// 重量	        2	0~10000kg(重量)
+    INT16S      Pressure[2];                        // 压强	        2	0~10000pa
+    INT16S      CalcDensity;                        // 测量密度     x10000
+    INT16S      Gravity;                            	// 计算加速度   x10000
+    INT16S      CalcGravity;                        // 测量加速度   x10000
     //INT08U                  Rsv[2+10];                        // 备用	        2	
 } StrMtrCommRecvData;
 
@@ -433,26 +433,26 @@ typedef union {
 //
 
 typedef struct {     
-    INT08U          DestAddr;       //接收地址      slave  =0xA1\A2	   
-    INT08U          SourceAddr;     //源地址       master   =0x80	   
-    INT08U          FramNum;        //帧序号
-    INT08U			Len;			//接收有效数据长度
-    INT08U          FrameCode;       
-    INT08U          Tmp[3];
-    INT32U			DataCode;			//接收控制字
+    INT08U      DestAddr;       //接收地址      slave  =0xA1\A2	   
+    INT08U      SourceAddr;     //源地址       master   =0x80	   
+    INT08U      FramNum;        //帧序号
+    INT08U      Len;			//接收有效数据长度
+    INT08U      FrameCode;       
+    INT08U      Tmp[3];
+    INT32U      DataCode;			//接收控制字
 } StrDevMtrRecvCtrl;
 
 //连接控制字
 // 4 Bytes
 typedef struct {     
-    uint8          ConnFlg;        //连接控制,1，允许连接，0，不允许连接
-    uint8			RecvEndFlg;		//接收标示，1，数据接收完成，0，无数据接收。
-    uint8			TimeOut;		//超时时间，单位1s
-    uint8			ErrFlg;		    //错误标示，连接正常，0；连接错误，1
-    uint8          SlaveAddr;       //接收地址         slave  =0xCA	   
-    uint8          MasterAddr;     //源地址           master   =0x80	   
-    uint8          SendFramNum;    //帧序号   
-    uint8          SendFlg;        //发送标示， 有数据发送，1；无数据发送，0
+    uint8       ConnFlg;        //连接控制,1，允许连接，0，不允许连接
+    uint8       RecvEndFlg;		//接收标示，1，数据接收完成，0，无数据接收。
+    uint8       TimeOut;		//超时时间，单位1s
+    uint8       ErrFlg;		    //错误标示，连接正常，0；连接错误，1
+    uint8       SlaveAddr;       //接收地址         slave  =0xCA	   
+    uint8       MasterAddr;     //源地址           master   =0x80	   
+    uint8       SendFramNum;    //帧序号   
+    uint8       SendFlg;        //发送标示， 有数据发送，1；无数据发送，0
 } StrDevMtrConnCtrl;		
 
 //统计某块通讯控制结构

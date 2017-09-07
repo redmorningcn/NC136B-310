@@ -146,6 +146,7 @@ void    comm_para_flow(StrDevDtu * sDtu,uint8 addrnum)
     uint32      tmp32;
     static     uint32      modelstoreaddr = 0;
     uint16      crc16;
+    uint8       *p;
     
     BSP_DispClrAll();                               //清原显示值，立即显示设定值                 
     
@@ -247,9 +248,22 @@ void    comm_para_flow(StrDevDtu * sDtu,uint8 addrnum)
         
         break;
         
-        //装置复位
-    case    RST_SYS: 
-        Restart();                      //重启系统
+        //装置复位，先应答消息，再
+    case    RST_SYS:
+        
+        //参数设置，数据原路返回
+        CSNC_SendData(  sCtrl.Dtu.pch,                      //DTU 的PCH：串口号，收发控制等底层信息
+                        sCtrl.Dtu.RxCtrl.DestAddr,          //源地址，
+                        sCtrl.Dtu.RxCtrl.SourceAddr,        //目标地址
+                        sCtrl.Dtu.RxCtrl.FramNum,           //帧序号 
+                        sCtrl.Dtu.RxCtrl.FrameCode,         //命令字
+                        sCtrl.Dtu.Rd.Buf,                   //数据区
+                        sCtrl.Dtu.RxCtrl.Len                //发送长度
+                      );
+        i = 100000;
+        while(i--);
+        
+        Restart();                                          //重启系统
         break;
         
         //设置斜率
@@ -359,13 +373,16 @@ void    comm_para_flow(StrDevDtu * sDtu,uint8 addrnum)
         break;
         
     case    RUN_MODEL_PARA:
+        
+       uprintf("SET1");         //立即显示设定值 
 
-        memcpy((uint8 *)&tmp32, &sDtu->Rd.Buf[0],sizeof(tmp32));      //取帧序号
-        if(tmp32 < (1 + sizeof(l_sCalcModel)/128 ))                 //序号有效
+        memcpy((uint8 *)&tmp32, &sDtu->Rd.Buf[0],sizeof(tmp32));        //取帧序号
+        if(tmp32 < (1 + sizeof(l_sCalcModel)/128 ))                     //序号有效
         {
-            memcpy((uint8 *)(   &l_sCalcModel + 128*tmp32),
-                                (uint8 *)&sDtu->Rd.Buf[4],
-                                sDtu->RxCtrl.Len-4);
+            p = (uint8 *)&l_sCalcModel;
+            memcpy((uint8 *)(  p + 128*tmp32),
+                               (uint8 *)&sDtu->Rd.Buf[4],
+                               sDtu->RxCtrl.Len-4);
             
             if(tmp32 == sizeof(l_sCalcModel)/128)               //接收完成
             {
@@ -384,6 +401,10 @@ void    comm_para_flow(StrDevDtu * sDtu,uint8 addrnum)
         }
         
         break;
+        
+    default:
+        break;
+
     }
 }
 

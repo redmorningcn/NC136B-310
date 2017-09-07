@@ -159,7 +159,6 @@ void    app_comm_otr(void)
             
             sCtrl.Otr.ConnCtrl[i].RecvEndFlg = 0;           //数据已处理。 接收数据置1
             sCtrl.Otr.ConnCtrl[i].TimeOut    = 0;           //超时计数清零
-
             
             return  ;
         }

@@ -152,6 +152,16 @@ void    app_comm_dtu(void)
                     if(sCtrl.Dtu.RxCtrl.SourceAddr == SLAVE_ADDR_SET)       //地址等于C2，参数设置。
                     {
                         comm_para_flow((StrDevDtu *)&sCtrl.Dtu,i);          //设置参数，或信息交互。依据code进行相应操作。
+                        
+                        //参数设置，数据原路返回
+                        CSNC_SendData(  sCtrl.Dtu.pch,                        //DTU 的PCH：串口号，收发控制等底层信息
+                                        sCtrl.Dtu.RxCtrl.DestAddr,            //源地址，
+                                        sCtrl.Dtu.RxCtrl.SourceAddr,          //目标地址
+                                        sCtrl.Dtu.RxCtrl.FramNum,             //帧序号 
+                                        sCtrl.Dtu.RxCtrl.FrameCode,           //命令字
+                                        sCtrl.Dtu.Rd.Buf,                     //数据区
+                                        sCtrl.Dtu.RxCtrl.Len                  //发送长度
+                                      );
                     }
                     break;
                 case 1:     //V2.0

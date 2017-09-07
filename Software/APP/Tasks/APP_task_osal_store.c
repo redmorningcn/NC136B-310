@@ -202,8 +202,6 @@ void  StoreData(void)
      sCtrl.sRec.VoitureCnt      = 0;
      *sCtrl.sRec.Weight          = 0;
      
-    
-
 // 	计算记录校验和
 	sCtrl.sRec.CrcCheck = GetCrc16Check((uint8 *)&sCtrl.sRec,sizeof(sCtrl.sRec) - 2);
 
@@ -213,7 +211,6 @@ void  StoreData(void)
 //	数据存储到flash
 	if(!WriteFlsh(FlshAddr, (uint16 *)&sCtrl.sRec, sizeof(sCtrl.sRec)))
 	{}
-
 
 // 	保存数据记录号
     sCtrl.sRecNumMgr.Current++;
