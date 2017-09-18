@@ -1078,6 +1078,9 @@
         <name>$PROJ_DIR$\..\..\..\..\..\APP\Protocol\app_comm_protocol.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\APP\comm\app_comm_tax.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\..\..\..\..\APP\User\app_lib.c</name>
       </file>
       <file>
@@ -1327,6 +1330,15 @@
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\..\..\..\..\Application\Library\SpeedTest\speed2.C</name>
+        </file>
+      </group>
+      <group>
+        <name>tax</name>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Application\Library\tax\app_tax.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Application\Library\tax\app_tax.h</name>
         </file>
       </group>
       <group>

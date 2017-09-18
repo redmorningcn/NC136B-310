@@ -169,7 +169,6 @@ static  void  AppTaskComm (void *p_arg)
     OS_TICK     ticks;
     /***********************************************
     * 描述： 任务初始化
-    
     */
     APP_CommInit();         
     
@@ -216,7 +215,6 @@ static  void  AppTaskComm (void *p_arg)
                    
                    if(flags & COMM_EVT_FLAG_MTR_RX) {      
                        flagClr |= COMM_EVT_FLAG_MTR_RX;         //接收到数据，清接收数据标示
-
                    }else{
                        flagClr |= COMM_EVT_FLAG_MTR_TIMEOUT;   //超时，清接收数据标示
                    }
@@ -225,8 +223,8 @@ static  void  AppTaskComm (void *p_arg)
             /***********************************************
             * 和无线发送模块事件发生，调用DTU通讯处理函数
             */           
-            else  if(     flags & COMM_EVT_FLAG_DTU_RX 
-                     ||          flags & COMM_EVT_FLAG_DTU_TIMEOUT ) {
+            else  if(   flags & COMM_EVT_FLAG_DTU_RX 
+                     ||  flags & COMM_EVT_FLAG_DTU_TIMEOUT ) {
                          
                          //调用DTU通讯处理函数
                          app_comm_dtu();                            
@@ -254,7 +252,18 @@ static  void  AppTaskComm (void *p_arg)
                             flagClr |=  COMM_EVT_FLAG_OTR_TIMEOUT;   //接收到数据，清接收数据标示
                         }
                     }
+            else if(    flags & COMM_EVT_FLAG_TAX_RX 
+                    ||  flags & COMM_EVT_FLAG_TAX_TIMEOUT ) {
             
+                        //调用DTU通讯处理函数
+                        app_comm_tax();                             
+                        
+                        if(flags &      COMM_EVT_FLAG_TAX_RX) {      
+                            flagClr |=  COMM_EVT_FLAG_TAX_RX;        //接收到数据，清接收数据标示
+                        }else{
+                            flagClr |=  COMM_EVT_FLAG_TAX_TIMEOUT;   //接收到数据，清接收数据标示
+                        }
+                    }
             /***********************************************
             * 描述： 清除标志
             */
@@ -330,7 +339,7 @@ void App_ModbusInit(void)
                            MODBUS_SLAVE,           // ... This is a MASTER
                            500,                    // ... 0 when a slave
                            MODBUS_MODE_RTU,        // ... Modbus Mode (_ASCII or _RTU)
-                           3,                      // ... Specify UART #2
+                           3,                      // ... Specify UART #3
                            57600,                  // ... Baud Rate
                            UART_DATABIT_8,         // ... Number of data bits 7 or 8
                            UART_PARITY_NONE,       // ... Parity: _NONE, _ODD or _EVEN
@@ -358,7 +367,7 @@ void App_ModbusInit(void)
                            MODBUS_SLAVE,           // ... This is a SLAVE
                            500,                    // ... 0 when a slave
                            MODBUS_MODE_RTU,        // ... Modbus Mode (_ASCII or _RTU)
-                           2,                      // ... Specify UART #3
+                           2,                      // ... Specify UART #2
                            57600,                   // ... Baud Rate
                            UART_DATABIT_8,         // ... Number of data bits 7 or 8
                            UART_PARITY_NONE,       // ... Parity: _NONE, _ODD or _EVEN
@@ -372,6 +381,36 @@ void App_ModbusInit(void)
     pch->RxFrameTail    = 0x102C;                   // ... 添加匹配帧尾
     
     sCtrl.Otr.pch       = pch;                      // ... modbus控制块和全局结构体建立连接
+#endif
+    
+    // UART3
+    /***********************************************
+    * 描述：  UART0串口和TAX连接。slave
+    *        
+    */
+#if MODBUS_CFG_MASTER_EN == DEF_TRUE
+    
+    pch         = MB_CfgCh( ModbusNode,             // ... Modbus Node # for this slave channel
+                           MODBUS_SLAVE,           // ... This is a SLAVE
+                           500,                    // ... 0 when a slave
+                           MODBUS_MODE_RTU,        // ... Modbus Mode (_ASCII or _RTU)
+                           0,                      // ... Specify UART #0
+                           28800,                   // ... Baud Rate
+                           UART_DATABIT_8,         // ... Number of data bits 7 or 8
+                           UART_PARITY_NONE,       // ... Parity: _NONE, _ODD or _EVEN
+                           UART_STOPBIT_1,         // ... Number of stop bits 1 or 2
+                           MODBUS_WR_EN);          // ... Enable (_EN) or disable (_DIS) writes
+    pch->AesEn          = DEF_DISABLED;             // ... AES加密禁止
+    pch->NonModbusEn    = DEF_ENABLED;              // ... 支持非MODBUS通信
+    pch->IapModbusEn    = DEF_ENABLED;              // ... 支持IAP MODBUS通信
+    
+    pch->RxFrameHead    = 0x1028;                   // ... 添加匹配帧头
+    pch->RxFrameTail    = 0x102C;                   // ... 添加匹配帧尾
+    
+    pch->RTU_TimeoutCnts = 50;
+    pch->RTU_TimeoutCtr  = 50;
+    
+    sCtrl.DevTax.pch    = pch;                      // ... modbus控制块和全局结构体建立连接
 #endif
     
 }
@@ -400,11 +439,13 @@ void APP_CommInit(void)
                  ( OS_ERR       *)&err);
     
     sCtrl.Os.CommEvtFlag= COMM_EVT_FLAG_MTR_RX        // MTR 接收事件
-        + COMM_EVT_FLAG_DTU_RX        // DTU 接收事件
+        + COMM_EVT_FLAG_DTU_RX          // DTU 接收事件
             + COMM_EVT_FLAG_OTR_RX        // OTR 接收事件
                 + COMM_EVT_FLAG_MTR_TIMEOUT   // MTR 操作超时，定时发送使用
                     + COMM_EVT_FLAG_DTU_TIMEOUT   // DTU 操作超时，定时发送使用
-                        + COMM_EVT_FLAG_OTR_TIMEOUT;  // OTR 操作超时，定时发送使用   
+                        + COMM_EVT_FLAG_OTR_TIMEOUT  // OTR 操作超时，定时发送使用   
+                            + COMM_EVT_FLAG_TAX_RX   // TAX 操作超时，定时发送使用
+                                + COMM_EVT_FLAG_TAX_TIMEOUT;  // TAX 操作超时，定时发送使用  
     
     /***********************************************
     * 描述： 初始化MODBUS通信
@@ -473,12 +514,15 @@ INT08U APP_CommRxDataDealCB(MODBUS_CH  *pch)
     
      //在此增加新的V2.0   
     stcCsncProtocolPara sCsncPara;      //csns結構
+    sCsncPara.destaddr = 0;             //地址赋值
     
     uint8       buf[256];
+    uint8       flg; 
     sCsncPara.databuf = buf;
     sCsncPara.rxtxbuf = (uint8 *)pch->RxFrameData;
     sCsncPara.rxtxlen = pch->RxBufByteCnt;
-    DataUnpack_CSNC(&sCsncPara);        //   
+    flg = DataUnpack_CSNC(&sCsncPara);   
+//   
 //    //協議V1.0
 //    uint8   DataPos;
 //    u8  SourceAddr = 
@@ -493,7 +537,7 @@ INT08U APP_CommRxDataDealCB(MODBUS_CH  *pch)
 //    if ( MASTE_ADDR_HOST != GetRecSlaveAddr() ) 
 //        return FALSE;
     //協議轉發考慮
-    if ( MASTE_ADDR_HOST != sCsncPara.destaddr ) 
+    if ( MASTE_ADDR_HOST != sCsncPara.destaddr || flg == 0 ) //解析错误、地址错误，退出。
         return FALSE;
     
     /***********************************************
@@ -887,9 +931,10 @@ CPU_BOOLEAN  NMBS_FCxx_Handler (MODBUS_CH  *pch)
                           (OS_ERR       *)&err);
              //BSP_OS_TimeDly(5);
              /***********************************************
-             * 描述： 电表协议协议处理
+             * 描述： tax通讯协议
              */  
         } else {
+            TAX_FCxx_Handler(pch);     //tax通讯处理
             return DEF_FALSE;
         }
     return DEF_TRUE;

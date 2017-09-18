@@ -311,27 +311,32 @@ void    comm_para_flow(StrDevDtu * sDtu,uint8 addrnum)
             uprintf("boX");	
             uprintf("boX");		
             GetOilPara();
-        }else
-        {
+            
+            //与单独设置油量模型兼容，写卡成功后，应将单设模型置为无效,并保存。，再重新调用初始化函数
+            l_sCalcModel.valid = 0;
+            FRAM_StoreCalcModel(&sCtrl.sCalcModel);             //数据油量存储
+            
+            GetOilPara();                                       //重新取计算参数
+        }else{
             uprintf("o..%2d",modelrecvnum);
         }
         
-        SetDispNow(); //马上显示
+        SetDispNow();               //马上显示
         
         
-        if(sDtu->pch->PortNbr == 2)
-        {
-            osal_start_timerRl( OS_TASK_ID_TMR, 
-                               OS_EVT_TMR_OTR, 
-                               OS_TICKS_PER_SEC*10 );          //统计装置和无线发送模块定时器  10s
-        }
-        
-        if(sDtu->pch->PortNbr == 3)
-        {
-            osal_start_timerRl( OS_TASK_ID_TMR, 
-                               OS_EVT_TMR_DTU, 
-                               OS_TICKS_PER_SEC*10 );          //统计装置和无线发送模块定时器  10s
-        }
+//        if(sDtu->pch->PortNbr == 2)
+//        {
+//            osal_start_timerEx( OS_TASK_ID_TMR, 
+//                               OS_EVT_TMR_OTR, 
+//                               OS_TICKS_PER_SEC*10 );          //统计装置和无线发送模块定时器  10s
+//        }
+//        
+//        if(sDtu->pch->PortNbr == 3)
+//        {
+//            osal_start_timerEx( OS_TASK_ID_TMR, 
+//                               OS_EVT_TMR_DTU, 
+//                               OS_TICKS_PER_SEC*10 );          //统计装置和无线发送模块定时器  10s
+//        }
         break;
         
         //数据

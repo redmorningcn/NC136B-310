@@ -211,10 +211,6 @@ void    app_comm_otr(void)
             }
            i++;
         
-        //重新给定时器给初值。osal_start_timerRl可以自动赋值，
-        osal_start_timerRl( OS_TASK_ID_TMR, 
-                            OS_EVT_TMR_OTR, 
-                            OS_TICKS_PER_SEC*2);  //统计装置和无线发送模块定时器  10s
     }
 }
 

@@ -124,8 +124,8 @@ typedef struct _stcCardPara_ 					//IC 卡cd参数 352
  	stcReviseHight	sReviseHight;				//修正起始高度
 	stcFixInfo      sFixInfo;              	 	//装车卡
 	stcDebugCard	sDebugCard;					//调试卡
-	uint16_t			Reserve0;					//预留
-	uint16_t			CrcCheck;					//CRC检验
+	uint16_t		Reserve0;					//预留
+	uint16_t		CrcCheck;					//CRC检验
 }stcCardPara;
 
 typedef struct _stcCardIndex_					//IC 卡文件索引 36
@@ -133,20 +133,20 @@ typedef struct _stcCardIndex_					//IC 卡文件索引 36
 	uint8_t			LocoType[2];				//机车型号
 	uint8_t			LocoNum[2];					//机车编号
 	uint8_t			ProNum[16];					//产品编号
-	uint32_t			StartAddr;					//开始地址
-	uint32_t			EndAddr;					//结束地址
-	uint16_t			RecLen;						//记录长度
-	uint16_t			RecNum;						//记录条数	
+	uint32_t		StartAddr;				//开始地址
+	uint32_t		EndAddr;				//结束地址
+	uint16_t		RecLen;					//记录长度
+	uint16_t		RecNum;					//记录条数	
 }stcCardIndex;
 
-typedef struct _stcCardFlg_						//IC 卡标识
+typedef struct _stcCardFlg_					//IC 卡标识
 {
 	stcCardID		sCardID;					//IC卡 ID结构
 	stcCardType		sCardType;					//IC卡 IC卡类型（数据卡，密度卡，）
 	stcCardPara		sCardPara;					//IC卡 卡参数
 	stcCardIndex	sCardIndex[100];			//IC卡 文件索引
-	uint16_t			WriteCardTimes;				//已写卡次数
-	uint16_t			CrcCheck;					//CRC检验
+	uint16_t			WriteCardTimes;			//已写卡次数
+	uint16_t			CrcCheck;				//CRC检验
 }stcCardFlg;
 
 

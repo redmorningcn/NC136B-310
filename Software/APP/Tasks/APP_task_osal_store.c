@@ -29,6 +29,8 @@
 #include <app_ctrl.h>
 #include <CardDataTypeDef.h>
 #include <cpu.h>
+#include "app_tax.h"
+     
 
 #ifdef VSC_INCLUDE_SOURCE_FILE_NAMES
 const  CPU_CHAR  *app_task_store__c = "$Id: $";
@@ -104,17 +106,73 @@ uint32  GetRecNumAddr(uint32 FlshRecNum)
     return  (uint32)(((FlshRecNum * sizeof(stcFlshRec)) % FLSH_MAX_SIZE)); 			
 }
 
+
 /*******************************************************************************
- * 名    称： 		StoreData
- * 功    能： 		数据存储。根据数据记录号将数据存储到指定
- 					flash地址;更新记录号等信息。大部分数据记录的
- 					内容在其他任务直接对sCtrl.sRec 中更新。少部分
- 					数据内容在该函数中跟新。
+ * 名    称： 	GetTaxInfoToRecord
+ * 功    能：   取TAX箱信息
  * 入口参数： 	无
  * 出口参数： 	无
  * 作　 　者： 	redmornigcn
- * 创建日期： 	2017-05-15
+ * 创建日期： 	2017-09-15
  * 修    改：
+ * 修改日期：
+ *******************************************************************************/
+uint32  GetTaxInfoToRecord(stcFlshRec *sFlshRec)
+{
+    if(sCtrl.Tax.ConnectFlag == 1)              //收到tax箱信息，将数据复制到数据记录
+    {
+        if(sCtrl.Tax.TaxType == TAX2_SET)       //TAX2
+        {
+            sCtrl.Tax.ConnectFlag = 0;          //清已取信息
+            
+            memcpy(&sFlshRec->RelSpeed,&sCtrl.Tax.Dat.Tax2.sTAX2Bak.RelSpeed,sizeof(sFlshRec->RelSpeed));
+            memcpy(&sFlshRec->TrainNum,&sCtrl.Tax.Dat.Tax2.sTAX2Bak.TrainNum,sizeof(sFlshRec->TrainNum));
+            memcpy(&sFlshRec->KmMark,&sCtrl.Tax.Dat.Tax2.sTAX2Bak.KmMark,sizeof(sFlshRec->KmMark));
+
+            sFlshRec->Time          = sCtrl.Tax.Dat.Tax2.sTAX2Bak.Time;
+            sFlshRec->LocoTyp       = sCtrl.Tax.Dat.Tax2.sTAX2Bak.LocoTyp;
+            sFlshRec->E_LocoTyp     = sCtrl.Tax.Dat.Tax2.sTAX2Bef.E_LocoTyp;
+            sFlshRec->LocoNum       = sCtrl.Tax.Dat.Tax2.sTAX2Bak.LocoNum;
+            sFlshRec->TrainTyp      = sCtrl.Tax.Dat.Tax2.sTAX2Bef.TrainTyp;
+            sFlshRec->Car_Truck     = sCtrl.Tax.Dat.Tax2.sTAX2Bak.Car_Truck;
+            sFlshRec->VoitureCnt    = sCtrl.Tax.Dat.Tax2.sTAX2Bak.VoitureCnt;
+            sFlshRec->Weight        = sCtrl.Tax.Dat.Tax2.sTAX2Bak.Weight;
+            sFlshRec->PlanLen       = sCtrl.Tax.Dat.Tax2.sTAX2Bak.PlanLen;
+            sFlshRec->MstDriverNum  = sCtrl.Tax.Dat.Tax2.sTAX2Bak.MstDriverNum;  
+            sFlshRec->E_MstDriverNum= sCtrl.Tax.Dat.Tax2.sTAX2Bef.E_MstDriverNum;
+            sFlshRec->E_SlvDriverNum= sCtrl.Tax.Dat.Tax2.sTAX2Bef.E_SlvDriverNum;
+            sFlshRec->SlvDriverNum  = sCtrl.Tax.Dat.Tax2.sTAX2Bak.SlvDriverNum;  
+            
+            sFlshRec->RoadNum       = sCtrl.Tax.Dat.Tax2.sTAX2Bak.RoadNum;      
+            sFlshRec->RelRoadNum    = sCtrl.Tax.Dat.Tax2.sTAX2Bef.RelRoadNum;   
+            sFlshRec->StationNum    = sCtrl.Tax.Dat.Tax2.sTAX2Bak.StationNum;   
+            sFlshRec->E_StationNum  = sCtrl.Tax.Dat.Tax2.sTAX2Bef.E_StationNum; 
+            sFlshRec->SignalTyp     = sCtrl.Tax.Dat.Tax2.sTAX2Bak.SignalTyp;    
+            sFlshRec->LocoSign      = sCtrl.Tax.Dat.Tax2.sTAX2Bak.LocoSign;     
+            sFlshRec->LocoWorkState = sCtrl.Tax.Dat.Tax2.sTAX2Bak.LocoWorkState;
+            sFlshRec->LocoState     = sCtrl.Tax.Dat.Tax2.sTAX2Bak.LocoState;  
+        }
+        
+        if(sCtrl.Tax.TaxType == TAX3_SET)   //TAX3设备
+        {
+            
+        }
+    }
+}
+
+      
+      
+/*******************************************************************************
+ * 名    称：RoadNum;        		StoreData
+ * 功    能：RelRoadNum;     		数据存储。根据数据记录号将数据存储到指定
+ 			StationNum;    		flash地址;更新记录号等信息。大部分数据记录的
+ 			E_StationNum;  		内容在其他任务直接对sCtrl.sRec 中更新。少部分
+ 					数据内容在该函数中跟新。
+ * 入口参数：SignalTyp;      	无
+ * 出口参数：LocoSign;       	无
+ * 作　 　者                 ： 	redmornigcn
+ * 创建日期：LocoWorkState;  	2017-05-15
+ * 修    改：LocoState;     
  * 修改日期：
  *******************************************************************************/
 void  StoreData(void)
@@ -128,7 +186,6 @@ void  StoreData(void)
 油量，在app_task_osal_calc中更新
 高度1，高度2，在app_task_oasl_comm中更新
 */    
-    
 //  存储时更新的内容
 	sCtrl.sRec.StoreCnt = sCtrl.sRecNumMgr.Current;     //取当前数据记录号	
 
@@ -163,44 +220,28 @@ void  StoreData(void)
 //    sCtrl.sRec.
         
     
-//暂时没用的数据清零
-     sCtrl.sRec.Car_Truck       = 0;
-     *sCtrl.sRec.DriverUnitNum   = 0;
-     sCtrl.sRec.E_LocoTyp       = 0;
-     sCtrl.sRec.E_MstDriverNum  = 0;
-     sCtrl.sRec.E_SlvDriverNum  = 0;
-     sCtrl.sRec.E_StationNum    = 0;
-     sCtrl.sRec.GpsLatitude     = 0;
-     sCtrl.sRec.GpsLongitude    = 0;
-     *sCtrl.sRec.KmMark          = 0;
-     *sCtrl.sRec.LocoNum         = 0;
-     sCtrl.sRec.LocoSign        = 0;
-     sCtrl.sRec.LocoState       = 0;
-     sCtrl.sRec.LocoTyp         = 0;
-     sCtrl.sRec.LocoWorkState   = 0;
-     sCtrl.sRec.MaxSpeed        = 0;
-     sCtrl.sRec.MstDensity      = 0;
-     sCtrl.sRec.MstDipTemp      = 0;
-     sCtrl.sRec.MyAddspeed      = 0;
-     sCtrl.sRec.MyDip1Den       = 0;
-     sCtrl.sRec.MyDip2Den       = 0;
-     sCtrl.sRec.MyKileMeter     = 0;
-     sCtrl.sRec.MyMstLocoPower  = 0;
-     sCtrl.sRec.MyPower         = 0;
-     *sCtrl.sRec.PlanLen         = 0;
-     sCtrl.sRec.RelRoadNum      = 0;
-     sCtrl.sRec.Reserve1        = 0;
-     sCtrl.sRec.RoadNum         = 0;
-     sCtrl.sRec.SignalTyp       = 0;
-     sCtrl.sRec.SlvDip1Prs      = 0;
-     sCtrl.sRec.SlvDip2Prs      = 0;
-     sCtrl.sRec.StationNum      = 0;
-     *sCtrl.sRec.SlvDriverNum    = 0;
-     *sCtrl.sRec.Time            = 0;
-     *sCtrl.sRec.TrainNum        = 0;
-     *sCtrl.sRec.TrainTyp        = 0;
-     sCtrl.sRec.VoitureCnt      = 0;
-     *sCtrl.sRec.Weight          = 0;
+//暂时没用的数据清零    
+    sCtrl.sRec.GpsLatitude     = 0;
+    sCtrl.sRec.GpsLongitude    = 0;
+
+    sCtrl.sRec.MaxSpeed        = 0;
+    sCtrl.sRec.MstDensity      = 0;
+    sCtrl.sRec.MstDipTemp      = 0;
+    sCtrl.sRec.MyAddspeed      = 0;
+    sCtrl.sRec.MyDip1Den       = 0;
+    sCtrl.sRec.MyDip2Den       = 0;
+    sCtrl.sRec.MyKileMeter     = 0;
+    sCtrl.sRec.MyMstLocoPower  = 0;
+    sCtrl.sRec.MyPower         = 0;
+
+    sCtrl.sRec.Reserve1        = 0;
+
+    sCtrl.sRec.SlvDip1Prs      = 0;
+    sCtrl.sRec.SlvDip2Prs      = 0;
+
+     
+// 	保存TAX箱信息 
+    GetTaxInfoToRecord(&sCtrl.sRec);
      
 // 	计算记录校验和
 	sCtrl.sRec.CrcCheck = GetCrc16Check((uint8 *)&sCtrl.sRec,sizeof(sCtrl.sRec) - 2);
@@ -286,7 +327,7 @@ void TaskInitStore(void)
 //    */
     BSP_StoreInit();			//初始化Flash底层相关函数
 
-    //初始化定时器
+//初始化定时器
     osal_start_timerEx( OS_TASK_ID_STORE,
                       OS_EVT_STORE_TICKS,
                       1000);
@@ -312,16 +353,14 @@ osalEvt  TaskStoreEvtProcess(INT8U task_id, osalEvt task_event)
 
     if( task_event & OS_EVT_STORE_TICKS ) {
 
-
             StoreData();            //保存数据记录
             
             osal_start_timerEx( OS_TASK_ID_STORE,
                                 OS_EVT_STORE_TICKS,
                                 1000*60);
                                 //1000);
-            
             return ( task_event ^ OS_EVT_STORE_TICKS );
-        }
+    }
 }
 
 

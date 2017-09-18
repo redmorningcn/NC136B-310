@@ -88,6 +88,8 @@ F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\
 -I
 F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\iap
 -I
+F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\tax
+-I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\arm\CMSIS\Include
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\arm\inc
@@ -179,6 +181,8 @@ F:\iar\NC136B-310统计模块\Application\Library\SpeedTest
 F:\iar\NC136B-310统计模块\Application\Library\csnr_package_deal
 -I
 F:\iar\NC136B-310统计模块\Application\Library\iap
+-I
+F:\iar\NC136B-310统计模块\Application\Library\tax
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\arm\CMSIS\Include
 -D__CHAR_BITS__=8

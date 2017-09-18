@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       07/Sep/2017  14:52:06
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       18/Sep/2017  11:51:12
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -101,6 +101,8 @@
 #        F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\csnr_package_deal\
 #        -I
 #        F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\iap\
+#        -I
+#        F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\tax\
 #        -On --use_c++_inline -I "C:\Program Files (x86)\IAR Systems\Embedded
 #        Workbench 7.3\arm\CMSIS\Include\"
 #    List file    =  
@@ -258,7 +260,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
    \   0000000A   0x2C02             CMP      R4,#+2
    \   0000000C   0xF280 0x8084      BGE.W    ??app_comm_dtu_1
     136                  if(sCtrl.Dtu.ConnCtrl[i].RecvEndFlg == 1)                   //如果地址i接收到数据，对数据进行处理
-   \   00000010   0x4871             LDR.N    R0,??app_comm_dtu_2
+   \   00000010   0x486E             LDR.N    R0,??app_comm_dtu_2
    \   00000012   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
    \   00000014   0xEB10 0x00C4      ADDS     R0,R0,R4, LSL #+3
    \   00000018   0xF890 0x04FA      LDRB     R0,[R0, #+1274]
@@ -271,7 +273,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
     141                      *        接收到地址C2，进行  设置模式。
     142                      */
     143                      switch(sCtrl.Dtu.RxCtrl.FrameCode)
-   \   00000020   0x486D             LDR.N    R0,??app_comm_dtu_2
+   \   00000020   0x486A             LDR.N    R0,??app_comm_dtu_2
    \   00000022   0xF890 0x04F1      LDRB     R0,[R0, #+1265]
    \   00000026   0x2800             CMP      R0,#+0
    \   00000028   0xD006             BEQ.N    ??app_comm_dtu_4
@@ -287,7 +289,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
     146                      
     147                              if(sCtrl.Dtu.RxCtrl.SourceAddr == SLAVE_ADDR_DTU)       //地址等于CA，无线数据传输。
    \                     ??app_comm_dtu_4: (+1)
-   \   00000038   0x4867             LDR.N    R0,??app_comm_dtu_2
+   \   00000038   0x4864             LDR.N    R0,??app_comm_dtu_2
    \   0000003A   0xF890 0x04EE      LDRB     R0,[R0, #+1262]
    \   0000003E   0x28CA             CMP      R0,#+202
    \   00000040   0xD104             BNE.N    ??app_comm_dtu_9
@@ -295,13 +297,13 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
     149                                  comm_record_send((StrDevDtu *)&sCtrl.Dtu,i);        //数据的需要传递  dtu，明确 地址，pch等信息。
    \   00000042   0x0021             MOVS     R1,R4
    \   00000044   0xB2C9             UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
-   \   00000046   0x4865             LDR.N    R0,??app_comm_dtu_2+0x4
+   \   00000046   0x4862             LDR.N    R0,??app_comm_dtu_2+0x4
    \   00000048   0x.... 0x....      BL       comm_record_send
     150                              }
     151                              
     152                              if(sCtrl.Dtu.RxCtrl.SourceAddr == SLAVE_ADDR_SET)       //地址等于C2，参数设置。
    \                     ??app_comm_dtu_9: (+1)
-   \   0000004C   0x4862             LDR.N    R0,??app_comm_dtu_2
+   \   0000004C   0x485F             LDR.N    R0,??app_comm_dtu_2
    \   0000004E   0xF890 0x04EE      LDRB     R0,[R0, #+1262]
    \   00000052   0x28C2             CMP      R0,#+194
    \   00000054   0xD11D             BNE.N    ??app_comm_dtu_10
@@ -309,7 +311,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
     154                                  comm_para_flow((StrDevDtu *)&sCtrl.Dtu,i);          //设置参数，或信息交互。依据code进行相应操作。
    \   00000056   0x0021             MOVS     R1,R4
    \   00000058   0xB2C9             UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
-   \   0000005A   0x4860             LDR.N    R0,??app_comm_dtu_2+0x4
+   \   0000005A   0x485D             LDR.N    R0,??app_comm_dtu_2+0x4
    \   0000005C   0x.... 0x....      BL       comm_para_flow
     155                                  
     156                                  //参数设置，数据原路返回
@@ -321,22 +323,22 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
     162                                                  sCtrl.Dtu.Rd.Buf,                     //数据区
     163                                                  sCtrl.Dtu.RxCtrl.Len                  //发送长度
     164                                                );
-   \   00000060   0x485D             LDR.N    R0,??app_comm_dtu_2
+   \   00000060   0x485A             LDR.N    R0,??app_comm_dtu_2
    \   00000062   0xF890 0x04F0      LDRB     R0,[R0, #+1264]
    \   00000066   0xB280             UXTH     R0,R0            ;; ZeroExt  R0,R0,#+16,#+16
    \   00000068   0x9002             STR      R0,[SP, #+8]
-   \   0000006A   0x485C             LDR.N    R0,??app_comm_dtu_2+0x4
+   \   0000006A   0x4859             LDR.N    R0,??app_comm_dtu_2+0x4
    \   0000006C   0x9001             STR      R0,[SP, #+4]
-   \   0000006E   0x485A             LDR.N    R0,??app_comm_dtu_2
+   \   0000006E   0x4857             LDR.N    R0,??app_comm_dtu_2
    \   00000070   0xF890 0x04F1      LDRB     R0,[R0, #+1265]
    \   00000074   0x9000             STR      R0,[SP, #+0]
-   \   00000076   0x4858             LDR.N    R0,??app_comm_dtu_2
+   \   00000076   0x4855             LDR.N    R0,??app_comm_dtu_2
    \   00000078   0xF890 0x34EF      LDRB     R3,[R0, #+1263]
-   \   0000007C   0x4856             LDR.N    R0,??app_comm_dtu_2
+   \   0000007C   0x4853             LDR.N    R0,??app_comm_dtu_2
    \   0000007E   0xF890 0x24EE      LDRB     R2,[R0, #+1262]
-   \   00000082   0x4855             LDR.N    R0,??app_comm_dtu_2
+   \   00000082   0x4852             LDR.N    R0,??app_comm_dtu_2
    \   00000084   0xF890 0x14ED      LDRB     R1,[R0, #+1261]
-   \   00000088   0x4853             LDR.N    R0,??app_comm_dtu_2
+   \   00000088   0x4850             LDR.N    R0,??app_comm_dtu_2
    \   0000008A   0xF8D0 0x0509      LDR      R0,[R0, #+1289]
    \   0000008E   0x.... 0x....      BL       CSNC_SendData
     165                              }
@@ -356,9 +358,9 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
     173                          case IAP_FRAME_CODE:        //V2.0 IAP程序下载
     174                                  status = IAP_PragramDeal(sCtrl.Dtu.Rd.Buf , sCtrl.Dtu.RxCtrl.Len ); //调用程序下载函数   
    \                     ??app_comm_dtu_7: (+1)
-   \   00000098   0x484F             LDR.N    R0,??app_comm_dtu_2
+   \   00000098   0x484C             LDR.N    R0,??app_comm_dtu_2
    \   0000009A   0xF890 0x14F0      LDRB     R1,[R0, #+1264]
-   \   0000009E   0x484F             LDR.N    R0,??app_comm_dtu_2+0x4
+   \   0000009E   0x484C             LDR.N    R0,??app_comm_dtu_2+0x4
    \   000000A0   0x.... 0x....      BL       IAP_PragramDeal
    \   000000A4   0x0005             MOVS     R5,R0
     175                                  
@@ -368,18 +370,18 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
     177                                  //应答数据          //如果是IAP传包帧，则传数据长度4，如果是开始、结束。返回长度为
     178                                  if(     sCtrl.Dtu.Rd.Buf[0] == IAP_START_CODE 
     179                                      ||  sCtrl.Dtu.Rd.Buf[0] == IAP_END_CODE )
-   \   000000AA   0x484B             LDR.N    R0,??app_comm_dtu_2
+   \   000000AA   0x4848             LDR.N    R0,??app_comm_dtu_2
    \   000000AC   0xF890 0x03AD      LDRB     R0,[R0, #+941]
    \   000000B0   0x2801             CMP      R0,#+1
    \   000000B2   0xD004             BEQ.N    ??app_comm_dtu_11
-   \   000000B4   0x4848             LDR.N    R0,??app_comm_dtu_2
+   \   000000B4   0x4845             LDR.N    R0,??app_comm_dtu_2
    \   000000B6   0xF890 0x03AD      LDRB     R0,[R0, #+941]
    \   000000BA   0x2803             CMP      R0,#+3
    \   000000BC   0xD103             BNE.N    ??app_comm_dtu_12
     180                                  {
     181                                      echolen = sCtrl.Dtu.RxCtrl.Len;   
    \                     ??app_comm_dtu_11: (+1)
-   \   000000BE   0x4846             LDR.N    R0,??app_comm_dtu_2
+   \   000000BE   0x4843             LDR.N    R0,??app_comm_dtu_2
    \   000000C0   0xF890 0x04F0      LDRB     R0,[R0, #+1264]
    \   000000C4   0x0006             MOVS     R6,R0
     182                                  }
@@ -397,18 +399,18 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
    \   000000C8   0x0030             MOVS     R0,R6
    \   000000CA   0xB280             UXTH     R0,R0            ;; ZeroExt  R0,R0,#+16,#+16
    \   000000CC   0x9002             STR      R0,[SP, #+8]
-   \   000000CE   0x4843             LDR.N    R0,??app_comm_dtu_2+0x4
+   \   000000CE   0x4840             LDR.N    R0,??app_comm_dtu_2+0x4
    \   000000D0   0x9001             STR      R0,[SP, #+4]
-   \   000000D2   0x4841             LDR.N    R0,??app_comm_dtu_2
+   \   000000D2   0x483E             LDR.N    R0,??app_comm_dtu_2
    \   000000D4   0xF890 0x04F1      LDRB     R0,[R0, #+1265]
    \   000000D8   0x9000             STR      R0,[SP, #+0]
-   \   000000DA   0x483F             LDR.N    R0,??app_comm_dtu_2
+   \   000000DA   0x483C             LDR.N    R0,??app_comm_dtu_2
    \   000000DC   0xF890 0x34EF      LDRB     R3,[R0, #+1263]
-   \   000000E0   0x483D             LDR.N    R0,??app_comm_dtu_2
+   \   000000E0   0x483A             LDR.N    R0,??app_comm_dtu_2
    \   000000E2   0xF890 0x24EE      LDRB     R2,[R0, #+1262]
-   \   000000E6   0x483C             LDR.N    R0,??app_comm_dtu_2
+   \   000000E6   0x4839             LDR.N    R0,??app_comm_dtu_2
    \   000000E8   0xF890 0x14ED      LDRB     R1,[R0, #+1261]
-   \   000000EC   0x483A             LDR.N    R0,??app_comm_dtu_2
+   \   000000EC   0x4837             LDR.N    R0,??app_comm_dtu_2
    \   000000EE   0xF8D0 0x0509      LDR      R0,[R0, #+1289]
    \   000000F2   0x.... 0x....      BL       CSNC_SendData
     192                              break;
@@ -418,19 +420,19 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
     196                      sCtrl.Dtu.ConnCtrl[i].RecvEndFlg = 0;                   //数据已处理。 接收数据置1
    \                     ??app_comm_dtu_8: (+1)
    \   000000F6   0x2000             MOVS     R0,#+0
-   \   000000F8   0x4937             LDR.N    R1,??app_comm_dtu_2
+   \   000000F8   0x4934             LDR.N    R1,??app_comm_dtu_2
    \   000000FA   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
    \   000000FC   0xEB11 0x01C4      ADDS     R1,R1,R4, LSL #+3
    \   00000100   0xF881 0x04FA      STRB     R0,[R1, #+1274]
     197                      sCtrl.Dtu.ConnCtrl[i].TimeOut    = 0;                   //超时计数清零
    \   00000104   0x2000             MOVS     R0,#+0
-   \   00000106   0x4934             LDR.N    R1,??app_comm_dtu_2
+   \   00000106   0x4931             LDR.N    R1,??app_comm_dtu_2
    \   00000108   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
    \   0000010A   0xEB11 0x01C4      ADDS     R1,R1,R4, LSL #+3
    \   0000010E   0xF881 0x04FB      STRB     R0,[R1, #+1275]
     198          
     199                      return  ;
-   \   00000112   0xE05F             B.N      ??app_comm_dtu_13
+   \   00000112   0xE059             B.N      ??app_comm_dtu_13
     200                  }
     201                  
     202                  i++;
@@ -454,18 +456,18 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
    \   0000011C   0x2F02             CMP      R7,#+2
    \   0000011E   0xDA2C             BGE.N    ??app_comm_dtu_15
     213                      sCtrl.Dtu.ConnCtrl[i].TimeOut++;
-   \   00000120   0x482D             LDR.N    R0,??app_comm_dtu_2
+   \   00000120   0x482A             LDR.N    R0,??app_comm_dtu_2
    \   00000122   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
    \   00000124   0xEB10 0x00C7      ADDS     R0,R0,R7, LSL #+3
    \   00000128   0xF890 0x04FB      LDRB     R0,[R0, #+1275]
    \   0000012C   0x1C40             ADDS     R0,R0,#+1
-   \   0000012E   0x492A             LDR.N    R1,??app_comm_dtu_2
+   \   0000012E   0x4927             LDR.N    R1,??app_comm_dtu_2
    \   00000130   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
    \   00000132   0xEB11 0x01C7      ADDS     R1,R1,R7, LSL #+3
    \   00000136   0xF881 0x04FB      STRB     R0,[R1, #+1275]
     214                      
     215                      if(sCtrl.Dtu.ConnCtrl[i].TimeOut > 10 * COMM_DEV_DTU_CONN_NUM){
-   \   0000013A   0x4827             LDR.N    R0,??app_comm_dtu_2
+   \   0000013A   0x4824             LDR.N    R0,??app_comm_dtu_2
    \   0000013C   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
    \   0000013E   0xEB10 0x00C7      ADDS     R0,R0,R7, LSL #+3
    \   00000142   0xF890 0x04FB      LDRB     R0,[R0, #+1275]
@@ -473,13 +475,13 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
    \   00000148   0xDB0E             BLT.N    ??app_comm_dtu_16
     216                          sCtrl.Dtu.ConnCtrl[i].TimeOut = 10 * COMM_DEV_DTU_CONN_NUM + 1;
    \   0000014A   0x2015             MOVS     R0,#+21
-   \   0000014C   0x4922             LDR.N    R1,??app_comm_dtu_2
+   \   0000014C   0x491F             LDR.N    R1,??app_comm_dtu_2
    \   0000014E   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
    \   00000150   0xEB11 0x01C7      ADDS     R1,R1,R7, LSL #+3
    \   00000154   0xF881 0x04FB      STRB     R0,[R1, #+1275]
     217                          sCtrl.Dtu.ConnCtrl[i].ErrFlg = 1;               //超时数大于10次，5S，报通讯错误。
    \   00000158   0x2001             MOVS     R0,#+1
-   \   0000015A   0x491F             LDR.N    R1,??app_comm_dtu_2
+   \   0000015A   0x491C             LDR.N    R1,??app_comm_dtu_2
    \   0000015C   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
    \   0000015E   0xEB11 0x01C7      ADDS     R1,R1,R7, LSL #+3
    \   00000162   0xF881 0x04FC      STRB     R0,[R1, #+1276]
@@ -489,7 +491,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
     220                          sCtrl.Dtu.ConnCtrl[i].ErrFlg = 0;               //接收到数据，通讯清零
    \                     ??app_comm_dtu_16: (+1)
    \   00000168   0x2000             MOVS     R0,#+0
-   \   0000016A   0x491B             LDR.N    R1,??app_comm_dtu_2
+   \   0000016A   0x4918             LDR.N    R1,??app_comm_dtu_2
    \   0000016C   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
    \   0000016E   0xEB11 0x01C7      ADDS     R1,R1,R7, LSL #+3
    \   00000172   0xF881 0x04FC      STRB     R0,[R1, #+1276]
@@ -506,7 +508,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
     228                  */ 
     229                  if( sCtrl.sRecNumMgr.Current == 0 )                     //记录号为0，还未发送数据。不做通讯状态判断
    \                     ??app_comm_dtu_15: (+1)
-   \   0000017A   0x4817             LDR.N    R0,??app_comm_dtu_2
+   \   0000017A   0x4814             LDR.N    R0,??app_comm_dtu_2
    \   0000017C   0x6840             LDR      R0,[R0, #+4]
    \   0000017E   0x2800             CMP      R0,#+0
    \   00000180   0xD10D             BNE.N    ??app_comm_dtu_18
@@ -520,7 +522,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
    \   00000188   0xDA08             BGE.N    ??app_comm_dtu_20
     233                          sCtrl.Dtu.ConnCtrl[i].TimeOut = 0;
    \   0000018A   0x2100             MOVS     R1,#+0
-   \   0000018C   0x4A12             LDR.N    R2,??app_comm_dtu_2
+   \   0000018C   0x4A0F             LDR.N    R2,??app_comm_dtu_2
    \   0000018E   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   00000190   0xEB12 0x02C0      ADDS     R2,R2,R0, LSL #+3
    \   00000194   0xF882 0x14FB      STRB     R1,[R2, #+1275]
@@ -530,7 +532,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
     235                      }
     236                      return;
    \                     ??app_comm_dtu_20: (+1)
-   \   0000019C   0xE01A             B.N      ??app_comm_dtu_13
+   \   0000019C   0xE014             B.N      ??app_comm_dtu_13
     237                  }
     238                          
     239                  //发送1条数据记录
@@ -544,7 +546,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
    \   000001A4   0x2F02             CMP      R7,#+2
    \   000001A6   0xDA0F             BGE.N    ??app_comm_dtu_22
     242                      if(sCtrl.Dtu.ConnCtrl[i].SlaveAddr == SLAVE_ADDR_DTU){
-   \   000001A8   0x480B             LDR.N    R0,??app_comm_dtu_2
+   \   000001A8   0x4808             LDR.N    R0,??app_comm_dtu_2
    \   000001AA   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
    \   000001AC   0xEB10 0x00C7      ADDS     R0,R0,R7, LSL #+3
    \   000001B0   0xF890 0x04FD      LDRB     R0,[R0, #+1277]
@@ -554,7 +556,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
     244                          comm_record_send_one((StrDevDtu *)&sCtrl.Dtu,i);  
    \   000001B8   0x0039             MOVS     R1,R7
    \   000001BA   0xB2C9             UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
-   \   000001BC   0x4807             LDR.N    R0,??app_comm_dtu_2+0x4
+   \   000001BC   0x4804             LDR.N    R0,??app_comm_dtu_2+0x4
    \   000001BE   0x.... 0x....      BL       comm_record_send_one
     245                          break;
    \   000001C2   0xE001             B.N      ??app_comm_dtu_22
@@ -564,33 +566,23 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
    \   000001C4   0x1C7F             ADDS     R7,R7,#+1
    \   000001C6   0xE7EC             B.N      ??app_comm_dtu_21
     248                  }
-    249                  
-    250                  //重新给定时器给初值。osal_start_timerRl可以自动赋值，
-    251                  osal_start_timerRl( OS_TASK_ID_TMR, 
-    252                                      OS_EVT_TMR_DTU, 
-    253                                      OS_TICKS_PER_SEC*10 );              //统计装置和无线发送模块定时器  10s
+    249              }
+    250          }
    \                     ??app_comm_dtu_22: (+1)
-   \   000001C8   0xF242 0x7210      MOVW     R2,#+10000
-   \   000001CC   0x2140             MOVS     R1,#+64
-   \   000001CE   0x2001             MOVS     R0,#+1
-   \   000001D0   0x.... 0x....      BL       osal_start_timerRl
-    254          
-    255              }
-    256          }
    \                     ??app_comm_dtu_13: (+1)
-   \   000001D4   0xBDF7             POP      {R0-R2,R4-R7,PC}  ;; return
-   \   000001D6   0xBF00             Nop      
+   \   000001C8   0xBDF7             POP      {R0-R2,R4-R7,PC}  ;; return
+   \   000001CA   0xBF00             Nop      
    \                     ??app_comm_dtu_2:
-   \   000001D8   0x........         DC32     sCtrl
-   \   000001DC   0x........         DC32     sCtrl+0x3AD
+   \   000001CC   0x........         DC32     sCtrl
+   \   000001D0   0x........         DC32     sCtrl+0x3AD
+    251          
+    252          
+    253          /*******************************************************************************
+    254           * 				end of file
+    255           *******************************************************************************/
+    256          #endif
     257          
     258          
-    259          /*******************************************************************************
-    260           * 				end of file
-    261           *******************************************************************************/
-    262          #endif
-    263          
-    264          
 
    Maximum stack usage in bytes:
 
@@ -602,19 +594,18 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
         32   -> comm_para_flow
         32   -> comm_record_send
         32   -> comm_record_send_one
-        32   -> osal_start_timerRl
 
 
    Section sizes:
 
    Bytes  Function/Label
    -----  --------------
-     480  app_comm_dtu
+     468  app_comm_dtu
 
  
- 480 bytes in section .text
+ 468 bytes in section .text
  
- 480 bytes of CODE memory
+ 468 bytes of CODE memory
 
 Errors: none
 Warnings: 1

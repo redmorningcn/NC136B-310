@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       07/Sep/2017  16:58:46
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       18/Sep/2017  11:51:11
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -101,6 +101,8 @@
 #        F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\csnr_package_deal\
 #        -I
 #        F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\iap\
+#        -I
+#        F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\tax\
 #        -On --use_c++_inline -I "C:\Program Files (x86)\IAR Systems\Embedded
 #        Workbench 7.3\arm\CMSIS\Include\"
 #    List file    =  
@@ -317,7 +319,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_otr.c
    \   0000005A   0xF881 0x065C      STRB     R0,[R1, #+1628]
     162                      
     163                      return  ;
-   \   0000005E   0xE05D             B.N      ??app_comm_otr_5
+   \   0000005E   0xE057             B.N      ??app_comm_otr_5
     164                  }
     165                  i++;
    \                     ??app_comm_otr_2: (+1)
@@ -417,7 +419,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_otr.c
     199                      }
     200                      return;
    \                     ??app_comm_otr_12: (+1)
-   \   000000E8   0xE018             B.N      ??app_comm_otr_5
+   \   000000E8   0xE012             B.N      ??app_comm_otr_5
     201                  }
     202                          
     203                  //发送1条数据记录
@@ -450,106 +452,98 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_otr.c
    \                     ??app_comm_otr_14: (+1)
    \   0000010E   0x1C6D             ADDS     R5,R5,#+1
     213                  
-    214                  //重新给定时器给初值。osal_start_timerRl可以自动赋值，
-    215                  osal_start_timerRl( OS_TASK_ID_TMR, 
-    216                                      OS_EVT_TMR_OTR, 
-    217                                      OS_TICKS_PER_SEC*2);  //统计装置和无线发送模块定时器  10s
-   \   00000110   0xF44F 0x62FA      MOV      R2,#+2000
-   \   00000114   0x2180             MOVS     R1,#+128
-   \   00000116   0x2001             MOVS     R0,#+1
-   \   00000118   0x.... 0x....      BL       osal_start_timerRl
-    218              }
-    219          }
+    214              }
+    215          }
    \                     ??app_comm_otr_5: (+1)
-   \   0000011C   0xBD31             POP      {R0,R4,R5,PC}    ;; return
-    220          
-    221          
-    222          /*******************************************************************************
-    223           * 名    称： comm_tinyrec_send
-    224           * 功    能： 发送记录中的比较关键信息
-    225           * 入口参数： 通讯设备数据结构
-    226           * 出口参数： 无
-    227           * 作　 　者： redmorningcn.
-    228           * 创建日期： 2017-05-20
-    229           * 修    改：
-    230           * 修改日期：
-    231           * 备    注： 任务创建函数需要在app.h文件中声明
-    232           *******************************************************************************/
+   \   00000110   0xBD31             POP      {R0,R4,R5,PC}    ;; return
+    216          
+    217          
+    218          /*******************************************************************************
+    219           * 名    称： comm_tinyrec_send
+    220           * 功    能： 发送记录中的比较关键信息
+    221           * 入口参数： 通讯设备数据结构
+    222           * 出口参数： 无
+    223           * 作　 　者： redmorningcn.
+    224           * 创建日期： 2017-05-20
+    225           * 修    改：
+    226           * 修改日期：
+    227           * 备    注： 任务创建函数需要在app.h文件中声明
+    228           *******************************************************************************/
 
    \                                 In section .text, align 2, keep-with-next
-    233          uint8    comm_tinyrec_send(StrDevOtr * sOtr,uint8    addrnum)
-    234          {
+    229          uint8    comm_tinyrec_send(StrDevOtr * sOtr,uint8    addrnum)
+    230          {
    \                     comm_tinyrec_send: (+1)
    \   00000000   0xB53E             PUSH     {R1-R5,LR}
    \   00000002   0x0004             MOVS     R4,R0
    \   00000004   0x000D             MOVS     R5,R1
-    235              //if(sOtr->pch->Ch == 2)      //无线通道
-    236              {
-    237                  //记录号为0，还未发送数据。不做通讯状态判断
-    238                  if( sCtrl.sRecNumMgr.Current == 0 )                                   
+    231              //if(sOtr->pch->Ch == 2)      //无线通道
+    232              {
+    233                  //记录号为0，还未发送数据。不做通讯状态判断
+    234                  if( sCtrl.sRecNumMgr.Current == 0 )                                   
    \   00000006   0x....             LDR.N    R0,??DataTable1
    \   00000008   0x6840             LDR      R0,[R0, #+4]
    \   0000000A   0x2800             CMP      R0,#+0
    \   0000000C   0xD101             BNE.N    ??comm_tinyrec_send_0
-    239                  {
-    240                      return 0;
+    235                  {
+    236                      return 0;
    \   0000000E   0x2000             MOVS     R0,#+0
    \   00000010   0xE048             B.N      ??comm_tinyrec_send_1
-    241                  }
-    242                  /***********************************************
-    243                  * 描述： 取值
-    244                  * 
-    245                  */ 
-    246                  sOtr->Wr.sTinyRec.Addr      = 0xc1;
+    237                  }
+    238                  /***********************************************
+    239                  * 描述： 取值
+    240                  * 
+    241                  */ 
+    242                  sOtr->Wr.sTinyRec.Addr      = 0xc1;
    \                     ??comm_tinyrec_send_0: (+1)
    \   00000012   0x20C1             MOVS     R0,#+193
    \   00000014   0xF884 0x00A0      STRB     R0,[R4, #+160]
-    247                  sOtr->Wr.sTinyRec.CurRecNum = sCtrl.sRecNumMgr.Current;
+    243                  sOtr->Wr.sTinyRec.CurRecNum = sCtrl.sRecNumMgr.Current;
    \   00000018   0x....             LDR.N    R0,??DataTable1
    \   0000001A   0x6840             LDR      R0,[R0, #+4]
    \   0000001C   0xF8C4 0x00A4      STR      R0,[R4, #+164]
-    248                  sOtr->Wr.sTinyRec.Hig1      = sCtrl.sRec.Myhig1;
+    244                  sOtr->Wr.sTinyRec.Hig1      = sCtrl.sRec.Myhig1;
    \   00000020   0x....             LDR.N    R0,??DataTable1
    \   00000022   0xF8B0 0x0064      LDRH     R0,[R0, #+100]
    \   00000026   0xF8A4 0x00AE      STRH     R0,[R4, #+174]
-    249                  sOtr->Wr.sTinyRec.Hig2      = sCtrl.sRec.Myhig2;
+    245                  sOtr->Wr.sTinyRec.Hig2      = sCtrl.sRec.Myhig2;
    \   0000002A   0x....             LDR.N    R0,??DataTable1
    \   0000002C   0xF8B0 0x0066      LDRH     R0,[R0, #+102]
    \   00000030   0xF8A4 0x00B0      STRH     R0,[R4, #+176]
-    250                  sOtr->Wr.sTinyRec.LocoWorkSta=sCtrl.sRec.MyLocoWorkState;
+    246                  sOtr->Wr.sTinyRec.LocoWorkSta=sCtrl.sRec.MyLocoWorkState;
    \   00000034   0x....             LDR.N    R0,??DataTable1
    \   00000036   0xF890 0x0099      LDRB     R0,[R0, #+153]
    \   0000003A   0xF884 0x00B2      STRB     R0,[R4, #+178]
-    251                  sOtr->Wr.sTinyRec.ModelNum  = sCtrl.sRec.OilBoxModel;
+    247                  sOtr->Wr.sTinyRec.ModelNum  = sCtrl.sRec.OilBoxModel;
    \   0000003E   0x....             LDR.N    R0,??DataTable1
    \   00000040   0xF890 0x009B      LDRB     R0,[R0, #+155]
    \   00000044   0xF884 0x00A1      STRB     R0,[R4, #+161]
-    252                  sOtr->Wr.sTinyRec.Oil       = sCtrl.sRec.MstDip;
+    248                  sOtr->Wr.sTinyRec.Oil       = sCtrl.sRec.MstDip;
    \   00000048   0x....             LDR.N    R0,??DataTable1
    \   0000004A   0x6D40             LDR      R0,[R0, #+84]
    \   0000004C   0xF8A4 0x00A2      STRH     R0,[R4, #+162]
-    253                  sOtr->Wr.sTinyRec.Speed1    = sCtrl.sRec.Myspeed1;
+    249                  sOtr->Wr.sTinyRec.Speed1    = sCtrl.sRec.Myspeed1;
    \   00000050   0x....             LDR.N    R0,??DataTable1
    \   00000052   0xF8B0 0x0050      LDRH     R0,[R0, #+80]
    \   00000056   0xF8A4 0x00A8      STRH     R0,[R4, #+168]
-    254                  sOtr->Wr.sTinyRec.Speed2    = sCtrl.sRec.Myspeed2;
+    250                  sOtr->Wr.sTinyRec.Speed2    = sCtrl.sRec.Myspeed2;
    \   0000005A   0x....             LDR.N    R0,??DataTable1
    \   0000005C   0xF8B0 0x0052      LDRH     R0,[R0, #+82]
    \   00000060   0xF8A4 0x00AA      STRH     R0,[R4, #+170]
-    255                  sOtr->Wr.sTinyRec.Speedcs   = sCtrl.sRec.MyEngRotSpd;
+    251                  sOtr->Wr.sTinyRec.Speedcs   = sCtrl.sRec.MyEngRotSpd;
    \   00000064   0x....             LDR.N    R0,??DataTable1
    \   00000066   0xF8B0 0x0082      LDRH     R0,[R0, #+130]
    \   0000006A   0xF8A4 0x00AC      STRH     R0,[R4, #+172]
-    256                 
-    257                  //超时值发送SLAVE_ADDR_OTR 的数据
-    258                  CSNC_SendData(sCtrl.Otr.pch,                                //OTR 的PCH：串口号，收发控制等底层信息
-    259                                sOtr->ConnCtrl[addrnum].MasterAddr,           //源地址，
-    260                                sOtr->ConnCtrl[addrnum].SlaveAddr,            //目标地址
-    261                                sOtr->ConnCtrl[addrnum].SendFramNum,          //帧序号 ，，在接收中累加
-    262                                0,                                            //命令字
-    263                                (uint8 *)&sCtrl.Otr.Wr.sTinyRec,              //数据区
-    264                                sizeof(sCtrl.Otr.Wr.sTinyRec)                 //发送长度
-    265                                );
+    252                 
+    253                  //超时值发送SLAVE_ADDR_OTR 的数据
+    254                  CSNC_SendData(sCtrl.Otr.pch,                                //OTR 的PCH：串口号，收发控制等底层信息
+    255                                sOtr->ConnCtrl[addrnum].MasterAddr,           //源地址，
+    256                                sOtr->ConnCtrl[addrnum].SlaveAddr,            //目标地址
+    257                                sOtr->ConnCtrl[addrnum].SendFramNum,          //帧序号 ，，在接收中累加
+    258                                0,                                            //命令字
+    259                                (uint8 *)&sCtrl.Otr.Wr.sTinyRec,              //数据区
+    260                                sizeof(sCtrl.Otr.Wr.sTinyRec)                 //发送长度
+    261                                );
    \   0000006E   0x2014             MOVS     R0,#+20
    \   00000070   0x9002             STR      R0,[SP, #+8]
    \   00000072   0x....             LDR.N    R0,??DataTable1_2
@@ -568,12 +562,12 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_otr.c
    \   00000098   0x....             LDR.N    R0,??DataTable1
    \   0000009A   0xF8D0 0x066A      LDR      R0,[R0, #+1642]
    \   0000009E   0x.... 0x....      BL       CSNC_SendData
-    266              }
-    267              return 1;
+    262              }
+    263              return 1;
    \   000000A2   0x2001             MOVS     R0,#+1
    \                     ??comm_tinyrec_send_1: (+1)
    \   000000A4   0xBD3E             POP      {R1-R5,PC}       ;; return
-    268          }
+    264          }
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable1:
@@ -586,13 +580,13 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_otr.c
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable1_2:
    \   00000000   0x........         DC32     sCtrl+0x5AE
-    269          
-    270          /*******************************************************************************
-    271           * 				end of file
-    272           *******************************************************************************/
-    273          #endif
-    274          
-    275          
+    265          
+    266          /*******************************************************************************
+    267           * 				end of file
+    268           *******************************************************************************/
+    269          #endif
+    270          
+    271          
 
    Maximum stack usage in bytes:
 
@@ -601,7 +595,6 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_otr.c
       16   app_comm_otr
         16   -> comm_para_flow
         16   -> comm_tinyrec_send
-        16   -> osal_start_timerRl
       24   comm_tinyrec_send
         24   -> CSNC_SendData
 
@@ -613,13 +606,13 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_otr.c
        4  ??DataTable1
        4  ??DataTable1_1
        4  ??DataTable1_2
-     286  app_comm_otr
+     274  app_comm_otr
      166  comm_tinyrec_send
 
  
- 464 bytes in section .text
+ 452 bytes in section .text
  
- 464 bytes of CODE memory
+ 452 bytes of CODE memory
 
 Errors: none
 Warnings: none

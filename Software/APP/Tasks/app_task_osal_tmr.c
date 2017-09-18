@@ -162,12 +162,31 @@ osalEvt  TaskTmrEvtProcess(INT8U task_id, osalEvt task_event)
                     ( CPU_TS       ) 0,
                     ( OS_ERR      *) &err);        
 
-     osal_start_timerEx(  OS_TASK_ID_TMR,     //计数器重新开始
-                  OS_EVT_TMR_OTR,
-                  OS_TICKS_PER_SEC*2);                             
+         osal_start_timerEx(  OS_TASK_ID_TMR,     //计数器重新开始
+                      OS_EVT_TMR_OTR,
+                      OS_TICKS_PER_SEC*2);                             
 
          
         return ( task_event ^ OS_EVT_TMR_OTR );
+    }
+    
+    /***************************************************************************
+    * 描述： 超时操作 TAX 
+    COMM_EVT_FLAG_DTU_TIMEOUT 标示。
+    */
+    if( task_event & OS_EVT_TMR_TAX ) {            
+
+        OS_FlagPost(( OS_FLAG_GRP *)&sCtrl.Os.CommEvtFlagGrp,
+                    ( OS_FLAGS     ) COMM_EVT_FLAG_TAX_TIMEOUT,
+                    ( OS_OPT       ) OS_OPT_POST_FLAG_SET,
+                    ( CPU_TS       ) 0,
+                    ( OS_ERR      *) &err);        
+        
+        osal_start_timerEx(  OS_TASK_ID_TMR,     //计数器重新开始
+                  OS_EVT_TMR_TAX,
+                  OS_TICKS_PER_SEC*1);                             
+
+        return ( task_event ^ OS_EVT_TMR_TAX );
     }
 
     /***************************************************************************
@@ -188,7 +207,7 @@ osalEvt  TaskTmrEvtProcess(INT8U task_id, osalEvt task_event)
             if( sCtrl.Otr.ConnectTimeOut > 1)
                 sCtrl.Otr.ConnectFlag = 0;
 
-       osal_start_timerEx(  OS_TASK_ID_TMR,     //计数器重新开始
+            osal_start_timerEx(  OS_TASK_ID_TMR,     //计数器重新开始
                     OS_EVT_TMR_SEC,
                     OS_TICKS_PER_SEC);        
             

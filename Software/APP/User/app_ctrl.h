@@ -29,7 +29,7 @@
 #include <mb.h>
 #include <RecDataTypeDef.h>
 #include <CardDataTypeDef.h>
-
+#include "app_tax.h"
 
 #ifdef   APP_GLOBALS
 #define  APP_EXT
@@ -76,6 +76,9 @@
 #define COMM_EVT_FLAG_MTR_TIMEOUT           (1 << 3)	// MTR 操作超时，定时发送使用
 #define COMM_EVT_FLAG_DTU_TIMEOUT           (1 << 4)	// DTU 操作超时，定时发送使用
 #define COMM_EVT_FLAG_OTR_TIMEOUT           (1 << 5)	// OTR 操作超时，定时发送使用
+
+#define COMM_EVT_FLAG_TAX_RX                (1 << 6)	// OTR 接收事件
+#define COMM_EVT_FLAG_TAX_TIMEOUT           (1 << 7)	// OTR 操作超时，定时发送使用
 
 
 #define OS_EVT_FLAG_00                    (1 << 0)// 
@@ -129,6 +132,8 @@
 #define OS_EVT_TMR_MTR                  0X00000020
 #define OS_EVT_TMR_DTU                  0X00000040
 #define OS_EVT_TMR_OTR                  0X00000080
+#define OS_EVT_TMR_TAX                  0X00000100
+
 /***************************************************
 * 描述： OSAL事件定义：LED任务事件
 */
@@ -380,7 +385,7 @@ typedef struct {
     INT16U                  Speed;                              // 速度	        2	数值0-600（Km/H）
     struct __recv_work__ {                                     	// 机车工况	    1
     INT08U                  Null     	: 1;   	//              0x01:零位
-    INT08U                  Tow   	: 1;       	 //              0x02:牵引
+    INT08U                  Tow   	    : 1;       	 //              0x02:牵引
     INT08U                  Brake   	: 1;       	 //              0x04:制动
     INT08U                  Rsv        	: 5;  	// 其他：未定义
     } Work;
@@ -656,7 +661,66 @@ typedef struct {
 } StrDevOtr;
 
 
+/***************************************************
+* 描述： tax
+*/
+// 发送数据结构	卡-->统计		
+__packed
+typedef union {
+    uint8		Buf[160];		//	
+} UniTaxCommRecvData;
 
+// 发送数据结构  		统计--> 卡
+__packed
+typedef union {
+	stcFlshRec	sRec;						//数据记录     128 	
+    stcTinyRec  sTinyRec;                   //简单数据记录
+	uint8		Buf[160];					//
+} UniTaxCommSendData;
+
+
+//接收控制字
+typedef struct {     
+    INT08U          DestAddr;       //接收地址      slave  =0xA1\A2	   
+    INT08U          SourceAddr;     //源地址       master   =0x80	   
+    INT08U          FramNum;        //帧序号
+    INT08U			Len;			//接收有效数据长度
+    INT08U          FrameCode;       
+    INT08U          Tmp[3];
+    INT32U			DataCode;			//接收控制字
+} StrDevTaxRecvCtrl;
+
+//连接控制字，
+typedef struct {     
+    INT08U          ConnFlg;        //连接控制,1，允许连接，0，不允许连接
+    INT08U			RecvEndFlg;		//接收标示，1，数据接收完成，0，无数据接收。
+    INT08U			TimeOut;		//超时时间，单位1s
+    INT08U			ErrFlg;		    //错误标示，连接正常，0；连接错误，1
+
+    INT08U          SlaveAddr;       //接收地址      slave  =0xCA	   
+    INT08U          MasterAddr;     //源地址           master   =0x80	   
+    INT08U          SendFramNum;    //帧序号   
+    INT08U          SendFlg;        //发送标示， 有数据发送，1；无数据发送，0
+} StrDevTaxConnCtrl;		
+
+
+#define	COMM_DEV_TAX_CONN_NUM	2	// 设备连接数CA/C1	
+__packed
+typedef struct {  
+	UniTaxCommRecvData	Rd;			//接收数据区
+	UniTaxCommSendData	Wr;			//发送数据区
+
+    /***************************************************
+    * 描述： 串口控制组
+    */
+	StrDevTaxRecvCtrl    	RxCtrl;				        //接收控制，包含当前接收到的控制信息
+	StrDevTaxConnCtrl		ConnCtrl[COMM_DEV_TAX_CONN_NUM];//连接控制，对每个地址作为单独的数据连接。
+	
+    MODBUS_CH            	*pch;                   		// MODBUS句柄
+    
+    INT08U                  ConnectTimeOut  : 7;     	// 连接超时计数器，秒为单位
+    INT08U                  ConnectFlag     : 1;         	// 连接标志
+} StrDevTax;
 
 
 //    Ctrl.Os.CommEvtFlag = M_EVT_FLAG_HEART       	// ?????
@@ -669,8 +733,6 @@ typedef struct {
 //                        + COMM_EVT_FLAG_CONFIG     	 // ??
 //                        + COMM_EVT_FLAG_IAP_START  	 // IAP??
 //                        + COMM_EVT_FLAG_IAP_END;    	// IAP??
-
-
 
 //记录号管理:当前记录号，卡已读记录号，无线发送模块记录号
 //16 bytes
@@ -730,6 +792,15 @@ typedef struct _stcCalcModel_
 	uint8		valid;							// 1        使用
 	uint16		CrcCheck;						// 2 		CrcCheck;
 }stcCalcModel;
+
+typedef struct
+{
+    UnionTAX    Dat;
+    uint32      ConnectTimeOut;
+    uint8       ConnectFlag;
+    uint8       TaxType;    //1;0XF0:TAX2;  0XFA:TAX3/TAX07
+
+}stcTaxCtrl;
 
 //OS 系统运行参数。
 //事件标示组。
@@ -809,9 +880,17 @@ typedef struct _StrSysCtrlPara {
     //128 +128 + 8 + 8 + 4  = 276          
 	StrDevOtr	Otr;						//  和邋IC卡模块进行通讯控制字，接收收、发缓冲，	接收控制，发送控制
 
+    //
+    /***************************************************
+    * 描述：通讯设备描述，和TAX 通訊
+    */
+    // 
+    StrDevTax   DevTax;
+    
     //定义全局的Os操作变量?   
-    StrCtrlOS    	Os;                                	 // OS系统结构体变量    
-    	
+    StrCtrlOS    Os;                                	 // OS系统结构体变量    
+    
+    stcTaxCtrl   Tax;
 //    //显示结构体	
 //    	StrDisp           Disp;                            	//显示结构体变量 	
 	

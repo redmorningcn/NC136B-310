@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       07/Sep/2017  14:51:30
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       18/Sep/2017  11:57:10
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -102,6 +102,8 @@
 #        F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\csnr_package_deal\
 #        -I
 #        F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\iap\
+#        -I
+#        F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\tax\
 #        -On --use_c++_inline -I "C:\Program Files (x86)\IAR Systems\Embedded
 #        Workbench 7.3\arm\CMSIS\Include\"
 #    List file    =  
@@ -273,7 +275,7 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_osal_tmr.c
     132                  
     133                  return ( task_event ^ OS_EVT_TMR_MTR );
    \   00000038   0xF095 0x0020      EORS     R0,R5,#0x20
-   \   0000003C   0xE082             B.N      ??TaskTmrEvtProcess_1
+   \   0000003C   0xE096             B.N      ??TaskTmrEvtProcess_1
     134              }
     135              
     136              /***************************************************************************
@@ -307,7 +309,7 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_osal_tmr.c
     150                  
     151                  return ( task_event ^ OS_EVT_TMR_DTU );
    \   0000005E   0xF095 0x0040      EORS     R0,R5,#0x40
-   \   00000062   0xE06F             B.N      ??TaskTmrEvtProcess_1
+   \   00000062   0xE083             B.N      ??TaskTmrEvtProcess_1
     152              }
     153              
     154              /***************************************************************************
@@ -331,9 +333,9 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_osal_tmr.c
    \   00000072   0x....             LDR.N    R0,??DataTable1_1
    \   00000074   0x.... 0x....      BL       OS_FlagPost
     164          
-    165               osal_start_timerEx(  OS_TASK_ID_TMR,     //计数器重新开始
-    166                            OS_EVT_TMR_OTR,
-    167                            OS_TICKS_PER_SEC*2);                             
+    165                   osal_start_timerEx(  OS_TASK_ID_TMR,     //计数器重新开始
+    166                                OS_EVT_TMR_OTR,
+    167                                OS_TICKS_PER_SEC*2);                             
    \   00000078   0xF44F 0x62FA      MOV      R2,#+2000
    \   0000007C   0x2180             MOVS     R1,#+128
    \   0000007E   0x2001             MOVS     R0,#+1
@@ -342,167 +344,202 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_osal_tmr.c
     169                   
     170                  return ( task_event ^ OS_EVT_TMR_OTR );
    \   00000084   0xF095 0x0080      EORS     R0,R5,#0x80
-   \   00000088   0xE05C             B.N      ??TaskTmrEvtProcess_1
+   \   00000088   0xE070             B.N      ??TaskTmrEvtProcess_1
     171              }
-    172          
+    172              
     173              /***************************************************************************
-    174              * 描述： 统计模块和无线发送模块通讯定时器，
+    174              * 描述： 超时操作 TAX 
     175              COMM_EVT_FLAG_DTU_TIMEOUT 标示。
     176              */
-    177              if( task_event & OS_EVT_TMR_SEC ) {        
+    177              if( task_event & OS_EVT_TMR_TAX ) {            
    \                     ??TaskTmrEvtProcess_3: (+1)
-   \   0000008A   0x0768             LSLS     R0,R5,#+29
-   \   0000008C   0xD559             BPL.N    ??TaskTmrEvtProcess_4
-    178                      sCtrl.Dtu.ConnectTimeOut++;
-   \   0000008E   0x....             LDR.N    R0,??DataTable1_2
-   \   00000090   0xF890 0x050D      LDRB     R0,[R0, #+1293]
-   \   00000094   0xF010 0x0180      ANDS     R1,R0,#0x80
-   \   00000098   0x1C40             ADDS     R0,R0,#+1
-   \   0000009A   0xF010 0x007F      ANDS     R0,R0,#0x7F
-   \   0000009E   0x4308             ORRS     R0,R0,R1
-   \   000000A0   0x....             LDR.N    R1,??DataTable1_2
-   \   000000A2   0xF881 0x050D      STRB     R0,[R1, #+1293]
-    179                      sCtrl.Mtr.ConnectTimeOut++;
-   \   000000A6   0x....             LDR.N    R0,??DataTable1_2
-   \   000000A8   0xF890 0x03AC      LDRB     R0,[R0, #+940]
-   \   000000AC   0xF010 0x0180      ANDS     R1,R0,#0x80
-   \   000000B0   0x1C40             ADDS     R0,R0,#+1
-   \   000000B2   0xF010 0x007F      ANDS     R0,R0,#0x7F
-   \   000000B6   0x4308             ORRS     R0,R0,R1
-   \   000000B8   0x....             LDR.N    R1,??DataTable1_2
-   \   000000BA   0xF881 0x03AC      STRB     R0,[R1, #+940]
-    180                      sCtrl.Otr.ConnectTimeOut++;
-   \   000000BE   0x....             LDR.N    R0,??DataTable1_2
-   \   000000C0   0xF890 0x066E      LDRB     R0,[R0, #+1646]
-   \   000000C4   0xF010 0x0180      ANDS     R1,R0,#0x80
-   \   000000C8   0x1C40             ADDS     R0,R0,#+1
-   \   000000CA   0xF010 0x007F      ANDS     R0,R0,#0x7F
-   \   000000CE   0x4308             ORRS     R0,R0,R1
-   \   000000D0   0x....             LDR.N    R1,??DataTable1_2
-   \   000000D2   0xF881 0x066E      STRB     R0,[R1, #+1646]
-    181                      
-    182                      if( sCtrl.Dtu.ConnectTimeOut > 1)
-   \   000000D6   0x....             LDR.N    R0,??DataTable1_2
-   \   000000D8   0xF890 0x050D      LDRB     R0,[R0, #+1293]
-   \   000000DC   0xF010 0x007F      ANDS     R0,R0,#0x7F
-   \   000000E0   0x2802             CMP      R0,#+2
-   \   000000E2   0xDB07             BLT.N    ??TaskTmrEvtProcess_5
-    183                          sCtrl.Dtu.ConnectFlag = 0;
-   \   000000E4   0x....             LDR.N    R0,??DataTable1_2
-   \   000000E6   0xF890 0x050D      LDRB     R0,[R0, #+1293]
-   \   000000EA   0xF010 0x007F      ANDS     R0,R0,#0x7F
-   \   000000EE   0x....             LDR.N    R1,??DataTable1_2
-   \   000000F0   0xF881 0x050D      STRB     R0,[R1, #+1293]
-    184                      
-    185                      if( sCtrl.Mtr.ConnectTimeOut > 1)
-   \                     ??TaskTmrEvtProcess_5: (+1)
-   \   000000F4   0x....             LDR.N    R0,??DataTable1_2
-   \   000000F6   0xF890 0x03AC      LDRB     R0,[R0, #+940]
-   \   000000FA   0xF010 0x007F      ANDS     R0,R0,#0x7F
-   \   000000FE   0x2802             CMP      R0,#+2
-   \   00000100   0xDB07             BLT.N    ??TaskTmrEvtProcess_6
-    186                          sCtrl.Mtr.ConnectFlag = 0;
-   \   00000102   0x....             LDR.N    R0,??DataTable1_2
-   \   00000104   0xF890 0x03AC      LDRB     R0,[R0, #+940]
-   \   00000108   0xF010 0x007F      ANDS     R0,R0,#0x7F
-   \   0000010C   0x....             LDR.N    R1,??DataTable1_2
-   \   0000010E   0xF881 0x03AC      STRB     R0,[R1, #+940]
-    187                      
-    188                      if( sCtrl.Otr.ConnectTimeOut > 1)
-   \                     ??TaskTmrEvtProcess_6: (+1)
-   \   00000112   0x....             LDR.N    R0,??DataTable1_2
-   \   00000114   0xF890 0x066E      LDRB     R0,[R0, #+1646]
-   \   00000118   0xF010 0x007F      ANDS     R0,R0,#0x7F
-   \   0000011C   0x2802             CMP      R0,#+2
-   \   0000011E   0xDB07             BLT.N    ??TaskTmrEvtProcess_7
-    189                          sCtrl.Otr.ConnectFlag = 0;
-   \   00000120   0x....             LDR.N    R0,??DataTable1_2
-   \   00000122   0xF890 0x066E      LDRB     R0,[R0, #+1646]
-   \   00000126   0xF010 0x007F      ANDS     R0,R0,#0x7F
-   \   0000012A   0x....             LDR.N    R1,??DataTable1_2
-   \   0000012C   0xF881 0x066E      STRB     R0,[R1, #+1646]
-    190          
-    191                 osal_start_timerEx(  OS_TASK_ID_TMR,     //计数器重新开始
-    192                              OS_EVT_TMR_SEC,
-    193                              OS_TICKS_PER_SEC);        
-   \                     ??TaskTmrEvtProcess_7: (+1)
-   \   00000130   0xF44F 0x727A      MOV      R2,#+1000
-   \   00000134   0x2104             MOVS     R1,#+4
-   \   00000136   0x2001             MOVS     R0,#+1
-   \   00000138   0x.... 0x....      BL       osal_start_timerEx
-    194                      
-    195                  return ( task_event ^ OS_EVT_TMR_SEC );
-   \   0000013C   0xF095 0x0004      EORS     R0,R5,#0x4
-   \   00000140   0xE000             B.N      ??TaskTmrEvtProcess_1
-    196              }
-    197              return 0;
+   \   0000008A   0x05E8             LSLS     R0,R5,#+23
+   \   0000008C   0xD511             BPL.N    ??TaskTmrEvtProcess_4
+    178          
+    179                  OS_FlagPost(( OS_FLAG_GRP *)&sCtrl.Os.CommEvtFlagGrp,
+    180                              ( OS_FLAGS     ) COMM_EVT_FLAG_TAX_TIMEOUT,
+    181                              ( OS_OPT       ) OS_OPT_POST_FLAG_SET,
+    182                              ( CPU_TS       ) 0,
+    183                              ( OS_ERR      *) &err);        
+   \   0000008E   0xA801             ADD      R0,SP,#+4
+   \   00000090   0x9000             STR      R0,[SP, #+0]
+   \   00000092   0x2300             MOVS     R3,#+0
+   \   00000094   0x2200             MOVS     R2,#+0
+   \   00000096   0x2180             MOVS     R1,#+128
+   \   00000098   0x....             LDR.N    R0,??DataTable1_1
+   \   0000009A   0x.... 0x....      BL       OS_FlagPost
+    184                  
+    185                  osal_start_timerEx(  OS_TASK_ID_TMR,     //计数器重新开始
+    186                            OS_EVT_TMR_TAX,
+    187                            OS_TICKS_PER_SEC*1);                             
+   \   0000009E   0xF44F 0x727A      MOV      R2,#+1000
+   \   000000A2   0xF44F 0x7180      MOV      R1,#+256
+   \   000000A6   0x2001             MOVS     R0,#+1
+   \   000000A8   0x.... 0x....      BL       osal_start_timerEx
+    188          
+    189                  return ( task_event ^ OS_EVT_TMR_TAX );
+   \   000000AC   0xF495 0x7080      EORS     R0,R5,#0x100
+   \   000000B0   0xE05C             B.N      ??TaskTmrEvtProcess_1
+    190              }
+    191          
+    192              /***************************************************************************
+    193              * 描述： 统计模块和无线发送模块通讯定时器，
+    194              COMM_EVT_FLAG_DTU_TIMEOUT 标示。
+    195              */
+    196              if( task_event & OS_EVT_TMR_SEC ) {        
    \                     ??TaskTmrEvtProcess_4: (+1)
-   \   00000142   0x2000             MOVS     R0,#+0
+   \   000000B2   0x0768             LSLS     R0,R5,#+29
+   \   000000B4   0xD559             BPL.N    ??TaskTmrEvtProcess_5
+    197                      sCtrl.Dtu.ConnectTimeOut++;
+   \   000000B6   0x....             LDR.N    R0,??DataTable1_2
+   \   000000B8   0xF890 0x050D      LDRB     R0,[R0, #+1293]
+   \   000000BC   0xF010 0x0180      ANDS     R1,R0,#0x80
+   \   000000C0   0x1C40             ADDS     R0,R0,#+1
+   \   000000C2   0xF010 0x007F      ANDS     R0,R0,#0x7F
+   \   000000C6   0x4308             ORRS     R0,R0,R1
+   \   000000C8   0x....             LDR.N    R1,??DataTable1_2
+   \   000000CA   0xF881 0x050D      STRB     R0,[R1, #+1293]
+    198                      sCtrl.Mtr.ConnectTimeOut++;
+   \   000000CE   0x....             LDR.N    R0,??DataTable1_2
+   \   000000D0   0xF890 0x03AC      LDRB     R0,[R0, #+940]
+   \   000000D4   0xF010 0x0180      ANDS     R1,R0,#0x80
+   \   000000D8   0x1C40             ADDS     R0,R0,#+1
+   \   000000DA   0xF010 0x007F      ANDS     R0,R0,#0x7F
+   \   000000DE   0x4308             ORRS     R0,R0,R1
+   \   000000E0   0x....             LDR.N    R1,??DataTable1_2
+   \   000000E2   0xF881 0x03AC      STRB     R0,[R1, #+940]
+    199                      sCtrl.Otr.ConnectTimeOut++;
+   \   000000E6   0x....             LDR.N    R0,??DataTable1_2
+   \   000000E8   0xF890 0x066E      LDRB     R0,[R0, #+1646]
+   \   000000EC   0xF010 0x0180      ANDS     R1,R0,#0x80
+   \   000000F0   0x1C40             ADDS     R0,R0,#+1
+   \   000000F2   0xF010 0x007F      ANDS     R0,R0,#0x7F
+   \   000000F6   0x4308             ORRS     R0,R0,R1
+   \   000000F8   0x....             LDR.N    R1,??DataTable1_2
+   \   000000FA   0xF881 0x066E      STRB     R0,[R1, #+1646]
+    200                      
+    201                      if( sCtrl.Dtu.ConnectTimeOut > 1)
+   \   000000FE   0x....             LDR.N    R0,??DataTable1_2
+   \   00000100   0xF890 0x050D      LDRB     R0,[R0, #+1293]
+   \   00000104   0xF010 0x007F      ANDS     R0,R0,#0x7F
+   \   00000108   0x2802             CMP      R0,#+2
+   \   0000010A   0xDB07             BLT.N    ??TaskTmrEvtProcess_6
+    202                          sCtrl.Dtu.ConnectFlag = 0;
+   \   0000010C   0x....             LDR.N    R0,??DataTable1_2
+   \   0000010E   0xF890 0x050D      LDRB     R0,[R0, #+1293]
+   \   00000112   0xF010 0x007F      ANDS     R0,R0,#0x7F
+   \   00000116   0x....             LDR.N    R1,??DataTable1_2
+   \   00000118   0xF881 0x050D      STRB     R0,[R1, #+1293]
+    203                      
+    204                      if( sCtrl.Mtr.ConnectTimeOut > 1)
+   \                     ??TaskTmrEvtProcess_6: (+1)
+   \   0000011C   0x....             LDR.N    R0,??DataTable1_2
+   \   0000011E   0xF890 0x03AC      LDRB     R0,[R0, #+940]
+   \   00000122   0xF010 0x007F      ANDS     R0,R0,#0x7F
+   \   00000126   0x2802             CMP      R0,#+2
+   \   00000128   0xDB07             BLT.N    ??TaskTmrEvtProcess_7
+    205                          sCtrl.Mtr.ConnectFlag = 0;
+   \   0000012A   0x....             LDR.N    R0,??DataTable1_2
+   \   0000012C   0xF890 0x03AC      LDRB     R0,[R0, #+940]
+   \   00000130   0xF010 0x007F      ANDS     R0,R0,#0x7F
+   \   00000134   0x....             LDR.N    R1,??DataTable1_2
+   \   00000136   0xF881 0x03AC      STRB     R0,[R1, #+940]
+    206                      
+    207                      if( sCtrl.Otr.ConnectTimeOut > 1)
+   \                     ??TaskTmrEvtProcess_7: (+1)
+   \   0000013A   0x....             LDR.N    R0,??DataTable1_2
+   \   0000013C   0xF890 0x066E      LDRB     R0,[R0, #+1646]
+   \   00000140   0xF010 0x007F      ANDS     R0,R0,#0x7F
+   \   00000144   0x2802             CMP      R0,#+2
+   \   00000146   0xDB07             BLT.N    ??TaskTmrEvtProcess_8
+    208                          sCtrl.Otr.ConnectFlag = 0;
+   \   00000148   0x....             LDR.N    R0,??DataTable1_2
+   \   0000014A   0xF890 0x066E      LDRB     R0,[R0, #+1646]
+   \   0000014E   0xF010 0x007F      ANDS     R0,R0,#0x7F
+   \   00000152   0x....             LDR.N    R1,??DataTable1_2
+   \   00000154   0xF881 0x066E      STRB     R0,[R1, #+1646]
+    209          
+    210                      osal_start_timerEx(  OS_TASK_ID_TMR,     //计数器重新开始
+    211                              OS_EVT_TMR_SEC,
+    212                              OS_TICKS_PER_SEC);        
+   \                     ??TaskTmrEvtProcess_8: (+1)
+   \   00000158   0xF44F 0x727A      MOV      R2,#+1000
+   \   0000015C   0x2104             MOVS     R1,#+4
+   \   0000015E   0x2001             MOVS     R0,#+1
+   \   00000160   0x.... 0x....      BL       osal_start_timerEx
+    213                      
+    214                  return ( task_event ^ OS_EVT_TMR_SEC );
+   \   00000164   0xF095 0x0004      EORS     R0,R5,#0x4
+   \   00000168   0xE000             B.N      ??TaskTmrEvtProcess_1
+    215              }
+    216              return 0;
+   \                     ??TaskTmrEvtProcess_5: (+1)
+   \   0000016A   0x2000             MOVS     R0,#+0
    \                     ??TaskTmrEvtProcess_1: (+1)
-   \   00000144   0xBD3E             POP      {R1-R5,PC}       ;; return
-    198          }
-    199          
-    200          /*******************************************************************************
-    201           * 名    称： APP_TmrInit
-    202           * 功    能： 任务初始化
-    203           * 入口参数： 无
-    204           * 出口参数： 无
-    205           * 作　　者： wumingshen.
-    206           * 创建日期： 2015-03-28
-    207           * 修    改：
-    208           * 修改日期：
-    209           *******************************************************************************/
+   \   0000016C   0xBD3E             POP      {R1-R5,PC}       ;; return
+    217          }
+    218          
+    219          /*******************************************************************************
+    220           * 名    称： APP_TmrInit
+    221           * 功    能： 任务初始化
+    222           * 入口参数： 无
+    223           * 出口参数： 无
+    224           * 作　　者： wumingshen.
+    225           * 创建日期： 2015-03-28
+    226           * 修    改：
+    227           * 修改日期：
+    228           *******************************************************************************/
 
    \                                 In section .text, align 2, keep-with-next
-    210          void TaskInitTmr(void)
-    211          {
+    229          void TaskInitTmr(void)
+    230          {
    \                     TaskInitTmr: (+1)
    \   00000000   0xB580             PUSH     {R7,LR}
-    212              /***********************************************
-    213              * 描述： 初始化
-    214              */    
-    215                 
-    216              /***********************************************
-    217              * 描述： 在看门狗标志组注册本任务的看门狗标志
-    218              */
-    219              WdtFlags |= WDT_FLAG_TMR;
+    231              /***********************************************
+    232              * 描述： 初始化
+    233              */    
+    234                 
+    235              /***********************************************
+    236              * 描述： 在看门狗标志组注册本任务的看门狗标志
+    237              */
+    238              WdtFlags |= WDT_FLAG_TMR;
    \   00000002   0x....             LDR.N    R0,??DataTable1_3
    \   00000004   0x6800             LDR      R0,[R0, #+0]
    \   00000006   0xF050 0x0004      ORRS     R0,R0,#0x4
    \   0000000A   0x....             LDR.N    R1,??DataTable1_3
    \   0000000C   0x6008             STR      R0,[R1, #+0]
-    220              /*************************************************
-    221              * 描述：启动事件查询
-    222              */
-    223              //2017一段时间后，无通讯。
-    224              
-    225          //    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_SEC, OS_TICKS_PER_SEC);   
-    226          //    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_MTR, OS_TICKS_PER_SEC*1 );  //统计模块和测量装置通讯定时器  500ms
-    227          //    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_DTU, OS_TICKS_PER_SEC*2 );  //统计装置和无线发送模块定时器  500ms
-    228          //    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_OTR, OS_TICKS_PER_SEC*10 ); //统计模块和IC卡模块通讯定时器  500ms  
-    229              
-    230              osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_SEC,OS_TICKS_PER_SEC);   
+    239              /*************************************************
+    240              * 描述：启动事件查询
+    241              */
+    242              //2017一段时间后，无通讯。
+    243              
+    244          //    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_SEC, OS_TICKS_PER_SEC);   
+    245          //    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_MTR, OS_TICKS_PER_SEC*1 );  //统计模块和测量装置通讯定时器  500ms
+    246          //    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_DTU, OS_TICKS_PER_SEC*2 );  //统计装置和无线发送模块定时器  500ms
+    247          //    osal_start_timerRl( OS_TASK_ID_TMR, OS_EVT_TMR_OTR, OS_TICKS_PER_SEC*10 ); //统计模块和IC卡模块通讯定时器  500ms  
+    248              
+    249              osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_SEC,OS_TICKS_PER_SEC);   
    \   0000000E   0xF44F 0x727A      MOV      R2,#+1000
    \   00000012   0x2104             MOVS     R1,#+4
    \   00000014   0x2001             MOVS     R0,#+1
    \   00000016   0x.... 0x....      BL       osal_start_timerEx
-    231              osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_MTR,OS_TICKS_PER_SEC*1 ); 
+    250              osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_MTR,OS_TICKS_PER_SEC*1 ); 
    \   0000001A   0xF44F 0x727A      MOV      R2,#+1000
    \   0000001E   0x2120             MOVS     R1,#+32
    \   00000020   0x2001             MOVS     R0,#+1
    \   00000022   0x.... 0x....      BL       osal_start_timerEx
-    232              osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_DTU,OS_TICKS_PER_SEC*2 ); 
+    251              osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_DTU,OS_TICKS_PER_SEC*2 ); 
    \   00000026   0xF44F 0x62FA      MOV      R2,#+2000
    \   0000002A   0x2140             MOVS     R1,#+64
    \   0000002C   0x2001             MOVS     R0,#+1
    \   0000002E   0x.... 0x....      BL       osal_start_timerEx
-    233              osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_OTR,OS_TICKS_PER_SEC*10 );
+    252              osal_start_timerEx( OS_TASK_ID_TMR, OS_EVT_TMR_OTR,OS_TICKS_PER_SEC*10 );
    \   00000032   0xF242 0x7210      MOVW     R2,#+10000
    \   00000036   0x2180             MOVS     R1,#+128
    \   00000038   0x2001             MOVS     R0,#+1
    \   0000003A   0x.... 0x....      BL       osal_start_timerEx
-    234          
-    235          }
+    253          
+    254          }
    \   0000003E   0xBD01             POP      {R0,PC}          ;; return
 
    \                                 In section .text, align 4, keep-with-next
@@ -511,7 +548,7 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_osal_tmr.c
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable1_1:
-   \   00000000   0x........         DC32     sCtrl+0x69B
+   \   00000000   0x........         DC32     sCtrl+0x7FC
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable1_2:
@@ -520,11 +557,11 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_osal_tmr.c
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable1_3:
    \   00000000   0x........         DC32     WdtFlags
-    236          
-    237          /*******************************************************************************
-    238           * 				                    end of file                                *
-    239           *******************************************************************************/
-    240          #endif
+    255          
+    256          /*******************************************************************************
+    257           * 				                    end of file                                *
+    258           *******************************************************************************/
+    259          #endif
 
    Maximum stack usage in bytes:
 
@@ -546,12 +583,12 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_osal_tmr.c
        4  ??DataTable1_2
        4  ??DataTable1_3
       64  TaskInitTmr
-     326  TaskTmrEvtProcess
+     366  TaskTmrEvtProcess
 
  
- 406 bytes in section .text
+ 446 bytes in section .text
  
- 406 bytes of CODE memory
+ 446 bytes of CODE memory
 
 Errors: none
 Warnings: 1

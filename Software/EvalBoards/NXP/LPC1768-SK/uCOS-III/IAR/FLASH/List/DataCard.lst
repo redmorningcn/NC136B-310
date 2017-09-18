@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       06/Sep/2017  10:50:16
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       18/Sep/2017  09:40:30
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -103,6 +103,8 @@
 #        F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\csnr_package_deal\
 #        -I
 #        F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\iap\
+#        -I
+#        F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\IAR\..\..\..\..\..\..\Application\Library\tax\
 #        -On --use_c++_inline -I "C:\Program Files (x86)\IAR Systems\Embedded
 #        Workbench 7.3\arm\CMSIS\Include\"
 #    List file    =  
@@ -214,7 +216,7 @@ F:\iar\NC136B-310统计模块\Application\Library\CardOperations\DataCard.c
    \   00000018   0x0020             MOVS     R0,R4
    \   0000001A   0x4669             MOV      R1,SP
    \   0000001C   0x2280             MOVS     R2,#+128
-   \   0000001E   0x.... 0x....      BL       __aeabi_memcpy4
+   \   0000001E   0x.... 0x....      BL       __aeabi_memcpy
    \   00000022   0xB020             ADD      SP,SP,#+128
    \   00000024   0xBCF0             POP      {R4-R7}
    \   00000026   0xF85D 0xFB10      LDR      PC,[SP], #+16    ;; return
@@ -1892,7 +1894,6 @@ F:\iar\NC136B-310统计模块\Application\Library\CardOperations\DataCard.c
        0   DataCardPartRead
      160   FlshRecToCardRec
        160   -> __aeabi_memcpy
-       160   -> __aeabi_memcpy4
        0   GetCardMaxRecNum
        0   GetReadFlshRecCnt
        0   GetUnFihCardEvtFlg

@@ -126,9 +126,6 @@ void  CalcSpeedcs( void )
     PluseCnt = m_sSpeedcsPluse.PluseCnt;
 	cstime	 = m_sSpeedcsPluse.TimeCnt;
     	
-
-    
-    
 //	if(sSpeedPluse.TimeCnt)
 //	{
 //		if(times < 3)

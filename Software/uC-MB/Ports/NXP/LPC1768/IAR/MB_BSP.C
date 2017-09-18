@@ -67,7 +67,8 @@
 //0ºÅ´®¿ÚÒı½ÅÅäÖÃ
 #define     TXD0	        2
 #define     RXD0	        3
-#define     EN_485_0		27
+//#define     EN_485_0		27
+#define     EN_485_0		428
 
 //1ºÅ´®¿ÚÒı½ÅÅäÖÃ
 #define		TXD1            15
