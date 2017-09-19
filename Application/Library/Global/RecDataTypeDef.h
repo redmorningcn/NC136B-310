@@ -106,8 +106,6 @@ typedef __packed struct _stcFlshRec   	//定义油尺记录数据结构
 	uint16	MyDip1Den;
 	uint16	MyDip2Den;	
 
-	
-	
 //	uint16 	SlvPot1;			//从机均缸1				2	预留接监控		
 //	uint16 	SlvPot2;			//从机均缸2				2	预留接监控
 	uint16	MyDip1Err;

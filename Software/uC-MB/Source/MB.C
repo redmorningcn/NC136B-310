@@ -972,19 +972,22 @@ void  MB_RTU_TmrUpdate (void)
     CPU_INT08U   ch;
     MODBUS_CH   *pch;
 
-
     pch = &MB_ChTbl[0];
     for (ch = 0; ch < MODBUS_CFG_MAX_CH; ch++) {
         if (pch->Mode == MODBUS_MODE_RTU) {
             if (pch->RTU_TimeoutEn == DEF_TRUE) {
                 if (pch->RTU_TimeoutCtr > 0) {
                     pch->RTU_TimeoutCtr--;
-                    if (pch->RTU_TimeoutCtr == 0) {
+                    if (
+                                pch->RTU_TimeoutCtr == 0                        //redmorningcn 超时
+                          ||    pch->RxBufByteCtr >= MODBUS_CFG_BUF_SIZE -1     //redmorningcn 20170919接收区已满   
+                        ) {
 #if (MODBUS_CFG_RTU_EN == DEF_ENABLED)
                         //if (pch->MasterSlave == MODBUS_MASTER) {  // 无名沈注释掉
                             pch->RTU_TimeoutEn = DEF_FALSE;
                         //}                                         // 无名沈注释掉
 #endif
+                        //redmorningcn 在信号超时发送信号量的基础上，增加接收缓冲区满也发送信号量 20170919
                         MB_OS_RxSignal(pch);          /* RTU Timer expired for this Modbus channel         */
                     }
                 }

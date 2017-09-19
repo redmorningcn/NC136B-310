@@ -179,47 +179,8 @@ void  StoreData(void)
 {	
 	uint32				FlshAddr;							//数据存储地址
     stcTime             sTime;
-//  数据记录内容更新在应用中进行。
-//	数据内容存储在sCtrl.sRec 中。
-/*
-速度1，速度2，柴油机转速，工况，在app_task_osal_speed中更新
-油量，在app_task_osal_calc中更新
-高度1，高度2，在app_task_oasl_comm中更新
-*/    
-//  存储时更新的内容
-	sCtrl.sRec.StoreCnt = sCtrl.sRecNumMgr.Current;     //取当前数据记录号	
 
-//  装置时间:年-月-日，时-分-秒
-	ReadTime((stcTime *)&sTime);
 
-	sCtrl.sRec.MyYear		= sTime.Year;			
-	sCtrl.sRec.MyMonth	    = sTime.Month;		
-	sCtrl.sRec.MyData		= sTime.Date;			
-	sCtrl.sRec.MyHour		= sTime.Hour;			
-	sCtrl.sRec.MyMinute	    = sTime.Min;			
-	sCtrl.sRec.MySecond	    = sTime.Sec;			
-
-//开机标示
-    if(sCtrl.sRunPara.StartFlg)
-    {
-        sCtrl.sRec.RecTypCod = START_EVT;               
-        sCtrl.sRunPara.StartFlg = 0;
-    }
-    
-//存储机车信息
-    sCtrl.sRec.JcRealType   = sCtrl.sProductInfo.sLocoId.Type;
-    sCtrl.sRec.JcRealNo     = sCtrl.sProductInfo.sLocoId.Num;
-
-//软件版本    
-    sCtrl.sRec.SoftVes 	    = sCtrl.SoftWareID;     
-//故障代码
-//    sCtrl.sRec.ErrorCode    = 
-
-//运算参数
-    sCtrl.sRec.OilBoxModel  = sCtrl.SOilPara.ModelNum;
-//    sCtrl.sRec.
-        
-    
 //暂时没用的数据清零    
     sCtrl.sRec.GpsLatitude     = 0;
     sCtrl.sRec.GpsLongitude    = 0;
@@ -239,7 +200,54 @@ void  StoreData(void)
     sCtrl.sRec.SlvDip1Prs      = 0;
     sCtrl.sRec.SlvDip2Prs      = 0;
 
-     
+//  数据记录内容更新在应用中进行。
+//	数据内容存储在sCtrl.sRec 中。
+         
+/*
+速度1，速度2，柴油机转速，工况，在app_task_osal_speed中更新
+油量，在app_task_osal_calc中更新
+高度1，高度2，在app_task_oasl_comm中更新
+*/    
+//  存储时更新的内容
+	sCtrl.sRec.StoreCnt = sCtrl.sRecNumMgr.Current;     //取当前数据记录号	
+
+//  装置时间:年-月-日，时-分-秒
+	ReadTime((stcTime *)&sTime);
+
+	sCtrl.sRec.MyYear		= sTime.Year;			
+	sCtrl.sRec.MyMonth	    = sTime.Month;		
+	sCtrl.sRec.MyData		= sTime.Date;			
+	sCtrl.sRec.MyHour		= sTime.Hour;			
+	sCtrl.sRec.MyMinute	    = sTime.Min;			
+	sCtrl.sRec.MySecond	    = sTime.Sec;			
+
+//开机标示
+    sCtrl.sRec.RecTypCod = 0xff;                    //正常
+    if(sCtrl.sRunPara.StartFlg)
+    {
+        sCtrl.sRec.RecTypCod = START_EVT;           //開機          
+        sCtrl.sRunPara.StartFlg = 0;
+    }
+    else
+    {
+        //sCtrl.sRec.RecTypCod = 
+    }
+        
+    
+//存储机车信息
+    sCtrl.sRec.JcRealType   = sCtrl.sProductInfo.sLocoId.Type;
+    sCtrl.sRec.JcRealNo     = sCtrl.sProductInfo.sLocoId.Num;
+
+//软件版本    
+    sCtrl.sRec.SoftVes 	    = sCtrl.SoftWareID;     
+//故障代码
+//    sCtrl.sRec.ErrorCode    = 
+
+//运算参数
+    sCtrl.sRec.OilBoxModel  = sCtrl.SOilPara.ModelNum;
+//    sCtrl.sRec.
+        
+    
 // 	保存TAX箱信息 
     GetTaxInfoToRecord(&sCtrl.sRec);
      
@@ -353,13 +361,13 @@ osalEvt  TaskStoreEvtProcess(INT8U task_id, osalEvt task_event)
 
     if( task_event & OS_EVT_STORE_TICKS ) {
 
-            StoreData();            //保存数据记录
-            
-            osal_start_timerEx( OS_TASK_ID_STORE,
-                                OS_EVT_STORE_TICKS,
-                                1000*60);
-                                //1000);
-            return ( task_event ^ OS_EVT_STORE_TICKS );
+        StoreData();            //保存数据记录
+        
+        osal_start_timerEx( OS_TASK_ID_STORE,
+                            OS_EVT_STORE_TICKS,
+                            1000*60);
+                            //1000);
+        return ( task_event ^ OS_EVT_STORE_TICKS );
     }
 }
 

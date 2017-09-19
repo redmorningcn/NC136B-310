@@ -447,7 +447,7 @@ uint8    comm_record_send_one(StrDevDtu * sDtu,uint8    addrnum)
             FRAM_StoreRecNumMgr((StrRecNumMgr *)&sCtrl.sRecNumMgr);         //保存记录号
         }
         
-        sCtrl.Dtu.ConnCtrl[addrnum].SendFramNum++;
+        //sDtu->ConnCtrl[addrnum].SendFramNum++;                            //发送序号由接收控制
         
         /***********************************************
         * 描述： 数据记录准备,根据记录号取数据记录。
@@ -525,7 +525,7 @@ void    comm_record_send(StrDevDtu * sDtu,uint8 addrnum)
     * 
     */                         
     if(sDtu->RxCtrl.FramNum == sDtu->ConnCtrl[addrnum].SendFramNum){
-        sDtu->ConnCtrl[addrnum].SendFramNum++;    //数据正确，序号加1
+        sDtu->ConnCtrl[addrnum].SendFramNum++;                  //数据正确，序号加1
         sCtrl.sRecNumMgr.GrsRead++;
         
         CPU_SR  cpu_sr;

@@ -52,9 +52,9 @@ const  CPU_CHAR  *app_comm_dtu__c = "$Id: $";
  * TYPEDEFS
  */
 //IAP 下载帧控制字
-#define     IAP_FRAME_CODE      10 
+#define     IAP_FRAME_CODE          10 
 //SET 设置控制字
-#define     SET_FRAME_CODE      2      
+#define     SET_FRAME_CODE          2      
 
 
 /*******************************************************************************
@@ -226,7 +226,7 @@ void    app_comm_dtu(void)
         * 描述： 如果是超时。
         * 发送数据
         */ 
-        if( sCtrl.sRecNumMgr.Current == 0 )                     //记录号为0，还未发送数据。不做通讯状态判断
+        if( sCtrl.sRecNumMgr.Current == 0 )                                     //记录号为0，还未发送数据。不做通讯状态判断
         {
             uint8 i = 0;
             while( i < COMM_DEV_DTU_CONN_NUM){
@@ -239,10 +239,14 @@ void    app_comm_dtu(void)
         //发送1条数据记录
         i =0 ;
         while(i < COMM_DEV_DTU_CONN_NUM){
-            if(sCtrl.Dtu.ConnCtrl[i].SlaveAddr == SLAVE_ADDR_DTU){
-                                                                //对DTU地址发送数据        
-                comm_record_send_one((StrDevDtu *)&sCtrl.Dtu,i);  
-                break;
+            if(sCtrl.Dtu.ConnCtrl[i].SlaveAddr == SLAVE_ADDR_DTU){              //对DTU地址发送数据 
+                                                                                    
+                if(     sCtrl.sRecNumMgr.Current > sCtrl.sRecNumMgr.GrsRead      //数据未发完，10每次，否则，有新数据才发送
+                   ||   sCtrl.sRecNumMgr.GrsRead >  sCtrl.sRecNumMgr.Current   ) //记录异常，也发送
+                {
+                    comm_record_send_one((StrDevDtu *)&sCtrl.Dtu,i);  
+                    break;
+                }
             }
             i++;
         }
