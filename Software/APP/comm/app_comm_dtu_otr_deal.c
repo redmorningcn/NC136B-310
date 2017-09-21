@@ -379,7 +379,7 @@ void    comm_para_flow(StrDevDtu * sDtu,uint8 addrnum)
         
     case    RUN_MODEL_PARA:
         
-       uprintf("SET1");         //立即显示设定值 
+        uprintf("SET--");         //立即显示设定值 
 
         memcpy((uint8 *)&tmp32, &sDtu->Rd.Buf[0],sizeof(tmp32));        //取帧序号
         if(tmp32 < (1 + sizeof(l_sCalcModel)/128 ))                     //序号有效
@@ -402,6 +402,13 @@ void    comm_para_flow(StrDevDtu * sDtu,uint8 addrnum)
                     
                     FRAM_StoreCalcModel(&sCtrl.sCalcModel);
                 }
+                
+                //设置成功后，指示
+                uprintf("SET-%d",l_sCalcModel.ModelNum);         //立即显示设定值 
+                tmp32 = 1000000;
+                while(tmp32--);
+                uprintf("SET-%d",l_sCalcModel.ModelNum);         //立即显示设定值 
+
             }
         }
         

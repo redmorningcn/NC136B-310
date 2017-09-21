@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       19/Sep/2017  19:02:33
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       22/Sep/2017  01:41:02
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -158,95 +158,97 @@ F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\app.c
      41          *********************************************************************************************************
      42          */
      43          
-     44          
-     45          /*
-     46          *********************************************************************************************************
-     47          *                                       LOCAL GLOBAL VARIABLES
+     44          //正常运行,
+     45          #define     DEBUG_MODEL_DISENABLE    1 
+     46          
+     47          /*
      48          *********************************************************************************************************
-     49          */
-     50          
-     51                                                                          /* ----------------- APPLICATION GLOBALS ------------------ */
-     52                                                                          /* -------- uC/OS-III APPLICATION TASK STACKS ------------- */
+     49          *                                       LOCAL GLOBAL VARIABLES
+     50          *********************************************************************************************************
+     51          */
+     52          
+     53                                                                          /* ----------------- APPLICATION GLOBALS ------------------ */
+     54                                                                          /* -------- uC/OS-III APPLICATION TASK STACKS ------------- */
 
    \                                 In section .bss, align 4
-     53          static  OS_TCB        App_TaskStartTCB;
+     55          static  OS_TCB        App_TaskStartTCB;
    \                     App_TaskStartTCB:
    \   00000000                      DS8 200
 
    \                                 In section .bss, align 4
-     54          static  CPU_STK_SIZE  App_TaskStartStk[APP_CFG_TASK_START_STK_SIZE];
+     56          static  CPU_STK_SIZE  App_TaskStartStk[APP_CFG_TASK_START_STK_SIZE];
    \                     App_TaskStartStk:
    \   00000000                      DS8 256
-     55          
-     56          
-     57          /*
-     58          *********************************************************************************************************
-     59          *                                      LOCAL FUNCTION PROTOTYPES
+     57          
+     58          
+     59          /*
      60          *********************************************************************************************************
-     61          */
-     62          
-     63          static  void  App_ObjCreate          (void);
-     64          static  void  App_TaskCreate         (void);
-     65          static  void  App_TaskStart          (void       *p_arg);
-     66          
-     67          
-     68          /*
-     69          *********************************************************************************************************
-     70          *                                                main()
-     71          *
-     72          * Description : This is the standard entry point for C code.  It is assumed that your code will call
-     73          *               main() once you have performed all necessary initialization.
-     74          *
-     75          * Argument(s) : none.
+     61          *                                      LOCAL FUNCTION PROTOTYPES
+     62          *********************************************************************************************************
+     63          */
+     64          
+     65          static  void  App_ObjCreate          (void);
+     66          static  void  App_TaskCreate         (void);
+     67          static  void  App_TaskStart          (void       *p_arg);
+     68          
+     69          
+     70          /*
+     71          *********************************************************************************************************
+     72          *                                                main()
+     73          *
+     74          * Description : This is the standard entry point for C code.  It is assumed that your code will call
+     75          *               main() once you have performed all necessary initialization.
      76          *
-     77          * Return(s)   : none.
+     77          * Argument(s) : none.
      78          *
-     79          * Caller(s)   : This the main standard entry point.
+     79          * Return(s)   : none.
      80          *
-     81          * Note(s)     : none.
-     82          *********************************************************************************************************
-     83          */
-     84          
+     81          * Caller(s)   : This the main standard entry point.
+     82          *
+     83          * Note(s)     : none.
+     84          *********************************************************************************************************
+     85          */
+     86          
 
    \                                 In section .text, align 2, keep-with-next
-     85          int  main (void)
-     86          {
+     87          int  main (void)
+     88          {
    \                     main: (+1)
    \   00000000   0xB500             PUSH     {LR}
    \   00000002   0xB08B             SUB      SP,SP,#+44
-     87              OS_ERR  err;
-     88              
-     89              App_Main();
+     89              OS_ERR  err;
+     90              
+     91              App_Main();
    \   00000004   0x.... 0x....      BL       App_Main
-     90          
-     91              CPU_Init();
+     92          
+     93              CPU_Init();
    \   00000008   0x.... 0x....      BL       CPU_Init
-     92               
-     93              //NVIC_SetVTOR(0x10000);  //20170815补充
-     94          
-     95              BSP_Init();                                                 /* Initialize BSP functions                             */
-   \   0000000C   0x.... 0x....      BL       BSP_Init
+     94               
+     95              //NVIC_SetVTOR(0x10000);  //20170815补充
      96          
-     97              Mem_Init();
-   \   00000010   0x.... 0x....      BL       Mem_Init
+     97              BSP_Init();                                                 /* Initialize BSP functions                             */
+   \   0000000C   0x.... 0x....      BL       BSP_Init
      98          
-     99              OSInit(&err);                                               /* Initialize "uC/OS-III, The Real-Time Kernel"         */
+     99              Mem_Init();
+   \   00000010   0x.... 0x....      BL       Mem_Init
+    100          
+    101              OSInit(&err);                                               /* Initialize "uC/OS-III, The Real-Time Kernel"         */
    \   00000014   0xA809             ADD      R0,SP,#+36
    \   00000016   0x.... 0x....      BL       OSInit
-    100          
-    101              OSTaskCreate((OS_TCB     *)&App_TaskStartTCB,               /* Create the start task                                */
-    102                           (CPU_CHAR   *)"App Task Start",
-    103                           (OS_TASK_PTR ) App_TaskStart,
-    104                           (void       *) 0,
-    105                           (OS_PRIO     ) APP_CFG_TASK_START_PRIO,
-    106                           (CPU_STK    *)&App_TaskStartStk[0],
-    107                           (CPU_STK     )(APP_CFG_TASK_START_STK_SIZE / 10u),
-    108                           (CPU_STK_SIZE) APP_CFG_TASK_START_STK_SIZE,
-    109                           (OS_MSG_QTY  ) 0,
-    110                           (OS_TICK     ) 0,
-    111                           (void       *) 0,
-    112                           (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
-    113                           (OS_ERR     *)&err);
+    102          
+    103              OSTaskCreate((OS_TCB     *)&App_TaskStartTCB,               /* Create the start task                                */
+    104                           (CPU_CHAR   *)"App Task Start",
+    105                           (OS_TASK_PTR ) App_TaskStart,
+    106                           (void       *) 0,
+    107                           (OS_PRIO     ) APP_CFG_TASK_START_PRIO,
+    108                           (CPU_STK    *)&App_TaskStartStk[0],
+    109                           (CPU_STK     )(APP_CFG_TASK_START_STK_SIZE / 10u),
+    110                           (CPU_STK_SIZE) APP_CFG_TASK_START_STK_SIZE,
+    111                           (OS_MSG_QTY  ) 0,
+    112                           (OS_TICK     ) 0,
+    113                           (void       *) 0,
+    114                           (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
+    115                           (OS_ERR     *)&err);
    \   0000001A   0xA809             ADD      R0,SP,#+36
    \   0000001C   0x9008             STR      R0,[SP, #+32]
    \   0000001E   0x2003             MOVS     R0,#+3
@@ -270,80 +272,80 @@ F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\app.c
    \   00000044   0x....             LDR.N    R1,??DataTable0_1
    \   00000046   0x....             LDR.N    R0,??DataTable0_2
    \   00000048   0x.... 0x....      BL       OSTaskCreate
-    114          #if (OS_TASK_NAME_EN > 0u)
-    115              OSTaskNameSet(APP_CFG_TASK_START_PRIO, "Start", &err);
-    116          #endif
-    117          
-    118          
-    119              OSStart(&err);                                              /* Start multitasking (i.e. give control to uC/OS-III). */
+    116          #if (OS_TASK_NAME_EN > 0u)
+    117              OSTaskNameSet(APP_CFG_TASK_START_PRIO, "Start", &err);
+    118          #endif
+    119          
+    120          
+    121              OSStart(&err);                                              /* Start multitasking (i.e. give control to uC/OS-III). */
    \   0000004C   0xA809             ADD      R0,SP,#+36
    \   0000004E   0x.... 0x....      BL       OSStart
-    120          
-    121              while(DEF_ON){												/* Should Never Get Here							    */
+    122          
+    123              while(DEF_ON){												/* Should Never Get Here							    */
    \                     ??main_0: (+1)
    \   00000052   0xE7FE             B.N      ??main_0
-    122              };
-    123          }
-    124          
-    125          /*
-    126          *********************************************************************************************************
-    127          *                                          App_TaskStart()
-    128          *
-    129          * Description : This is an example of a startup task.  As mentioned in the book's text, you MUST
-    130          *               initialize the ticker only once multitasking has started.
-    131          *
-    132          * Argument(s) : p_arg   is the argument passed to 'App_TaskStart()' by 'OSTaskCreate()'.
+    124              };
+    125          }
+    126          
+    127          /*
+    128          *********************************************************************************************************
+    129          *                                          App_TaskStart()
+    130          *
+    131          * Description : This is an example of a startup task.  As mentioned in the book's text, you MUST
+    132          *               initialize the ticker only once multitasking has started.
     133          *
-    134          * Return(s)   : none.
+    134          * Argument(s) : p_arg   is the argument passed to 'App_TaskStart()' by 'OSTaskCreate()'.
     135          *
-    136          * Caller(s)   : This is a task.
+    136          * Return(s)   : none.
     137          *
-    138          * Notes       : (1) The first line of code is used to prevent a compiler warning because 'p_arg' is not
-    139          *                   used.  The compiler should not generate any code for this statement.
-    140          *********************************************************************************************************
-    141          */
-    142          
+    138          * Caller(s)   : This is a task.
+    139          *
+    140          * Notes       : (1) The first line of code is used to prevent a compiler warning because 'p_arg' is not
+    141          *                   used.  The compiler should not generate any code for this statement.
+    142          *********************************************************************************************************
+    143          */
+    144          
 
    \                                 In section .text, align 4, keep-with-next
-    143          static  void  App_TaskStart (void *p_arg)
-    144          {
+    145          static  void  App_TaskStart (void *p_arg)
+    146          {
    \                     App_TaskStart: (+1)
    \   00000000   0xB510             PUSH     {R4,LR}
    \   00000002   0xB084             SUB      SP,SP,#+16
    \   00000004   0x0004             MOVS     R4,R0
-    145              OS_ERR  os_err;
-    146          
-    147              (void)p_arg;                                                /* See Note #1                                          */
-    148              
-    149              /***********************************************
-    150              * 描述： 设置UCOS钩子函数
-    151              */
-    152              App_OS_SetAllHooks();
+    147              OS_ERR  os_err;
+    148          
+    149              (void)p_arg;                                                /* See Note #1                                          */
+    150              
+    151              /***********************************************
+    152              * 描述： 设置UCOS钩子函数
+    153              */
+    154              App_OS_SetAllHooks();
    \   00000006   0x.... 0x....      BL       App_OS_SetAllHooks
-    153              
-    154              BSP_Start();                                                /* Start BSP and tick initialization                    */
+    155              
+    156              BSP_Start();                                                /* Start BSP and tick initialization                    */
    \   0000000A   0x.... 0x....      BL       BSP_Start
-    155          
-    156          #if (OS_TASK_STAT_EN > 0)
-    157              OSStatInit();                                               /* Determine CPU capacity                               */
-    158          #endif
-    159          
-    160              App_ObjCreate();                                            /* Create Applicaiton kernel objects                    */
-   \   0000000E   0x.... 0x....      BL       App_ObjCreate
+    157          
+    158          #if (OS_TASK_STAT_EN > 0)
+    159              OSStatInit();                                               /* Determine CPU capacity                               */
+    160          #endif
     161          
-    162              App_TaskCreate();                                           /* Create Application tasks                             */
-   \   00000012   0x.... 0x....      BL       App_TaskCreate
+    162              App_ObjCreate();                                            /* Create Applicaiton kernel objects                    */
+   \   0000000E   0x.... 0x....      BL       App_ObjCreate
     163          
-    164              BSP_LED_Off(0);
+    164              App_TaskCreate();                                           /* Create Application tasks                             */
+   \   00000012   0x.... 0x....      BL       App_TaskCreate
+    165          
+    166              BSP_LED_Off(0);
    \   00000016   0x2000             MOVS     R0,#+0
    \   00000018   0x.... 0x....      BL       BSP_LED_Off
-    165          
-    166              while (DEF_TRUE) {    
-    167                                                                          /* Task body, always written as an infinite loop.       */
-    168                  //BSP_LED_Toggle(8);
-    169                          
-    170                  OSTimeDlyHMSM(0, 0, 0, 100,
-    171                                OS_OPT_TIME_HMSM_STRICT, &os_err);
+    167          
+    168              while (DEF_TRUE) {    
+    169                                                                          /* Task body, always written as an infinite loop.       */
+    170                  //BSP_LED_Toggle(8);
+    171                          
+    172                  OSTimeDlyHMSM(0, 0, 0, 100,
+    173                                OS_OPT_TIME_HMSM_STRICT, &os_err);
    \                     ??App_TaskStart_0: (+1)
    \   0000001C   0xA802             ADD      R0,SP,#+8
    \   0000001E   0x9001             STR      R0,[SP, #+4]
@@ -354,70 +356,73 @@ F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\app.c
    \   00000028   0x2100             MOVS     R1,#+0
    \   0000002A   0x2000             MOVS     R0,#+0
    \   0000002C   0x.... 0x....      BL       OSTimeDlyHMSM
-    172                  
-    173                  WDT_Feed();
+    174                 
+    175                  #if DEBUG_MODEL_DISENABLE > 0 
+    176                      WDT_Feed();                                               /* Determine CPU capacity                               */
    \   00000030   0x.... 0x....      BL       WDT_Feed
    \   00000034   0xE7F2             B.N      ??App_TaskStart_0
-    174              }
-    175          }
-    176          
-    177          
-    178          /*
-    179          *********************************************************************************************************
-    180          *                                      App_ObjCreate()
-    181          *
-    182          * Description:  Creates the application kernel objects.
-    183          *
-    184          * Argument(s) :  none.
-    185          *
-    186          * Return(s)   :  none.
-    187          *
-    188          * Caller(s)   :  App_TaskStart().
-    189          *
-    190          * Note(s)     :  none.
-    191          *********************************************************************************************************
-    192          */
-    193          
+    177                  #endif
+    178                 
+    179              }
+    180          }
+    181          
+    182          
+    183          /*
+    184          *********************************************************************************************************
+    185          *                                      App_ObjCreate()
+    186          *
+    187          * Description:  Creates the application kernel objects.
+    188          *
+    189          * Argument(s) :  none.
+    190          *
+    191          * Return(s)   :  none.
+    192          *
+    193          * Caller(s)   :  App_TaskStart().
+    194          *
+    195          * Note(s)     :  none.
+    196          *********************************************************************************************************
+    197          */
+    198          
 
    \                                 In section .text, align 2, keep-with-next
-    194          static  void  App_ObjCreate (void)
-    195          {
-    196              
-    197          }
+    199          static  void  App_ObjCreate (void)
+    200          {
+    201              
+    202          }
    \                     App_ObjCreate: (+1)
    \   00000000   0x4770             BX       LR               ;; return
-    198          
-    199          /*
-    200          *********************************************************************************************************
-    201          *                                      App_TaskCreate()
-    202          *
-    203          * Description :  This function creates the application tasks.
-    204          *
-    205          * Argument(s) :  none.
-    206          *
-    207          * Return(s)   :  none.
-    208          *
-    209          * Caller(s)   :  App_TaskStart().
-    210          *
-    211          * Note(s)     :  none.
-    212          *********************************************************************************************************
-    213          */
-    214          extern void OS_TaskCreateHook(void);
+    203          
+    204          /*
+    205          *********************************************************************************************************
+    206          *                                      App_TaskCreate()
+    207          *
+    208          * Description :  This function creates the application tasks.
+    209          *
+    210          * Argument(s) :  none.
+    211          *
+    212          * Return(s)   :  none.
+    213          *
+    214          * Caller(s)   :  App_TaskStart().
+    215          *
+    216          * Note(s)     :  none.
+    217          *********************************************************************************************************
+    218          */
+    219          extern void OS_TaskCreateHook(void);
 
    \                                 In section .text, align 2, keep-with-next
-    215          static  void  App_TaskCreate (void)
-    216          {
+    220          static  void  App_TaskCreate (void)
+    221          {
    \                     App_TaskCreate: (+1)
    \   00000000   0xB580             PUSH     {R7,LR}
-    217            
-    218              OS_TaskCreateHook();
+    222            
+    223              OS_TaskCreateHook();
    \   00000002   0x.... 0x....      BL       OS_TaskCreateHook
-    219              /***********************************************
-    220              * 描述： 在此处创建OSAL任务
-    221              */
-    222              App_TaskOsalCreate();
+    224              /***********************************************
+    225              * 描述： 在此处创建OSAL任务
+    226              */
+    227              App_TaskOsalCreate();
    \   00000006   0x.... 0x....      BL       App_TaskOsalCreate
-    223          }
+    228          }
    \   0000000A   0xBD01             POP      {R0,PC}          ;; return
 
    \                                 In section .text, align 4, keep-with-next
@@ -443,7 +448,7 @@ F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\app.c
    \              0x72 0x74    
    \              0x00         
    \   0000000F   0x00               DC8 0
-    224          
+    229          
 
    Maximum stack usage in bytes:
 

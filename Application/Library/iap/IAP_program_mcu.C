@@ -212,7 +212,6 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
     {
         case IAP_START_CODE:                                        //开始升级指令（考虑断续传）
                                                                     //端点续传，更改地址。（如需考虑，根据序号计算地址）
-            
             memcpy(&gsIAPPara,&databuf[sizeof(iapcode)],2+2+4+4+2); //cpoy硬件版本，软件版本，程序大小，当前地址，当前帧号
             
             lastiapnum = 0;
@@ -238,6 +237,9 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
             
             memcpy(&databuf[sizeof(iapcode)],&gsIAPPara,2+2+4+4+2); //cpoy硬件版本，软件版本，程序大小，当前地址，当前帧号
 
+            gsIAPPara.code = 0x00;                                  //升级有效指令变为0，需要全部下载完成，才能改写成功1            
+            IAP_WriteParaFlash(&gsIAPPara);
+
             break;
         case IAP_DATA_CODE:                                         //传输数据包
             memcpy((char *)&iapnum,&databuf[sizeof(iapcode)],sizeof(iapnum));   //取帧序号
@@ -262,17 +264,25 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
 
                     if(iapnum != lastiapnum && iapnum )     //重复接收退出
                     {
-                        IAP_WriteFlash(&gsIAPCtrl);        //写数据(地址，gsIAPCtrl.addr依次写入)
-                        gsIAPCtrl.addr += IAP_WRITE_1024;  //数据地址累加  
-                         
-                        gsIAPPara.addr =  gsIAPCtrl.addr;  //已写地址
-                         
-                        bufsize = 0;
-                    
-                        gsIAPPara.code      = 0x00;         //未完成，存序号
-                        gsIAPPara.framenum  = iapnum;       //当前序号
-                        gsIAPPara.crc16 = GetCrc16Check((uint8 *)&gsIAPPara,sizeof(gsIAPPara)-2);
-                        IAP_WriteParaFlash(&gsIAPPara);
+                        if(gsIAPCtrl.addr >= USER_APP_START_ADDR)
+                        {
+                            IAP_WriteFlash(&gsIAPCtrl);        //写数据(地址，gsIAPCtrl.addr依次写入)
+                            gsIAPCtrl.addr += IAP_WRITE_1024;  //数据地址累加  
+                             
+                            gsIAPPara.addr =  gsIAPCtrl.addr;  //已写地址
+                             
+                            bufsize = 0;
+                        
+                            gsIAPPara.code      = 0x00;         //未完成，存序号
+                            gsIAPPara.framenum  = iapnum;       //当前序号
+                            gsIAPPara.crc16 = GetCrc16Check((uint8 *)&gsIAPPara,sizeof(gsIAPPara)-2);
+                            IAP_WriteParaFlash(&gsIAPPara);
+                        }else
+                        {
+                            databuf[1] = 4;                             //返回状态
+                            return 4;                            
+                        }
+                           
                     }
                 }
                 

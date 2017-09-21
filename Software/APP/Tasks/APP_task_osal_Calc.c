@@ -376,7 +376,8 @@ int16    GetDipPrs30SecVal(int16   PrsAvg)
 			Sum5  = Sum5 + PrsAvg - AvgTmp;			
 		}
 
-		
+        Times++;
+
 		return	PrsAvg;
 	}
 	else
@@ -664,7 +665,7 @@ CPU_CRITICAL_ENTER() ;
     if(sCtrl.SOilPara.ModelNum > 64)
         sCtrl.SOilPara.ModelNum = 1;
     
-    if(sCtrl.SOilPara.Hig > 500 || sCtrl.SOilPara.Hig < 500)
+    if(sCtrl.SOilPara.Hig > 500 || sCtrl.SOilPara.Hig < -500)
         sCtrl.SOilPara.Hig = 0;
     
     FRAM_StoreOilPara((StrOilPara  *)&sCtrl.SOilPara);      //写入算参数。高度，修正系数，模型编号

@@ -1918,11 +1918,11 @@ static  void  MBS_RTU_Task (MODBUS_CH  *pch)
                  ( pch->RxFrameTail != 0 ) ) ) {
                   //redmorningcn 20170526   
 //move1         pch->RxBufByteCnt   = pch->RxBufByteCtr;
- 
+                                     
                 send_reply = NMBS_FCxx_Handler(pch);
                 if (send_reply == DEF_TRUE) {
                     goto exit;
-                }
+                }              
             }
         next:
 #endif

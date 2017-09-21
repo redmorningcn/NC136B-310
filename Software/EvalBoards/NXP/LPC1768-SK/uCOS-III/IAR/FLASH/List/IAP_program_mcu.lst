@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       19/Sep/2017  19:02:39
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       22/Sep/2017  01:03:40
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -352,31 +352,31 @@ F:\iar\NC136B-310统计模块\Application\Library\iap\IAP_program_mcu.C
     151              if(sIAPCtrl->addr == USER_APP_START_ADDR)
    \   00000008   0xF8D4 0x0400      LDR      R0,[R4, #+1024]
    \   0000000C   0xF5B0 0x2F80      CMP      R0,#+262144
-   \   00000010   0xD114             BNE.N    ??IAP_WriteFlash_0
+   \   00000010   0xD115             BNE.N    ??IAP_WriteFlash_0
     152              {
     153                  flash_prog_area_sec_start   = 	GetSecNum(USER_APP_START_ADDR);
    \   00000012   0xF45F 0x2080      MOVS     R0,#+262144
    \   00000016   0x.... 0x....      BL       GetSecNum
    \   0000001A   0x0006             MOVS     R6,R0
     154                  flash_prog_area_sec_end 	=  	GetSecNum(USER_APP_START_ADDR + USER_APP_PRO_SIZE);//准备擦除
-   \   0000001C   0x....             LDR.N    R0,??DataTable4_1  ;; 0x6ffff
-   \   0000001E   0x.... 0x....      BL       GetSecNum
-   \   00000022   0x0007             MOVS     R7,R0
+   \   0000001C   0x.... 0x....      LDR.W    R0,??DataTable4_1  ;; 0x6ffff
+   \   00000020   0x.... 0x....      BL       GetSecNum
+   \   00000024   0x0007             MOVS     R7,R0
     155          
     156                  status = EraseSector(flash_prog_area_sec_start, flash_prog_area_sec_end);           //一次性擦除所有
-   \   00000024   0x0039             MOVS     R1,R7
-   \   00000026   0x0030             MOVS     R0,R6
-   \   00000028   0x.... 0x....      BL       EraseSector
-   \   0000002C   0x0005             MOVS     R5,R0
+   \   00000026   0x0039             MOVS     R1,R7
+   \   00000028   0x0030             MOVS     R0,R6
+   \   0000002A   0x.... 0x....      BL       EraseSector
+   \   0000002E   0x0005             MOVS     R5,R0
     157          
     158                  status = BlankCheckSector(flash_prog_area_sec_start, flash_prog_area_sec_end,
     159                                &result[0], &result[1]);
-   \   0000002E   0xAB01             ADD      R3,SP,#+4
-   \   00000030   0x466A             MOV      R2,SP
-   \   00000032   0x0039             MOVS     R1,R7
-   \   00000034   0x0030             MOVS     R0,R6
-   \   00000036   0x.... 0x....      BL       BlankCheckSector
-   \   0000003A   0x0005             MOVS     R5,R0
+   \   00000030   0xAB01             ADD      R3,SP,#+4
+   \   00000032   0x466A             MOV      R2,SP
+   \   00000034   0x0039             MOVS     R1,R7
+   \   00000036   0x0030             MOVS     R0,R6
+   \   00000038   0x.... 0x....      BL       BlankCheckSector
+   \   0000003C   0x0005             MOVS     R5,R0
     160              }
     161              
     162              //开始flash编写
@@ -385,29 +385,29 @@ F:\iar\NC136B-310统计模块\Application\Library\iap\IAP_program_mcu.C
     165                                               IAP_WRITE_1024
     166                                      );                      //拷贝数据
    \                     ??IAP_WriteFlash_0: (+1)
-   \   0000003C   0xF44F 0x6280      MOV      R2,#+1024
-   \   00000040   0x0021             MOVS     R1,R4
-   \   00000042   0xF8D4 0x0400      LDR      R0,[R4, #+1024]
-   \   00000046   0x.... 0x....      BL       CopyRAM2Flash
-   \   0000004A   0x0005             MOVS     R5,R0
+   \   0000003E   0xF44F 0x6280      MOV      R2,#+1024
+   \   00000042   0x0021             MOVS     R1,R4
+   \   00000044   0xF8D4 0x0400      LDR      R0,[R4, #+1024]
+   \   00000048   0x.... 0x....      BL       CopyRAM2Flash
+   \   0000004C   0x0005             MOVS     R5,R0
     167              
     168              status =  Compare((uint8 *) sIAPCtrl->addr,
     169                                          sIAPCtrl->buf,
     170                                          IAP_WRITE_1024);    //比较数据
-   \   0000004C   0xF44F 0x6280      MOV      R2,#+1024
-   \   00000050   0x0021             MOVS     R1,R4
-   \   00000052   0xF8D4 0x0400      LDR      R0,[R4, #+1024]
-   \   00000056   0x.... 0x....      BL       Compare
-   \   0000005A   0x0005             MOVS     R5,R0
+   \   0000004E   0xF44F 0x6280      MOV      R2,#+1024
+   \   00000052   0x0021             MOVS     R1,R4
+   \   00000054   0xF8D4 0x0400      LDR      R0,[R4, #+1024]
+   \   00000058   0x.... 0x....      BL       Compare
+   \   0000005C   0x0005             MOVS     R5,R0
     171              
     172          //   sIAPCtrl->addr += IAP_WRITE_1024;              //数据地址累加  
     173          //      sIAPCtrl->addr += IAP_WRITE_1024;              //数据地址累加  
     174                  
     175              zyIrqEnable();                                  //写flash完成时，开全局中断
-   \   0000005C   0xB662             CPSIE    I
+   \   0000005E   0xB662             CPSIE    I
     176          }
-   \   0000005E   0xB005             ADD      SP,SP,#+20
-   \   00000060   0xBDF0             POP      {R4-R7,PC}       ;; return
+   \   00000060   0xB005             ADD      SP,SP,#+20
+   \   00000062   0xBDF0             POP      {R4-R7,PC}       ;; return
     177                                 
     178                                 
     179          void Boot( void );
@@ -449,7 +449,7 @@ F:\iar\NC136B-310统计模块\Application\Library\iap\IAP_program_mcu.C
    \   0000000E   0xDA01             BGE.N    ??IAP_PragramDeal_0
     206                  return  0;
    \   00000010   0x2000             MOVS     R0,#+0
-   \   00000012   0xE128             B.N      ??IAP_PragramDeal_1
+   \   00000012   0xE139             B.N      ??IAP_PragramDeal_1
     207              
     208              memcpy((char *)&iapcode,databuf,sizeof(iapcode));              //取升级命令字
    \                     ??IAP_PragramDeal_0: (+1)
@@ -469,18 +469,17 @@ F:\iar\NC136B-310统计模块\Application\Library\iap\IAP_program_mcu.C
    \   0000002E   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   00000030   0x2801             CMP      R0,#+1
    \   00000032   0xD009             BEQ.N    ??IAP_PragramDeal_2
-   \   00000034   0xF0C0 0x8110      BCC.W    ??IAP_PragramDeal_3
+   \   00000034   0xF0C0 0x8121      BCC.W    ??IAP_PragramDeal_3
    \   00000038   0x2803             CMP      R0,#+3
-   \   0000003A   0xF000 0x80C1      BEQ.W    ??IAP_PragramDeal_4
-   \   0000003E   0xD33F             BCC.N    ??IAP_PragramDeal_5
+   \   0000003A   0xF000 0x80D2      BEQ.W    ??IAP_PragramDeal_4
+   \   0000003E   0xD345             BCC.N    ??IAP_PragramDeal_5
    \   00000040   0x2804             CMP      R0,#+4
-   \   00000042   0xF000 0x8103      BEQ.W    ??IAP_PragramDeal_6
-   \   00000046   0xE107             B.N      ??IAP_PragramDeal_3
+   \   00000042   0xF000 0x8114      BEQ.W    ??IAP_PragramDeal_6
+   \   00000046   0xE118             B.N      ??IAP_PragramDeal_3
     212              {
     213                  case IAP_START_CODE:                                        //开始升级指令（考虑断续传）
     214                                                                              //端点续传，更改地址。（如需考虑，根据序号计算地址）
-    215                      
-    216                      memcpy(&gsIAPPara,&databuf[sizeof(iapcode)],2+2+4+4+2); //cpoy硬件版本，软件版本，程序大小，当前地址，当前帧号
+    215                      memcpy(&gsIAPPara,&databuf[sizeof(iapcode)],2+2+4+4+2); //cpoy硬件版本，软件版本，程序大小，当前地址，当前帧号
    \                     ??IAP_PragramDeal_2: (+1)
    \   00000048   0x260E             MOVS     R6,#+14
    \   0000004A   0x1CA7             ADDS     R7,R4,#+2
@@ -489,26 +488,26 @@ F:\iar\NC136B-310统计模块\Application\Library\iap\IAP_program_mcu.C
    \   00000052   0x0039             MOVS     R1,R7
    \   00000054   0x4640             MOV      R0,R8
    \   00000056   0x.... 0x....      BL       __aeabi_memcpy
-    217                      
-    218                      lastiapnum = 0;
+    216                      
+    217                      lastiapnum = 0;
    \   0000005A   0x2000             MOVS     R0,#+0
    \   0000005C   0x....             LDR.N    R1,??DataTable4_3
    \   0000005E   0x8008             STRH     R0,[R1, #+0]
-    219                      ////////////////断点续传，读出已存信息
-    220                      IAP_ReadParaFlash(&sIAPParatmp);
+    218                      ////////////////断点续传，读出已存信息
+    219                      IAP_ReadParaFlash(&sIAPParatmp);
    \   00000060   0xA801             ADD      R0,SP,#+4
    \   00000062   0x.... 0x....      BL       IAP_ReadParaFlash
-    221                      
-    222                      gsIAPPara.softver = sCtrl.SoftWareID;                   //返回版本信息
+    220                      
+    221                      gsIAPPara.softver = sCtrl.SoftWareID;                   //返回版本信息
    \   00000066   0x....             LDR.N    R0,??DataTable4_4
    \   00000068   0x8840             LDRH     R0,[R0, #+2]
    \   0000006A   0x....             LDR.N    R1,??DataTable4_2
    \   0000006C   0x8048             STRH     R0,[R1, #+2]
-    223                      
-    224                      if(
-    225                                  sIAPParatmp.softsize == gsIAPPara.softsize     //软件大小
-    226                             &&   gsIAPPara.framenum                          //开始包序号不为0   
-    227                         ) 
+    222                      
+    223                      if(
+    224                                  sIAPParatmp.softsize == gsIAPPara.softsize     //软件大小
+    225                             &&   gsIAPPara.framenum                          //开始包序号不为0   
+    226                         ) 
    \   0000006E   0x9802             LDR      R0,[SP, #+8]
    \   00000070   0x....             LDR.N    R1,??DataTable4_2
    \   00000072   0x6849             LDR      R1,[R1, #+4]
@@ -518,38 +517,38 @@ F:\iar\NC136B-310统计模块\Application\Library\iap\IAP_program_mcu.C
    \   0000007A   0x68C0             LDR      R0,[R0, #+12]
    \   0000007C   0x2800             CMP      R0,#+0
    \   0000007E   0xD00A             BEQ.N    ??IAP_PragramDeal_7
-    228                      {                                                       //数据未接收完成，发送当前序号
-    229                          gsIAPPara.framenum  = sIAPParatmp.framenum;         //返回当前序号
+    227                      {                                                       //数据未接收完成，发送当前序号
+    228                          gsIAPPara.framenum  = sIAPParatmp.framenum;         //返回当前序号
    \   00000080   0x9804             LDR      R0,[SP, #+16]
    \   00000082   0x....             LDR.N    R1,??DataTable4_2
    \   00000084   0x60C8             STR      R0,[R1, #+12]
-    230                          lastiapnum          = sIAPParatmp.framenum;         //下载序号。断点续传 
+    229                          lastiapnum          = sIAPParatmp.framenum;         //下载序号。断点续传 
    \   00000086   0x9804             LDR      R0,[SP, #+16]
    \   00000088   0x....             LDR.N    R1,??DataTable4_3
    \   0000008A   0x8008             STRH     R0,[R1, #+0]
-    231                          gsIAPCtrl.addr      = sIAPParatmp.addr;
+    230                          gsIAPCtrl.addr      = sIAPParatmp.addr;
    \   0000008C   0x9803             LDR      R0,[SP, #+12]
    \   0000008E   0x....             LDR.N    R1,??DataTable4_5
    \   00000090   0xF8C1 0x0400      STR      R0,[R1, #+1024]
    \   00000094   0xE00A             B.N      ??IAP_PragramDeal_8
-    232                      }else
-    233                      {
-    234                          gsIAPPara.framenum  = 0;                            //信息不正确，
+    231                      }else
+    232                      {
+    233                          gsIAPPara.framenum  = 0;                            //信息不正确，
    \                     ??IAP_PragramDeal_7: (+1)
    \   00000096   0x2000             MOVS     R0,#+0
    \   00000098   0x....             LDR.N    R1,??DataTable4_2
    \   0000009A   0x60C8             STR      R0,[R1, #+12]
-    235                          lastiapnum = 0;
+    234                          lastiapnum = 0;
    \   0000009C   0x2000             MOVS     R0,#+0
    \   0000009E   0x....             LDR.N    R1,??DataTable4_3
    \   000000A0   0x8008             STRH     R0,[R1, #+0]
-    236                          gsIAPCtrl.addr = USER_APP_START_ADDR;               //开始发送时，初始化地址。
+    235                          gsIAPCtrl.addr = USER_APP_START_ADDR;               //开始发送时，初始化地址。
    \   000000A2   0xF45F 0x2080      MOVS     R0,#+262144
    \   000000A6   0x....             LDR.N    R1,??DataTable4_5
    \   000000A8   0xF8C1 0x0400      STR      R0,[R1, #+1024]
-    237                      }
-    238                      
-    239                      memcpy(&databuf[sizeof(iapcode)],&gsIAPPara,2+2+4+4+2); //cpoy硬件版本，软件版本，程序大小，当前地址，当前帧号
+    236                      }
+    237                      
+    238                      memcpy(&databuf[sizeof(iapcode)],&gsIAPPara,2+2+4+4+2); //cpoy硬件版本，软件版本，程序大小，当前地址，当前帧号
    \                     ??IAP_PragramDeal_8: (+1)
    \   000000AC   0x260E             MOVS     R6,#+14
    \   000000AE   0x....             LDR.N    R7,??DataTable4_2
@@ -558,288 +557,314 @@ F:\iar\NC136B-310统计模块\Application\Library\iap\IAP_program_mcu.C
    \   000000B6   0x0039             MOVS     R1,R7
    \   000000B8   0x4640             MOV      R0,R8
    \   000000BA   0x.... 0x....      BL       __aeabi_memcpy
-    240          
-    241                      break;
-   \   000000BE   0xE0CF             B.N      ??IAP_PragramDeal_9
-    242                  case IAP_DATA_CODE:                                         //传输数据包
-    243                      memcpy((char *)&iapnum,&databuf[sizeof(iapcode)],sizeof(iapnum));   //取帧序号
+    239          
+    240                      gsIAPPara.code = 0x00;                                  //升级有效指令变为0，需要全部下载完成，才能改写成功1            
+   \   000000BE   0x2000             MOVS     R0,#+0
+   \   000000C0   0x....             LDR.N    R1,??DataTable4_2
+   \   000000C2   0x8208             STRH     R0,[R1, #+16]
+    241                      IAP_WriteParaFlash(&gsIAPPara);
+   \   000000C4   0x....             LDR.N    R0,??DataTable4_2
+   \   000000C6   0x.... 0x....      BL       IAP_WriteParaFlash
+    242          
+    243                      break;
+   \   000000CA   0xE0DA             B.N      ??IAP_PragramDeal_9
+    244                  case IAP_DATA_CODE:                                         //传输数据包
+    245                      memcpy((char *)&iapnum,&databuf[sizeof(iapcode)],sizeof(iapnum));   //取帧序号
    \                     ??IAP_PragramDeal_5: (+1)
-   \   000000C0   0x2602             MOVS     R6,#+2
-   \   000000C2   0x1CA7             ADDS     R7,R4,#+2
-   \   000000C4   0x46E8             MOV      R8,SP
-   \   000000C6   0x0032             MOVS     R2,R6
-   \   000000C8   0x0039             MOVS     R1,R7
-   \   000000CA   0x4640             MOV      R0,R8
-   \   000000CC   0x.... 0x....      BL       __aeabi_memcpy
-    244                      
-    245                      if(     iapnum == lastiapnum+1 
-    246                          ||  iapnum == lastiapnum )                  //相同帧号（重发数据）
-   \   000000D0   0xF8BD 0x0000      LDRH     R0,[SP, #+0]
-   \   000000D4   0x....             LDR.N    R1,??DataTable4_3
-   \   000000D6   0x8809             LDRH     R1,[R1, #+0]
-   \   000000D8   0x1C49             ADDS     R1,R1,#+1
-   \   000000DA   0x4288             CMP      R0,R1
-   \   000000DC   0xD005             BEQ.N    ??IAP_PragramDeal_10
-   \   000000DE   0xF8BD 0x0000      LDRH     R0,[SP, #+0]
-   \   000000E2   0x....             LDR.N    R1,??DataTable4_3
-   \   000000E4   0x8809             LDRH     R1,[R1, #+0]
+   \   000000CC   0x2602             MOVS     R6,#+2
+   \   000000CE   0x1CA7             ADDS     R7,R4,#+2
+   \   000000D0   0x46E8             MOV      R8,SP
+   \   000000D2   0x0032             MOVS     R2,R6
+   \   000000D4   0x0039             MOVS     R1,R7
+   \   000000D6   0x4640             MOV      R0,R8
+   \   000000D8   0x.... 0x....      BL       __aeabi_memcpy
+    246                      
+    247                      if(     iapnum == lastiapnum+1 
+    248                          ||  iapnum == lastiapnum )                  //相同帧号（重发数据）
+   \   000000DC   0xF8BD 0x0000      LDRH     R0,[SP, #+0]
+   \   000000E0   0x....             LDR.N    R1,??DataTable4_3
+   \   000000E2   0x8809             LDRH     R1,[R1, #+0]
+   \   000000E4   0x1C49             ADDS     R1,R1,#+1
    \   000000E6   0x4288             CMP      R0,R1
-   \   000000E8   0xD166             BNE.N    ??IAP_PragramDeal_11
-    247                      {
-    248                          memcpy(&gsIAPCtrl.buf[(iapnum % SEC_DIV_TIMENS)*IAP_DATA_LEN],
-    249                          &databuf[2 + 2],                            //数据区是从第4字节开始
-    250                          datalen - 4);                                //拷贝数据到升级缓冲区
+   \   000000E8   0xD005             BEQ.N    ??IAP_PragramDeal_10
+   \   000000EA   0xF8BD 0x0000      LDRH     R0,[SP, #+0]
+   \   000000EE   0x....             LDR.N    R1,??DataTable4_3
+   \   000000F0   0x8809             LDRH     R1,[R1, #+0]
+   \   000000F2   0x4288             CMP      R0,R1
+   \   000000F4   0xD171             BNE.N    ??IAP_PragramDeal_11
+    249                      {
+    250                          memcpy(&gsIAPCtrl.buf[(iapnum % SEC_DIV_TIMENS)*IAP_DATA_LEN],
+    251                          &databuf[2 + 2],                            //数据区是从第4字节开始
+    252                          datalen - 4);                                //拷贝数据到升级缓冲区
    \                     ??IAP_PragramDeal_10: (+1)
-   \   000000EA   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-   \   000000EC   0x1F2E             SUBS     R6,R5,#+4
-   \   000000EE   0x1D27             ADDS     R7,R4,#+4
-   \   000000F0   0x....             LDR.N    R0,??DataTable4_5
-   \   000000F2   0xF8BD 0x1000      LDRH     R1,[SP, #+0]
-   \   000000F6   0x2208             MOVS     R2,#+8
-   \   000000F8   0xFB91 0xF3F2      SDIV     R3,R1,R2
-   \   000000FC   0xFB03 0x1312      MLS      R3,R3,R2,R1
-   \   00000100   0x2180             MOVS     R1,#+128
-   \   00000102   0xFB01 0x0803      MLA      R8,R1,R3,R0
-   \   00000106   0x0032             MOVS     R2,R6
-   \   00000108   0x0039             MOVS     R1,R7
-   \   0000010A   0x4640             MOV      R0,R8
-   \   0000010C   0x.... 0x....      BL       __aeabi_memcpy
-    251          
-    252                          bufsize += datalen - 4;                     //4字节代码，数据区前标示
-   \   00000110   0x....             LDR.N    R0,??DataTable4_6
-   \   00000112   0x8800             LDRH     R0,[R0, #+0]
-   \   00000114   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-   \   00000116   0x1F29             SUBS     R1,R5,#+4
-   \   00000118   0x1808             ADDS     R0,R1,R0
-   \   0000011A   0x....             LDR.N    R1,??DataTable4_6
-   \   0000011C   0x8008             STRH     R0,[R1, #+0]
-    253                                                                      //准备数据
-    254                          if(     (iapnum % SEC_DIV_TIMENS ) == (SEC_DIV_TIMENS - 1) 
-    255                              || (datalen -4) != IAP_DATA_LEN )       //如果数据凑满1024字节，或者升级结束。进行写flash操作。
-   \   0000011E   0xF8BD 0x0000      LDRH     R0,[SP, #+0]
-   \   00000122   0x2108             MOVS     R1,#+8
-   \   00000124   0xFB90 0xF2F1      SDIV     R2,R0,R1
-   \   00000128   0xFB02 0x0211      MLS      R2,R2,R1,R0
-   \   0000012C   0x2A07             CMP      R2,#+7
-   \   0000012E   0xD003             BEQ.N    ??IAP_PragramDeal_12
-   \   00000130   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-   \   00000132   0x1F28             SUBS     R0,R5,#+4
-   \   00000134   0x2880             CMP      R0,#+128
-   \   00000136   0xD03A             BEQ.N    ??IAP_PragramDeal_13
-    256                          {
-    257                              if((datalen - 4) != IAP_DATA_LEN)       //如果升级结束，将1024字节剩余空间写0xff
+   \   000000F6   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
+   \   000000F8   0x1F2E             SUBS     R6,R5,#+4
+   \   000000FA   0x1D27             ADDS     R7,R4,#+4
+   \   000000FC   0x....             LDR.N    R0,??DataTable4_5
+   \   000000FE   0xF8BD 0x1000      LDRH     R1,[SP, #+0]
+   \   00000102   0x2208             MOVS     R2,#+8
+   \   00000104   0xFB91 0xF3F2      SDIV     R3,R1,R2
+   \   00000108   0xFB03 0x1312      MLS      R3,R3,R2,R1
+   \   0000010C   0x2180             MOVS     R1,#+128
+   \   0000010E   0xFB01 0x0803      MLA      R8,R1,R3,R0
+   \   00000112   0x0032             MOVS     R2,R6
+   \   00000114   0x0039             MOVS     R1,R7
+   \   00000116   0x4640             MOV      R0,R8
+   \   00000118   0x.... 0x....      BL       __aeabi_memcpy
+    253          
+    254                          bufsize += datalen - 4;                     //4字节代码，数据区前标示
+   \   0000011C   0x....             LDR.N    R0,??DataTable4_6
+   \   0000011E   0x8800             LDRH     R0,[R0, #+0]
+   \   00000120   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
+   \   00000122   0x1F29             SUBS     R1,R5,#+4
+   \   00000124   0x1808             ADDS     R0,R1,R0
+   \   00000126   0x....             LDR.N    R1,??DataTable4_6
+   \   00000128   0x8008             STRH     R0,[R1, #+0]
+    255                                                                      //准备数据
+    256                          if(     (iapnum % SEC_DIV_TIMENS ) == (SEC_DIV_TIMENS - 1) 
+    257                              || (datalen -4) != IAP_DATA_LEN )       //如果数据凑满1024字节，或者升级结束。进行写flash操作。
+   \   0000012A   0xF8BD 0x0000      LDRH     R0,[SP, #+0]
+   \   0000012E   0x2108             MOVS     R1,#+8
+   \   00000130   0xFB90 0xF2F1      SDIV     R2,R0,R1
+   \   00000134   0xFB02 0x0211      MLS      R2,R2,R1,R0
+   \   00000138   0x2A07             CMP      R2,#+7
+   \   0000013A   0xD003             BEQ.N    ??IAP_PragramDeal_12
+   \   0000013C   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
+   \   0000013E   0x1F28             SUBS     R0,R5,#+4
+   \   00000140   0x2880             CMP      R0,#+128
+   \   00000142   0xD045             BEQ.N    ??IAP_PragramDeal_13
+    258                          {
+    259                              if((datalen - 4) != IAP_DATA_LEN)       //如果升级结束，将1024字节剩余空间写0xff
    \                     ??IAP_PragramDeal_12: (+1)
-   \   00000138   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
-   \   0000013A   0x1F28             SUBS     R0,R5,#+4
-   \   0000013C   0x2880             CMP      R0,#+128
-   \   0000013E   0xD009             BEQ.N    ??IAP_PragramDeal_14
-    258                              {
-    259                                  for(int i = bufsize;i < IAP_WRITE_1024;i++ )
-   \   00000140   0x....             LDR.N    R0,??DataTable4_6
-   \   00000142   0x8800             LDRH     R0,[R0, #+0]
+   \   00000144   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
+   \   00000146   0x1F28             SUBS     R0,R5,#+4
+   \   00000148   0x2880             CMP      R0,#+128
+   \   0000014A   0xD009             BEQ.N    ??IAP_PragramDeal_14
+    260                              {
+    261                                  for(int i = bufsize;i < IAP_WRITE_1024;i++ )
+   \   0000014C   0x....             LDR.N    R0,??DataTable4_6
+   \   0000014E   0x8800             LDRH     R0,[R0, #+0]
    \                     ??IAP_PragramDeal_15: (+1)
-   \   00000144   0xF5B0 0x6F80      CMP      R0,#+1024
-   \   00000148   0xDA04             BGE.N    ??IAP_PragramDeal_14
-    260                                  gsIAPCtrl.buf[i] = 0xff;	
-   \   0000014A   0x21FF             MOVS     R1,#+255
-   \   0000014C   0x....             LDR.N    R2,??DataTable4_5
-   \   0000014E   0x5481             STRB     R1,[R0, R2]
-   \   00000150   0x1C40             ADDS     R0,R0,#+1
-   \   00000152   0xE7F7             B.N      ??IAP_PragramDeal_15
-    261                              }
-    262          
-    263                              if(iapnum != lastiapnum && iapnum )     //重复接收退出
+   \   00000150   0xF5B0 0x6F80      CMP      R0,#+1024
+   \   00000154   0xDA04             BGE.N    ??IAP_PragramDeal_14
+    262                                  gsIAPCtrl.buf[i] = 0xff;	
+   \   00000156   0x21FF             MOVS     R1,#+255
+   \   00000158   0x....             LDR.N    R2,??DataTable4_5
+   \   0000015A   0x5481             STRB     R1,[R0, R2]
+   \   0000015C   0x1C40             ADDS     R0,R0,#+1
+   \   0000015E   0xE7F7             B.N      ??IAP_PragramDeal_15
+    263                              }
+    264          
+    265                              if(iapnum != lastiapnum && iapnum )     //重复接收退出
    \                     ??IAP_PragramDeal_14: (+1)
-   \   00000154   0xF8BD 0x0000      LDRH     R0,[SP, #+0]
-   \   00000158   0x....             LDR.N    R1,??DataTable4_3
-   \   0000015A   0x8809             LDRH     R1,[R1, #+0]
-   \   0000015C   0x4288             CMP      R0,R1
-   \   0000015E   0xD026             BEQ.N    ??IAP_PragramDeal_13
    \   00000160   0xF8BD 0x0000      LDRH     R0,[SP, #+0]
-   \   00000164   0x2800             CMP      R0,#+0
-   \   00000166   0xD022             BEQ.N    ??IAP_PragramDeal_13
-    264                              {
-    265                                  IAP_WriteFlash(&gsIAPCtrl);        //写数据(地址，gsIAPCtrl.addr依次写入)
-   \   00000168   0x....             LDR.N    R0,??DataTable4_5
-   \   0000016A   0x.... 0x....      BL       IAP_WriteFlash
-    266                                  gsIAPCtrl.addr += IAP_WRITE_1024;  //数据地址累加  
-   \   0000016E   0x....             LDR.N    R0,??DataTable4_5
-   \   00000170   0xF8D0 0x0400      LDR      R0,[R0, #+1024]
-   \   00000174   0xF510 0x6080      ADDS     R0,R0,#+1024
-   \   00000178   0x....             LDR.N    R1,??DataTable4_5
-   \   0000017A   0xF8C1 0x0400      STR      R0,[R1, #+1024]
-    267                                   
-    268                                  gsIAPPara.addr =  gsIAPCtrl.addr;  //已写地址
-   \   0000017E   0x....             LDR.N    R0,??DataTable4_5
-   \   00000180   0xF8D0 0x0400      LDR      R0,[R0, #+1024]
-   \   00000184   0x....             LDR.N    R1,??DataTable4_2
-   \   00000186   0x6088             STR      R0,[R1, #+8]
-    269                                   
-    270                                  bufsize = 0;
-   \   00000188   0x2000             MOVS     R0,#+0
-   \   0000018A   0x....             LDR.N    R1,??DataTable4_6
-   \   0000018C   0x8008             STRH     R0,[R1, #+0]
-    271                              
-    272                                  gsIAPPara.code      = 0x00;         //未完成，存序号
-   \   0000018E   0x2000             MOVS     R0,#+0
-   \   00000190   0x....             LDR.N    R1,??DataTable4_2
-   \   00000192   0x8208             STRH     R0,[R1, #+16]
-    273                                  gsIAPPara.framenum  = iapnum;       //当前序号
-   \   00000194   0xF8BD 0x0000      LDRH     R0,[SP, #+0]
-   \   00000198   0x....             LDR.N    R1,??DataTable4_2
-   \   0000019A   0x60C8             STR      R0,[R1, #+12]
-    274                                  gsIAPPara.crc16 = GetCrc16Check((uint8 *)&gsIAPPara,sizeof(gsIAPPara)-2);
-   \   0000019C   0x2112             MOVS     R1,#+18
-   \   0000019E   0x....             LDR.N    R0,??DataTable4_2
-   \   000001A0   0x.... 0x....      BL       GetCrc16Check
-   \   000001A4   0x....             LDR.N    R1,??DataTable4_2
-   \   000001A6   0x8248             STRH     R0,[R1, #+18]
-    275                                  IAP_WriteParaFlash(&gsIAPPara);
-   \   000001A8   0x....             LDR.N    R0,??DataTable4_2
-   \   000001AA   0x.... 0x....      BL       IAP_WriteParaFlash
-    276                              }
-    277                          }
-    278                          
-    279                          lastiapnum = iapnum;                            //序号赋值
-   \                     ??IAP_PragramDeal_13: (+1)
-   \   000001AE   0xF8BD 0x0000      LDRH     R0,[SP, #+0]
-   \   000001B2   0x....             LDR.N    R1,??DataTable4_3
-   \   000001B4   0x8008             STRH     R0,[R1, #+0]
-    280                      }
-    281                      else
-    282                      {
-    283                          databuf[1] = 1;
-    284                          return 1; 
-    285                      }
-    286                  
-    287                      break;
-   \   000001B6   0xE053             B.N      ??IAP_PragramDeal_9
-   \                     ??IAP_PragramDeal_11: (+1)
-   \   000001B8   0x2001             MOVS     R0,#+1
-   \   000001BA   0x7060             STRB     R0,[R4, #+1]
-   \   000001BC   0x2001             MOVS     R0,#+1
-   \   000001BE   0xE052             B.N      ??IAP_PragramDeal_1
-    288                      
-    289                   //结束升级指令   //做升级后程序完整性判断。程序大小？ //写程序完成标示
-    290                  case IAP_END_CODE:                                          
-    291                                                                      
-    292                      if( bufsize )                                   //最后的数据未写入，补充写入
-   \                     ??IAP_PragramDeal_4: (+1)
-   \   000001C0   0x....             LDR.N    R0,??DataTable4_6
-   \   000001C2   0x8800             LDRH     R0,[R0, #+0]
-   \   000001C4   0x2800             CMP      R0,#+0
-   \   000001C6   0xD012             BEQ.N    ??IAP_PragramDeal_16
-    293                      {
-    294                           IAP_WriteFlash(&gsIAPCtrl);                //写数据(地址，gsIAPCtrl.addr依次写入)
-   \   000001C8   0x....             LDR.N    R0,??DataTable4_5
-   \   000001CA   0x.... 0x....      BL       IAP_WriteFlash
-    295                           gsIAPCtrl.addr += IAP_WRITE_1024;          //数据地址累加  
-   \   000001CE   0x....             LDR.N    R0,??DataTable4_5
-   \   000001D0   0xF8D0 0x0400      LDR      R0,[R0, #+1024]
-   \   000001D4   0xF510 0x6080      ADDS     R0,R0,#+1024
-   \   000001D8   0x....             LDR.N    R1,??DataTable4_5
-   \   000001DA   0xF8C1 0x0400      STR      R0,[R1, #+1024]
-    296          
-    297                           gsIAPPara.addr =  gsIAPCtrl.addr;          //已写地址
-   \   000001DE   0x....             LDR.N    R0,??DataTable4_5
-   \   000001E0   0xF8D0 0x0400      LDR      R0,[R0, #+1024]
-   \   000001E4   0x....             LDR.N    R1,??DataTable4_2
-   \   000001E6   0x6088             STR      R0,[R1, #+8]
-    298                           bufsize = 0;
-   \   000001E8   0x2000             MOVS     R0,#+0
-   \   000001EA   0x....             LDR.N    R1,??DataTable4_6
-   \   000001EC   0x8008             STRH     R0,[R1, #+0]
-    299                      }
-    300                          
-    301                      memcpy(&gsIAPPara,&databuf[sizeof(iapcode)],2+2+4+4+2); //cpoy硬件版本，软件版本，程序大小，当前地址，当前帧号
+   \   00000164   0x....             LDR.N    R1,??DataTable4_3
+   \   00000166   0x8809             LDRH     R1,[R1, #+0]
+   \   00000168   0x4288             CMP      R0,R1
+   \   0000016A   0xD031             BEQ.N    ??IAP_PragramDeal_13
+   \   0000016C   0xF8BD 0x0000      LDRH     R0,[SP, #+0]
+   \   00000170   0x2800             CMP      R0,#+0
+   \   00000172   0xD02D             BEQ.N    ??IAP_PragramDeal_13
+    266                              {
+    267                                  if(gsIAPCtrl.addr >= USER_APP_START_ADDR)
+   \   00000174   0x....             LDR.N    R0,??DataTable4_5
+   \   00000176   0xF8D0 0x0400      LDR      R0,[R0, #+1024]
+   \   0000017A   0xF5B0 0x2F80      CMP      R0,#+262144
+   \   0000017E   0xDB23             BLT.N    ??IAP_PragramDeal_16
+    268                                  {
+    269                                      IAP_WriteFlash(&gsIAPCtrl);        //写数据(地址，gsIAPCtrl.addr依次写入)
+   \   00000180   0x....             LDR.N    R0,??DataTable4_5
+   \   00000182   0x.... 0x....      BL       IAP_WriteFlash
+    270                                      gsIAPCtrl.addr += IAP_WRITE_1024;  //数据地址累加  
+   \   00000186   0x....             LDR.N    R0,??DataTable4_5
+   \   00000188   0xF8D0 0x0400      LDR      R0,[R0, #+1024]
+   \   0000018C   0xF510 0x6080      ADDS     R0,R0,#+1024
+   \   00000190   0x....             LDR.N    R1,??DataTable4_5
+   \   00000192   0xF8C1 0x0400      STR      R0,[R1, #+1024]
+    271                                       
+    272                                      gsIAPPara.addr =  gsIAPCtrl.addr;  //已写地址
+   \   00000196   0x....             LDR.N    R0,??DataTable4_5
+   \   00000198   0xF8D0 0x0400      LDR      R0,[R0, #+1024]
+   \   0000019C   0x....             LDR.N    R1,??DataTable4_2
+   \   0000019E   0x6088             STR      R0,[R1, #+8]
+    273                                       
+    274                                      bufsize = 0;
+   \   000001A0   0x2000             MOVS     R0,#+0
+   \   000001A2   0x....             LDR.N    R1,??DataTable4_6
+   \   000001A4   0x8008             STRH     R0,[R1, #+0]
+    275                                  
+    276                                      gsIAPPara.code      = 0x00;         //未完成，存序号
+   \   000001A6   0x2000             MOVS     R0,#+0
+   \   000001A8   0x....             LDR.N    R1,??DataTable4_2
+   \   000001AA   0x8208             STRH     R0,[R1, #+16]
+    277                                      gsIAPPara.framenum  = iapnum;       //当前序号
+   \   000001AC   0xF8BD 0x0000      LDRH     R0,[SP, #+0]
+   \   000001B0   0x....             LDR.N    R1,??DataTable4_2
+   \   000001B2   0x60C8             STR      R0,[R1, #+12]
+    278                                      gsIAPPara.crc16 = GetCrc16Check((uint8 *)&gsIAPPara,sizeof(gsIAPPara)-2);
+   \   000001B4   0x2112             MOVS     R1,#+18
+   \   000001B6   0x....             LDR.N    R0,??DataTable4_2
+   \   000001B8   0x.... 0x....      BL       GetCrc16Check
+   \   000001BC   0x....             LDR.N    R1,??DataTable4_2
+   \   000001BE   0x8248             STRH     R0,[R1, #+18]
+    279                                      IAP_WriteParaFlash(&gsIAPPara);
+   \   000001C0   0x....             LDR.N    R0,??DataTable4_2
+   \   000001C2   0x.... 0x....      BL       IAP_WriteParaFlash
+   \   000001C6   0xE003             B.N      ??IAP_PragramDeal_13
+    280                                  }else
+    281                                  {
+    282                                      databuf[1] = 4;                             //返回状态
    \                     ??IAP_PragramDeal_16: (+1)
-   \   000001EE   0x260E             MOVS     R6,#+14
-   \   000001F0   0x1CA7             ADDS     R7,R4,#+2
-   \   000001F2   0x.... 0x....      LDR.W    R8,??DataTable4_2
-   \   000001F6   0x0032             MOVS     R2,R6
-   \   000001F8   0x0039             MOVS     R1,R7
-   \   000001FA   0x4640             MOV      R0,R8
-   \   000001FC   0x.... 0x....      BL       __aeabi_memcpy
-    302                     
-    303                      if(     gsIAPPara.softsize > (gsIAPCtrl.addr - USER_APP_START_ADDR)     //程序大小不符，软件退出。
-    304                         ||   (gsIAPCtrl.addr - USER_APP_START_ADDR - IAP_WRITE_1024) > gsIAPPara.softsize
-    305                         )
+   \   000001C8   0x2004             MOVS     R0,#+4
+   \   000001CA   0x7060             STRB     R0,[R4, #+1]
+    283                                      return 4;                            
+   \   000001CC   0x2004             MOVS     R0,#+4
+   \   000001CE   0xE05B             B.N      ??IAP_PragramDeal_1
+    284                                  }
+    285                                     
+    286                              }
+    287                          }
+    288                          
+    289                          lastiapnum = iapnum;                            //序号赋值
+   \                     ??IAP_PragramDeal_13: (+1)
+   \   000001D0   0xF8BD 0x0000      LDRH     R0,[SP, #+0]
+   \   000001D4   0x....             LDR.N    R1,??DataTable4_3
+   \   000001D6   0x8008             STRH     R0,[R1, #+0]
+    290                      }
+    291                      else
+    292                      {
+    293                          databuf[1] = 1;
+    294                          return 1; 
+    295                      }
+    296                  
+    297                      break;
+   \   000001D8   0xE053             B.N      ??IAP_PragramDeal_9
+   \                     ??IAP_PragramDeal_11: (+1)
+   \   000001DA   0x2001             MOVS     R0,#+1
+   \   000001DC   0x7060             STRB     R0,[R4, #+1]
+   \   000001DE   0x2001             MOVS     R0,#+1
+   \   000001E0   0xE052             B.N      ??IAP_PragramDeal_1
+    298                      
+    299                   //结束升级指令   //做升级后程序完整性判断。程序大小？ //写程序完成标示
+    300                  case IAP_END_CODE:                                          
+    301                                                                      
+    302                      if( bufsize )                                   //最后的数据未写入，补充写入
+   \                     ??IAP_PragramDeal_4: (+1)
+   \   000001E2   0x....             LDR.N    R0,??DataTable4_6
+   \   000001E4   0x8800             LDRH     R0,[R0, #+0]
+   \   000001E6   0x2800             CMP      R0,#+0
+   \   000001E8   0xD012             BEQ.N    ??IAP_PragramDeal_17
+    303                      {
+    304                           IAP_WriteFlash(&gsIAPCtrl);                //写数据(地址，gsIAPCtrl.addr依次写入)
+   \   000001EA   0x....             LDR.N    R0,??DataTable4_5
+   \   000001EC   0x.... 0x....      BL       IAP_WriteFlash
+    305                           gsIAPCtrl.addr += IAP_WRITE_1024;          //数据地址累加  
+   \   000001F0   0x....             LDR.N    R0,??DataTable4_5
+   \   000001F2   0xF8D0 0x0400      LDR      R0,[R0, #+1024]
+   \   000001F6   0xF510 0x6080      ADDS     R0,R0,#+1024
+   \   000001FA   0x....             LDR.N    R1,??DataTable4_5
+   \   000001FC   0xF8C1 0x0400      STR      R0,[R1, #+1024]
+    306          
+    307                           gsIAPPara.addr =  gsIAPCtrl.addr;          //已写地址
    \   00000200   0x....             LDR.N    R0,??DataTable4_5
    \   00000202   0xF8D0 0x0400      LDR      R0,[R0, #+1024]
-   \   00000206   0xF5B0 0x2080      SUBS     R0,R0,#+262144
-   \   0000020A   0x....             LDR.N    R1,??DataTable4_2
-   \   0000020C   0x6849             LDR      R1,[R1, #+4]
-   \   0000020E   0x4288             CMP      R0,R1
-   \   00000210   0xD308             BCC.N    ??IAP_PragramDeal_17
-   \   00000212   0x....             LDR.N    R0,??DataTable4_2
-   \   00000214   0x6840             LDR      R0,[R0, #+4]
-   \   00000216   0x....             LDR.N    R1,??DataTable4_5
-   \   00000218   0xF8D1 0x1400      LDR      R1,[R1, #+1024]
-   \   0000021C   0x....             LDR.N    R2,??DataTable4_7  ;; 0xfffbfc00
-   \   0000021E   0x1851             ADDS     R1,R2,R1
-   \   00000220   0x4288             CMP      R0,R1
-   \   00000222   0xD203             BCS.N    ??IAP_PragramDeal_18
-    306                      {
-    307                          databuf[1] = 3;                             //返回状态
-   \                     ??IAP_PragramDeal_17: (+1)
-   \   00000224   0x2003             MOVS     R0,#+3
-   \   00000226   0x7060             STRB     R0,[R4, #+1]
-    308                          return 3;
-   \   00000228   0x2003             MOVS     R0,#+3
-   \   0000022A   0xE01C             B.N      ??IAP_PragramDeal_1
+   \   00000206   0x....             LDR.N    R1,??DataTable4_2
+   \   00000208   0x6088             STR      R0,[R1, #+8]
+    308                           bufsize = 0;
+   \   0000020A   0x2000             MOVS     R0,#+0
+   \   0000020C   0x....             LDR.N    R1,??DataTable4_6
+   \   0000020E   0x8008             STRH     R0,[R1, #+0]
     309                      }
-    310                      
-    311                      //如果程序大小相符，认为下载正确。修改下载成功标示
-    312                      gsIAPPara.code = 0x01;
+    310                          
+    311                      memcpy(&gsIAPPara,&databuf[sizeof(iapcode)],2+2+4+4+2); //cpoy硬件版本，软件版本，程序大小，当前地址，当前帧号
+   \                     ??IAP_PragramDeal_17: (+1)
+   \   00000210   0x260E             MOVS     R6,#+14
+   \   00000212   0x1CA7             ADDS     R7,R4,#+2
+   \   00000214   0x.... 0x....      LDR.W    R8,??DataTable4_2
+   \   00000218   0x0032             MOVS     R2,R6
+   \   0000021A   0x0039             MOVS     R1,R7
+   \   0000021C   0x4640             MOV      R0,R8
+   \   0000021E   0x.... 0x....      BL       __aeabi_memcpy
+    312                     
+    313                      if(     gsIAPPara.softsize > (gsIAPCtrl.addr - USER_APP_START_ADDR)     //程序大小不符，软件退出。
+    314                         ||   (gsIAPCtrl.addr - USER_APP_START_ADDR - IAP_WRITE_1024) > gsIAPPara.softsize
+    315                         )
+   \   00000222   0x....             LDR.N    R0,??DataTable4_5
+   \   00000224   0xF8D0 0x0400      LDR      R0,[R0, #+1024]
+   \   00000228   0xF5B0 0x2080      SUBS     R0,R0,#+262144
+   \   0000022C   0x....             LDR.N    R1,??DataTable4_2
+   \   0000022E   0x6849             LDR      R1,[R1, #+4]
+   \   00000230   0x4288             CMP      R0,R1
+   \   00000232   0xD308             BCC.N    ??IAP_PragramDeal_18
+   \   00000234   0x....             LDR.N    R0,??DataTable4_2
+   \   00000236   0x6840             LDR      R0,[R0, #+4]
+   \   00000238   0x....             LDR.N    R1,??DataTable4_5
+   \   0000023A   0xF8D1 0x1400      LDR      R1,[R1, #+1024]
+   \   0000023E   0x....             LDR.N    R2,??DataTable4_7  ;; 0xfffbfc00
+   \   00000240   0x1851             ADDS     R1,R2,R1
+   \   00000242   0x4288             CMP      R0,R1
+   \   00000244   0xD203             BCS.N    ??IAP_PragramDeal_19
+    316                      {
+    317                          databuf[1] = 3;                             //返回状态
    \                     ??IAP_PragramDeal_18: (+1)
-   \   0000022C   0x2001             MOVS     R0,#+1
-   \   0000022E   0x....             LDR.N    R1,??DataTable4_2
-   \   00000230   0x8208             STRH     R0,[R1, #+16]
-    313                      gsIAPPara.framenum  = 0;                        //恢复开始状态
-   \   00000232   0x2000             MOVS     R0,#+0
-   \   00000234   0x....             LDR.N    R1,??DataTable4_2
-   \   00000236   0x60C8             STR      R0,[R1, #+12]
-    314                      gsIAPPara.crc16 = GetCrc16Check((uint8 *)&gsIAPPara,sizeof(gsIAPPara)-2);
-   \   00000238   0x2112             MOVS     R1,#+18
-   \   0000023A   0x....             LDR.N    R0,??DataTable4_2
-   \   0000023C   0x.... 0x....      BL       GetCrc16Check
-   \   00000240   0x....             LDR.N    R1,??DataTable4_2
-   \   00000242   0x8248             STRH     R0,[R1, #+18]
-    315                      IAP_WriteParaFlash(&gsIAPPara);
-   \   00000244   0x....             LDR.N    R0,??DataTable4_2
-   \   00000246   0x.... 0x....      BL       IAP_WriteParaFlash
-    316                      
-    317                      break;
-   \   0000024A   0xE009             B.N      ??IAP_PragramDeal_9
-    318                  case 0x04:                                          //终止升级指令
-    319                      gsIAPCtrl.addr = USER_APP_START_ADDR;           //初始化地址。
+   \   00000246   0x2003             MOVS     R0,#+3
+   \   00000248   0x7060             STRB     R0,[R4, #+1]
+    318                          return 3;
+   \   0000024A   0x2003             MOVS     R0,#+3
+   \   0000024C   0xE01C             B.N      ??IAP_PragramDeal_1
+    319                      }
+    320                      
+    321                      //如果程序大小相符，认为下载正确。修改下载成功标示
+    322                      gsIAPPara.code = 0x01;
+   \                     ??IAP_PragramDeal_19: (+1)
+   \   0000024E   0x2001             MOVS     R0,#+1
+   \   00000250   0x....             LDR.N    R1,??DataTable4_2
+   \   00000252   0x8208             STRH     R0,[R1, #+16]
+    323                      gsIAPPara.framenum  = 0;                        //恢复开始状态
+   \   00000254   0x2000             MOVS     R0,#+0
+   \   00000256   0x....             LDR.N    R1,??DataTable4_2
+   \   00000258   0x60C8             STR      R0,[R1, #+12]
+    324                      gsIAPPara.crc16 = GetCrc16Check((uint8 *)&gsIAPPara,sizeof(gsIAPPara)-2);
+   \   0000025A   0x2112             MOVS     R1,#+18
+   \   0000025C   0x....             LDR.N    R0,??DataTable4_2
+   \   0000025E   0x.... 0x....      BL       GetCrc16Check
+   \   00000262   0x....             LDR.N    R1,??DataTable4_2
+   \   00000264   0x8248             STRH     R0,[R1, #+18]
+    325                      IAP_WriteParaFlash(&gsIAPPara);
+   \   00000266   0x....             LDR.N    R0,??DataTable4_2
+   \   00000268   0x.... 0x....      BL       IAP_WriteParaFlash
+    326                      
+    327                      break;
+   \   0000026C   0xE009             B.N      ??IAP_PragramDeal_9
+    328                  case 0x04:                                          //终止升级指令
+    329                      gsIAPCtrl.addr = USER_APP_START_ADDR;           //初始化地址。
    \                     ??IAP_PragramDeal_6: (+1)
-   \   0000024C   0xF45F 0x2080      MOVS     R0,#+262144
-   \   00000250   0x....             LDR.N    R1,??DataTable4_5
-   \   00000252   0xF8C1 0x0400      STR      R0,[R1, #+1024]
-    320          
-    321                      break;  
-   \   00000256   0xE003             B.N      ??IAP_PragramDeal_9
-    322                  default:                                            //其他指令，直接返回
-    323                      databuf[1] = 2;
+   \   0000026E   0xF45F 0x2080      MOVS     R0,#+262144
+   \   00000272   0x....             LDR.N    R1,??DataTable4_5
+   \   00000274   0xF8C1 0x0400      STR      R0,[R1, #+1024]
+    330          
+    331                      break;  
+   \   00000278   0xE003             B.N      ??IAP_PragramDeal_9
+    332                  default:                                            //其他指令，直接返回
+    333                      databuf[1] = 2;
    \                     ??IAP_PragramDeal_3: (+1)
-   \   00000258   0x2002             MOVS     R0,#+2
-   \   0000025A   0x7060             STRB     R0,[R4, #+1]
-    324                      return 2;
-   \   0000025C   0x2002             MOVS     R0,#+2
-   \   0000025E   0xE002             B.N      ??IAP_PragramDeal_1
-    325              }
-    326              
-    327              databuf[1] = 0;
+   \   0000027A   0x2002             MOVS     R0,#+2
+   \   0000027C   0x7060             STRB     R0,[R4, #+1]
+    334                      return 2;
+   \   0000027E   0x2002             MOVS     R0,#+2
+   \   00000280   0xE002             B.N      ??IAP_PragramDeal_1
+    335              }
+    336              
+    337              databuf[1] = 0;
    \                     ??IAP_PragramDeal_9: (+1)
-   \   00000260   0x2000             MOVS     R0,#+0
-   \   00000262   0x7060             STRB     R0,[R4, #+1]
-    328              return 0;
-   \   00000264   0x2000             MOVS     R0,#+0
+   \   00000282   0x2000             MOVS     R0,#+0
+   \   00000284   0x7060             STRB     R0,[R4, #+1]
+    338              return 0;
+   \   00000286   0x2000             MOVS     R0,#+0
    \                     ??IAP_PragramDeal_1: (+1)
-   \   00000266   0xB006             ADD      SP,SP,#+24
-   \   00000268   0xE8BD 0x81F0      POP      {R4-R8,PC}       ;; return
-    329          }
+   \   00000288   0xB006             ADD      SP,SP,#+24
+   \   0000028A   0xE8BD 0x81F0      POP      {R4-R8,PC}       ;; return
+    339          }
 
    \                                 In section .bss, align 2
    \                     ??lastiapnum:
@@ -848,135 +873,135 @@ F:\iar\NC136B-310统计模块\Application\Library\iap\IAP_program_mcu.C
    \                                 In section .bss, align 2
    \                     ??bufsize:
    \   00000000                      DS8 2
-    330          
-    331          
-    332          typedef  void (*pFunction)(void);			                //定义一个函数类型的参数.
-    333          
-    334          /*******************************************************************************
-    335           * LOCAL VARIABLES
-    336           */
-    337          /***********************************************
-    338          * 描述：定义函数指针
-    339          */
+    340          
+    341          
+    342          typedef  void (*pFunction)(void);			                //定义一个函数类型的参数.
+    343          
+    344          /*******************************************************************************
+    345           * LOCAL VARIABLES
+    346           */
+    347          /***********************************************
+    348          * 描述：定义函数指针
+    349          */
 
    \                                 In section .bss, align 4
-    340          pFunction   pApp;
+    350          pFunction   pApp;
    \                     pApp:
    \   00000000                      DS8 4
-    341          
+    351          
 
    \                                 In section .text, align 2, keep-with-next
-    342          void Boot( void )
-    343          {
+    352          void Boot( void )
+    353          {
    \                     Boot: (+1)
    \   00000000   0xB538             PUSH     {R3-R5,LR}
-    344              u32     JumpAddress = 0;
+    354              u32     JumpAddress = 0;
    \   00000002   0x2400             MOVS     R4,#+0
-    345              u8      cpu_sr;
-    346              //SCB->VTOR = USER_APP_START_ADDR & 0x1FFFFF80;	
-    347          
-    348          	//JMP_Boot(USER_APP_START_ADDR);
-    349              
-    350          //   __ASM void JMP_Boot( uint32_t address ){
-    351          //   LDR SP, [R0]		;Load new stack pointer address
-    352          //   LDR PC, [R0, #4]	;Load new program counter address
-    353          //   }
-    354          
-    355              CPU_CRITICAL_ENTER();
+    355              u8      cpu_sr;
+    356              //SCB->VTOR = USER_APP_START_ADDR & 0x1FFFFF80;	
+    357          
+    358          	//JMP_Boot(USER_APP_START_ADDR);
+    359              
+    360          //   __ASM void JMP_Boot( uint32_t address ){
+    361          //   LDR SP, [R0]		;Load new stack pointer address
+    362          //   LDR PC, [R0, #4]	;Load new program counter address
+    363          //   }
+    364          
+    365              CPU_CRITICAL_ENTER();
    \   00000004   0x.... 0x....      BL       CPU_SR_Save
    \   00000008   0x0005             MOVS     R5,R0
    \   0000000A   0x.... 0x....      BL       CPU_IntDisMeasStart
-    356          
-    357              JumpAddress   =*(volatile u32*) (USER_APP_START_ADDR + 4); // 地址+4为PC地址
+    366          
+    367              JumpAddress   =*(volatile u32*) (USER_APP_START_ADDR + 4); // 地址+4为PC地址
    \   0000000E   0xF05F 0x1004      MOVS     R0,#+262148
    \   00000012   0x6800             LDR      R0,[R0, #+0]
    \   00000014   0x0004             MOVS     R4,R0
-    358              pApp          = (pFunction)JumpAddress;                     // 函数指针指向APP
+    368              pApp          = (pFunction)JumpAddress;                     // 函数指针指向APP
    \   00000016   0x....             LDR.N    R0,??DataTable4_8
    \   00000018   0x6004             STR      R4,[R0, #+0]
-    359              __set_MSP       (*(volatile u32*) USER_APP_START_ADDR);    // 初始化主堆栈指针（MSP）
+    369              __set_MSP       (*(volatile u32*) USER_APP_START_ADDR);    // 初始化主堆栈指针（MSP）
    \   0000001A   0xF45F 0x2080      MOVS     R0,#+262144
    \   0000001E   0x6800             LDR      R0,[R0, #+0]
    \   00000020   0xF380 0x8808      MSR      MSP,R0
-    360              __set_PSP       (*(volatile u32*) USER_APP_START_ADDR);    // 初始化进程堆栈指针（PSP）
+    370              __set_PSP       (*(volatile u32*) USER_APP_START_ADDR);    // 初始化进程堆栈指针（PSP）
    \   00000024   0xF45F 0x2080      MOVS     R0,#+262144
    \   00000028   0x6800             LDR      R0,[R0, #+0]
    \   0000002A   0xF380 0x8809      MSR      PSP,R0
-    361              __set_CONTROL   (0);                                        // 清零CONTROL
+    371              __set_CONTROL   (0);                                        // 清零CONTROL
    \   0000002E   0x2000             MOVS     R0,#+0
    \   00000030   0xF380 0x8814      MSR      CONTROL,R0
-    362              
-    363              pApp();                                                     //跳转运行
+    372              
+    373              pApp();                                                     //跳转运行
    \   00000034   0x....             LDR.N    R0,??DataTable4_8
    \   00000036   0x6800             LDR      R0,[R0, #+0]
    \   00000038   0x4780             BLX      R0
-    364              
-    365              //(*pApp)();
-    366              
-    367              CPU_CRITICAL_EXIT();
+    374              
+    375              //(*pApp)();
+    376              
+    377              CPU_CRITICAL_EXIT();
    \   0000003A   0x.... 0x....      BL       CPU_IntDisMeasStop
    \   0000003E   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
    \   00000040   0x0028             MOVS     R0,R5
    \   00000042   0x.... 0x....      BL       CPU_SR_Restore
-    368          
-    369          }
+    378          
+    379          }
    \   00000046   0xBD31             POP      {R0,R4,R5,PC}    ;; return
-    370          
+    380          
 
    \                                 In section .text, align 2, keep-with-next
-    371          void    Restart(void)
-    372          {
+    381          void    Restart(void)
+    382          {
    \                     Restart: (+1)
    \   00000000   0xB538             PUSH     {R3-R5,LR}
-    373              u32     JumpAddress = 0;
+    383              u32     JumpAddress = 0;
    \   00000002   0x2400             MOVS     R4,#+0
-    374              u8      cpu_sr;
-    375              //SCB->VTOR = USER_APP_START_ADDR & 0x1FFFFF80;	
-    376          
-    377          	//JMP_Boot(USER_APP_START_ADDR);
-    378              
-    379          //   __ASM void JMP_Boot( uint32_t address ){
-    380          //   LDR SP, [R0]		;Load new stack pointer address
-    381          //   LDR PC, [R0, #4]	;Load new program counter address
-    382          //   }
-    383          
-    384              CPU_CRITICAL_ENTER();
+    384              u8      cpu_sr;
+    385              //SCB->VTOR = USER_APP_START_ADDR & 0x1FFFFF80;	
+    386          
+    387          	//JMP_Boot(USER_APP_START_ADDR);
+    388              
+    389          //   __ASM void JMP_Boot( uint32_t address ){
+    390          //   LDR SP, [R0]		;Load new stack pointer address
+    391          //   LDR PC, [R0, #4]	;Load new program counter address
+    392          //   }
+    393          
+    394              CPU_CRITICAL_ENTER();
    \   00000004   0x.... 0x....      BL       CPU_SR_Save
    \   00000008   0x0005             MOVS     R5,R0
    \   0000000A   0x.... 0x....      BL       CPU_IntDisMeasStart
-    385          
-    386              JumpAddress   =*(volatile u32*) (0 + 4);    // 地址+4为PC地址
+    395          
+    396              JumpAddress   =*(volatile u32*) (0 + 4);    // 地址+4为PC地址
    \   0000000E   0x2004             MOVS     R0,#+4
    \   00000010   0x6800             LDR      R0,[R0, #+0]
    \   00000012   0x0004             MOVS     R4,R0
-    387              pApp          = (pFunction)JumpAddress;      // 函数指针指向APP
+    397              pApp          = (pFunction)JumpAddress;      // 函数指针指向APP
    \   00000014   0x....             LDR.N    R0,??DataTable4_8
    \   00000016   0x6004             STR      R4,[R0, #+0]
-    388              __set_MSP       (*(volatile u32*) 0);       // 初始化主堆栈指针（MSP）
+    398              __set_MSP       (*(volatile u32*) 0);       // 初始化主堆栈指针（MSP）
    \   00000018   0x2000             MOVS     R0,#+0
    \   0000001A   0x6800             LDR      R0,[R0, #+0]
    \   0000001C   0xF380 0x8808      MSR      MSP,R0
-    389              __set_PSP       (*(volatile u32*) 0);       // 初始化进程堆栈指针（PSP）
+    399              __set_PSP       (*(volatile u32*) 0);       // 初始化进程堆栈指针（PSP）
    \   00000020   0x2000             MOVS     R0,#+0
    \   00000022   0x6800             LDR      R0,[R0, #+0]
    \   00000024   0xF380 0x8809      MSR      PSP,R0
-    390              __set_CONTROL   (0);                                        // 清零CONTROL
+    400              __set_CONTROL   (0);                                        // 清零CONTROL
    \   00000028   0x2000             MOVS     R0,#+0
    \   0000002A   0xF380 0x8814      MSR      CONTROL,R0
-    391              
-    392              pApp();                                                     //跳转运行
+    401              
+    402              pApp();                                                     //跳转运行
    \   0000002E   0x....             LDR.N    R0,??DataTable4_8
    \   00000030   0x6800             LDR      R0,[R0, #+0]
    \   00000032   0x4780             BLX      R0
-    393              
-    394              //(*pApp)();
-    395              
-    396              CPU_CRITICAL_EXIT();
+    403              
+    404              //(*pApp)();
+    405              
+    406              CPU_CRITICAL_EXIT();
    \   00000034   0x.... 0x....      BL       CPU_IntDisMeasStop
    \   00000038   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
    \   0000003A   0x0028             MOVS     R0,R5
    \   0000003C   0x.... 0x....      BL       CPU_SR_Restore
-    397          }
+    407          }
    \   00000040   0xBD31             POP      {R0,R4,R5,PC}    ;; return
 
    \                                 In section .text, align 4, keep-with-next
@@ -1014,7 +1039,7 @@ F:\iar\NC136B-310统计模块\Application\Library\iap\IAP_program_mcu.C
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable4_8:
    \   00000000   0x........         DC32     pApp
-    398          
+    408          
 
    Maximum stack usage in bytes:
 
@@ -1072,10 +1097,10 @@ F:\iar\NC136B-310统计模块\Application\Library\iap\IAP_program_mcu.C
        4  ??DataTable4_7
        4  ??DataTable4_8
       72  Boot
-     620  IAP_PragramDeal
+     654  IAP_PragramDeal
       40  IAP_ReadDeviceInfo
       26  IAP_ReadParaFlash
-      98  IAP_WriteFlash
+     100  IAP_WriteFlash
       88  IAP_WriteParaFlash
       66  Restart
        2  bufsize
@@ -1086,9 +1111,9 @@ F:\iar\NC136B-310统计模块\Application\Library\iap\IAP_program_mcu.C
 
  
  1 056 bytes in section .bss
- 1 046 bytes in section .text
+ 1 082 bytes in section .text
  
- 1 046 bytes of CODE memory
+ 1 082 bytes of CODE memory
  1 056 bytes of DATA memory
 
 Errors: none

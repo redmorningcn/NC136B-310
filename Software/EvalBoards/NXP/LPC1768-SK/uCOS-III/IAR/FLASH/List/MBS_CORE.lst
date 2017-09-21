@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       19/Sep/2017  19:02:41
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       21/Sep/2017  22:56:53
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -3375,7 +3375,7 @@ F:\iar\NC136B-310统计模块\Software\uC-MB\Source\MBS_CORE.C
    \   0000006E   0xD006             BEQ.N    ??MBS_RTU_Task_3
    1919                            //redmorningcn 20170526   
    1920          //move1         pch->RxBufByteCnt   = pch->RxBufByteCtr;
-   1921           
+   1921                                               
    1922                          send_reply = NMBS_FCxx_Handler(pch);
    \                     ??MBS_RTU_Task_4: (+1)
    \   00000070   0x0020             MOVS     R0,R4
@@ -3386,7 +3386,7 @@ F:\iar\NC136B-310统计模块\Software\uC-MB\Source\MBS_CORE.C
    \   0000007A   0x2F01             CMP      R7,#+1
    \   0000007C   0xD026             BEQ.N    ??MBS_RTU_Task_2
    1924                              goto exit;
-   1925                          }
+   1925                          }              
    1926                      }
    1927                  next:
    1928          #endif

@@ -100,6 +100,8 @@ void    SetDispNow(void)
     dis_mode = 13*2;
 }
 
+extern  stcCalcModel    l_sCalcModel;       //临时采用的油箱模型
+
 /*******************************************************************************
  * 名    称： AppTaskDisp
  * 功    能： 控制任务
@@ -186,7 +188,7 @@ osalEvt  TaskDispEvtProcess(INT8U task_id, osalEvt task_event)
             */
             case 2: 
                 dis_mode++;
-                sCtrl.SoftWareID = 0x0203;
+                sCtrl.SoftWareID = 0x0207;
                 uprintf("SV_%02X.%02X",(uint8)(sCtrl.SoftWareID>>8),(uint8)sCtrl.SoftWareID);
                 
                 break;
@@ -204,8 +206,15 @@ osalEvt  TaskDispEvtProcess(INT8U task_id, osalEvt task_event)
             */
             case 4: 
                 dis_mode++;
-                
-                uprintf("C_%d",sCtrl.SOilPara.ModelNum);                
+                if(l_sCalcModel.valid == 1) //单独设置的油箱模型有效
+                {
+                    uprintf("C_%d.",l_sCalcModel.ModelNum);
+                }
+                else
+                {
+                    uprintf("C_%d",sCtrl.SOilPara.ModelNum);
+                }
+                                
                 break;
             /*******************************************************************
             * 描述： 高度

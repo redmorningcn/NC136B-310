@@ -397,7 +397,8 @@ void App_ModbusInit(void)
                            0,                      // ... Specify UART #0
                            28800,                   // ... Baud Rate
                            UART_DATABIT_8,         // ... Number of data bits 7 or 8
-                           UART_PARITY_NONE,       // ... Parity: _NONE, _ODD or _EVEN
+                           //UART_PARITY_NONE,       // ... Parity: _NONE, _ODD or _EVEN
+                           UART_PARITY_SP_0,
                            UART_STOPBIT_1,         // ... Number of stop bits 1 or 2
                            MODBUS_WR_EN);          // ... Enable (_EN) or disable (_DIS) writes
     pch->AesEn          = DEF_DISABLED;             // ... AES加密禁止
@@ -660,7 +661,6 @@ INT08U APP_CommRxDataDealCB(MODBUS_CH  *pch)
             {
                 //if( sCtrl.Dtu.ConnCtrl[i].SlaveAddr == SourceAddr)
                 if( sCtrl.Dtu.ConnCtrl[i].SlaveAddr == sCsncPara.sourceaddr)
-
                 {
                     sCtrl.Dtu.ConnCtrl[i].RecvEndFlg  = 1;              //接收到数据，置1。数据处理后置0
                     sCtrl.Dtu.ConnCtrl[i].TimeOut     = 0;              //超时计数器清零。
@@ -934,8 +934,9 @@ CPU_BOOLEAN  NMBS_FCxx_Handler (MODBUS_CH  *pch)
              * 描述： tax通讯协议
              */  
         } else {
-            TAX_FCxx_Handler(pch);     //tax通讯处理
-            return DEF_FALSE;
+            if(pch->PortNbr == 0)                       //串口0，做 
+                if(TAX_FCxx_Handler(pch) == FALSE)     //tax通讯处理
+                    return DEF_FALSE;
         }
     return DEF_TRUE;
 }

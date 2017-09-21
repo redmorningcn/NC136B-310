@@ -41,6 +41,8 @@
 *********************************************************************************************************
 */
 
+//正常运行,
+#define     DEBUG_MODEL_DISENABLE    1 
 
 /*
 *********************************************************************************************************
@@ -169,8 +171,11 @@ static  void  App_TaskStart (void *p_arg)
                 
         OSTimeDlyHMSM(0, 0, 0, 100,
                       OS_OPT_TIME_HMSM_STRICT, &os_err);
-        
-        WDT_Feed();
+       
+        #if DEBUG_MODEL_DISENABLE > 0 
+            WDT_Feed();                                               /* Determine CPU capacity                               */
+        #endif
+       
     }
 }
 

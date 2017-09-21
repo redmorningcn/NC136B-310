@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       19/Sep/2017  19:02:35
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       22/Sep/2017  00:13:14
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -335,8 +335,8 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_osal_tmr.c
     164          
     165                   osal_start_timerEx(  OS_TASK_ID_TMR,     //计数器重新开始
     166                                OS_EVT_TMR_OTR,
-    167                                OS_TICKS_PER_SEC*2);                             
-   \   00000078   0xF44F 0x62FA      MOV      R2,#+2000
+    167                                OS_TICKS_PER_SEC*2.5);                             
+   \   00000078   0xF640 0x12C4      MOVW     R2,#+2500
    \   0000007C   0x2180             MOVS     R1,#+128
    \   0000007E   0x2001             MOVS     R0,#+1
    \   00000080   0x.... 0x....      BL       osal_start_timerEx
@@ -371,8 +371,8 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_osal_tmr.c
     184                  
     185                  osal_start_timerEx(  OS_TASK_ID_TMR,     //计数器重新开始
     186                            OS_EVT_TMR_TAX,
-    187                            OS_TICKS_PER_SEC*1);                             
-   \   0000009E   0xF44F 0x727A      MOV      R2,#+1000
+    187                            OS_TICKS_PER_SEC*10);                             
+   \   0000009E   0xF242 0x7210      MOVW     R2,#+10000
    \   000000A2   0xF44F 0x7180      MOV      R1,#+256
    \   000000A6   0x2001             MOVS     R0,#+1
    \   000000A8   0x.... 0x....      BL       osal_start_timerEx

@@ -204,7 +204,7 @@ void    app_comm_otr(void)
         i =0 ;
         while(i < COMM_DEV_OTR_CONN_NUM)
             if(sCtrl.Otr.ConnCtrl[i].SlaveAddr == SLAVE_ADDR_OTR){
-                                                                //对OTR地址发送数据 
+        //对OTR地址发送数据 
                 comm_tinyrec_send((StrDevOtr *)&sCtrl.Otr,i);
                 //comm_record_send_one((StrDevOtr *)&sCtrl.Otr.RxCtrl,i);  
                 break;
