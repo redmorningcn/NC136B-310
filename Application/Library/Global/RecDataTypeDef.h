@@ -1,7 +1,7 @@
 #ifndef  _RecDataTypeDef_h_
 #define  _RecDataTypeDef_h_
 
-
+#include "app_tax.h"
 
 typedef __packed struct _stcFlshRec   	//定义油尺记录数据结构
 {
@@ -128,6 +128,65 @@ typedef __packed struct _stcFlshRec   	//定义油尺记录数据结构
 //	uint16	Reserve0;        	//预留          		2   
 	uint16 	CrcCheck;         	//存储的校验和    		2   Flash记录存储CRC校验
 }stcFlshRec;
+
+
+
+
+typedef __packed struct _stcFlshRecNDP02B  //定义油尺记录数据结构（20170921 新数 油尺据结构）
+{
+    uint8				CmdTpye		      ;//命令类型       1     		        	
+    uint8				EvtType           ;//事件类型       1                  
+    uint16				LocoType          ;//机车型号       2                  
+    uint16				LocoNum           ;//机 车 号       2                     
+    uint32				SysID             ;//记录流水号     4                   
+    uint16				Oil               ;//油量           2                    
+    uint16				Hight1            ;//高度1          2                    
+    uint16				Hight2            ;//高度2          2                    
+    uint16				Pressure1         ;//压力1          2                    
+    uint16				Pressure2         ;//压力2          2                    
+    uint16				Density1          ;//密度1          2                    
+    uint16				Density2          ;//密度2          2                    
+    uint8				TempOil           ;//油箱温度       1                  
+    uint8				TempEnv           ;//环境温度       1                  
+    uint32				Degree            ;//电量           4                    
+    uint16				Power             ;//功率           2                    
+    uint16				Voltage           ;//电压           2                    
+    uint16				Current           ;//电流           2                    
+    uint16				EngineSpeed       ;//柴速           2                    
+    uint32				Longitude         ;//经度           4                    
+    uint32  			Latitude	      ;//纬度           4                    
+    uint16				AddSpeed          ;//加速度         2                     
+    uint32				Rssi    : 6       ;//信号强度       1                  
+    uint32				ErrCode : 24      ;//故障代码       3                  
+    uint8				ModelCode         ;//模型编号       1                  
+    uint8				DevConfig         ;//通讯设备配      1                   
+    uint16				Recv              ;//预留           6                    
+    struct _sSysTime {
+        uint32      Sec                 : 6;        // D05~D00：秒
+        uint32      Min                 : 6;        // D11~D06：分
+        uint32      Hour                : 5;        // D16~D12：时
+        uint32      Day                 : 5;        // D21~D17：日
+        uint32      Mon                 : 4;        // D25~D22：月
+        uint32      Year                : 6;        // D31~D26：年
+    } SysTime;                                          // 04 LKJ时间
+    uint8				TaxType                         ;//TAX特征码      1                     
+    uint8				TaxFlg                           ;//TAX特征码      64       
+    /***************************************************
+    * 描述： TAX:64 bytes
+    */
+    union __uTAX__ {
+    _StrTax_II_Rec      Tax2;                           // 记录数据     
+    struct __sTAX_III__ {
+    StrTaxVariable      Vari;
+    StrTaxConstant      Cons;
+    } Tax3;
+    uint8_t             buf1[64];
+    uint16_t            buf2[64/2];
+    uint32_t            buf3[64/4];
+    } Tax;    
+    
+    uint16				CrcCheck                        ;//校验   2                 
+}stcFlshRecNDP02B;
 
 
 

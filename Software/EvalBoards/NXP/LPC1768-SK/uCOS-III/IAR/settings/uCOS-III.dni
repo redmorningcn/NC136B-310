@@ -14,7 +14,7 @@ TraceBufferSize=0x00010000
 TraceStallIfFIFOFull=0x00000000
 TracePortSize=0x00000004
 [DebugChecksum]
-Checksum=-286719741
+Checksum=-1408490536
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -156,7 +156,8 @@ Bp10=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\tax\app_
 Bp11=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\iap\IAP_program_mcu.C}.329.13" 0 0 1 "" 0 "" 0
 Bp12=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\iap\IAP_program_mcu.C}.318.17" 0 0 1 "" 0 "" 0
 Bp13=_ 0 "EMUL_CODE" "0x0002135E" 0 0 1 "" 0 "" 0
-Count=14
+Bp14=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\APP\comm\app_comm_dtu.c}.143.13" 0 0 1 "" 0 "" 0
+Count=15
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""

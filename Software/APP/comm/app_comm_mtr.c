@@ -120,7 +120,9 @@ void    app_comm_mtr(void)
                                     +   (sCtrl.Mtr.Rd.sRecv.Hight %256)*256;   
                 //密度值
                 sCtrl.sRec.MyDip1Den=    sCtrl.Mtr.Rd.sRecv.Density/256 
-                                    +   (sCtrl.Mtr.Rd.sRecv.Density %256)*256;   
+                                    +   (sCtrl.Mtr.Rd.sRecv.Density %256)*256; 
+                //
+                
             }
             
             if(sCtrl.Mtr.RxCtrl.SourceAddr == SLAVE_ADDR_DIP2)    //测量装置2，

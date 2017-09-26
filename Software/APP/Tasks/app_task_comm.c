@@ -934,8 +934,8 @@ CPU_BOOLEAN  NMBS_FCxx_Handler (MODBUS_CH  *pch)
              * 描述： tax通讯协议
              */  
         } else {
-            if(pch->PortNbr == 0)                       //串口0，做 
-                if(TAX_FCxx_Handler(pch) == FALSE)     //tax通讯处理
+//            if(pch->PortNbr == 0)                       //串口0，做 
+//                if(TAX_FCxx_Handler(pch) == FALSE)     //tax通讯处理
                     return DEF_FALSE;
         }
     return DEF_TRUE;

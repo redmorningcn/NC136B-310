@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       22/Sep/2017  00:13:15
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       26/Sep/2017  15:08:24
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -387,7 +387,7 @@ F:\iar\NC136B-310统计模块\Software\uC-MB\Cfg\Template\MB_DATA.C
     112              */
     113              if ( reg < sizeof(sCtrl) / 2 ) {
    \   0000002E   0xB29B             UXTH     R3,R3            ;; ZeroExt  R3,R3,#+16,#+16
-   \   00000030   0xF5B3 0x6F8D      CMP      R3,#+1128
+   \   00000030   0xF5B3 0x6F95      CMP      R3,#+1192
    \   00000034   0xD206             BCS.N    ??MB_CoilRd_2
     114                  reg_val = preg[reg];
    \   00000036   0xB29B             UXTH     R3,R3            ;; ZeroExt  R3,R3,#+16,#+16
@@ -519,7 +519,7 @@ F:\iar\NC136B-310统计模块\Software\uC-MB\Cfg\Template\MB_DATA.C
     190              */
     191              if ( reg < sizeof(sCtrl) / 2 ) {
    \   0000004C   0xB2BF             UXTH     R7,R7            ;; ZeroExt  R7,R7,#+16,#+16
-   \   0000004E   0xF5B7 0x6F8D      CMP      R7,#+1128
+   \   0000004E   0xF5B7 0x6F95      CMP      R7,#+1192
    \   00000052   0xD224             BCS.N    ??MB_CoilWr_2
     192                  /***********************************************
     193                  * 描述：
@@ -803,7 +803,7 @@ F:\iar\NC136B-310统计模块\Software\uC-MB\Cfg\Template\MB_DATA.C
     418              */
     419              if ( reg < sizeof(sCtrl) / 2 ) {
    \   00000020   0xB2A4             UXTH     R4,R4            ;; ZeroExt  R4,R4,#+16,#+16
-   \   00000022   0xF5B4 0x6F8D      CMP      R4,#+1128
+   \   00000022   0xF5B4 0x6F95      CMP      R4,#+1192
    \   00000026   0xD210             BCS.N    ??MB_HoldingRegRd_2
     420                  CPU_CRITICAL_ENTER();
    \   00000028   0x.... 0x....      BL       CPU_SR_Save
@@ -994,7 +994,7 @@ F:\iar\NC136B-310统计模块\Software\uC-MB\Cfg\Template\MB_DATA.C
     563              */
     564              if ( reg < sizeof(sCtrl) / 2 ) {
    \   00000028   0xB2A4             UXTH     R4,R4            ;; ZeroExt  R4,R4,#+16,#+16
-   \   0000002A   0xF5B4 0x6F8D      CMP      R4,#+1128
+   \   0000002A   0xF5B4 0x6F95      CMP      R4,#+1192
    \   0000002E   0xD216             BCS.N    ??MB_HoldingRegWr_2
    \   00000030   0xE002             B.N      ??MB_HoldingRegWr_3
    \                     ??MB_HoldingRegWr_1: (+1)

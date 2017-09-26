@@ -1351,69 +1351,9 @@
         <name>$PROJ_DIR$\..\..\..\..\..\..\Application\User\tmp.c</name>
       </file>
     </group>
-    <group>
-      <name>uC/MB</name>
-      <group>
-        <name>Cfg</name>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Cfg\Template\mb_app_hooks.c</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Cfg\Template\mb_app_hooks.h</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Cfg\Template\mb_cfg.h</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Cfg\Template\MB_DATA.C</name>
-        </file>
-      </group>
-      <group>
-        <name>OS</name>
-        <group>
-          <name>uCOS-III</name>
-          <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\OS\uCOS-III\MB_OS.C</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\OS\uCOS-III\MB_OS.H</name>
-          </file>
-        </group>
-      </group>
-      <group>
-        <name>Ports</name>
-        <group>
-          <name>NXP</name>
-          <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Ports\NXP\LPC1768\IAR\MB_BSP.C</name>
-          </file>
-        </group>
-      </group>
-      <group>
-        <name>Source</name>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Source\MB.C</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Source\mb.h</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Source\MB_AES.C</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Source\MB_DEF.H</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Source\MB_UTIL.C</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Source\MBM_CORE.C</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Source\MBS_CORE.C</name>
-        </file>
-      </group>
-    </group>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\..\..\..\..\embedsoft\Micrium_LPC1768-SK_uCOS-III\Software\EvalBoards\NXP\LPC1768-SK\BSP\IAR\LPC1768_FLASH512K_SRAM32K.icf</name>
+    </file>
   </group>
   <group>
     <name>BSP</name>
@@ -1675,6 +1615,69 @@
     <file>
       <name>$PROJ_DIR$\..\..\..\..\..\APP\User\readme.md</name>
     </file>
+  </group>
+  <group>
+    <name>uC/MB</name>
+    <group>
+      <name>Cfg</name>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Cfg\Template\mb_app_hooks.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Cfg\Template\mb_app_hooks.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Cfg\Template\mb_cfg.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Cfg\Template\MB_DATA.C</name>
+      </file>
+    </group>
+    <group>
+      <name>OS</name>
+      <group>
+        <name>uCOS-III</name>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\OS\uCOS-III\MB_OS.C</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\OS\uCOS-III\MB_OS.H</name>
+        </file>
+      </group>
+    </group>
+    <group>
+      <name>Ports</name>
+      <group>
+        <name>NXP</name>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Ports\NXP\LPC1768\IAR\MB_BSP.C</name>
+        </file>
+      </group>
+    </group>
+    <group>
+      <name>Source</name>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Source\MB.C</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Source\mb.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Source\MB_AES.C</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Source\MB_DEF.H</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Source\MB_UTIL.C</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Source\MBM_CORE.C</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\uC-MB\Source\MBS_CORE.C</name>
+      </file>
+    </group>
   </group>
   <group>
     <name>uC/OS-III</name>
@@ -1946,9 +1949,6 @@
       </group>
     </group>
   </group>
-  <file>
-    <name>$PROJ_DIR$\..\..\..\..\..\..\..\..\embedsoft\Micrium_LPC1768-SK_uCOS-III\Software\EvalBoards\NXP\LPC1768-SK\BSP\IAR\LPC1768_FLASH512K_SRAM32K.icf</name>
-  </file>
 </project>
 
 

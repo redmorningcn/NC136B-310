@@ -23,7 +23,7 @@
 #define		DATA_CARD_DIS		0x10000			//数据卡
 #define		DATA_CARD_FIN		0x20000			//数据卡
 #define		SYS_RUN_PARA		0x40000			//设置运行参数
-#define		CLEAR_ALL			0x80000			//设置运行参数
+#define		CLEAR_ALL			0x80000			//清零
 
 #define		RST_SYS				0x100000		//系统复位
 #define		CALC_PARA           0x200000		//油量计算系数

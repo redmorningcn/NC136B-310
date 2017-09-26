@@ -98,6 +98,13 @@ void    app_init_sctrl(void)
     sCtrl.sRunPara.StoreTime= 60;       
     sCtrl.sRunPara.SysReset = 0;
     
+    sCtrl.sRunPara.StoreType    = 0x02;            //shu ju NDP02B
+    sCtrl.sRunPara.StoreTypeBak = 0x02;
+
+
+    
+    
+    
 //测量装置1 初始化    
     sCtrl.Mtr.ConnCtrl[0].ConnFlg   = 1;
     sCtrl.Mtr.ConnCtrl[0].ErrFlg    = 0;

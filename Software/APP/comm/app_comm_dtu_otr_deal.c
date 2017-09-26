@@ -210,7 +210,7 @@ void    comm_para_flow(StrDevDtu * sDtu,uint8 addrnum)
         
         FRAM_StoreProductInfo((StrProductInfo *)&sCtrl.sProductInfo);
         
-        uprintf("%4d%4d"   ,sCtrl.sProductInfo.sLocoId.Type
+        uprintf("%4d.%4d"   ,sCtrl.sProductInfo.sLocoId.Type
                 ,sCtrl.sProductInfo.sLocoId.Num
                     );      
         break;
@@ -286,6 +286,14 @@ void    comm_para_flow(StrDevDtu * sDtu,uint8 addrnum)
         *   后续每200ms发送数据，序号从0开始累加。
         数据发送完成后，序号为0xffffffff。
         */    
+        //设置斜率
+    case    SYS_RUN_PARA: 
+        //存运行参数，存储时间，数据格式等信息
+        FRAM_StoreRunPara((stcRunPara *)&sCtrl.sRunPara);   //存数据。关键数据存储时保护
+        
+        uprintf("rt-%d",    sCtrl.sRunPara.StoreType);      //立即显示设定值 （0x02 ）数据新版
+
+        break;
         
     case    MODEL_CARD: 
         //模型数据接收序号
@@ -380,7 +388,8 @@ void    comm_para_flow(StrDevDtu * sDtu,uint8 addrnum)
     case    RUN_MODEL_PARA:
         
         uprintf("SET--");         //立即显示设定值 
-
+        SetDispNow();
+        
         memcpy((uint8 *)&tmp32, &sDtu->Rd.Buf[0],sizeof(tmp32));        //取帧序号
         if(tmp32 < (1 + sizeof(l_sCalcModel)/128 ))                     //序号有效
         {
@@ -405,10 +414,11 @@ void    comm_para_flow(StrDevDtu * sDtu,uint8 addrnum)
                 
                 //设置成功后，指示
                 uprintf("SET-%d",l_sCalcModel.ModelNum);         //立即显示设定值 
+                SetDispNow();
                 tmp32 = 1000000;
                 while(tmp32--);
                 uprintf("SET-%d",l_sCalcModel.ModelNum);         //立即显示设定值 
-
+                SetDispNow();
             }
         }
         
@@ -445,16 +455,16 @@ uint8    comm_record_send_one(StrDevDtu * sDtu,uint8    addrnum)
     */ 
     if(sDtu->ConnCtrl[addrnum].SlaveAddr == SLAVE_ADDR_DTU)
     {
-        if(sCtrl.sRecNumMgr.Current <= sCtrl.sRecNumMgr.GrsRead )           //已发送记录号比当前记录号大，进行异常处理
+        if(sCtrl.sRecNumMgr.Current <= sCtrl.sRecNumMgr.GrsRead )               //已发送记录号比当前记录号大，进行异常处理
         {
             sCtrl.sRecNumMgr.GrsRead = 0;
             if(sCtrl.sRecNumMgr.Current)
-                sCtrl.sRecNumMgr.GrsRead = sCtrl.sRecNumMgr.Current - 1;    //最后有效记录赋值     
+                sCtrl.sRecNumMgr.GrsRead = sCtrl.sRecNumMgr.Current - 1;        //最后有效记录赋值     
             
-            FRAM_StoreRecNumMgr((StrRecNumMgr *)&sCtrl.sRecNumMgr);         //保存记录号
+            FRAM_StoreRecNumMgr((StrRecNumMgr *)&sCtrl.sRecNumMgr);             //保存记录号
         }
         
-        //sDtu->ConnCtrl[addrnum].SendFramNum++;                            //发送序号由接收控制
+        //sDtu->ConnCtrl[addrnum].SendFramNum++;                                //发送序号由接收控制
         
         /***********************************************
         * 描述： 数据记录准备,根据记录号取数据记录。
@@ -471,14 +481,14 @@ uint8    comm_record_send_one(StrDevDtu * sDtu,uint8    addrnum)
     
     if(sDtu->ConnCtrl[addrnum].SlaveAddr == SLAVE_ADDR_OTR)
     {
-        if(sCtrl.sRecNumMgr.Current <= sCtrl.sRecNumMgr.IcRead )           //已发送记录号比当前记录号大，进行异常处理
+        if(sCtrl.sRecNumMgr.Current <= sCtrl.sRecNumMgr.IcRead )                //已发送记录号比当前记录号大，进行异常处理
         {
             sCtrl.sRecNumMgr.IcRead = 0;
             if(sCtrl.sRecNumMgr.Current)
-                sCtrl.sRecNumMgr.IcRead = sCtrl.sRecNumMgr.Current - 1;    //最后有效记录赋值     
+                sCtrl.sRecNumMgr.IcRead = sCtrl.sRecNumMgr.Current - 1;         //最后有效记录赋值     
             
             sCtrl.Otr.ConnCtrl[addrnum].SendFramNum++;
-            FRAM_StoreRecNumMgr((StrRecNumMgr *)&sCtrl.sRecNumMgr);         //保存记录号
+            FRAM_StoreRecNumMgr((StrRecNumMgr *)&sCtrl.sRecNumMgr);             //保存记录号
         }
         
         /***********************************************
@@ -490,22 +500,26 @@ uint8    comm_record_send_one(StrDevDtu * sDtu,uint8    addrnum)
         
         osal_start_timerRl( OS_TASK_ID_TMR, 
                            OS_EVT_TMR_OTR, 
-                           OS_TICKS_PER_SEC*10 );  //统计装置和无线发送模块定时器  10s
+                           OS_TICKS_PER_SEC*10 );               //统计装置和无线发送模块定时器  10s
     }
     
-    
+    uint8   framecode = 0;
+    if(sCtrl.sRunPara.StoreType == 0x02 && sCtrl.sRunPara.StoreTypeBak == 0x02) //新版数据格式  redmorningcn 20170922
+    {
+        framecode = 0x02;                                       //报文控制字
+    }
     //超时值发送SLAVE_ADDR_DTU 的数据
     CSNC_SendData(sDtu->pch,                                    //DTU 的PCH：串口号，收发控制等底层信息
                   sDtu->ConnCtrl[addrnum].MasterAddr,           //源地址，
                   sDtu->ConnCtrl[addrnum].SlaveAddr,            //目标地址
                   sDtu->ConnCtrl[addrnum].SendFramNum,          //帧序号 ，，在接收中累加
-                  0,                                            //命令字
+                  framecode,                                    //命令字
                   (uint8 *)&sDtu->Wr.sRec,                      //数据区
-                  sizeof(sDtu->Wr.sRec)                         //发送长度
+                  sizeof(sDtu->Wr.sRec)                        //发送长度
+                
+                      
                       );
-    
-    
-    
+
     return 1;
 }
 
@@ -530,7 +544,8 @@ void    comm_record_send(StrDevDtu * sDtu,uint8 addrnum)
     * 描述： 发送和接收的记录号相符，发送流水号加1
     *       再根据数据量，发送数据。
     * 
-    */                         
+    */      
+    
     if(sDtu->RxCtrl.FramNum == sDtu->ConnCtrl[addrnum].SendFramNum){
         sDtu->ConnCtrl[addrnum].SendFramNum++;                  //数据正确，序号加1
         sCtrl.sRecNumMgr.GrsRead++;

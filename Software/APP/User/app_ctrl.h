@@ -494,7 +494,9 @@ typedef struct {
 // 发送数据结构  		统计-->无线
 __packed
 typedef union {
-	stcFlshRec	sRec;						//数据记录     128 	
+	stcFlshRec	        sRec;						//数据记录     128 	
+    stcFlshRecNDP02B	sRecNdp02B;					//数据记录     128 	
+
 	uint8		Buf[160];					//
 } UniDtuCommSendData;
 
@@ -598,7 +600,9 @@ typedef struct _stcTinyRec{
 // 发送数据结构  		统计--> 卡
 __packed
 typedef union {
-	stcFlshRec	sRec;						//数据记录     128 	
+	stcFlshRec	        sRec;						//数据记录     128 	
+    stcFlshRecNDP02B	sRecNdp02B;						//数据记录     128 	
+
     stcTinyRec  sTinyRec;                   //简单数据记录
 	uint8		Buf[160];					//
 } UniOtrCommSendData;
@@ -772,8 +776,12 @@ typedef struct _stcRunPara_
 	uint8		RecClear;					// 1		数据记录清零，清StrRecNumMgr内容
 	uint8		SysReset;					// 1    	系统参数重置，清StrRecNumMgr + StrOilPara 	中的内容。
 	uint8		StartFlg;					// 1    	首次运行
-	uint8		SysSta;						// 1   	    系统运行状态
-	uint8		Buf[3];						// 1        备用
+	
+    uint8		SysSta;						// 1   	    系统运行状态
+	uint8		StoreType;                  // 1   	    系统运行状态
+	uint8		StoreTypeBak;               // 1   	    系统运行状态
+
+	uint8		Buf[1];						// 1        备用
 }stcRunPara;
 
 //油箱模型点，高度，油量
@@ -890,9 +898,12 @@ typedef struct _StrSysCtrlPara {
     StrDevTax   DevTax;
     
     //定义全局的Os操作变量?   
-    StrCtrlOS    Os;                                	 // OS系统结构体变量    
+    StrCtrlOS    Os;                    // OS系统结构体变量    
     
     stcTaxCtrl   Tax;
+    
+    stcFlshRecNDP02B    sRecNdp02B;     //  128  数据记录      包含所有采集数据及运算结果。
+
 //    //显示结构体	
 //    	StrDisp           Disp;                            	//显示结构体变量 	
 	

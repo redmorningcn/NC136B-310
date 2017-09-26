@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       22/Sep/2017  01:41:02
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       26/Sep/2017  15:08:18
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -159,7 +159,7 @@ F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\app.c
      42          */
      43          
      44          //正常运行,
-     45          #define     DEBUG_MODEL_DISENABLE    1 
+     45          #define     DEBUG_MODEL_DISENABLE    0
      46          
      47          /*
      48          *********************************************************************************************************
@@ -356,11 +356,10 @@ F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\app.c
    \   00000028   0x2100             MOVS     R1,#+0
    \   0000002A   0x2000             MOVS     R0,#+0
    \   0000002C   0x.... 0x....      BL       OSTimeDlyHMSM
+   \   00000030   0xE7F4             B.N      ??App_TaskStart_0
     174                 
     175                  #if DEBUG_MODEL_DISENABLE > 0 
     176                      WDT_Feed();                                               /* Determine CPU capacity                               */
-   \   00000030   0x.... 0x....      BL       WDT_Feed
-   \   00000034   0xE7F2             B.N      ??App_TaskStart_0
     177                  #endif
     178                 
     179              }
@@ -465,7 +464,6 @@ F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\app.c
         24   -> BSP_LED_Off
         24   -> BSP_Start
         24   -> OSTimeDlyHMSM
-        24   -> WDT_Feed
       48   main
         48   -> App_Main
         48   -> BSP_Init
@@ -486,7 +484,7 @@ F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\app.c
       16  ?_0
        2  App_ObjCreate
       12  App_TaskCreate
-      54  App_TaskStart
+      50  App_TaskStart
      256  App_TaskStartStk
      200  App_TaskStartTCB
       84  main
@@ -494,9 +492,9 @@ F:\iar\NC136B-310统计模块\Software\EvalBoards\NXP\LPC1768-SK\uCOS-III\app.c
  
  456 bytes in section .bss
   16 bytes in section .rodata
- 164 bytes in section .text
+ 160 bytes in section .text
  
- 164 bytes of CODE  memory
+ 160 bytes of CODE  memory
   16 bytes of CONST memory
  456 bytes of DATA  memory
 

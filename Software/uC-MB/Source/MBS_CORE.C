@@ -37,7 +37,7 @@
 // Modified by SE
 #include <includes.h>
 #include <mb_app_hooks.h>
-//#include <diagcounter.h>
+#include <app_ctrl.h>
 /*
 *********************************************************************************************************
 *                                                MACROS
@@ -1862,6 +1862,8 @@ static  void  MBS_ASCII_Task (MODBUS_CH  *pch)
 }
 #endif
 
+
+
 /*$PAGE*/
 /*
 *********************************************************************************************************
@@ -1891,22 +1893,33 @@ static  void  MBS_RTU_Task (MODBUS_CH  *pch)
 
     pch->StatMsgCtr++;
     if (pch->RxBufByteCtr >= MODBUS_RTU_MIN_MSG_SIZE) {
-        ok = MB_RTU_Rx(pch);                           /* Extract received command from .RxBuf[] & move to .RxFrameData[] */
-        
-        //redmorningcn  MB_RTU_Rx 最后两字节没取完整。在此补充完整。
-        pch->RxFrameData[pch->RxBufByteCtr-2] = pch->RxBuf[pch->RxBufByteCtr-2];
-        pch->RxFrameData[pch->RxBufByteCtr-1] = pch->RxBuf[pch->RxBufByteCtr-1];
-        
-        //redmorningcn  从move1位置。取数据长度。
-         pch->RxBufByteCnt   = pch->RxBufByteCtr;    
-        //从最后移动到此处。数据复制完后，清空接收缓冲，就可以继续数据接收        
-        if(pch->RxBufByteCtr)                                   //有数据长度，才重启定时器(redmorningcn 20170526)
-        { 
-            //redmorningcn 注释 20170526
-            //pch->RTU_TimeoutEn  = DEF_TRUE;                      // 重新启动超时（无名沈添加）
+         /***********************************************
+        * 描述： 判断是否从TAX箱端口接收，TAX特殊处理。进来后直接退出。
+        */
+        if ( sCtrl.DevTax.pch == pch ) {
+            send_reply = TAX_FCxx_Handler(pch);
+             
+            pch->RTU_TimeoutEn  = DEF_TRUE;                      // 重新启动超时（无名沈添加）
             pch->RxBufByteCtr   = 0;
             pch->RxBufPtr       = &pch->RxBuf[0];
+            goto exit;
         }       
+        
+        CPU_SR_ALLOC();
+    
+        CPU_CRITICAL_ENTER();
+        //redmorningcn  从move1位置。取数据长度。
+        pch->RxBufByteCnt   = pch->RxBufByteCtr; 
+        //redmorningcn  MB_RTU_Rx 最后两字节没取完整。在此补充完整。
+        pch->RxFrameData[pch->RxBufByteCnt-2] = pch->RxBuf[pch->RxBufByteCnt-2];
+        pch->RxFrameData[pch->RxBufByteCnt-1] = pch->RxBuf[pch->RxBufByteCnt-1];
+        CPU_CRITICAL_EXIT();
+        
+        ok = MB_RTU_Rx(pch);                           /* Extract received command from .RxBuf[] & move to .RxFrameData[] */
+        
+        pch->RTU_TimeoutEn  = DEF_TRUE;  
+        pch->RxBufByteCtr   = 0;
+        pch->RxBufPtr       = &pch->RxBuf[0];   
             
         if (ok == DEF_TRUE) {
             /***********************************************
@@ -1945,25 +1958,104 @@ static  void  MBS_RTU_Task (MODBUS_CH  *pch)
                 }
             }
         }
-    }else{
-            if(pch->RxBufByteCtr)                               //有数据长度，才重启定时器(redmorningcn 20170526)
-            { 
-                //redmorningcn 注释 20170526
-                //pch->RTU_TimeoutEn  = DEF_TRUE;               // 重新启动超时（无名沈添加）
-                pch->RxBufByteCtr   = 0;
-                pch->RxBufPtr       = &pch->RxBuf[0];
-            }
     }
-    //
+    else
+    {
+        pch->RTU_TimeoutEn  = DEF_TRUE;                      // 重新启动超时（无名沈添加）
+        pch->RxBufByteCtr   = 0;
+        pch->RxBufPtr       = &pch->RxBuf[0];
+    }
+    
 exit:
-    //移动位置
-//    if(pch->RxBufByteCtr)                                   //有数据长度，才重启定时器(redmorningcn 20170526)
-//    { 
-//        //redmorningcn 注释 20170526
-//        //pch->RTU_TimeoutEn  = DEF_TRUE;                      // 重新启动超时（无名沈添加）
-//        pch->RxBufByteCtr   = 0;
-//        pch->RxBufPtr       = &pch->RxBuf[0];
-//    }
+    //pch->RTU_TimeoutEn  = DEF_TRUE;                      // 重新启动超时（无名沈添加）
+    //pch->RxBufByteCtr   = 0;
+    //pch->RxBufPtr       = &pch->RxBuf[0];
 }
+//
+//#if (MODBUS_CFG_SLAVE_EN == DEF_ENABLED) && \
+//    (MODBUS_CFG_RTU_EN   == DEF_ENABLED)
+//static  void  MBS_RTU_Task (MODBUS_CH  *pch)
+//{
+//    CPU_BOOLEAN     ok;
+//    CPU_INT16U      calc_crc;                            /* Used for CRC                                                    */
+//    CPU_BOOLEAN     send_reply;
+//    OS_ERR          err;
+//
+//    pch->StatMsgCtr++;
+//    if (pch->RxBufByteCtr >= MODBUS_RTU_MIN_MSG_SIZE) {
+//        ok = MB_RTU_Rx(pch);                           /* Extract received command from .RxBuf[] & move to .RxFrameData[] */
+//        
+//        //redmorningcn  MB_RTU_Rx 最后两字节没取完整。在此补充完整。
+//        pch->RxFrameData[pch->RxBufByteCtr-2] = pch->RxBuf[pch->RxBufByteCtr-2];
+//        pch->RxFrameData[pch->RxBufByteCtr-1] = pch->RxBuf[pch->RxBufByteCtr-1];
+//        
+//        //redmorningcn  从move1位置。取数据长度。
+//         pch->RxBufByteCnt   = pch->RxBufByteCtr;    
+//        //从最后移动到此处。数据复制完后，清空接收缓冲，就可以继续数据接收        
+//        if(pch->RxBufByteCtr)                                   //有数据长度，才重启定时器(redmorningcn 20170526)
+//        { 
+//            //redmorningcn 注释 20170526
+//            //pch->RTU_TimeoutEn  = DEF_TRUE;                      // 重新启动超时（无名沈添加）
+//            pch->RxBufByteCtr   = 0;
+//            pch->RxBufPtr       = &pch->RxBuf[0];
+//        }       
+//            
+//        if (ok == DEF_TRUE) {
+//            /***********************************************
+//            * 描述： 2015/12/07增加，用于非MODBBUS通信
+//            */
+//#if MB_NONMODBUS_EN == DEF_ENABLED
+//            if ( ( pch->NonModbusEn == DEF_ENABLED ) && 
+//               ( ( pch->RxFrameHead != 0 ) || 
+//                 ( pch->RxFrameTail != 0 ) ) ) {
+//                  //redmorningcn 20170526   
+////move1         pch->RxBufByteCnt   = pch->RxBufByteCtr;
+//                                     
+//                send_reply = NMBS_FCxx_Handler(pch);
+//                if (send_reply == DEF_TRUE) {
+//                    goto exit;
+//                }              
+//            }
+//        next:
+//#endif
+//            /***********************************************
+//            * 描述： MODBUS RTU 从机数据处理
+//            */
+//            calc_crc = MB_RTU_RxCalcCRC(pch);          /* Do our own calculation of the CRC.                              */
+//            if (calc_crc != pch->RxFrameCRC) {         /* If the calculated CRC does not match the CRC received,          */
+//                pch->StatCRCErrCtr++;                  /* then the frame is bad.                                          */
+//                pch->StatNoRespCtr++;
+//                //COM_incDiaCtr(COM_BADCRC);
+//                //COM_incDiaCtr(COM_TIMEOUT);
+//            } else {
+//                send_reply = MBS_FCxx_Handler(pch);    /* Execute received command and formulate a response               */
+//                if (send_reply == DEF_TRUE) {
+//                    MB_RTU_Tx(pch);                    /* Send back reply.                                                */
+//                } else {
+//                    pch->StatNoRespCtr++;
+//                    //COM_incDiaCtr(COM_TIMEOUT);
+//                }
+//            }
+//        }
+//    }else{
+//            if(pch->RxBufByteCtr)                               //有数据长度，才重启定时器(redmorningcn 20170526)
+//            { 
+//                //redmorningcn 注释 20170526
+//                //pch->RTU_TimeoutEn  = DEF_TRUE;               // 重新启动超时（无名沈添加）
+//                pch->RxBufByteCtr   = 0;
+//                pch->RxBufPtr       = &pch->RxBuf[0];
+//            }
+//    }
+//    //
+//exit:
+//    //移动位置
+////    if(pch->RxBufByteCtr)                                   //有数据长度，才重启定时器(redmorningcn 20170526)
+////    { 
+////        //redmorningcn 注释 20170526
+////        //pch->RTU_TimeoutEn  = DEF_TRUE;                      // 重新启动超时（无名沈添加）
+////        pch->RxBufByteCtr   = 0;
+////        pch->RxBufPtr       = &pch->RxBuf[0];
+////    }
+//}
 #endif
 
