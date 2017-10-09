@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       26/Sep/2017  15:46:23
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       09/Oct/2017  10:56:40
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -389,7 +389,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu.c
     184                                  CSNC_SendData(  sCtrl.Dtu.pch,                        //DTU 的PCH：串口号，收发控制等底层信息
     185                                                  sCtrl.Dtu.RxCtrl.DestAddr,            //源地址，
     186                                                  sCtrl.Dtu.RxCtrl.SourceAddr,          //目标地址
-    187                                                  sCtrl.Dtu.RxCtrl.FramNum,             //帧序号 ，，在接收中累加
+    187                                                  sCtrl.Dtu.RxCtrl.FramNum,             //帧序号 ，在接收中累加
     188                                                  sCtrl.Dtu.RxCtrl.FrameCode,           //命令字
     189                                                  sCtrl.Dtu.Rd.Buf,                     //数据区
     190                                                  echolen                               //发送长度

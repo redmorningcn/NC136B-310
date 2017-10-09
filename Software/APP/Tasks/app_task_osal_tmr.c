@@ -164,9 +164,8 @@ osalEvt  TaskTmrEvtProcess(INT8U task_id, osalEvt task_event)
 
          osal_start_timerEx(  OS_TASK_ID_TMR,     //计数器重新开始
                       OS_EVT_TMR_OTR,
-                      OS_TICKS_PER_SEC*2.5);                             
+                      OS_TICKS_PER_SEC*3);                             
 
-         
         return ( task_event ^ OS_EVT_TMR_OTR );
     }
     

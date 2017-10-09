@@ -88,22 +88,23 @@ void    app_init_sctrl(void)
     sCtrl.Password      =   6237;
     sCtrl.SoftWareID    =   1705;   //年月，版本
     
+
+//   	FRAM_StoreRunPara((stcRunPara *) &sCtrl.sRunPara);
+    FRAM_ReadRunPara((stcRunPara *) &sCtrl.sRunPara);   //读取运行参数
+ 
 //开始标示    //存储时间间隔
     sCtrl.sRunPara.StartFlg = 1;  
     sCtrl.sRunPara.SysSta   = 0;        
-    
-   	FRAM_StoreRunPara((stcRunPara *) &sCtrl.sRunPara);
+        
     
     sCtrl.sRunPara.RecClear = 0;
     sCtrl.sRunPara.StoreTime= 60;       
     sCtrl.sRunPara.SysReset = 0;
     
-    sCtrl.sRunPara.StoreType    = 0x02;            //shu ju NDP02B
-    sCtrl.sRunPara.StoreTypeBak = 0x02;
+//    sCtrl.sRunPara.StoreType    = 0x02;            //shu ju NDP02B
+//    sCtrl.sRunPara.StoreTypeBak = 0x02;
 
 
-    
-    
     
 //测量装置1 初始化    
     sCtrl.Mtr.ConnCtrl[0].ConnFlg   = 1;

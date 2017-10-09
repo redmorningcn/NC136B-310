@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       26/Sep/2017  15:08:21
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       30/Sep/2017  11:25:10
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -132,14 +132,14 @@ F:\iar\NC136B-310统计模块\Application\Library\csnr_package_deal\csnc_package_dea
    \                     DataPackage_CSNC: (+1)
    \   00000000   0xE92D 0x4FFE      PUSH     {R1-R11,LR}
    \   00000004   0x0004             MOVS     R4,R0
-     13          	unsigned char	SumCheck8;
+     13          	unsigned char	    SumCheck8;
      14          	unsigned short	Crc16;
      15          	unsigned short	AddHeadNum;
      16          	unsigned short	i,j;
-     17          	unsigned char	ByteStation;
+     17          	unsigned char	    ByteStation;
      18          	unsigned char 	FramNum =0;						//序号
    \   00000006   0xF05F 0x0800      MOVS     R8,#+0
-     19          	unsigned char	DataLen;
+     19          	unsigned char	    DataLen;
      20          
      21          	//////////////////////////////////////////////准备数据
      22          	ByteStation = 0;

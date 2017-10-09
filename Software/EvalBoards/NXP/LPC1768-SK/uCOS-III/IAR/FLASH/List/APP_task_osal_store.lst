@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       26/Sep/2017  15:08:20
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       09/Oct/2017  14:24:43
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -254,13 +254,13 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\APP_task_osal_store.c
    \   00000006   0x.... 0x....      LDR.W    R0,??DataTable4
    \   0000000A   0xF890 0x08CC      LDRB     R0,[R0, #+2252]
    \   0000000E   0x2801             CMP      R0,#+1
-   \   00000010   0xF040 0x8096      BNE.W    ??GetTaxInfoToRecord_0
+   \   00000010   0xF040 0x8094      BNE.W    ??GetTaxInfoToRecord_0
     123              {
     124                  if(sCtrl.Tax.TaxType == TAX2_SET)       //TAX2
    \   00000014   0x.... 0x....      LDR.W    R0,??DataTable4
    \   00000018   0xF890 0x08CD      LDRB     R0,[R0, #+2253]
    \   0000001C   0x28F0             CMP      R0,#+240
-   \   0000001E   0xF040 0x808F      BNE.W    ??GetTaxInfoToRecord_1
+   \   0000001E   0xF040 0x808D      BNE.W    ??GetTaxInfoToRecord_1
     125                  {
     126                      sCtrl.Tax.ConnectFlag = 0;          //清已取信息
    \   00000022   0x2000             MOVS     R0,#+0
@@ -341,42 +341,42 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\APP_task_osal_store.c
    \   000000DC   0xF890 0x088B      LDRB     R0,[R0, #+2187]
    \   000000E0   0xF884 0x0023      STRB     R0,[R4, #+35]
     144                      sFlshRec->SlvDriverNum  = sCtrl.Tax.Dat.Tax2.sTAX2Bak.SlvDriverNum;  
-   \   000000E4   0x.... 0x....      LDR.W    R0,??DataTable4
-   \   000000E8   0xF8B0 0x08BE      LDRH     R0,[R0, #+2238]
-   \   000000EC   0x84A0             STRH     R0,[R4, #+36]
+   \   000000E4   0x....             LDR.N    R0,??DataTable4
+   \   000000E6   0xF8B0 0x08BE      LDRH     R0,[R0, #+2238]
+   \   000000EA   0x84A0             STRH     R0,[R4, #+36]
     145                      
     146                      sFlshRec->RoadNum       = sCtrl.Tax.Dat.Tax2.sTAX2Bak.RoadNum;      
-   \   000000EE   0x.... 0x....      LDR.W    R0,??DataTable4
-   \   000000F2   0xF890 0x08BA      LDRB     R0,[R0, #+2234]
-   \   000000F6   0xF884 0x0028      STRB     R0,[R4, #+40]
+   \   000000EC   0x....             LDR.N    R0,??DataTable4
+   \   000000EE   0xF890 0x08BA      LDRB     R0,[R0, #+2234]
+   \   000000F2   0xF884 0x0028      STRB     R0,[R4, #+40]
     147                      sFlshRec->RelRoadNum    = sCtrl.Tax.Dat.Tax2.sTAX2Bef.RelRoadNum;   
-   \   000000FA   0x....             LDR.N    R0,??DataTable4
-   \   000000FC   0xF890 0x088F      LDRB     R0,[R0, #+2191]
-   \   00000100   0xF884 0x0029      STRB     R0,[R4, #+41]
+   \   000000F6   0x....             LDR.N    R0,??DataTable4
+   \   000000F8   0xF890 0x088F      LDRB     R0,[R0, #+2191]
+   \   000000FC   0xF884 0x0029      STRB     R0,[R4, #+41]
     148                      sFlshRec->StationNum    = sCtrl.Tax.Dat.Tax2.sTAX2Bak.StationNum;   
-   \   00000104   0x....             LDR.N    R0,??DataTable4
-   \   00000106   0xF890 0x08BB      LDRB     R0,[R0, #+2235]
-   \   0000010A   0xF884 0x002A      STRB     R0,[R4, #+42]
+   \   00000100   0x....             LDR.N    R0,??DataTable4
+   \   00000102   0xF890 0x08BB      LDRB     R0,[R0, #+2235]
+   \   00000106   0xF884 0x002A      STRB     R0,[R4, #+42]
     149                      sFlshRec->E_StationNum  = sCtrl.Tax.Dat.Tax2.sTAX2Bef.E_StationNum; 
-   \   0000010E   0x....             LDR.N    R0,??DataTable4
-   \   00000110   0xF890 0x0885      LDRB     R0,[R0, #+2181]
-   \   00000114   0xF884 0x002B      STRB     R0,[R4, #+43]
+   \   0000010A   0x....             LDR.N    R0,??DataTable4
+   \   0000010C   0xF890 0x0885      LDRB     R0,[R0, #+2181]
+   \   00000110   0xF884 0x002B      STRB     R0,[R4, #+43]
     150                      sFlshRec->SignalTyp     = sCtrl.Tax.Dat.Tax2.sTAX2Bak.SignalTyp;    
-   \   00000118   0x....             LDR.N    R0,??DataTable4
-   \   0000011A   0xF890 0x08AE      LDRB     R0,[R0, #+2222]
-   \   0000011E   0xF884 0x002C      STRB     R0,[R4, #+44]
+   \   00000114   0x....             LDR.N    R0,??DataTable4
+   \   00000116   0xF890 0x08AE      LDRB     R0,[R0, #+2222]
+   \   0000011A   0xF884 0x002C      STRB     R0,[R4, #+44]
     151                      sFlshRec->LocoSign      = sCtrl.Tax.Dat.Tax2.sTAX2Bak.LocoSign;     
-   \   00000122   0x....             LDR.N    R0,??DataTable4
-   \   00000124   0xF890 0x08AA      LDRB     R0,[R0, #+2218]
-   \   00000128   0xF884 0x002D      STRB     R0,[R4, #+45]
+   \   0000011E   0x....             LDR.N    R0,??DataTable4
+   \   00000120   0xF890 0x08AA      LDRB     R0,[R0, #+2218]
+   \   00000124   0xF884 0x002D      STRB     R0,[R4, #+45]
     152                      sFlshRec->LocoWorkState = sCtrl.Tax.Dat.Tax2.sTAX2Bak.LocoWorkState;
-   \   0000012C   0x....             LDR.N    R0,??DataTable4
-   \   0000012E   0xF890 0x08AB      LDRB     R0,[R0, #+2219]
-   \   00000132   0xF884 0x002E      STRB     R0,[R4, #+46]
+   \   00000128   0x....             LDR.N    R0,??DataTable4
+   \   0000012A   0xF890 0x08AB      LDRB     R0,[R0, #+2219]
+   \   0000012E   0xF884 0x002E      STRB     R0,[R4, #+46]
     153                      sFlshRec->LocoState     = sCtrl.Tax.Dat.Tax2.sTAX2Bak.LocoState;  
-   \   00000136   0x....             LDR.N    R0,??DataTable4
-   \   00000138   0xF890 0x08C5      LDRB     R0,[R0, #+2245]
-   \   0000013C   0xF884 0x002F      STRB     R0,[R4, #+47]
+   \   00000132   0x....             LDR.N    R0,??DataTable4
+   \   00000134   0xF890 0x08C5      LDRB     R0,[R0, #+2245]
+   \   00000138   0xF884 0x002F      STRB     R0,[R4, #+47]
     154                  }
     155                  
     156                  if(sCtrl.Tax.TaxType == TAX3_SET)   //TAX3设备
@@ -387,7 +387,7 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\APP_task_osal_store.c
     161          }
    \                     ??GetTaxInfoToRecord_1: (+1)
    \                     ??GetTaxInfoToRecord_0: (+1)
-   \   00000140   0xE8BD 0x8FF2      POP      {R1,R4-R11,PC}   ;; return
+   \   0000013C   0xE8BD 0x8FF2      POP      {R1,R4-R11,PC}   ;; return
     162          
     163                
     164          /*******************************************************************************
@@ -824,65 +824,59 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\APP_task_osal_store.c
    \   00000006   0x.... 0x....      BL       GetRecNumAddr
    \   0000000A   0x0004             MOVS     R4,R0
     364              
-    365              sCtrl.sRunPara.StoreType    = 0x02;         //调试模式
-   \   0000000C   0x2002             MOVS     R0,#+2
-   \   0000000E   0x....             LDR.N    R1,??DataTable4
-   \   00000010   0xF881 0x00B1      STRB     R0,[R1, #+177]
-    366              sCtrl.sRunPara.StoreTypeBak = 0x02;         //调试模式
-   \   00000014   0x2002             MOVS     R0,#+2
-   \   00000016   0x....             LDR.N    R1,??DataTable4
-   \   00000018   0xF881 0x00B2      STRB     R0,[R1, #+178]
+    365          //    sCtrl.sRunPara.StoreType    = 0x02;           //调试模式
+    366          //    sCtrl.sRunPara.StoreTypeBak = 0x02;           //调试模式
     367          
     368              if(sCtrl.sRunPara.StoreType == 0x02 && sCtrl.sRunPara.StoreTypeBak == 0x02)  //NDP02B格式
-   \   0000001C   0x....             LDR.N    R0,??DataTable4
-   \   0000001E   0xF890 0x00B1      LDRB     R0,[R0, #+177]
-   \   00000022   0x2802             CMP      R0,#+2
-   \   00000024   0xD10D             BNE.N    ??StoreData_0
-   \   00000026   0x....             LDR.N    R0,??DataTable4
-   \   00000028   0xF890 0x00B2      LDRB     R0,[R0, #+178]
-   \   0000002C   0x2802             CMP      R0,#+2
-   \   0000002E   0xD108             BNE.N    ??StoreData_0
+   \   0000000C   0x....             LDR.N    R0,??DataTable4
+   \   0000000E   0xF890 0x00B1      LDRB     R0,[R0, #+177]
+   \   00000012   0x2802             CMP      R0,#+2
+   \   00000014   0xD10D             BNE.N    ??StoreData_0
+   \   00000016   0x....             LDR.N    R0,??DataTable4
+   \   00000018   0xF890 0x00B2      LDRB     R0,[R0, #+178]
+   \   0000001C   0x2802             CMP      R0,#+2
+   \   0000001E   0xD108             BNE.N    ??StoreData_0
     369              {
     370                  SetRecFlsh_NDP02B(&sCtrl.sRecNdp02B);
-   \   00000030   0x....             LDR.N    R0,??DataTable4_5
-   \   00000032   0x.... 0x....      BL       SetRecFlsh_NDP02B
-    371              //	数据存储到flash
+   \   00000020   0x....             LDR.N    R0,??DataTable4_5
+   \   00000022   0x.... 0x....      BL       SetRecFlsh_NDP02B
+    371                                                              //	数据存储到flash
     372                  if(!WriteFlsh(FlshAddr, (uint16 *)&sCtrl.sRecNdp02B, sizeof(sCtrl.sRecNdp02B)))
-   \   00000036   0x2280             MOVS     R2,#+128
-   \   00000038   0x....             LDR.N    R1,??DataTable4_5
-   \   0000003A   0x0020             MOVS     R0,R4
-   \   0000003C   0x.... 0x....      BL       WriteFlsh
-   \   00000040   0xE007             B.N      ??StoreData_1
+   \   00000026   0x2280             MOVS     R2,#+128
+   \   00000028   0x....             LDR.N    R1,??DataTable4_5
+   \   0000002A   0x0020             MOVS     R0,R4
+   \   0000002C   0x.... 0x....      BL       WriteFlsh
+   \   00000030   0xE007             B.N      ??StoreData_1
     373                  {}        
     374              }
     375              else
     376              {
-    377                  SetRecFlsh(&sCtrl.sRec);
+    377                  SetRecFlsh(&sCtrl.sRec);                    //原数据结构
    \                     ??StoreData_0: (+1)
-   \   00000042   0x....             LDR.N    R0,??DataTable4_6
-   \   00000044   0x.... 0x....      BL       SetRecFlsh
+   \   00000032   0x....             LDR.N    R0,??DataTable4_6
+   \   00000034   0x.... 0x....      BL       SetRecFlsh
     378                  //	数据存储到flash
     379                  if(!WriteFlsh(FlshAddr, (uint16 *)&sCtrl.sRec, sizeof(sCtrl.sRec)))
-   \   00000048   0x2280             MOVS     R2,#+128
-   \   0000004A   0x....             LDR.N    R1,??DataTable4_6
-   \   0000004C   0x0020             MOVS     R0,R4
-   \   0000004E   0x.... 0x....      BL       WriteFlsh
+   \   00000038   0x2280             MOVS     R2,#+128
+   \   0000003A   0x....             LDR.N    R1,??DataTable4_6
+   \   0000003C   0x0020             MOVS     R0,R4
+   \   0000003E   0x.... 0x....      BL       WriteFlsh
     380                  {}
     381              }
     382              
     383          // 	保存数据记录号
     384              sCtrl.sRecNumMgr.Current++;
    \                     ??StoreData_1: (+1)
-   \   00000052   0x....             LDR.N    R0,??DataTable4
-   \   00000054   0x6840             LDR      R0,[R0, #+4]
-   \   00000056   0x1C40             ADDS     R0,R0,#+1
-   \   00000058   0x....             LDR.N    R1,??DataTable4
-   \   0000005A   0x6048             STR      R0,[R1, #+4]
+   \   00000042   0x....             LDR.N    R0,??DataTable4
+   \   00000044   0x6840             LDR      R0,[R0, #+4]
+   \   00000046   0x1C40             ADDS     R0,R0,#+1
+   \   00000048   0x....             LDR.N    R1,??DataTable4
+   \   0000004A   0x6048             STR      R0,[R1, #+4]
     385          	FRAM_StoreRecNumMgr((StrRecNumMgr  *)&sCtrl.sRecNumMgr);    //数据记录号加1，并保存
-   \   0000005C   0x....             LDR.N    R0,??DataTable4_7
-   \   0000005E   0x.... 0x....      BL       FRAM_StoreRecNumMgr
+   \   0000004C   0x....             LDR.N    R0,??DataTable4_7
+   \   0000004E   0x.... 0x....      BL       FRAM_StoreRecNumMgr
     386          }
-   \   00000062   0xBD10             POP      {R4,PC}          ;; return
+   \   00000052   0xBD10             POP      {R4,PC}          ;; return
     387          
     388          /*******************************************************************************
     389           * 名    称： 		ReadFlshRec
@@ -1175,18 +1169,18 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\APP_task_osal_store.c
        4  ??DataTable4_9
       52  BSP_StoreInit
       20  GetRecNumAddr
-     324  GetTaxInfoToRecord
+     320  GetTaxInfoToRecord
       36  ReadFlshRec
      230  SetRecFlsh
      374  SetRecFlsh_NDP02B
-     100  StoreData
+      84  StoreData
       20  TaskInitStore
       36  TaskStoreEvtProcess
 
  
- 1 240 bytes in section .text
+ 1 220 bytes in section .text
  
- 1 240 bytes of CODE memory
+ 1 220 bytes of CODE memory
 
 Errors: none
 Warnings: 19

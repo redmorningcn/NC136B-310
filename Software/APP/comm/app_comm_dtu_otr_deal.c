@@ -289,8 +289,16 @@ void    comm_para_flow(StrDevDtu * sDtu,uint8 addrnum)
         //设置斜率
     case    SYS_RUN_PARA: 
         //存运行参数，存储时间，数据格式等信息
-        FRAM_StoreRunPara((stcRunPara *)&sCtrl.sRunPara);   //存数据。关键数据存储时保护
+        //FRAM_StoreRunPara((stcRunPara *)&sCtrl.sRunPara);   //存数据。关键数据存储时保护
+        uint8  bittmp =  0x01 << ( ( (uint8 *)&sCtrl.sRunPara.StoreType ) - (uint8 *)&sCtrl.sRunPara);    //数据格式更改
         
+        if((sDtu->Rd.sRunPara.SetBitFlg & bittmp) == bittmp )
+        {
+            sCtrl.sRunPara.StoreType    = sDtu->Rd.sRunPara.StoreType;
+            sCtrl.sRunPara.StoreTypeBak = sDtu->Rd.sRunPara.StoreTypeBak;
+        }
+      
+        FRAM_StoreRunPara((stcRunPara *)&sCtrl.sRunPara);   //存数据。关键数据存储时保护
         uprintf("rt-%d",    sCtrl.sRunPara.StoreType);      //立即显示设定值 （0x02 ）数据新版
 
         break;
@@ -516,8 +524,6 @@ uint8    comm_record_send_one(StrDevDtu * sDtu,uint8    addrnum)
                   framecode,                                    //命令字
                   (uint8 *)&sDtu->Wr.sRec,                      //数据区
                   sizeof(sDtu->Wr.sRec)                        //发送长度
-                
-                      
                       );
 
     return 1;

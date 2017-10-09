@@ -184,7 +184,7 @@ void    app_comm_dtu(void)
                         CSNC_SendData(  sCtrl.Dtu.pch,                        //DTU 的PCH：串口号，收发控制等底层信息
                                         sCtrl.Dtu.RxCtrl.DestAddr,            //源地址，
                                         sCtrl.Dtu.RxCtrl.SourceAddr,          //目标地址
-                                        sCtrl.Dtu.RxCtrl.FramNum,             //帧序号 ，，在接收中累加
+                                        sCtrl.Dtu.RxCtrl.FramNum,             //帧序号 ，在接收中累加
                                         sCtrl.Dtu.RxCtrl.FrameCode,           //命令字
                                         sCtrl.Dtu.Rd.Buf,                     //数据区
                                         echolen                               //发送长度

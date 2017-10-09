@@ -10,13 +10,13 @@
 //
 void	DataPackage_CSNC(stcCsncProtocolPara *sprotocolpara)
 {
-	unsigned char	SumCheck8;
+	unsigned char	    SumCheck8;
 	unsigned short	Crc16;
 	unsigned short	AddHeadNum;
 	unsigned short	i,j;
-	unsigned char	ByteStation;
+	unsigned char	    ByteStation;
 	unsigned char 	FramNum =0;						//序号
-	unsigned char	DataLen;
+	unsigned char	    DataLen;
 
 	//////////////////////////////////////////////准备数据
 	ByteStation = 0;

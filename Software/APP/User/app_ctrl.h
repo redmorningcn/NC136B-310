@@ -124,17 +124,21 @@
 * 描述： OSAL事件定义
 */
 /***************************************************
-* 描述： OSAL事件定义：TMR任务事件
+* 描述： OSAL事件定义：TMR任务事件(20170930 定时器会不时停止发送，控制数据量8个)
 */
-#define OS_EVT_TMR_TICKS                0X00000001
-#define OS_EVT_TMR_MSEC                 0X00000002
+//#define OS_EVT_TMR_TICKS                0X00000001
+#define OS_EVT_TMR_MTR                  0X00000001
+//#define OS_EVT_TMR_MSEC                 0X00000002
+#define OS_EVT_TMR_DTU                  0X00000002
 #define OS_EVT_TMR_SEC                  0X00000004
-#define OS_EVT_TMR_MIN                  0X00000008
-#define OS_EVT_TMR_DEAL                 0X00000010
-#define OS_EVT_TMR_MTR                  0X00000020
-#define OS_EVT_TMR_DTU                  0X00000040
-#define OS_EVT_TMR_OTR                  0X00000080
-#define OS_EVT_TMR_TAX                  0X00000100
+//#define OS_EVT_TMR_MIN                  0X00000008
+#define OS_EVT_TMR_OTR                  0X00000008
+//#define OS_EVT_TMR_DEAL                 0X00000010
+#define OS_EVT_TMR_TAX                  0X00000010
+
+#define OS_EVT_TMR_5                    0X00000020
+#define OS_EVT_TMR_6                    0X00000040
+#define OS_EVT_TMR_7                    0X00000080
 
 /***************************************************
 * 描述： OSAL事件定义：LED任务事件
@@ -369,6 +373,85 @@ typedef struct {
 //
 //
 
+//    Ctrl.Os.CommEvtFlag = M_EVT_FLAG_HEART       	// ?????
+//                        + COMM_EVT_FLAG_RESET       	// COMM??
+//                        + COMM_EVT_FLAG_CONNECT    	 // COMM??
+//                        + COMM_EVT_FLAG_RECV        	 // ????
+//                        + COMM_EVT_FLAG_REPORT     	 // ????
+//                        + COMM_EVT_FLAG_CLOSE      	 // ??
+//                        + COMM_EVT_FLAG_TIMEOUT    	 // ??
+//                        + COMM_EVT_FLAG_CONFIG     	 // ??
+//                        + COMM_EVT_FLAG_IAP_START  	 // IAP??
+//                        + COMM_EVT_FLAG_IAP_END;    	// IAP??
+
+
+typedef struct {     
+ 	uint16	Type;				//机车类型	2	参见机车类型代码表
+ 	uint16	Num;				//机车号		2	
+} stcLocoId;
+
+//记录号管理:当前记录号，卡已读记录号，无线发送模块记录号
+//16 bytes
+typedef struct _StrRecNumMgr {
+    uint32		Current;				//当前记录号	0~0xffffffff
+    uint32		IcRead;				//IC卡已读取记录号
+    uint32		GrsRead;			//无线已读取记录号
+    uint32		Back;				//备用
+}StrRecNumMgr;
+
+//产品信息:  型号+ 编号
+//12 bytes
+typedef struct _StrProductInfo {
+	uint32		    Type;			//产品类别，0 :NDP02  ,1:NDP02-B
+	uint32		    ID;				//产品编号	16110002
+	stcLocoId		sLocoId;		//机车信息	104(DF4B) - 1000
+}StrProductInfo;
+
+//油量计算参数: 模型编号，高度，密度，斜率
+//12 bytes
+typedef struct _StrOilPara {
+    uint8			ModelNum;			//模型编号	0~64
+    uint8			Rec8;				//备用
+    int16			Hig;					//高度  -500~500
+    int16			Density;				//密度  800~900,     0.xxxx克/立方厘米（10000倍）
+    int16			Rec16;				//备用
+    uint32			Slope;				//修正系数 :计算值再乘(slope/10000)  
+}StrOilPara;
+
+//运行参数，装置运行相关，数据存储周期，显示参数，恢复出厂设置
+//8 bytes
+typedef struct _stcRunPara_					
+{
+	uint8		StoreTime;					// 1 		数据记录存储周期
+	uint8		RecClear;					// 1		数据记录清零，清StrRecNumMgr内容
+	uint8		SysReset;					// 1    	系统参数重置，清StrRecNumMgr + StrOilPara 	中的内容。
+	uint8		StartFlg;					// 1    	首次运行
+	
+    uint8		SysSta;						// 1   	    系统运行状态
+	uint8		StoreType;                  // 1   	    系统运行状态
+	uint8		StoreTypeBak;               // 1   	    系统运行状态
+
+	uint8		SetBitFlg;					// 1        设置有效位指示
+}stcRunPara;
+
+//油箱模型点，高度，油量
+// 4 bytes
+//typedef struct _stcModPot_					//
+//{
+//	uint16	Hig;								// 2 		高度
+//	uint16	Oil;								// 2 		油量
+//}stcModPot;
+//运算用油箱模型
+//408 bytes
+typedef struct _stcCalcModel_					
+{
+	stcModPot	sModPot[100];					// 4*100 	内容
+	uint16		PotNum;							// 2 		模型有效点数 
+	uint16		StartOil;                       // 2    	模型初始油量   	
+	uint8		ModelNum;						// 1		模型编号
+	uint8		valid;							// 1        使用
+	uint16		CrcCheck;						// 2 		CrcCheck;
+}stcCalcModel;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //与测量装置通讯结构
@@ -500,10 +583,7 @@ typedef union {
 	uint8		Buf[160];					//
 } UniDtuCommSendData;
 
-typedef struct {     
- 	uint16	Type;				//机车类型	2	参见机车类型代码表
- 	uint16	Num;				//机车号		2	
-} stcLocoId;
+
 /***************************************************
 * 描述： 统计模块--无线发送模块，长沙南睿轨道交通车辆装置异步串行通信通用通信协议
 */
@@ -529,7 +609,8 @@ typedef union {
 	uint32      Slope;			    //CALC_PARA	    设置计算的斜率	    4	(slope/10000);     后续补充其他
     uint8       ModelNum;           //              模型编号            1       
     stcIapStart IapStart;           //IAP开始     
-	uint8		Buf[160];		    //	
+	stcRunPara	sRunPara;           //运行参数                      
+    uint8		Buf[160];		    //	
 } UniDtuCommRecvData;
 
 //接收控制字
@@ -615,12 +696,14 @@ typedef union {
 __packed
 typedef union {
 	int16		Density;			//DENSITY_CARD   设置密度值   		2     0.xxxx克/立方厘米（10000倍）
-	stcTime		sTime;			//TIME_CARD        设置时间        		8     second,minute,hour,data,month,year,crccheck
-	int16		Hig;				//HIGHT_CARD	     设置高度值   		2     0.1mm  (10倍)
-	stcLocoId		sLocoId;		//FIX_CARD          设置机车信息	4     type,num;
-	uint32          	Slope;			//CALC_PARA	     设置计算的斜率	4	(slope/10000);     后续补充其他
-	uint8       ModelNum;    
-    uint8		Buf[160];		//	
+	stcTime		sTime;			    //TIME_CARD     设置时间            8     second,minute,hour,data,month,year,crccheck
+	int16		Hig;				//HIGHT_CARD    设置高度值          2     0.1mm  (10倍)
+	stcLocoId   sLocoId;		    //FIX_CARD      设置机车信息	    4     type,num;
+	uint32      Slope;			    //CALC_PARA	    设置计算的斜率	    4	(slope/10000);     后续补充其他
+    uint8       ModelNum;           //              模型编号            1       
+    stcIapStart IapStart;           //IAP开始     
+	stcRunPara	sRunPara;           //运行参数                      
+    uint8		Buf[160];		    //	
 } UniOtrCommRecvData;
 
 //接收控制字
@@ -729,79 +812,7 @@ typedef struct {
 } StrDevTax;
 
 
-//    Ctrl.Os.CommEvtFlag = M_EVT_FLAG_HEART       	// ?????
-//                        + COMM_EVT_FLAG_RESET       	// COMM??
-//                        + COMM_EVT_FLAG_CONNECT    	 // COMM??
-//                        + COMM_EVT_FLAG_RECV        	 // ????
-//                        + COMM_EVT_FLAG_REPORT     	 // ????
-//                        + COMM_EVT_FLAG_CLOSE      	 // ??
-//                        + COMM_EVT_FLAG_TIMEOUT    	 // ??
-//                        + COMM_EVT_FLAG_CONFIG     	 // ??
-//                        + COMM_EVT_FLAG_IAP_START  	 // IAP??
-//                        + COMM_EVT_FLAG_IAP_END;    	// IAP??
 
-//记录号管理:当前记录号，卡已读记录号，无线发送模块记录号
-//16 bytes
-typedef struct _StrRecNumMgr {
-    uint32		Current;				//当前记录号	0~0xffffffff
-    uint32		IcRead;				//IC卡已读取记录号
-    uint32		GrsRead;			//无线已读取记录号
-    uint32		Back;				//备用
-}StrRecNumMgr;
-
-//产品信息:  型号+ 编号
-//12 bytes
-typedef struct _StrProductInfo {
-	uint32		Type;			//产品类别，0 :NDP02  ,1:NDP02-B
-	uint32		ID;				//产品编号	16110002
-	stcLocoId		sLocoId;		//机车信息	104(DF4B) - 1000
-}StrProductInfo;
-
-//油量计算参数: 模型编号，高度，密度，斜率
-//12 bytes
-typedef struct _StrOilPara {
-    uint8			ModelNum;			//模型编号	0~64
-    uint8			Rec8;				//备用
-    int16			Hig;					//高度  -500~500
-    int16			Density;				//密度  800~900,     0.xxxx克/立方厘米（10000倍）
-    int16			Rec16;				//备用
-    uint32			Slope;				//修正系数 :计算值再乘(slope/10000)  
-}StrOilPara;
-
-//运行参数，装置运行相关，数据存储周期，显示参数，恢复出厂设置
-//8 bytes
-typedef struct _stcRunPara_					
-{
-	uint8		StoreTime;					// 1 		数据记录存储周期
-	uint8		RecClear;					// 1		数据记录清零，清StrRecNumMgr内容
-	uint8		SysReset;					// 1    	系统参数重置，清StrRecNumMgr + StrOilPara 	中的内容。
-	uint8		StartFlg;					// 1    	首次运行
-	
-    uint8		SysSta;						// 1   	    系统运行状态
-	uint8		StoreType;                  // 1   	    系统运行状态
-	uint8		StoreTypeBak;               // 1   	    系统运行状态
-
-	uint8		Buf[1];						// 1        备用
-}stcRunPara;
-
-//油箱模型点，高度，油量
-// 4 bytes
-//typedef struct _stcModPot_					//
-//{
-//	uint16	Hig;								// 2 		高度
-//	uint16	Oil;								// 2 		油量
-//}stcModPot;
-//运算用油箱模型
-//408 bytes
-typedef struct _stcCalcModel_					
-{
-	stcModPot	sModPot[100];					// 4*100 	内容
-	uint16		PotNum;							// 2 		模型有效点数 
-	uint16		StartOil;                       // 2    	模型初始油量   	
-	uint8		ModelNum;						// 1		模型编号
-	uint8		valid;							// 1        使用
-	uint16		CrcCheck;						// 2 		CrcCheck;
-}stcCalcModel;
 
 typedef struct
 {

@@ -362,19 +362,19 @@ void  StoreData(void)
     // 	计算数据记录地址
     uint32  FlshAddr = GetRecNumAddr( sCtrl.sRecNumMgr.Current );		
     
-    sCtrl.sRunPara.StoreType    = 0x02;         //调试模式
-    sCtrl.sRunPara.StoreTypeBak = 0x02;         //调试模式
+//    sCtrl.sRunPara.StoreType    = 0x02;           //调试模式
+//    sCtrl.sRunPara.StoreTypeBak = 0x02;           //调试模式
 
     if(sCtrl.sRunPara.StoreType == 0x02 && sCtrl.sRunPara.StoreTypeBak == 0x02)  //NDP02B格式
     {
         SetRecFlsh_NDP02B(&sCtrl.sRecNdp02B);
-    //	数据存储到flash
+                                                    //	数据存储到flash
         if(!WriteFlsh(FlshAddr, (uint16 *)&sCtrl.sRecNdp02B, sizeof(sCtrl.sRecNdp02B)))
         {}        
     }
     else
     {
-        SetRecFlsh(&sCtrl.sRec);
+        SetRecFlsh(&sCtrl.sRec);                    //原数据结构
         //	数据存储到flash
         if(!WriteFlsh(FlshAddr, (uint16 *)&sCtrl.sRec, sizeof(sCtrl.sRec)))
         {}
