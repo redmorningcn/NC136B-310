@@ -412,10 +412,13 @@ typedef struct _StrProductInfo {
 typedef struct _StrOilPara {
     uint8			ModelNum;			//模型编号	0~64
     uint8			Rec8;				//备用
-    int16			Hig;					//高度  -500~500
-    int16			Density;				//密度  800~900,     0.xxxx克/立方厘米（10000倍）
+    int16			Hig;				//高度  -500~500
+    int16			Density;			//密度  800~900,     0.xxxx克/立方厘米（10000倍）
     int16			Rec16;				//备用
-    uint32			Slope;				//修正系数 :计算值再乘(slope/10000)  
+    uint32			Slope;				//修正系数 :计算值再乘(slope/10000) 
+    
+    uint8           tmp[24];
+
 }StrOilPara;
 
 //运行参数，装置运行相关，数据存储周期，显示参数，恢复出厂设置
@@ -432,6 +435,7 @@ typedef struct _stcRunPara_
 	uint8		StoreTypeBak;               // 1   	    系统运行状态
 
 	uint8		SetBitFlg;					// 1        设置有效位指示
+    
 }stcRunPara;
 
 //油箱模型点，高度，油量
@@ -872,13 +876,13 @@ typedef struct _StrSysCtrlPara {
     /***************************************************
     * 描述：系统运行参数：起始地址 = 172
     */
-	stcRunPara	sRunPara;				    // 8		//数据存储周期，数据清零，参数清零
+	stcRunPara	sRunPara;				    // 8+24		//数据存储周期，数据清零，参数清零
 
     //
     /***************************************************
     * 描述：计算用油箱模型：起始地址 = 180
     */
-	stcCalcModel	sCalcModel;				// 408    100点油箱模型，模型点数，模型编号，初始油量，crccheck
+	stcCalcModel	sCalcModel;				// 408+24    100点油箱模型，模型点数，模型编号，初始油量，crccheck
 
     //
     /***************************************************

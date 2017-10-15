@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       09/Oct/2017  10:56:41
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       11/Oct/2017  19:05:44
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -380,7 +380,7 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
    \   0000002A   0x2308             MOVS     R3,#+8
    \   0000002C   0x002A             MOVS     R2,R5
    \   0000002E   0x.... 0x....      LDR.W    R0,??DataTable6_4
-   \   00000032   0xF8D0 0x1824      LDR      R1,[R0, #+2084]
+   \   00000032   0xF8D0 0x183C      LDR      R1,[R0, #+2108]
    \   00000036   0x.... 0x....      LDR.W    R0,??DataTable6_5
    \   0000003A   0x.... 0x....      BL       OSFlagPend
    \   0000003E   0x0007             MOVS     R7,R0
@@ -614,7 +614,7 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
     327              
     328              sCtrl.Mtr.pch       = pch;                      // ... modbus控制块和全局结构体建立连接
    \   0000006A   0x.... 0x....      LDR.W    R0,??DataTable6_4
-   \   0000006E   0xF8C0 0x43A8      STR      R4,[R0, #+936]
+   \   0000006E   0xF8C0 0x43C0      STR      R4,[R0, #+960]
     329              
     330          #endif
     331              // UART2
@@ -675,7 +675,7 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
     355              
     356              sCtrl.Dtu.pch       = pch;                      // ... modbus控制块和全局结构体建立连接
    \   000000D0   0x.... 0x....      LDR.W    R0,??DataTable6_4
-   \   000000D4   0xF8C0 0x4509      STR      R4,[R0, #+1289]
+   \   000000D4   0xF8C0 0x4521      STR      R4,[R0, #+1313]
     357          #endif
     358              
     359              // UART3
@@ -735,7 +735,7 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
     382              
     383              sCtrl.Otr.pch       = pch;                      // ... modbus控制块和全局结构体建立连接
    \   00000136   0x.... 0x....      LDR.W    R0,??DataTable6_4
-   \   0000013A   0xF8C0 0x466A      STR      R4,[R0, #+1642]
+   \   0000013A   0xF8C0 0x4682      STR      R4,[R0, #+1666]
     384          #endif
     385              
     386              // UART3
@@ -803,7 +803,7 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
     413              
     414              sCtrl.DevTax.pch    = pch;                      // ... modbus控制块和全局结构体建立连接
    \   000001A4   0x.... 0x....      LDR.W    R0,??DataTable6_4
-   \   000001A8   0xF8C0 0x47CB      STR      R4,[R0, #+1995]
+   \   000001A8   0xF8C0 0x47E3      STR      R4,[R0, #+2019]
     415          #endif
     416              
     417          }
@@ -852,7 +852,7 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
     449                                          + COMM_EVT_FLAG_TAX_TIMEOUT;  // TAX 操作超时，定时发送使用  
    \   00000012   0x20FF             MOVS     R0,#+255
    \   00000014   0x.... 0x....      LDR.W    R1,??DataTable6_4
-   \   00000018   0xF8C1 0x0824      STR      R0,[R1, #+2084]
+   \   00000018   0xF8C1 0x083C      STR      R0,[R1, #+2108]
     450              
     451              /***********************************************
     452              * 描述： 初始化MODBUS通信
@@ -1035,24 +1035,24 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
    \                     ??APP_CommRxDataDealCB_8: (+1)
    \   00000060   0xF89D 0x0004      LDRB     R0,[SP, #+4]
    \   00000064   0x.... 0x....      LDR.W    R1,??DataTable6_4
-   \   00000068   0xF881 0x038D      STRB     R0,[R1, #+909]
+   \   00000068   0xF881 0x03A5      STRB     R0,[R1, #+933]
     576                      sCtrl.Mtr.RxCtrl.DestAddr   = sCsncPara.destaddr;    	//目标地址
    \   0000006C   0xF89D 0x0005      LDRB     R0,[SP, #+5]
    \   00000070   0x.... 0x....      LDR.W    R1,??DataTable6_4
-   \   00000074   0xF881 0x038C      STRB     R0,[R1, #+908]
+   \   00000074   0xF881 0x03A4      STRB     R0,[R1, #+932]
     577                      sCtrl.Mtr.RxCtrl.FramNum    = sCsncPara.framnum;    	//接收到的帧号
    \   00000078   0xF89D 0x0006      LDRB     R0,[SP, #+6]
    \   0000007C   0x.... 0x....      LDR.W    R1,??DataTable6_4
-   \   00000080   0xF881 0x038E      STRB     R0,[R1, #+910]
+   \   00000080   0xF881 0x03A6      STRB     R0,[R1, #+934]
     578                      sCtrl.Mtr.RxCtrl.FrameCode  = (uint8)sCsncPara.framcode & (0x0f);//指令码 ，测量装置未定义 
    \   00000084   0xF89D 0x0007      LDRB     R0,[SP, #+7]
    \   00000088   0xF010 0x000F      ANDS     R0,R0,#0xF
    \   0000008C   0x.... 0x....      LDR.W    R1,??DataTable6_4
-   \   00000090   0xF881 0x0390      STRB     R0,[R1, #+912]
+   \   00000090   0xF881 0x03A8      STRB     R0,[R1, #+936]
     579                      sCtrl.Mtr.RxCtrl.Len        = sCsncPara.datalen;       	//数据区长度    
    \   00000094   0xF89D 0x0010      LDRB     R0,[SP, #+16]
    \   00000098   0x.... 0x....      LDR.W    R1,??DataTable6_4
-   \   0000009C   0xF881 0x038F      STRB     R0,[R1, #+911]
+   \   0000009C   0xF881 0x03A7      STRB     R0,[R1, #+935]
     580                      
     581                      //取数据记录，将数据记录保存到接收区
     582                      //OS_CRITICAL_ENTER();
@@ -1083,7 +1083,7 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
    \   000000BE   0x.... 0x....      LDR.W    R1,??DataTable6_4
    \   000000C2   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   000000C4   0xEB11 0x01C0      ADDS     R1,R1,R0, LSL #+3
-   \   000000C8   0xF891 0x139C      LDRB     R1,[R1, #+924]
+   \   000000C8   0xF891 0x13B4      LDRB     R1,[R1, #+948]
    \   000000CC   0xF89D 0x2004      LDRB     R2,[SP, #+4]
    \   000000D0   0x4291             CMP      R1,R2
    \   000000D2   0xD10F             BNE.N    ??APP_CommRxDataDealCB_12
@@ -1093,13 +1093,13 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
    \   000000D6   0x.... 0x....      LDR.W    R2,??DataTable6_4
    \   000000DA   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   000000DC   0xEB12 0x02C0      ADDS     R2,R2,R0, LSL #+3
-   \   000000E0   0xF882 0x1399      STRB     R1,[R2, #+921]
+   \   000000E0   0xF882 0x13B1      STRB     R1,[R2, #+945]
     597                              sCtrl.Mtr.ConnCtrl[i].TimeOut      = 0;      //超时计数器清零。
    \   000000E4   0x2100             MOVS     R1,#+0
    \   000000E6   0x.... 0x....      LDR.W    R2,??DataTable6_4
    \   000000EA   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   000000EC   0xEB12 0x02C0      ADDS     R2,R2,R0, LSL #+3
-   \   000000F0   0xF882 0x139A      STRB     R1,[R2, #+922]
+   \   000000F0   0xF882 0x13B2      STRB     R1,[R2, #+946]
     598                          }
     599                      }
    \                     ??APP_CommRxDataDealCB_12: (+1)
@@ -1124,16 +1124,16 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
     608                  sCtrl.Mtr.ConnectFlag       = 1;
    \                     ??APP_CommRxDataDealCB_9: (+1)
    \   0000010A   0x.... 0x....      LDR.W    R0,??DataTable6_4
-   \   0000010E   0xF890 0x03AC      LDRB     R0,[R0, #+940]
+   \   0000010E   0xF890 0x03C4      LDRB     R0,[R0, #+964]
    \   00000112   0xF050 0x0080      ORRS     R0,R0,#0x80
    \   00000116   0x.... 0x....      LDR.W    R1,??DataTable6_4
-   \   0000011A   0xF881 0x03AC      STRB     R0,[R1, #+940]
+   \   0000011A   0xF881 0x03C4      STRB     R0,[R1, #+964]
     609                  sCtrl.Mtr.ConnectTimeOut    = 0;   
    \   0000011E   0x.... 0x....      LDR.W    R0,??DataTable6_4
-   \   00000122   0xF890 0x03AC      LDRB     R0,[R0, #+940]
+   \   00000122   0xF890 0x03C4      LDRB     R0,[R0, #+964]
    \   00000126   0xF010 0x0080      ANDS     R0,R0,#0x80
    \   0000012A   0x.... 0x....      LDR.W    R1,??DataTable6_4
-   \   0000012E   0xF881 0x03AC      STRB     R0,[R1, #+940]
+   \   0000012E   0xF881 0x03C4      STRB     R0,[R1, #+964]
     610                  
     611                  break;
    \   00000132   0xE120             B.N      ??APP_CommRxDataDealCB_7
@@ -1165,24 +1165,24 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
    \                     ??APP_CommRxDataDealCB_13: (+1)
    \   00000144   0xF89D 0x0004      LDRB     R0,[SP, #+4]
    \   00000148   0x.... 0x....      LDR.W    R1,??DataTable6_4
-   \   0000014C   0xF881 0x04EE      STRB     R0,[R1, #+1262]
+   \   0000014C   0xF881 0x0506      STRB     R0,[R1, #+1286]
     630                      sCtrl.Dtu.RxCtrl.DestAddr   = sCsncPara.destaddr;    	//目标地址
    \   00000150   0xF89D 0x0005      LDRB     R0,[SP, #+5]
    \   00000154   0x.... 0x....      LDR.W    R1,??DataTable6_4
-   \   00000158   0xF881 0x04ED      STRB     R0,[R1, #+1261]
+   \   00000158   0xF881 0x0505      STRB     R0,[R1, #+1285]
     631                      sCtrl.Dtu.RxCtrl.FramNum    = sCsncPara.framnum;    	//接收到的帧号
    \   0000015C   0xF89D 0x0006      LDRB     R0,[SP, #+6]
    \   00000160   0x.... 0x....      LDR.W    R1,??DataTable6_4
-   \   00000164   0xF881 0x04EF      STRB     R0,[R1, #+1263]
+   \   00000164   0xF881 0x0507      STRB     R0,[R1, #+1287]
     632                      sCtrl.Dtu.RxCtrl.FrameCode  = (uint8)sCsncPara.framcode & (0x0f);//指令码 ，测量装置未定义 
    \   00000168   0xF89D 0x0007      LDRB     R0,[SP, #+7]
    \   0000016C   0xF010 0x000F      ANDS     R0,R0,#0xF
    \   00000170   0x.... 0x....      LDR.W    R1,??DataTable6_4
-   \   00000174   0xF881 0x04F1      STRB     R0,[R1, #+1265]
+   \   00000174   0xF881 0x0509      STRB     R0,[R1, #+1289]
     633                      sCtrl.Dtu.RxCtrl.Len        = sCsncPara.datalen;       	//数据区长度               
    \   00000178   0xF89D 0x0010      LDRB     R0,[SP, #+16]
    \   0000017C   0x.... 0x....      LDR.W    R1,??DataTable6_4
-   \   00000180   0xF881 0x04F0      STRB     R0,[R1, #+1264]
+   \   00000180   0xF881 0x0508      STRB     R0,[R1, #+1288]
     634          
     635          			/***********************************************
     636                      * 描述：无线通讯及IC卡通讯，定义数据区的前 4 个字节为命令字，   
@@ -1194,7 +1194,7 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
    \   00000188   0x2804             CMP      R0,#+4
    \   0000018A   0xDB24             BLT.N    ??APP_CommRxDataDealCB_15
    \   0000018C   0x.... 0x....      LDR.W    R0,??DataTable6_4
-   \   00000190   0xF890 0x04F1      LDRB     R0,[R0, #+1265]
+   \   00000190   0xF890 0x0509      LDRB     R0,[R0, #+1289]
    \   00000194   0x2800             CMP      R0,#+0
    \   00000196   0xD11E             BNE.N    ??APP_CommRxDataDealCB_15
     641                      {
@@ -1203,7 +1203,7 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
    \   00000198   0xF89D 0x0010      LDRB     R0,[SP, #+16]
    \   0000019C   0x1F00             SUBS     R0,R0,#+4
    \   0000019E   0x.... 0x....      LDR.W    R1,??DataTable6_4
-   \   000001A2   0xF881 0x04F0      STRB     R0,[R1, #+1264]
+   \   000001A2   0xF881 0x0508      STRB     R0,[R1, #+1288]
     644                          //取数据记录，将数据记录保存到接收区
     645                          //OS_CRITICAL_ENTER();
     646                          //memcpy( (INT08U *)&sCtrl.Dtu.RxCtrl.Code, (INT08U *)&pch->RxFrameData[DataPos], 4);        //功能码
@@ -1257,7 +1257,7 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
    \   000001F4   0x.... 0x....      LDR.W    R1,??DataTable6_4
    \   000001F8   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   000001FA   0xEB11 0x01C0      ADDS     R1,R1,R0, LSL #+3
-   \   000001FE   0xF891 0x14FD      LDRB     R1,[R1, #+1277]
+   \   000001FE   0xF891 0x1515      LDRB     R1,[R1, #+1301]
    \   00000202   0xF89D 0x2004      LDRB     R2,[SP, #+4]
    \   00000206   0x4291             CMP      R1,R2
    \   00000208   0xD10E             BNE.N    ??APP_CommRxDataDealCB_19
@@ -1267,13 +1267,13 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
    \   0000020C   0x.... 0x....      LDR.W    R2,??DataTable6_4
    \   00000210   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   00000212   0xEB12 0x02C0      ADDS     R2,R2,R0, LSL #+3
-   \   00000216   0xF882 0x14FA      STRB     R1,[R2, #+1274]
+   \   00000216   0xF882 0x1512      STRB     R1,[R2, #+1298]
     666                              sCtrl.Dtu.ConnCtrl[i].TimeOut     = 0;              //超时计数器清零。
    \   0000021A   0x2100             MOVS     R1,#+0
    \   0000021C   0x....             LDR.N    R2,??DataTable6_4
    \   0000021E   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   00000220   0xEB12 0x02C0      ADDS     R2,R2,R0, LSL #+3
-   \   00000224   0xF882 0x14FB      STRB     R1,[R2, #+1275]
+   \   00000224   0xF882 0x1513      STRB     R1,[R2, #+1299]
     667                          }
     668                      }
    \                     ??APP_CommRxDataDealCB_19: (+1)
@@ -1298,16 +1298,16 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
     677                  sCtrl.Dtu.ConnectFlag       = 1;
    \                     ??APP_CommRxDataDealCB_14: (+1)
    \   0000023C   0x....             LDR.N    R0,??DataTable6_4
-   \   0000023E   0xF890 0x050D      LDRB     R0,[R0, #+1293]
+   \   0000023E   0xF890 0x0525      LDRB     R0,[R0, #+1317]
    \   00000242   0xF050 0x0080      ORRS     R0,R0,#0x80
    \   00000246   0x....             LDR.N    R1,??DataTable6_4
-   \   00000248   0xF881 0x050D      STRB     R0,[R1, #+1293]
+   \   00000248   0xF881 0x0525      STRB     R0,[R1, #+1317]
     678                  sCtrl.Dtu.ConnectTimeOut    = 0;   
    \   0000024C   0x....             LDR.N    R0,??DataTable6_4
-   \   0000024E   0xF890 0x050D      LDRB     R0,[R0, #+1293]
+   \   0000024E   0xF890 0x0525      LDRB     R0,[R0, #+1317]
    \   00000252   0xF010 0x0080      ANDS     R0,R0,#0x80
    \   00000256   0x....             LDR.N    R1,??DataTable6_4
-   \   00000258   0xF881 0x050D      STRB     R0,[R1, #+1293]
+   \   00000258   0xF881 0x0525      STRB     R0,[R1, #+1317]
     679                  
     680                  break;
    \   0000025C   0xE08B             B.N      ??APP_CommRxDataDealCB_7
@@ -1337,24 +1337,24 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
    \                     ??APP_CommRxDataDealCB_20: (+1)
    \   0000026E   0xF89D 0x0004      LDRB     R0,[SP, #+4]
    \   00000272   0x....             LDR.N    R1,??DataTable6_4
-   \   00000274   0xF881 0x064F      STRB     R0,[R1, #+1615]
+   \   00000274   0xF881 0x0667      STRB     R0,[R1, #+1639]
     697                      sCtrl.Otr.RxCtrl.DestAddr   = sCsncPara.destaddr;    	//目标地址
    \   00000278   0xF89D 0x0005      LDRB     R0,[SP, #+5]
    \   0000027C   0x....             LDR.N    R1,??DataTable6_4
-   \   0000027E   0xF881 0x064E      STRB     R0,[R1, #+1614]
+   \   0000027E   0xF881 0x0666      STRB     R0,[R1, #+1638]
     698                      sCtrl.Otr.RxCtrl.FramNum    = sCsncPara.framnum;    	//接收到的帧号
    \   00000282   0xF89D 0x0006      LDRB     R0,[SP, #+6]
    \   00000286   0x....             LDR.N    R1,??DataTable6_4
-   \   00000288   0xF881 0x0650      STRB     R0,[R1, #+1616]
+   \   00000288   0xF881 0x0668      STRB     R0,[R1, #+1640]
     699                      sCtrl.Otr.RxCtrl.FrameCode  = (uint8)sCsncPara.framcode & (0x0f);//指令码 ，测量装置未定义 
    \   0000028C   0xF89D 0x0007      LDRB     R0,[SP, #+7]
    \   00000290   0xF010 0x000F      ANDS     R0,R0,#0xF
    \   00000294   0x....             LDR.N    R1,??DataTable6_4
-   \   00000296   0xF881 0x0652      STRB     R0,[R1, #+1618]
+   \   00000296   0xF881 0x066A      STRB     R0,[R1, #+1642]
     700                      sCtrl.Otr.RxCtrl.Len        = sCsncPara.datalen;       	//数据区长度               
    \   0000029A   0xF89D 0x0010      LDRB     R0,[SP, #+16]
    \   0000029E   0x....             LDR.N    R1,??DataTable6_4
-   \   000002A0   0xF881 0x0651      STRB     R0,[R1, #+1617]
+   \   000002A0   0xF881 0x0669      STRB     R0,[R1, #+1641]
     701          
     702                      /***********************************************
     703                      * 描述：无线通讯及IC卡通讯，定义数据区的前 4 个字节为命令字，   
@@ -1366,17 +1366,17 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
    \   000002A8   0x2804             CMP      R0,#+4
    \   000002AA   0xDB23             BLT.N    ??APP_CommRxDataDealCB_22
    \   000002AC   0x....             LDR.N    R0,??DataTable6_4
-   \   000002AE   0xF890 0x0652      LDRB     R0,[R0, #+1618]
+   \   000002AE   0xF890 0x066A      LDRB     R0,[R0, #+1642]
    \   000002B2   0x2800             CMP      R0,#+0
    \   000002B4   0xD11E             BNE.N    ??APP_CommRxDataDealCB_22
     708                      {
     709                          //sCtrl.Otr.RxCtrl.Len        = Len - 4;                  //数据区长度
     710                          sCtrl.Otr.RxCtrl.Len        = sCtrl.Otr.RxCtrl.Len  - 4;                  //数据区长度 - 4;                  //数据区长度
    \   000002B6   0x....             LDR.N    R0,??DataTable6_4
-   \   000002B8   0xF890 0x0651      LDRB     R0,[R0, #+1617]
+   \   000002B8   0xF890 0x0669      LDRB     R0,[R0, #+1641]
    \   000002BC   0x1F00             SUBS     R0,R0,#+4
    \   000002BE   0x....             LDR.N    R1,??DataTable6_4
-   \   000002C0   0xF881 0x0651      STRB     R0,[R1, #+1617]
+   \   000002C0   0xF881 0x0669      STRB     R0,[R1, #+1641]
     711                          //取数据记录，将数据记录保存到接收区
     712                          //OS_CRITICAL_ENTER();
     713                          //memcpy( (INT08U *)&sCtrl.Otr.RxCtrl.Code, (INT08U *)&pch->RxFrameData[DataPos], 4);        //功能码
@@ -1429,7 +1429,7 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
    \   00000312   0x....             LDR.N    R1,??DataTable6_4
    \   00000314   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   00000316   0xEB11 0x01C0      ADDS     R1,R1,R0, LSL #+3
-   \   0000031A   0xF891 0x165E      LDRB     R1,[R1, #+1630]
+   \   0000031A   0xF891 0x1676      LDRB     R1,[R1, #+1654]
    \   0000031E   0xF89D 0x2004      LDRB     R2,[SP, #+4]
    \   00000322   0x4291             CMP      R1,R2
    \   00000324   0xD10D             BNE.N    ??APP_CommRxDataDealCB_26
@@ -1439,13 +1439,13 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
    \   00000328   0x....             LDR.N    R2,??DataTable6_4
    \   0000032A   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   0000032C   0xEB12 0x02C0      ADDS     R2,R2,R0, LSL #+3
-   \   00000330   0xF882 0x165B      STRB     R1,[R2, #+1627]
+   \   00000330   0xF882 0x1673      STRB     R1,[R2, #+1651]
     732                              sCtrl.Otr.ConnCtrl[i].TimeOut     = 0;      //超时计数器清零。
    \   00000334   0x2100             MOVS     R1,#+0
    \   00000336   0x....             LDR.N    R2,??DataTable6_4
    \   00000338   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   0000033A   0xEB12 0x02C0      ADDS     R2,R2,R0, LSL #+3
-   \   0000033E   0xF882 0x165C      STRB     R1,[R2, #+1628]
+   \   0000033E   0xF882 0x1674      STRB     R1,[R2, #+1652]
     733                          }
     734                      } 
    \                     ??APP_CommRxDataDealCB_26: (+1)
@@ -1470,16 +1470,16 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
     743                  sCtrl.Otr.ConnectFlag       = 1;
    \                     ??APP_CommRxDataDealCB_21: (+1)
    \   00000356   0x....             LDR.N    R0,??DataTable6_4
-   \   00000358   0xF890 0x066E      LDRB     R0,[R0, #+1646]
+   \   00000358   0xF890 0x0686      LDRB     R0,[R0, #+1670]
    \   0000035C   0xF050 0x0080      ORRS     R0,R0,#0x80
    \   00000360   0x....             LDR.N    R1,??DataTable6_4
-   \   00000362   0xF881 0x066E      STRB     R0,[R1, #+1646]
+   \   00000362   0xF881 0x0686      STRB     R0,[R1, #+1670]
     744                  sCtrl.Otr.ConnectTimeOut    = 0;   
    \   00000366   0x....             LDR.N    R0,??DataTable6_4
-   \   00000368   0xF890 0x066E      LDRB     R0,[R0, #+1646]
+   \   00000368   0xF890 0x0686      LDRB     R0,[R0, #+1670]
    \   0000036C   0xF010 0x0080      ANDS     R0,R0,#0x80
    \   00000370   0x....             LDR.N    R1,??DataTable6_4
-   \   00000372   0xF881 0x066E      STRB     R0,[R1, #+1646]
+   \   00000372   0xF881 0x0686      STRB     R0,[R1, #+1670]
     745                  
     746                  break;
     747              }
@@ -2114,7 +2114,7 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable6_5:
-   \   00000000   0x........         DC32     sCtrl+0x7FC
+   \   00000000   0x........         DC32     sCtrl+0x814
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable6_6:
@@ -2126,23 +2126,23 @@ F:\iar\NC136B-310统计模块\Software\APP\Tasks\app_task_comm.c
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable6_8:
-   \   00000000   0x........         DC32     sCtrl+0x24C
+   \   00000000   0x........         DC32     sCtrl+0x264
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable6_9:
-   \   00000000   0x........         DC32     sCtrl+0x4F5
+   \   00000000   0x........         DC32     sCtrl+0x50D
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable6_10:
-   \   00000000   0x........         DC32     sCtrl+0x3AD
+   \   00000000   0x........         DC32     sCtrl+0x3C5
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable6_11:
-   \   00000000   0x........         DC32     sCtrl+0x656
+   \   00000000   0x........         DC32     sCtrl+0x66E
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable6_12:
-   \   00000000   0x........         DC32     sCtrl+0x50E
+   \   00000000   0x........         DC32     sCtrl+0x526
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable6_13:

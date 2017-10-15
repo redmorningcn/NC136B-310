@@ -221,13 +221,15 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
             gsIAPPara.softver = sCtrl.SoftWareID;                   //返回版本信息
             
             if(
-                        sIAPParatmp.softsize == gsIAPPara.softsize     //软件大小
+                        sIAPParatmp.softsize == gsIAPPara.softsize  //软件大小
                    &&   gsIAPPara.framenum                          //开始包序号不为0   
                ) 
             {                                                       //数据未接收完成，发送当前序号
                 gsIAPPara.framenum  = sIAPParatmp.framenum;         //返回当前序号
                 lastiapnum          = sIAPParatmp.framenum;         //下载序号。断点续传 
                 gsIAPCtrl.addr      = sIAPParatmp.addr;
+                gsIAPPara.addr      = gsIAPCtrl.addr;
+                
             }else
             {
                 gsIAPPara.framenum  = 0;                            //信息不正确，
@@ -259,7 +261,7 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
                     if((datalen - 4) != IAP_DATA_LEN)       //如果升级结束，将1024字节剩余空间写0xff
                     {
                         for(int i = bufsize;i < IAP_WRITE_1024;i++ )
-                        gsIAPCtrl.buf[i] = 0xff;	
+                            gsIAPCtrl.buf[i] = 0xff;	
                     }
 
                     if(iapnum != lastiapnum && iapnum )     //重复接收退出
@@ -277,13 +279,16 @@ int8    IAP_PragramDeal(uint8 *databuf,char datalen)
                             gsIAPPara.framenum  = iapnum;       //当前序号
                             gsIAPPara.crc16 = GetCrc16Check((uint8 *)&gsIAPPara,sizeof(gsIAPPara)-2);
                             IAP_WriteParaFlash(&gsIAPPara);
-                        }else
+                        }
+                        else
                         {
                             databuf[1] = 4;                             //返回状态
                             return 4;                            
                         }
                            
                     }
+                    
+                    bufsize = 0;                                //重复数据清空（满足写条件的，不论是否已写，都清空缓冲）
                 }
                 
                 lastiapnum = iapnum;                            //序号赋值

@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       30/Sep/2017  11:25:11
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       11/Oct/2017  18:40:18
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -522,14 +522,14 @@ F:\iar\NC136B-310统计模块\Application\Library\EquipmentOperations\EquimentCom.c
    \                     ??CarddataOperate_4: (+1)
    \   00000132   0xF05F 0x0802      MOVS     R8,#+2
    \   00000136   0xEB17 0x0904      ADDS     R9,R7,R4
-   \   0000013A   0xF10D 0x0A08      ADD      R10,SP,#+8
+   \   0000013A   0xF10D 0x0A0C      ADD      R10,SP,#+12
    \   0000013E   0x4642             MOV      R2,R8
    \   00000140   0x4649             MOV      R1,R9
    \   00000142   0x4650             MOV      R0,R10
    \   00000144   0x.... 0x....      BL       __aeabi_memcpy
     162          							  
     163          							  SetDen(density);
-   \   00000148   0xF9BD 0x0008      LDRSH    R0,[SP, #+8]
+   \   00000148   0xF9BD 0x000C      LDRSH    R0,[SP, #+12]
    \   0000014C   0x.... 0x....      BL       SetDen
     164          //							  printfcom0("\r\n density %d  数据长度 %d datalen %d  buf %x buf++ %x",density,sizeof(density),datalen,buf[datalen],buf[datalen+1]);  
     165          							  break;   
@@ -557,13 +557,13 @@ F:\iar\NC136B-310统计模块\Application\Library\EquipmentOperations\EquimentCom.c
     174                                        memcpy((unsigned char *)&hig,&buf[datalen],sizeof(hig));
    \   00000170   0xF05F 0x0902      MOVS     R9,#+2
    \   00000174   0xEB17 0x0A04      ADDS     R10,R7,R4
-   \   00000178   0xF10D 0x0B06      ADD      R11,SP,#+6
+   \   00000178   0xF10D 0x0B04      ADD      R11,SP,#+4
    \   0000017C   0x464A             MOV      R2,R9
    \   0000017E   0x4651             MOV      R1,R10
    \   00000180   0x4658             MOV      R0,R11
    \   00000182   0x.... 0x....      BL       __aeabi_memcpy
     175          							  SetHight(hig);
-   \   00000186   0xF9BD 0x0006      LDRSH    R0,[SP, #+6]
+   \   00000186   0xF9BD 0x0004      LDRSH    R0,[SP, #+4]
    \   0000018A   0x.... 0x....      BL       SetHight
     176                      
     177          //							  printfcom0("\r\n density %d  数据长度 %d datalen %d  buf %x buf++ %x",density,sizeof(density),datalen,buf[datalen],buf[datalen+1]);  
@@ -608,7 +608,7 @@ F:\iar\NC136B-310统计模块\Application\Library\EquipmentOperations\EquimentCom.c
    \                     ??CarddataOperate_7: (+1)
    \   000001BE   0xF05F 0x0802      MOVS     R8,#+2
    \   000001C2   0xEB17 0x0904      ADDS     R9,R7,R4
-   \   000001C6   0xF10D 0x0A06      ADD      R10,SP,#+6
+   \   000001C6   0xF10D 0x0A04      ADD      R10,SP,#+4
    \   000001CA   0x4642             MOV      R2,R8
    \   000001CC   0x4649             MOV      R1,R9
    \   000001CE   0x4650             MOV      R0,R10
@@ -617,7 +617,7 @@ F:\iar\NC136B-310统计模块\Application\Library\EquipmentOperations\EquimentCom.c
     198          //							  printfcom0("\r\n 高度：%d",hig);
     199          							  
     200          							  SetHight(hig);
-   \   000001D4   0xF9BD 0x0006      LDRSH    R0,[SP, #+6]
+   \   000001D4   0xF9BD 0x0004      LDRSH    R0,[SP, #+4]
    \   000001D8   0x.... 0x....      BL       SetHight
     201          							  break; 
    \   000001DC   0xE084             B.N      ??CarddataOperate_19
@@ -636,7 +636,7 @@ F:\iar\NC136B-310统计模块\Application\Library\EquipmentOperations\EquimentCom.c
    \                     ??CarddataOperate_9: (+1)
    \   000001E8   0xF05F 0x0801      MOVS     R8,#+1
    \   000001EC   0xEB17 0x0904      ADDS     R9,R7,R4
-   \   000001F0   0xF10D 0x0A04      ADD      R10,SP,#+4
+   \   000001F0   0xF10D 0x0A06      ADD      R10,SP,#+6
    \   000001F4   0x4642             MOV      R2,R8
    \   000001F6   0x4649             MOV      R1,R9
    \   000001F8   0x4650             MOV      R0,R10
@@ -645,7 +645,7 @@ F:\iar\NC136B-310统计模块\Application\Library\EquipmentOperations\EquimentCom.c
     211          //							  printfcom0("\r\n 选模：%d",modelnum);
     212          
     213          							  SetSel(modelnum);
-   \   000001FE   0xF89D 0x0004      LDRB     R0,[SP, #+4]
+   \   000001FE   0xF89D 0x0006      LDRB     R0,[SP, #+6]
    \   00000202   0x.... 0x....      BL       SetSel
     214          							  break; 
    \   00000206   0xE06F             B.N      ??CarddataOperate_19
@@ -657,7 +657,7 @@ F:\iar\NC136B-310统计模块\Application\Library\EquipmentOperations\EquimentCom.c
    \   00000208   0xF05F 0x0802      MOVS     R8,#+2
    \   0000020C   0x1938             ADDS     R0,R7,R4
    \   0000020E   0x9000             STR      R0,[SP, #+0]
-   \   00000210   0xF10D 0x090C      ADD      R9,SP,#+12
+   \   00000210   0xF10D 0x090A      ADD      R9,SP,#+10
    \   00000214   0x4642             MOV      R2,R8
    \   00000216   0x9900             LDR      R1,[SP, #+0]
    \   00000218   0x4648             MOV      R0,R9
@@ -668,7 +668,7 @@ F:\iar\NC136B-310统计模块\Application\Library\EquipmentOperations\EquimentCom.c
     221          							  memcpy((unsigned char *)&loconum,&buf[datalen],sizeof(loconum));
    \   00000220   0xF05F 0x0902      MOVS     R9,#+2
    \   00000224   0xEB17 0x0A04      ADDS     R10,R7,R4
-   \   00000228   0xF10D 0x0B0A      ADD      R11,SP,#+10
+   \   00000228   0xF10D 0x0B08      ADD      R11,SP,#+8
    \   0000022C   0x464A             MOV      R2,R9
    \   0000022E   0x4651             MOV      R1,R10
    \   00000230   0x4658             MOV      R0,R11
@@ -677,8 +677,8 @@ F:\iar\NC136B-310统计模块\Application\Library\EquipmentOperations\EquimentCom.c
     223          //							  printfcom0("\r\n 机车类型：%d，机车编号：%d",locotype,loconum);
     224          							  
     225          							  SetFix(locotype,loconum);
-   \   00000236   0xF8BD 0x100A      LDRH     R1,[SP, #+10]
-   \   0000023A   0xF8BD 0x000C      LDRH     R0,[SP, #+12]
+   \   00000236   0xF8BD 0x1008      LDRH     R1,[SP, #+8]
+   \   0000023A   0xF8BD 0x000A      LDRH     R0,[SP, #+10]
    \   0000023E   0x.... 0x....      BL       SetFix
     226          				     		  break; 
    \   00000242   0xE051             B.N      ??CarddataOperate_19

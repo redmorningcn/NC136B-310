@@ -96,10 +96,13 @@ void    app_init_sctrl(void)
     sCtrl.sRunPara.StartFlg = 1;  
     sCtrl.sRunPara.SysSta   = 0;        
         
-    
     sCtrl.sRunPara.RecClear = 0;
     sCtrl.sRunPara.StoreTime= 60;       
     sCtrl.sRunPara.SysReset = 0;
+    
+    FRAM_StoreRunPara((stcRunPara *) &sCtrl.sRunPara);   //读取运行参数
+    
+   
     
 //    sCtrl.sRunPara.StoreType    = 0x02;            //shu ju NDP02B
 //    sCtrl.sRunPara.StoreTypeBak = 0x02;
@@ -193,9 +196,19 @@ void    app_init_sctrl(void)
      //NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x10000);
      
      //NVIC_SetVTOR(0x10000);
-     
+ 
+    #if DEBUG_MODEL_DISENABLE > 0 
+        WDT_Feed();                    /* 喂狗                             */
+    #endif   
+        
      app_init_sctrl();                  //初始化全局变量
-     
+ 
+
+    #if DEBUG_MODEL_DISENABLE > 0 
+        WDT_Feed();                    /* 喂狗                             */
+    #endif   
+        
+        
      //FeedDog();
      
     //NVIC_SetVTOR(0x10000);

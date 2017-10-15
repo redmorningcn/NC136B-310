@@ -14,7 +14,7 @@ TraceBufferSize=0x00010000
 TraceStallIfFIFOFull=0x00000000
 TracePortSize=0x00000004
 [DebugChecksum]
-Checksum=1875969044
+Checksum=-1767188946
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -149,16 +149,14 @@ Bp3=_ 0 "EMUL_CODE" "{F:\iar\NC136B-310统计模块}.77.5" 0 0 1 "" 0 "" 0
 Bp4=_ 0 "EMUL_CODE" "{F:\iar\NC136B-310统计模块}.314.5" 0 0 1 "" 0 "" 0
 Bp5=_ 0 "EMUL_CODE" "0x0000CE06" 0 0 1 "" 0 "" 0
 Bp6=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\tax\app_tax.c}.166.21" 0 0 1 "" 0 "" 0
-Bp7=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\iap\IAP_program_mcu.C}.331.13" 0 0 1 "" 0 "" 0
-Bp8=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\tax\app_tax.c}.147.25" 0 0 1 "" 0 "" 0
-Bp9=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\tax\app_tax.c}.181.21" 0 0 1 "" 0 "" 0
-Bp10=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\tax\app_tax.c}.124.5" 0 0 1 "" 0 "" 0
-Bp11=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\iap\IAP_program_mcu.C}.329.13" 0 0 1 "" 0 "" 0
-Bp12=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\iap\IAP_program_mcu.C}.318.17" 0 0 1 "" 0 "" 0
-Bp13=_ 0 "EMUL_CODE" "0x0002135E" 0 0 1 "" 0 "" 0
-Bp14=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\APP\comm\app_comm_dtu_otr_deal.c}.295.9" 0 0 1 "" 0 "" 0
-Bp15=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\APP\xmain.c}.100.5" 0 0 1 "" 0 "" 0
-Count=16
+Bp7=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\tax\app_tax.c}.147.25" 0 0 1 "" 0 "" 0
+Bp8=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\tax\app_tax.c}.181.21" 0 0 1 "" 0 "" 0
+Bp9=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\..\Application\Library\tax\app_tax.c}.124.5" 0 0 1 "" 0 "" 0
+Bp10=_ 0 "EMUL_CODE" "0x0002135E" 0 0 1 "" 0 "" 0
+Bp11=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\uC-LIB\lib_mem.c}.197.5" 0 0 1 "" 0 "" 0
+Bp12=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\uC-LIB\lib_mem.c}.171.5" 0 0 1 "" 0 "" 0
+Bp13=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..\uC-LIB\lib_mem.c}.172.5" 0 0 1 "" 0 "" 0
+Count=14
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""

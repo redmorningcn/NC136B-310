@@ -188,7 +188,7 @@ osalEvt  TaskDispEvtProcess(INT8U task_id, osalEvt task_event)
             */
             case 2: 
                 dis_mode++;
-                sCtrl.SoftWareID = 0x0207;
+                sCtrl.SoftWareID = 0x0303;
                 uprintf("SV_%02X.%02X",(uint8)(sCtrl.SoftWareID>>8),(uint8)sCtrl.SoftWareID);
                 
                 break;

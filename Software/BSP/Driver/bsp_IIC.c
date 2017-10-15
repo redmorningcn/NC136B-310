@@ -43,7 +43,10 @@ void I2C_delay(void)
 	while(i) 
 	{ 
 		i--; 
-	}  
+	} 
+//    #if DEBUG_MODEL_DISENABLE > 0 
+//        WDT_Feed();                                               /* Determine CPU capacity                               */
+//    #endif
 }
 
 //------------------------------------------------------------------------

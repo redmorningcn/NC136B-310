@@ -18,7 +18,8 @@
 #include <includes.h>
 #include "bsp_FRAM.h"
 #include "App_ctrl.h"
-					  
+
+
 
 /***********************************************
 * 描述: OS接口
@@ -116,7 +117,7 @@ uint8 WriteFM24CL64(uint16  Addr, uint8 *DataBuf, uint32 DataBufLen)
         
     SlaveAddr = FRAM_DIVICE_ADDR & (~(0x01));               //求FM24CL64设备写地址
     
-    StartI2C();                                             		//启动IIC总线
+    StartI2C();                                             //启动IIC总线
     
     WriteByteWithI2C(SlaveAddr);                            //写FM24CL64地址
     CheckSlaveAckI2C();
@@ -311,11 +312,11 @@ uint8 FRAM_StoreCurRecord(stcFlshRec  *sFlshRec)
 {
 	uint8	flg = TRUE;
 	
-	FRAM_WaitEvent();
+	//FRAM_WaitEvent();
 	if(!WriteFM24CL64(FRAM_REC_ADDR, (uint8 *)sFlshRec, sizeof(stcFlshRec)))		
 		flg = FALSE;
 	
-	FRAM_SendEvent();
+	//FRAM_SendEvent();
 	return	flg;
 }
 
@@ -332,11 +333,11 @@ uint8 FRAM_ReadCurRecord(stcFlshRec  *sFlshRec)
 {
 	uint8	flg = TRUE;
 	
-	FRAM_WaitEvent();
+	//FRAM_WaitEvent();
 	if(!ReadFM24CL64(FRAM_REC_ADDR, (uint8 *)sFlshRec, sizeof(stcFlshRec)))		
 		flg = FALSE;
 	
-	FRAM_SendEvent();
+	//FRAM_SendEvent();
 	return	flg;
 }
 

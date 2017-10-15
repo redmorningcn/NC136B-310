@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       09/Oct/2017  13:11:23
+# IAR ANSI C/C++ Compiler V7.50.1.10123/W32 for ARM       11/Oct/2017  19:05:44
 # Copyright 1999-2015 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -557,22 +557,22 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu_otr_deal.c
     262                                );
    \                     ??comm_para_flow_11: (+1)
    \   000001FA   0x.... 0x....      LDR.W    R0,??DataTable2
-   \   000001FE   0xF890 0x04F0      LDRB     R0,[R0, #+1264]
+   \   000001FE   0xF890 0x0508      LDRB     R0,[R0, #+1288]
    \   00000202   0xB280             UXTH     R0,R0            ;; ZeroExt  R0,R0,#+16,#+16
    \   00000204   0x9002             STR      R0,[SP, #+8]
    \   00000206   0x.... 0x....      LDR.W    R0,??DataTable2_10
    \   0000020A   0x9001             STR      R0,[SP, #+4]
    \   0000020C   0x.... 0x....      LDR.W    R0,??DataTable2
-   \   00000210   0xF890 0x04F1      LDRB     R0,[R0, #+1265]
+   \   00000210   0xF890 0x0509      LDRB     R0,[R0, #+1289]
    \   00000214   0x9000             STR      R0,[SP, #+0]
    \   00000216   0x.... 0x....      LDR.W    R0,??DataTable2
-   \   0000021A   0xF890 0x34EF      LDRB     R3,[R0, #+1263]
+   \   0000021A   0xF890 0x3507      LDRB     R3,[R0, #+1287]
    \   0000021E   0x.... 0x....      LDR.W    R0,??DataTable2
-   \   00000222   0xF890 0x24EE      LDRB     R2,[R0, #+1262]
+   \   00000222   0xF890 0x2506      LDRB     R2,[R0, #+1286]
    \   00000226   0x.... 0x....      LDR.W    R0,??DataTable2
-   \   0000022A   0xF890 0x14ED      LDRB     R1,[R0, #+1261]
+   \   0000022A   0xF890 0x1505      LDRB     R1,[R0, #+1285]
    \   0000022E   0x.... 0x....      LDR.W    R0,??DataTable2
-   \   00000232   0xF8D0 0x0509      LDR      R0,[R0, #+1289]
+   \   00000232   0xF8D0 0x0521      LDR      R0,[R0, #+1313]
    \   00000236   0x.... 0x....      BL       CSNC_SendData
     263                  i = 100000;
    \   0000023A   0x20A0             MOVS     R0,#+160
@@ -659,11 +659,11 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu_otr_deal.c
     297                      sCtrl.sRunPara.StoreType    = sDtu->Rd.sRunPara.StoreType;
    \   000002C2   0x7960             LDRB     R0,[R4, #+5]
    \   000002C4   0x.... 0x....      LDR.W    R1,??DataTable2
-   \   000002C8   0xF881 0x00B1      STRB     R0,[R1, #+177]
+   \   000002C8   0xF881 0x00C9      STRB     R0,[R1, #+201]
     298                      sCtrl.sRunPara.StoreTypeBak = sDtu->Rd.sRunPara.StoreTypeBak;
    \   000002CC   0x79A0             LDRB     R0,[R4, #+6]
    \   000002CE   0x.... 0x....      LDR.W    R1,??DataTable2
-   \   000002D2   0xF881 0x00B2      STRB     R0,[R1, #+178]
+   \   000002D2   0xF881 0x00CA      STRB     R0,[R1, #+202]
     299                  }
     300                
     301                  FRAM_StoreRunPara((stcRunPara *)&sCtrl.sRunPara);   //存数据。关键数据存储时保护
@@ -672,7 +672,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu_otr_deal.c
    \   000002DA   0x.... 0x....      BL       FRAM_StoreRunPara
     302                  uprintf("rt-%d",    sCtrl.sRunPara.StoreType);      //立即显示设定值 （0x02 ）数据新版
    \   000002DE   0x.... 0x....      LDR.W    R0,??DataTable2
-   \   000002E2   0xF890 0x10B1      LDRB     R1,[R0, #+177]
+   \   000002E2   0xF890 0x10C9      LDRB     R1,[R0, #+201]
    \   000002E6   0x.... 0x....      LDR.W    R0,??DataTable2_12
    \   000002EA   0x.... 0x....      BL       uprintf
     303          
@@ -1159,12 +1159,12 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu_otr_deal.c
    \   00000096   0x....             LDR.N    R0,??DataTable2
    \   00000098   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
    \   0000009A   0xEB10 0x00C5      ADDS     R0,R0,R5, LSL #+3
-   \   0000009E   0xF890 0x0660      LDRB     R0,[R0, #+1632]
+   \   0000009E   0xF890 0x0678      LDRB     R0,[R0, #+1656]
    \   000000A2   0x1C40             ADDS     R0,R0,#+1
    \   000000A4   0x....             LDR.N    R1,??DataTable2
    \   000000A6   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
    \   000000A8   0xEB11 0x01C5      ADDS     R1,R1,R5, LSL #+3
-   \   000000AC   0xF881 0x0660      STRB     R0,[R1, #+1632]
+   \   000000AC   0xF881 0x0678      STRB     R0,[R1, #+1656]
     499                      FRAM_StoreRecNumMgr((StrRecNumMgr *)&sCtrl.sRecNumMgr);             //保存记录号
    \   000000B0   0x....             LDR.N    R0,??DataTable2_8
    \   000000B2   0x.... 0x....      BL       FRAM_StoreRecNumMgr
@@ -1196,11 +1196,11 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu_otr_deal.c
    \   000000CE   0x2600             MOVS     R6,#+0
     515              if(sCtrl.sRunPara.StoreType == 0x02 && sCtrl.sRunPara.StoreTypeBak == 0x02) //新版数据格式  redmorningcn 20170922
    \   000000D0   0x....             LDR.N    R0,??DataTable2
-   \   000000D2   0xF890 0x00B1      LDRB     R0,[R0, #+177]
+   \   000000D2   0xF890 0x00C9      LDRB     R0,[R0, #+201]
    \   000000D6   0x2802             CMP      R0,#+2
    \   000000D8   0xD106             BNE.N    ??comm_record_send_one_8
    \   000000DA   0x....             LDR.N    R0,??DataTable2
-   \   000000DC   0xF890 0x00B2      LDRB     R0,[R0, #+178]
+   \   000000DC   0xF890 0x00CA      LDRB     R0,[R0, #+202]
    \   000000E0   0x2802             CMP      R0,#+2
    \   000000E2   0xD101             BNE.N    ??comm_record_send_one_8
     516              {
@@ -1393,11 +1393,11 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu_otr_deal.c
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable2_10:
-   \   00000000   0x........         DC32     sCtrl+0x3AD
+   \   00000000   0x........         DC32     sCtrl+0x3C5
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable2_11:
-   \   00000000   0x........         DC32     sCtrl+0xAC
+   \   00000000   0x........         DC32     sCtrl+0xC4
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable2_12:
@@ -1413,7 +1413,7 @@ F:\iar\NC136B-310统计模块\Software\APP\comm\app_comm_dtu_otr_deal.c
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable2_15:
-   \   00000000   0x........         DC32     sCtrl+0xB4
+   \   00000000   0x........         DC32     sCtrl+0xCC
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable2_16:

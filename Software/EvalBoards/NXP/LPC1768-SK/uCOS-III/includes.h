@@ -247,6 +247,10 @@ typedef struct _stcSysPra_						//系统参数
 #define		COM_LED_DATA		2
 
 
+//debug
+//#define     DEBUG_MODEL_DISENABLE    0
+//正常运行,
+#define     DEBUG_MODEL_DISENABLE    1
 
 /***********************************************
 * 描述： 看门狗标志组外部引用声明

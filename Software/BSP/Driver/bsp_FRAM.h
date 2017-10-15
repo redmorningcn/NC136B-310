@@ -42,19 +42,27 @@ extern "C" {
  * MACROS
  */
    //铁电参数
-#define		FRAM_SIZE               				8192		//1024*8空间容量
+#define		FRAM_SIZE               		8192		//1024*8空间容量
 #define		FRAM_START_ADDR	        		0x0000	   	//铁电的起始地址
 #define		FRAM_DIVICE_ADDR     			0xa0	     	//铁电的设备地址
 #define		FRAM_END_ADDR	      			(FRAM_START_ADDR + FRAM_SIZE)	        
 														//铁电的结束地址
 //参数存储地址
-#define		FRAM_RECNUM_MGR_ADDR		4			//数据记录管理存储地址
-#define		FRAM_PRODUCT_INFO_ADDR		20			//产品ID地址
-#define		FRAM_REC_ADDR				32			//当前数据记录存储地址
-#define		FRAM_OIL_PARA_ADDR			160			//油量计算参数
-#define		FRAM_RUN_PARA_ADDR			172			//系统运行参数
-#define		FRAM_CALC_MODEL_ADDR		180			//计算油箱模型
-
+#define		FRAM_RECNUM_MGR_ADDR		4			                                            //数据记录管理存储地址
+#define		FRAM_PRODUCT_INFO_ADDR		(FRAM_RECNUM_MGR_ADDR   + sizeof(StrRecNumMgr))		//产品ID地址
+#define		FRAM_REC_ADDR				(FRAM_PRODUCT_INFO_ADDR + sizeof(StrProductInfo))		//当前数据记录存储地址
+#define		FRAM_OIL_PARA_ADDR			(FRAM_REC_ADDR          + sizeof(stcFlshRec))			//油量计算参数
+#define		FRAM_RUN_PARA_ADDR			(FRAM_OIL_PARA_ADDR     + sizeof(StrOilPara))			//系统运行参数
+#define		FRAM_CALC_MODEL_ADDR		(FRAM_RUN_PARA_ADDR     + sizeof(stcRunPara))			//计算油箱模型
+//////参数存储地址
+//#define		FRAM_RECNUM_MGR_ADDR		4			//数据记录管理存储地址
+//#define		FRAM_PRODUCT_INFO_ADDR		20			//产品ID地址
+//#define		FRAM_REC_ADDR				32			//当前数据记录存储地址
+//#define		FRAM_OIL_PARA_ADDR			160			//油量计算参数
+//#define		FRAM_RUN_PARA_ADDR			172			//系统运行参数
+//#define		FRAM_CALC_MODEL_ADDR		180			//计算油箱模型    
+//    
+    
 #define		OIL_BOX_MODEL_ADDR			2000		//油箱模型地址	
 
 //错误标识

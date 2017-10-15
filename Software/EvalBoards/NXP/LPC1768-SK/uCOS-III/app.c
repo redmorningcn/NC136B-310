@@ -41,11 +41,6 @@
 *********************************************************************************************************
 */
 
-//debug
-//#define     DEBUG_MODEL_DISENABLE    0
-//正常运行,
-#define     DEBUG_MODEL_DISENABLE    1
-
 
 /*
 *********************************************************************************************************
@@ -90,16 +85,16 @@ static  void  App_TaskStart          (void       *p_arg);
 int  main (void)
 {
     OS_ERR  err;
-    
-    App_Main();
+            
+    //App_Main();               //2017-10-11 转移到 App_TaskStart，操作系统准备工作完成前处理
 
     CPU_Init();
      
     //NVIC_SetVTOR(0x10000);  //20170815补充
 
     BSP_Init();                                                 /* Initialize BSP functions                             */
-
-    Mem_Init();
+    
+    Mem_Init();                             
 
     OSInit(&err);                                               /* Initialize "uC/OS-III, The Real-Time Kernel"         */
 
@@ -156,12 +151,15 @@ static  void  App_TaskStart (void *p_arg)
     */
     App_OS_SetAllHooks();
     
+    
     BSP_Start();                                                /* Start BSP and tick initialization                    */
 
 #if (OS_TASK_STAT_EN > 0)
     OSStatInit();                                               /* Determine CPU capacity                               */
 #endif
 
+    App_Main();                                                 //APP 参数初始化
+    
     App_ObjCreate();                                            /* Create Applicaiton kernel objects                    */
 
     App_TaskCreate();                                           /* Create Application tasks                             */
